@@ -7,4 +7,4 @@ If you need any information abount this project you may find these information w
 
 == General ==
 
- * Examination
+Examination
