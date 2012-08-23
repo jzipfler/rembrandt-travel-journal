@@ -1,0 +1,16 @@
+#useful informations about svn
+
+= Introduction =
+
+On this page, you can read/add informations about svn.
+Your experiences, problems and solutions and/or hints.
+
+= Problems when creating a java file =
+
+If you receive an error in eclipse, that you current working project isn't a java project you checked out the wrong folder.
+The easiest way is, to check out the Rembrand folder all the time and use the "Check out as..." option to give your working project a name. 
+
+= Check out multiple branches in Eclipse =
+
+If you have multiple branches you want to working on, you could get problems if you only check out the Rembrand folder.
+You could use "Check out as..." to change the project name and to check out multiple branches.
