@@ -33,10 +33,20 @@ import java.awt.Font;
 import javax.swing.border.TitledBorder;
 import java.awt.Insets;
 import javax.swing.SwingConstants;
+import javax.swing.JSplitPane;
+import javax.swing.JTextPane;
+import java.awt.Color;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
+import java.awt.Rectangle;
+import java.awt.Point;
+import javax.swing.JTextField;
 
 public class ViewWizzard extends JFrame {
 
 	private JPanel pnlQuestionCards;
+	private JTextField txtInputCountry;
+	private JTextField txtInputCity;
 
 	/**
 	 * Launch the application.
@@ -101,16 +111,62 @@ public class ViewWizzard extends JFrame {
 		
 		JPanel pnlViewContent = new JPanel();
 		pnlFirstView.add(pnlViewContent, BorderLayout.CENTER);
-		pnlViewContent.setLayout(new BorderLayout(0, 0));
+		pnlViewContent.setLayout(new BorderLayout(0, 5));
 		
 		JLabel lblHeadLine = new JLabel("WILLKOMMEN");
+		lblHeadLine.setSize(new Dimension(67, 17));
+		lblHeadLine.setMaximumSize(new Dimension(67, 20));
 		lblHeadLine.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHeadLine.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblHeadLine.setFont(new Font("Tahoma", Font.BOLD, 14));
 		pnlViewContent.add(lblHeadLine, BorderLayout.NORTH);
 		
-		JLabel lblExplanationText = new JLabel("Dieser kleine Wizzard wird Ihnen helfen eine neue Reise anzulegen.");
-		pnlViewContent.add(lblExplanationText);
+		JPanel pnlContainer = new JPanel();
+		pnlViewContent.add(pnlContainer, BorderLayout.CENTER);
+		pnlContainer.setLayout(new GridLayout(2, 0, 0, 0));
+		
+		JTextPane txtpnExplanation = new JTextPane();
+		pnlContainer.add(txtpnExplanation);
+		txtpnExplanation.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtpnExplanation.setSelectedTextColor(Color.BLACK);
+		txtpnExplanation.setSelectionColor(Color.WHITE);
+		txtpnExplanation.setText("Dieser Wizzard wird Ihnen helfen eine neue Reise anzulegen.\r\n\r\nDazu werden Ihnen verschiedene Fragen, ihre Reise betreffend gestellt. \r\nSie werden nach Ihrem:\r\n\r\n\t- Datum\r\n\t- Reiseland\r\n\t- Ort\r\n\t- usw.\r\n\r\ngefragt. \r\nDiese Angaben dienen ebenfalls dazu den Reiseeintrag sp\u00E4ter wieder zu finden. Daher sollten die Angaben m\u00F6glichst pr\u00E4zise sein.");
+		txtpnExplanation.setEditable(false);
+		
+		JPanel pnlQuestion = new JPanel();
+		pnlContainer.add(pnlQuestion);
+		pnlQuestion.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(186dlu;default)"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(186dlu;default)"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblCountry = new JLabel("In welches Land reisen Sie?");
+		pnlQuestion.add(lblCountry, "4, 4");
+		
+		JLabel lblCity = new JLabel("Name des Ortes Ihres Aufenthalts?");
+		pnlQuestion.add(lblCity, "8, 4");
+		
+		txtInputCountry = new JTextField();
+		pnlQuestion.add(txtInputCountry, "4, 6");
+		txtInputCountry.setColumns(10);
+		
+		txtInputCity = new JTextField();
+		pnlQuestion.add(txtInputCity, "8, 6, fill, default");
+		txtInputCity.setColumns(10);
 	}
 
 }
