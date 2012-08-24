@@ -54,6 +54,10 @@ public class ViewWizzard extends JFrame {
 	private JTextField txtInputCity;
 	private JTextField txtDate;
 	private JTextField txtEndDate;
+	private JPanel pnlCards;
+	private JPanel pnlSecondView;
+	private JButton btnExit;
+	
 
 	/**
 	 * Launch the application.
@@ -82,39 +86,15 @@ public class ViewWizzard extends JFrame {
 		pnlQuestionCards = new JPanel();
 		pnlQuestionCards.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(pnlQuestionCards);
-		pnlQuestionCards.setLayout(new CardLayout(0, 0));
+		pnlQuestionCards.setLayout(new BorderLayout(0, 0));
+		
+		pnlCards = new JPanel();
+		pnlQuestionCards.add(pnlCards, BorderLayout.CENTER);
+		pnlCards.setLayout(new CardLayout(0, 0));
 		
 		JPanel pnlFirstView = new JPanel();
-		pnlQuestionCards.add(pnlFirstView, "name_6546871643145");
+		pnlCards.add(pnlFirstView, "name_17364743092986");
 		pnlFirstView.setLayout(new BorderLayout(0, 0));
-		
-		JPanel pnlNavigation = new JPanel();
-		pnlNavigation.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		pnlFirstView.add(pnlNavigation, BorderLayout.SOUTH);
-		pnlNavigation.setLayout(new FormLayout(new ColumnSpec[] {
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),
-				FormFactory.GROWING_BUTTON_COLSPEC,
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),
-				FormFactory.GROWING_BUTTON_COLSPEC,
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),},
-			new RowSpec[] {
-				RowSpec.decode("23px"),}));
-		
-		JButton btnNext = new JButton("Weiter");
-		btnNext.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		
-		JButton btnExit = new JButton("Ende");
-		pnlNavigation.add(btnExit, "2, 1");
-		btnExit.setSize(new Dimension(80, 23));
-		btnExit.setMaximumSize(new Dimension(80, 23));
-		btnExit.setMinimumSize(new Dimension(80, 23));
-		pnlNavigation.add(btnNext, "4, 1");
-		btnNext.setSize(new Dimension(80, 23));
-		btnNext.setMaximumSize(new Dimension(80, 23));
-		btnNext.setMinimumSize(new Dimension(80, 23));
 		
 		JPanel pnlViewContent = new JPanel();
 		pnlFirstView.add(pnlViewContent, BorderLayout.CENTER);
@@ -179,31 +159,9 @@ public class ViewWizzard extends JFrame {
 		pnlQuestion.add(txtInputCity, "8, 6, fill, default");
 		txtInputCity.setColumns(10);
 		
-		JPanel pnlSecondView = new JPanel();
-		pnlQuestionCards.add(pnlSecondView, "name_3974285089612");
+		pnlSecondView = new JPanel();
+		pnlCards.add(pnlSecondView, "name_17366503517548");
 		pnlSecondView.setLayout(new BorderLayout(0, 0));
-		
-		JPanel pnlNavigation_1 = new JPanel();
-		pnlSecondView.add(pnlNavigation_1, BorderLayout.SOUTH);
-		pnlNavigation_1.setLayout(new FormLayout(new ColumnSpec[] {
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),
-				FormFactory.GROWING_BUTTON_COLSPEC,
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),
-				FormFactory.GROWING_BUTTON_COLSPEC,
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),},
-			new RowSpec[] {
-				FormFactory.LINE_GAP_ROWSPEC,
-				RowSpec.decode("23px"),}));
-		
-		JButton btnBack = new JButton("Zur\u00FCck");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		pnlNavigation_1.add(btnBack, "2, 2, fill, fill");
-		
-		JButton btnNext_1 = new JButton("Weiter");
-		pnlNavigation_1.add(btnNext_1, "4, 2, fill, center");
 		
 		JPanel pnlViewContent_1 = new JPanel();
 		pnlSecondView.add(pnlViewContent_1, BorderLayout.CENTER);
@@ -214,9 +172,9 @@ public class ViewWizzard extends JFrame {
 		lblHeadLine_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		pnlViewContent_1.add(lblHeadLine_1, BorderLayout.NORTH);
 		
-		JPanel panel = new JPanel();
-		pnlViewContent_1.add(panel, BorderLayout.CENTER);
-		panel.setLayout(new FormLayout(new ColumnSpec[] {
+		JPanel pnlContainer_1 = new JPanel();
+		pnlViewContent_1.add(pnlContainer_1, BorderLayout.CENTER);
+		pnlContainer_1.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("20px", true), Sizes.constant("20px", true)), 0),
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -245,38 +203,73 @@ public class ViewWizzard extends JFrame {
 		
 		JLabel lblDateSection = new JLabel("Datumsangaben:");
 		lblDateSection.setFont(new Font("Tahoma", Font.BOLD, 11));
-		panel.add(lblDateSection, "4, 2, left, top");
+		pnlContainer_1.add(lblDateSection, "4, 2, left, top");
 		
 		JLabel lblDate = new JLabel("Datum des Reisebeginns?");
-		panel.add(lblDate, "4, 4, left, top");
+		pnlContainer_1.add(lblDate, "4, 4, left, top");
 		
 		JLabel lblEndDate = new JLabel("Das Ende der Reise?");
-		panel.add(lblEndDate, "8, 4, left, top");
+		pnlContainer_1.add(lblEndDate, "8, 4, left, top");
 		
 		txtDate = new JTextField();
-		panel.add(txtDate, "4, 6, fill, top");
+		pnlContainer_1.add(txtDate, "4, 6, fill, top");
 		txtDate.setColumns(10);
 		
 		txtEndDate = new JTextField();
-		panel.add(txtEndDate, "8, 6, fill, top");
+		pnlContainer_1.add(txtEndDate, "8, 6, fill, top");
 		txtEndDate.setColumns(10);
 		
 		JLabel lblTravelOptions = new JLabel("Reiseart:");
 		lblTravelOptions.setFont(new Font("Tahoma", Font.BOLD, 11));
-		panel.add(lblTravelOptions, "4, 8, left, top");
+		pnlContainer_1.add(lblTravelOptions, "4, 8, left, top");
 		
 		JComboBox cboOptions = new JComboBox();
 		cboOptions.setSize(new Dimension(50, 20));
 		cboOptions.setPreferredSize(new Dimension(50, 20));
 		cboOptions.setModel(new DefaultComboBoxModel(new String[] {"Auto", "Bus", "Fahrrad", "Flugzeug", "Motorrad", "Schiff", "Zug"}));
-		panel.add(cboOptions, "4, 10, left, top");
+		pnlContainer_1.add(cboOptions, "4, 10, left, top");
 		
 		JLabel lblHeadlineNote = new JLabel("Hinweise:");
 		lblHeadlineNote.setFont(new Font("Tahoma", Font.BOLD, 11));
-		panel.add(lblHeadlineNote, "4, 12, left, top");
+		pnlContainer_1.add(lblHeadlineNote, "4, 12, left, top");
 		
 		JLabel lblNote = new JLabel("Die hier angegebene Reiseart beschr\u00E4nkt sich auf den Hauptweg. Ben\u00F6tigte Transfers werden hier nicht ber\u00FCcksichtigt.");
-		panel.add(lblNote, "4, 14, 5, 1, left, top");
+		pnlContainer_1.add(lblNote, "4, 14, 5, 1, left, top");
+		
+		JPanel pnlNavigation = new JPanel();
+		pnlQuestionCards.add(pnlNavigation, BorderLayout.SOUTH);
+		pnlNavigation.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		pnlNavigation.setLayout(new FormLayout(new ColumnSpec[] {
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),
+				FormFactory.GROWING_BUTTON_COLSPEC,
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),
+				FormFactory.GROWING_BUTTON_COLSPEC,
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),},
+			new RowSpec[] {
+				RowSpec.decode("23px"),}));
+		
+		JButton btnNext = new JButton("Weiter");
+		btnNext.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				pnlSecondView.show();
+				btnExit.setText("Zurück");
+			}
+		});
+		
+		btnExit = new JButton("Abbrechen");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		pnlNavigation.add(btnExit, "2, 1");
+		btnExit.setSize(new Dimension(80, 23));
+		btnExit.setMaximumSize(new Dimension(80, 23));
+		btnExit.setMinimumSize(new Dimension(80, 23));
+		pnlNavigation.add(btnNext, "4, 1");
+		btnNext.setSize(new Dimension(80, 23));
+		btnNext.setMaximumSize(new Dimension(80, 23));
+		btnNext.setMinimumSize(new Dimension(80, 23));
 	}
 
 }
