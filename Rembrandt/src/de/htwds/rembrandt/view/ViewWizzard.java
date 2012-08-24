@@ -41,12 +41,19 @@ import javax.swing.border.LineBorder;
 import java.awt.Rectangle;
 import java.awt.Point;
 import javax.swing.JTextField;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JFormattedTextField;
+import javax.swing.JSpinner;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class ViewWizzard extends JFrame {
 
 	private JPanel pnlQuestionCards;
 	private JTextField txtInputCountry;
 	private JTextField txtInputCity;
+	private JTextField txtDate;
+	private JTextField txtEndDate;
 
 	/**
 	 * Launch the application.
@@ -137,7 +144,7 @@ public class ViewWizzard extends JFrame {
 		pnlContainer.add(pnlQuestion);
 		pnlQuestion.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
+				ColumnSpec.decode("default:grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("max(186dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -145,7 +152,7 @@ public class ViewWizzard extends JFrame {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("max(186dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,},
+				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
@@ -153,6 +160,10 @@ public class ViewWizzard extends JFrame {
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblLocation = new JLabel("Land- und Ortsangabe:");
+		lblLocation.setFont(new Font("Tahoma", Font.BOLD, 11));
+		pnlQuestion.add(lblLocation, "4, 2");
 		
 		JLabel lblCountry = new JLabel("In welches Land reisen Sie?");
 		pnlQuestion.add(lblCountry, "4, 4");
@@ -167,6 +178,105 @@ public class ViewWizzard extends JFrame {
 		txtInputCity = new JTextField();
 		pnlQuestion.add(txtInputCity, "8, 6, fill, default");
 		txtInputCity.setColumns(10);
+		
+		JPanel pnlSecondView = new JPanel();
+		pnlQuestionCards.add(pnlSecondView, "name_3974285089612");
+		pnlSecondView.setLayout(new BorderLayout(0, 0));
+		
+		JPanel pnlNavigation_1 = new JPanel();
+		pnlSecondView.add(pnlNavigation_1, BorderLayout.SOUTH);
+		pnlNavigation_1.setLayout(new FormLayout(new ColumnSpec[] {
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),
+				FormFactory.GROWING_BUTTON_COLSPEC,
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),
+				FormFactory.GROWING_BUTTON_COLSPEC,
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),},
+			new RowSpec[] {
+				FormFactory.LINE_GAP_ROWSPEC,
+				RowSpec.decode("23px"),}));
+		
+		JButton btnBack = new JButton("Zur\u00FCck");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		pnlNavigation_1.add(btnBack, "2, 2, fill, fill");
+		
+		JButton btnNext_1 = new JButton("Weiter");
+		pnlNavigation_1.add(btnNext_1, "4, 2, fill, center");
+		
+		JPanel pnlViewContent_1 = new JPanel();
+		pnlSecondView.add(pnlViewContent_1, BorderLayout.CENTER);
+		pnlViewContent_1.setLayout(new BorderLayout(0, 5));
+		
+		JLabel lblHeadLine_1 = new JLabel("Reiseart und Datum");
+		lblHeadLine_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHeadLine_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		pnlViewContent_1.add(lblHeadLine_1, BorderLayout.NORTH);
+		
+		JPanel panel = new JPanel();
+		pnlViewContent_1.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("20px", true), Sizes.constant("20px", true)), 0),
+				FormFactory.RELATED_GAP_COLSPEC,
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("150px", true), Sizes.constant("200px", true)), 1),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("150px", true), Sizes.constant("200px", true)), 1),
+				FormFactory.RELATED_GAP_COLSPEC,
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("20px", true), Sizes.constant("20px", true)), 0),},
+			new RowSpec[] {
+				RowSpec.decode("65px"),
+				RowSpec.decode("14px"),
+				FormFactory.NARROW_LINE_GAP_ROWSPEC,
+				RowSpec.decode("14px"),
+				FormFactory.NARROW_LINE_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				RowSpec.decode("62px"),
+				RowSpec.decode("14px"),
+				FormFactory.NARROW_LINE_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("14px"),
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("14px"),}));
+		
+		JLabel lblDateSection = new JLabel("Datumsangaben:");
+		lblDateSection.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel.add(lblDateSection, "4, 2, left, top");
+		
+		JLabel lblDate = new JLabel("Datum des Reisebeginns?");
+		panel.add(lblDate, "4, 4, left, top");
+		
+		JLabel lblEndDate = new JLabel("Das Ende der Reise?");
+		panel.add(lblEndDate, "8, 4, left, top");
+		
+		txtDate = new JTextField();
+		panel.add(txtDate, "4, 6, fill, top");
+		txtDate.setColumns(10);
+		
+		txtEndDate = new JTextField();
+		panel.add(txtEndDate, "8, 6, fill, top");
+		txtEndDate.setColumns(10);
+		
+		JLabel lblTravelOptions = new JLabel("Reiseart:");
+		lblTravelOptions.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel.add(lblTravelOptions, "4, 8, left, top");
+		
+		JComboBox cboOptions = new JComboBox();
+		cboOptions.setSize(new Dimension(50, 20));
+		cboOptions.setPreferredSize(new Dimension(50, 20));
+		cboOptions.setModel(new DefaultComboBoxModel(new String[] {"Auto", "Bus", "Fahrrad", "Flugzeug", "Motorrad", "Schiff", "Zug"}));
+		panel.add(cboOptions, "4, 10, left, top");
+		
+		JLabel lblHeadlineNote = new JLabel("Hinweise:");
+		lblHeadlineNote.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel.add(lblHeadlineNote, "4, 12, left, top");
+		
+		JLabel lblNote = new JLabel("Die hier angegebene Reiseart beschr\u00E4nkt sich auf den Hauptweg. Ben\u00F6tigte Transfers werden hier nicht ber\u00FCcksichtigt.");
+		panel.add(lblNote, "4, 14, 5, 1, left, top");
 	}
 
 }
