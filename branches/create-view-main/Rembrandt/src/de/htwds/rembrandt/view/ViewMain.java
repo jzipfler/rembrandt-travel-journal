@@ -17,6 +17,7 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
+
 import javax.swing.UIManager;
 
 /**
@@ -59,7 +60,7 @@ public class ViewMain extends JFrame {
 	public ViewMain() {
 		setPreferredSize(new Dimension(800, 600));
 		setMinimumSize(new Dimension(640, 480));
-		setTitle("Travel journal");
+		setTitle("Travel Journal");
 		setName("MainMenu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 626, 439);
@@ -128,6 +129,7 @@ public class ViewMain extends JFrame {
 		 */
 		pnlContent = new JPanel();
 		contentPane.add(pnlContent, BorderLayout.CENTER);
+		pnlContent.setLayout(new BorderLayout(0, 0));
 	}
 
 	public JPanel getPnlContent() {
