@@ -57,6 +57,10 @@ public class ViewWizzard extends JFrame {
 	private JPanel pnlCards;
 	private JPanel pnlSecondView;
 	private JButton btnExit;
+	private JTextField txtStartArrivalInput;
+	private JTextField txtDestinationArrivalInput;
+	private JTextField txtDepartureStartInput;
+	private JTextField txtDepartureDestinationInput;
 	
 
 	/**
@@ -134,6 +138,16 @@ public class ViewWizzard extends JFrame {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -235,6 +249,85 @@ public class ViewWizzard extends JFrame {
 		
 		JLabel lblNote = new JLabel("Die hier angegebene Reiseart beschr\u00E4nkt sich auf den Hauptweg. Ben\u00F6tigte Transfers werden hier nicht ber\u00FCcksichtigt.");
 		pnlContainer_1.add(lblNote, "4, 14, 5, 1, left, top");
+		
+		JPanel pnlThirdView = new JPanel();
+		pnlCards.add(pnlThirdView, "name_2758029025195");
+		pnlThirdView.setLayout(new BorderLayout(0, 0));
+		
+		JPanel pnlViewContent_2 = new JPanel();
+		pnlThirdView.add(pnlViewContent_2, BorderLayout.CENTER);
+		pnlViewContent_2.setLayout(new BorderLayout(0, 5));
+		
+		JLabel lblHeadLine_2 = new JLabel("Details zur Reiseroute");
+		pnlViewContent_2.add(lblHeadLine_2, BorderLayout.NORTH);
+		lblHeadLine_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblHeadLine_2.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JPanel pnlContainer_2 = new JPanel();
+		pnlViewContent_2.add(pnlContainer_2, BorderLayout.CENTER);
+		pnlContainer_2.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblArrivalTxt = new JLabel("Anreise:");
+		lblArrivalTxt.setFont(new Font("Tahoma", Font.BOLD, 11));
+		pnlContainer_2.add(lblArrivalTxt, "3, 2");
+		
+		JLabel lblStartArrival = new JLabel("Start ?");
+		pnlContainer_2.add(lblStartArrival, "3, 4");
+		
+		JLabel lblDestinationArrival = new JLabel("Ziel ?");
+		pnlContainer_2.add(lblDestinationArrival, "7, 4");
+		
+		txtStartArrivalInput = new JTextField();
+		pnlContainer_2.add(txtStartArrivalInput, "3, 6, fill, default");
+		txtStartArrivalInput.setColumns(10);
+		
+		txtDestinationArrivalInput = new JTextField();
+		pnlContainer_2.add(txtDestinationArrivalInput, "7, 6, fill, default");
+		txtDestinationArrivalInput.setColumns(10);
+		
+		JLabel lblDeparture = new JLabel("Abreise:");
+		lblDeparture.setFont(new Font("Tahoma", Font.BOLD, 11));
+		pnlContainer_2.add(lblDeparture, "3, 12");
+		
+		JLabel lblDepartureStart = new JLabel("Start ?");
+		pnlContainer_2.add(lblDepartureStart, "3, 14");
+		
+		JLabel lblDepartureDestination = new JLabel("Ziel ?");
+		pnlContainer_2.add(lblDepartureDestination, "7, 14");
+		
+		txtDepartureStartInput = new JTextField();
+		pnlContainer_2.add(txtDepartureStartInput, "3, 16, fill, default");
+		txtDepartureStartInput.setColumns(10);
+		
+		txtDepartureDestinationInput = new JTextField();
+		pnlContainer_2.add(txtDepartureDestinationInput, "7, 16, fill, default");
+		txtDepartureDestinationInput.setColumns(10);
 		
 		JPanel pnlNavigation = new JPanel();
 		pnlQuestionCards.add(pnlNavigation, BorderLayout.SOUTH);
