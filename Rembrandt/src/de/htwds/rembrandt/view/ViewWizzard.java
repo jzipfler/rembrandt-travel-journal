@@ -1,51 +1,33 @@
 package de.htwds.rembrandt.view;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.Dimension;
 import java.awt.CardLayout;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.AbstractAction;
-import java.awt.event.ActionEvent;
-import javax.swing.Action;
-import java.awt.GridLayout;
-import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.Cursor;
-import javax.swing.BoxLayout;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.Sizes;
-import java.awt.event.ActionListener;
-import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Font;
-import javax.swing.border.TitledBorder;
-import java.awt.Insets;
-import javax.swing.SwingConstants;
-import javax.swing.JSplitPane;
-import javax.swing.JTextPane;
 import java.awt.Color;
-import javax.swing.UIManager;
-import javax.swing.border.LineBorder;
-import java.awt.Rectangle;
-import java.awt.Point;
-import javax.swing.JTextField;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JFormattedTextField;
-import javax.swing.JSpinner;
-import javax.swing.JComboBox;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.Sizes;
 
 /**
  * Diese Klasse implementiert den Wizzard zur Sammlung der Reisedaten
@@ -61,6 +43,7 @@ public class ViewWizzard extends JFrame {
 	private JTextField txtDate;
 	private JTextField txtEndDate;
 	private JPanel pnlCards;
+	private JPanel pnlFirstView;
 	private JPanel pnlSecondView;
 	private JPanel pnlThirdView;
 	private JButton btnBack;
@@ -110,7 +93,7 @@ public class ViewWizzard extends JFrame {
 		pnlQuestionCards.add(pnlCards, BorderLayout.CENTER);
 		pnlCards.setLayout(new CardLayout(0, 0));
 		
-		JPanel pnlFirstView = new JPanel();
+		pnlFirstView = new JPanel();
 		pnlCards.add(pnlFirstView, "name_17364743092986");
 		pnlFirstView.setLayout(new BorderLayout(0, 0));
 		
@@ -223,7 +206,7 @@ public class ViewWizzard extends JFrame {
 				RowSpec.decode("62px"),
 				RowSpec.decode("14px"),
 				FormFactory.NARROW_LINE_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
+				RowSpec.decode("45px"),
 				FormFactory.UNRELATED_GAP_ROWSPEC,
 				RowSpec.decode("14px"),
 				FormFactory.UNRELATED_GAP_ROWSPEC,
@@ -367,23 +350,29 @@ public class ViewWizzard extends JFrame {
 		btnNext = new JButton("Weiter");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cardNumber += 1;
+				if (cardNumber < THIRD){
+					cardNumber += 1;
+				}
 				switch (cardNumber){
 				case FIRST:
+					pnlFirstView.show();
+					pnlSecondView.hide();
 					break;
 				case SECOND:
 					pnlSecondView.show();
+					pnlFirstView.hide();
 					break;
 				case THIRD:
 					pnlThirdView.show();
+					pnlSecondView.hide();
 					break;
 				default:
 					break;
 				}
-				if (cardNumber != 0){
+				if (cardNumber != FIRST){
 					btnBack.setText("Zurück");
 				}
-				if (cardNumber == 2){
+				if (cardNumber == THIRD){
 					btnNext.setText("Ende");
 				}
 			}
@@ -392,7 +381,31 @@ public class ViewWizzard extends JFrame {
 		btnBack = new JButton("Abbrechen");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				if (cardNumber > FIRST){
+					cardNumber -= 1;
+				}
+				switch (cardNumber){
+				case FIRST:
+					pnlFirstView.show();
+					pnlSecondView.hide();
+					break;
+				case SECOND:
+					pnlSecondView.show();
+					pnlFirstView.hide();
+					break;
+				case THIRD:
+					pnlThirdView.show();
+					pnlSecondView.show();
+					break;
+				default:
+					break;
+				}
+				if (cardNumber == FIRST){
+					btnBack.setText("Abbrechen");
+				}
+				if (cardNumber != THIRD){
+					btnNext.setText("Weiter");
+				}
 			}
 		});
 		pnlNavigation.add(btnBack, "2, 1");
