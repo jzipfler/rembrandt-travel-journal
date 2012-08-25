@@ -47,8 +47,14 @@ import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * Diese Klasse implementiert den Wizzard zur Sammlung der Reisedaten
+ * 
+ * @author Daniel
+ * @version 1.1
+ */
 public class ViewWizzard extends JFrame {
-
+	
 	private JPanel pnlQuestionCards;
 	private JTextField txtInputCountry;
 	private JTextField txtInputCity;
@@ -56,13 +62,20 @@ public class ViewWizzard extends JFrame {
 	private JTextField txtEndDate;
 	private JPanel pnlCards;
 	private JPanel pnlSecondView;
-	private JButton btnExit;
+	private JPanel pnlThirdView;
+	private JButton btnBack;
+	private JButton btnNext;
 	private JTextField txtStartArrivalInput;
 	private JTextField txtDestinationArrivalInput;
 	private JTextField txtDepartureStartInput;
 	private JTextField txtDepartureDestinationInput;
 	
-
+	//Konstanten und Felder
+	private int cardNumber;
+	private static final int FIRST  = 0;
+	private static final int SECOND = 1;
+	private static final int THIRD  = 2;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -83,6 +96,7 @@ public class ViewWizzard extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewWizzard() {
+		cardNumber = 0;
 		setTitle("Reise anlegen");
 		setMinimumSize(new Dimension(640, 480));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -209,7 +223,7 @@ public class ViewWizzard extends JFrame {
 				RowSpec.decode("62px"),
 				RowSpec.decode("14px"),
 				FormFactory.NARROW_LINE_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
+				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.UNRELATED_GAP_ROWSPEC,
 				RowSpec.decode("14px"),
 				FormFactory.UNRELATED_GAP_ROWSPEC,
@@ -237,11 +251,20 @@ public class ViewWizzard extends JFrame {
 		lblTravelOptions.setFont(new Font("Tahoma", Font.BOLD, 11));
 		pnlContainer_1.add(lblTravelOptions, "4, 8, left, top");
 		
+		JPanel pnlSubContainer = new JPanel();
+		pnlContainer_1.add(pnlSubContainer, "4, 10, fill, fill");
+		pnlSubContainer.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("75px"),},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		
 		JComboBox cboOptions = new JComboBox();
+		pnlSubContainer.add(cboOptions, "2, 2");
 		cboOptions.setSize(new Dimension(50, 20));
 		cboOptions.setPreferredSize(new Dimension(50, 20));
 		cboOptions.setModel(new DefaultComboBoxModel(new String[] {"Auto", "Bus", "Fahrrad", "Flugzeug", "Motorrad", "Schiff", "Zug"}));
-		pnlContainer_1.add(cboOptions, "4, 10, left, top");
 		
 		JLabel lblHeadlineNote = new JLabel("Hinweise:");
 		lblHeadlineNote.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -250,7 +273,7 @@ public class ViewWizzard extends JFrame {
 		JLabel lblNote = new JLabel("Die hier angegebene Reiseart beschr\u00E4nkt sich auf den Hauptweg. Ben\u00F6tigte Transfers werden hier nicht ber\u00FCcksichtigt.");
 		pnlContainer_1.add(lblNote, "4, 14, 5, 1, left, top");
 		
-		JPanel pnlThirdView = new JPanel();
+		pnlThirdView = new JPanel();
 		pnlCards.add(pnlThirdView, "name_2758029025195");
 		pnlThirdView.setLayout(new BorderLayout(0, 0));
 		
@@ -341,24 +364,41 @@ public class ViewWizzard extends JFrame {
 			new RowSpec[] {
 				RowSpec.decode("23px"),}));
 		
-		JButton btnNext = new JButton("Weiter");
+		btnNext = new JButton("Weiter");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				pnlSecondView.show();
-				btnExit.setText("Zurück");
+				cardNumber += 1;
+				switch (cardNumber){
+				case FIRST:
+					break;
+				case SECOND:
+					pnlSecondView.show();
+					break;
+				case THIRD:
+					pnlThirdView.show();
+					break;
+				default:
+					break;
+				}
+				if (cardNumber != 0){
+					btnBack.setText("Zurück");
+				}
+				if (cardNumber == 2){
+					btnNext.setText("Ende");
+				}
 			}
 		});
 		
-		btnExit = new JButton("Abbrechen");
-		btnExit.addActionListener(new ActionListener() {
+		btnBack = new JButton("Abbrechen");
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 			}
 		});
-		pnlNavigation.add(btnExit, "2, 1");
-		btnExit.setSize(new Dimension(80, 23));
-		btnExit.setMaximumSize(new Dimension(80, 23));
-		btnExit.setMinimumSize(new Dimension(80, 23));
+		pnlNavigation.add(btnBack, "2, 1");
+		btnBack.setSize(new Dimension(80, 23));
+		btnBack.setMaximumSize(new Dimension(80, 23));
+		btnBack.setMinimumSize(new Dimension(80, 23));
 		pnlNavigation.add(btnNext, "4, 1");
 		btnNext.setSize(new Dimension(80, 23));
 		btnNext.setMaximumSize(new Dimension(80, 23));
