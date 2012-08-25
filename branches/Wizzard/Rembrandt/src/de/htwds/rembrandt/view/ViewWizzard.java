@@ -355,16 +355,16 @@ public class ViewWizzard extends JFrame {
 				}
 				switch (cardNumber){
 				case FIRST:
-					pnlFirstView.show();
-					pnlSecondView.hide();
+					pnlFirstView.setVisible(true);
+					pnlSecondView.setVisible(false);
 					break;
 				case SECOND:
-					pnlSecondView.show();
-					pnlFirstView.hide();
+					pnlSecondView.setVisible(true);
+					pnlFirstView.setVisible(false);
 					break;
 				case THIRD:
-					pnlThirdView.show();
-					pnlSecondView.hide();
+					pnlThirdView.setVisible(true);
+					pnlSecondView.setVisible(false);
 					break;
 				default:
 					break;
@@ -386,16 +386,16 @@ public class ViewWizzard extends JFrame {
 				}
 				switch (cardNumber){
 				case FIRST:
-					pnlFirstView.show();
-					pnlSecondView.hide();
+					pnlFirstView.setVisible(true);
+					pnlSecondView.setVisible(false);
 					break;
 				case SECOND:
-					pnlSecondView.show();
-					pnlFirstView.hide();
+					pnlSecondView.setVisible(true);
+					pnlFirstView.setVisible(false);
 					break;
 				case THIRD:
-					pnlThirdView.show();
-					pnlSecondView.show();
+					pnlThirdView.setVisible(true);
+					pnlSecondView.setVisible(false);
 					break;
 				default:
 					break;
