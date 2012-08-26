@@ -14,12 +14,17 @@ import com.jgoodies.forms.factories.FormFactory;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 
 public class ViewTravelinformation extends JPanel {
 	private JTextField txtCountryInput;
 	private JTextField txtCityInput;
 	private JTextField txtArrivalInput;
 	private JTextField txtDepartureInput;
+	private JTextField txtArrivalStartInput;
+	private JTextField txtArrivalDestinationInput;
+	private JTextField txtDepartureStartInput;
+	private JTextField txtDepartureDestinationInput;
 
 	/**
 	 * Create the panel.
@@ -43,13 +48,15 @@ public class ViewTravelinformation extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("20px"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
+				ColumnSpec.decode("default:grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,},
+				ColumnSpec.decode("25px"),},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
@@ -66,10 +73,24 @@ public class ViewTravelinformation extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
 		JLabel lblLocation = new JLabel("Reiseland und Ort:\r\n");
-		lblLocation.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblLocation.setFont(new Font("Arial", Font.BOLD, 11));
 		pnlViewContent.add(lblLocation, "2, 2");
 		
 		JLabel lblCountry = new JLabel("Land:");
@@ -91,7 +112,7 @@ public class ViewTravelinformation extends JPanel {
 		txtCityInput.setColumns(10);
 		
 		JLabel lblDateAndTravelInformation = new JLabel("Datum und Reiseart:");
-		lblDateAndTravelInformation.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblDateAndTravelInformation.setFont(new Font("Arial", Font.BOLD, 11));
 		pnlViewContent.add(lblDateAndTravelInformation, "2, 8");
 		
 		JLabel lblDateArrival = new JLabel("Anreise:");
@@ -122,8 +143,55 @@ public class ViewTravelinformation extends JPanel {
 		pnlComboBox.add(cboOptions);
 		
 		JLabel lblDirections = new JLabel("Reisewege:");
-		lblDirections.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblDirections.setFont(new Font("Arial", Font.BOLD, 11));
 		pnlViewContent.add(lblDirections, "2, 16");
+		
+		JLabel lblArrivalDirections = new JLabel("Anreise");
+		lblArrivalDirections.setFont(new Font("Arial", Font.PLAIN, 11));
+		pnlViewContent.add(lblArrivalDirections, "2, 18");
+		
+		JLabel lblArrivalStart = new JLabel("Start :");
+		lblArrivalStart.setFont(new Font("Arial", Font.PLAIN, 11));
+		pnlViewContent.add(lblArrivalStart, "2, 20, right, default");
+		
+		txtArrivalStartInput = new JTextField();
+		txtArrivalStartInput.setFont(new Font("Arial", Font.PLAIN, 11));
+		pnlViewContent.add(txtArrivalStartInput, "4, 20, fill, default");
+		txtArrivalStartInput.setColumns(10);
+		
+		JLabel lblArrivalDestination = new JLabel("Ziel :");
+		lblArrivalDestination.setFont(new Font("Arial", Font.PLAIN, 11));
+		pnlViewContent.add(lblArrivalDestination, "8, 20, right, default");
+		
+		txtArrivalDestinationInput = new JTextField();
+		txtArrivalDestinationInput.setFont(new Font("Arial", Font.PLAIN, 11));
+		pnlViewContent.add(txtArrivalDestinationInput, "10, 20, fill, default");
+		txtArrivalDestinationInput.setColumns(10);
+		
+		JLabel lblDepartureDirections = new JLabel("Abreise:");
+		lblDepartureDirections.setFont(new Font("Arial", Font.PLAIN, 11));
+		pnlViewContent.add(lblDepartureDirections, "2, 22");
+		
+		JLabel lblDepartureStart = new JLabel("Start :");
+		lblDepartureStart.setFont(new Font("Arial", Font.PLAIN, 11));
+		pnlViewContent.add(lblDepartureStart, "2, 24, right, default");
+		
+		txtDepartureStartInput = new JTextField();
+		txtDepartureStartInput.setFont(new Font("Arial", Font.PLAIN, 11));
+		pnlViewContent.add(txtDepartureStartInput, "4, 24, fill, default");
+		txtDepartureStartInput.setColumns(10);
+		
+		JLabel lblDepartureDestination = new JLabel("Ziel :");
+		lblDepartureDestination.setFont(new Font("Arial", Font.PLAIN, 11));
+		pnlViewContent.add(lblDepartureDestination, "8, 24, right, default");
+		
+		txtDepartureDestinationInput = new JTextField();
+		txtDepartureDestinationInput.setFont(new Font("Arial", Font.PLAIN, 11));
+		pnlViewContent.add(txtDepartureDestinationInput, "10, 24, fill, default");
+		txtDepartureDestinationInput.setColumns(10);
+		
+		JButton btnEdit = new JButton("Bearbeiten");
+		pnlViewContent.add(btnEdit, "2, 30");
 
 	}
 
