@@ -17,7 +17,11 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
+
+import de.htwds.rembrandt.controler.mainViewController.LoadContacPanelActionListener;
+
 import javax.swing.UIManager;
+import java.awt.Component;
 
 /**
  * 
@@ -30,11 +34,13 @@ import javax.swing.UIManager;
 public class ViewMain extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel emptyInitialContentPanel;
+	private JPanel pnlContent;
 	private JButton btnPhotos;
 	private JButton btnData;
 	private JButton btnLists;
 	private JLabel lblFavorits;
+	private JButton btnKontakte;
+	private JButton btnReiseinfos;
 
 	/**
 	 * Launch the application.
@@ -58,7 +64,7 @@ public class ViewMain extends JFrame {
 	public ViewMain() {
 		setPreferredSize(new Dimension(800, 600));
 		setMinimumSize(new Dimension(640, 480));
-		setTitle("Main menu");
+		setTitle("Travel Journal");
 		setName("MainMenu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 626, 439);
@@ -67,18 +73,22 @@ public class ViewMain extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		JPanel quicklunchPanel = new JPanel();
-		quicklunchPanel.setFont(new Font("Nimbus Sans L", Font.PLAIN, 15));
-		quicklunchPanel.setMaximumSize(new Dimension(188, 32767));
-		quicklunchPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		quicklunchPanel.setPreferredSize(new Dimension(188, 10));
-		quicklunchPanel.setMinimumSize(new Dimension(188, 10));
-		contentPane.add(quicklunchPanel, BorderLayout.WEST);
-		quicklunchPanel.setLayout(new FormLayout(new ColumnSpec[] {
+		JPanel pnlQuicklunch = new JPanel();
+		pnlQuicklunch.setFont(new Font("Arial", Font.PLAIN, 15));
+		pnlQuicklunch.setMaximumSize(new Dimension(188, 32767));
+		pnlQuicklunch.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		pnlQuicklunch.setPreferredSize(new Dimension(188, 10));
+		pnlQuicklunch.setMinimumSize(new Dimension(188, 10));
+		contentPane.add(pnlQuicklunch, BorderLayout.WEST);
+		pnlQuicklunch.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("max(72dlu;pref)"),
 				FormFactory.RELATED_GAP_COLSPEC,},
 			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -96,33 +106,44 @@ public class ViewMain extends JFrame {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
 		btnPhotos = new JButton("Fotos");
 		btnPhotos.setBackground(UIManager.getColor("Button.background"));
-		btnPhotos.setFont(new Font("Dialog", Font.BOLD, 14));
-		quicklunchPanel.add(btnPhotos, "2, 2");
+		btnPhotos.setFont(new Font("Arial", Font.BOLD, 14));
+		pnlQuicklunch.add(btnPhotos, "2, 2");
 		
 		btnData = new JButton("Daten");
-		btnData.setFont(new Font("Dialog", Font.BOLD, 14));
-		quicklunchPanel.add(btnData, "2, 4");
+		btnData.setFont(new Font("Arial", Font.BOLD, 14));
+		pnlQuicklunch.add(btnData, "2, 4");
 		
 		btnLists = new JButton("Listen");
-		btnLists.setFont(new Font("Dialog", Font.BOLD, 14));
-		quicklunchPanel.add(btnLists, "2, 6");
+		btnLists.setFont(new Font("Arial", Font.BOLD, 14));
+		pnlQuicklunch.add(btnLists, "2, 6");
+		
+		btnReiseinfos = new JButton("Reiseinfos");
+		btnReiseinfos.setFont(new Font("Arial", Font.BOLD, 14));
+		pnlQuicklunch.add(btnReiseinfos, "2, 10");
 		
 		lblFavorits = new JLabel("Favoriten:");
-		lblFavorits.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblFavorits.setFont(new Font("Arial", Font.BOLD, 14));
 		lblFavorits.setHorizontalAlignment(SwingConstants.CENTER);
-		quicklunchPanel.add(lblFavorits, "2, 10");
+		pnlQuicklunch.add(lblFavorits, "2, 14");
+		
+		btnKontakte = new JButton("Kontakte");
+		btnKontakte.addActionListener(new LoadContacPanelActionListener(this));
+		btnKontakte.setFont(new Font("Arial", Font.BOLD, 14));
+		pnlQuicklunch.add(btnKontakte, "2, 8");
 		
 		/*
 		 * Dimensions of the contentPanes = 440,440
 		 */
-		emptyInitialContentPanel = new JPanel();
-		contentPane.add(emptyInitialContentPanel, BorderLayout.CENTER);
+		pnlContent = new JPanel();
+		contentPane.add(pnlContent, BorderLayout.CENTER);
+		pnlContent.setLayout(new BorderLayout(0, 0));
 	}
 
+	public JPanel getPnlContent() {
+		return pnlContent;
+	}
 }
