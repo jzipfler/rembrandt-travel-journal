@@ -54,7 +54,7 @@ public class ViewTravelinformation extends JPanel {
 		lblHeadline.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		lblHeadline.setHorizontalAlignment(SwingConstants.LEFT);
 		lblHeadline.setHorizontalTextPosition(SwingConstants.LEFT);
-		lblHeadline.setFont(new Font("Arial", Font.BOLD, 14));
+		lblHeadline.setFont(new Font("Arial", Font.BOLD, 15));
 		add(lblHeadline, BorderLayout.NORTH);
 		
 		JTabbedPane tpnSwitch = new JTabbedPane(JTabbedPane.TOP);
@@ -72,25 +72,26 @@ public class ViewTravelinformation extends JPanel {
 		add(tpnSwitch, BorderLayout.CENTER);
 		
 		JPanel pnlInformation = new JPanel();
+		pnlInformation.setFont(new Font("Arial", Font.PLAIN, 13));
 		tpnSwitch.addTab("Informationen", null, pnlInformation, null);
 		pnlInformation.setLayout(new BorderLayout(0, 0));
 		
 		pnlInformationContent = new JPanel();
 		pnlInformation.add(pnlInformationContent, BorderLayout.NORTH);
-		pnlInformationContent.setFont(new Font("Arial", Font.PLAIN, 11));
+		pnlInformationContent.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("20px"),
+				ColumnSpec.decode("15px"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
+				ColumnSpec.decode("max(64dlu;default):grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("25px"),},
+				ColumnSpec.decode("5px"),},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
@@ -122,50 +123,50 @@ public class ViewTravelinformation extends JPanel {
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
 		JLabel lblLocation = new JLabel("Reiseland und Ort:\r\n");
-		lblLocation.setFont(new Font("Arial", Font.BOLD, 11));
+		lblLocation.setFont(new Font("Arial", Font.BOLD, 13));
 		pnlInformationContent.add(lblLocation, "2, 2");
 		
 		JLabel lblCountry = new JLabel("Land:");
-		lblCountry.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblCountry.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(lblCountry, "2, 4, right, default");
 		
 		txtCountryInput = new JTextField();
 		txtCountryInput.setEditable(false);
-		txtCountryInput.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtCountryInput.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(txtCountryInput, "4, 4, fill, default");
 		txtCountryInput.setColumns(10);
 		
 		JLabel lblCity = new JLabel("Ort:");
-		lblCity.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblCity.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(lblCity, "8, 4, right, default");
 		
 		txtCityInput = new JTextField();
 		txtCityInput.setEditable(false);
-		txtCityInput.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtCityInput.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(txtCityInput, "10, 4, fill, default");
 		txtCityInput.setColumns(10);
 		
 		JLabel lblDateAndTravelInformation = new JLabel("Datum und Reiseart:");
-		lblDateAndTravelInformation.setFont(new Font("Arial", Font.BOLD, 11));
+		lblDateAndTravelInformation.setFont(new Font("Arial", Font.BOLD, 13));
 		pnlInformationContent.add(lblDateAndTravelInformation, "2, 8");
 		
 		JLabel lblDateArrival = new JLabel("Anreise:");
-		lblDateArrival.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblDateArrival.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(lblDateArrival, "2, 10, right, default");
 		
 		txtArrivalInput = new JTextField();
 		txtArrivalInput.setEditable(false);
-		txtArrivalInput.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtArrivalInput.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(txtArrivalInput, "4, 10, fill, default");
 		txtArrivalInput.setColumns(10);
 		
 		JLabel lblDeparture = new JLabel("Abreise:");
-		lblDeparture.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblDeparture.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(lblDeparture, "8, 10, right, default");
 		
 		txtDepartureInput = new JTextField();
 		txtDepartureInput.setEditable(false);
-		txtDepartureInput.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtDepartureInput.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(txtDepartureInput, "10, 10, fill, default");
 		txtDepartureInput.setColumns(10);
 		
@@ -174,20 +175,20 @@ public class ViewTravelinformation extends JPanel {
 		pnlComboBox.setLayout(new BorderLayout(0, 0));
 		
 		cboOptions.setEnabled(false);
-		cboOptions.setFont(new Font("Arial", Font.PLAIN, 11));
+		cboOptions.setFont(new Font("Arial", Font.PLAIN, 13));
 		cboOptions.setModel(new DefaultComboBoxModel(new String[] {"Auto", "Bus", "Fahrrad", "Flugzeug", "Motorrad", "Schiff", "Zug"}));
 		pnlComboBox.add(cboOptions);
 		
 		JLabel lblDirections = new JLabel("Reisewege:");
-		lblDirections.setFont(new Font("Arial", Font.BOLD, 11));
+		lblDirections.setFont(new Font("Arial", Font.BOLD, 13));
 		pnlInformationContent.add(lblDirections, "2, 16");
 		
 		JLabel lblArrivalDirections = new JLabel("Anreise");
-		lblArrivalDirections.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblArrivalDirections.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(lblArrivalDirections, "2, 18");
 		
 		JLabel lblArrivalStart = new JLabel("Start :");
-		lblArrivalStart.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblArrivalStart.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(lblArrivalStart, "2, 20, right, default");
 		
 		txtArrivalStartInput = new JTextField();
@@ -197,36 +198,36 @@ public class ViewTravelinformation extends JPanel {
 		txtArrivalStartInput.setColumns(10);
 		
 		JLabel lblArrivalDestination = new JLabel("Ziel :");
-		lblArrivalDestination.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblArrivalDestination.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(lblArrivalDestination, "8, 20, right, default");
 		
 		txtArrivalDestinationInput = new JTextField();
 		txtArrivalDestinationInput.setEditable(false);
-		txtArrivalDestinationInput.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtArrivalDestinationInput.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(txtArrivalDestinationInput, "10, 20, fill, default");
 		txtArrivalDestinationInput.setColumns(10);
 		
 		JLabel lblDepartureDirections = new JLabel("Abreise:");
-		lblDepartureDirections.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblDepartureDirections.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(lblDepartureDirections, "2, 22");
 		
 		JLabel lblDepartureStart = new JLabel("Start :");
-		lblDepartureStart.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblDepartureStart.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(lblDepartureStart, "2, 24, right, default");
 		
 		txtDepartureStartInput = new JTextField();
 		txtDepartureStartInput.setEditable(false);
-		txtDepartureStartInput.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtDepartureStartInput.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(txtDepartureStartInput, "4, 24, fill, default");
 		txtDepartureStartInput.setColumns(10);
 		
 		JLabel lblDepartureDestination = new JLabel("Ziel :");
-		lblDepartureDestination.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblDepartureDestination.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(lblDepartureDestination, "8, 24, right, default");
 		
 		txtDepartureDestinationInput = new JTextField();
 		txtDepartureDestinationInput.setEditable(false);
-		txtDepartureDestinationInput.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtDepartureDestinationInput.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(txtDepartureDestinationInput, "10, 24, fill, default");
 		txtDepartureDestinationInput.setColumns(10);
 		
@@ -234,6 +235,7 @@ public class ViewTravelinformation extends JPanel {
 		pnlInformation.add(pnlEditbuttonContainer, BorderLayout.SOUTH);
 		
 		JButton btnEdit = new JButton("Bearbeiten");
+		btnEdit.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnEdit.addActionListener(new SetEditEnableActionListener(this));
 		pnlEditbuttonContainer.add(btnEdit);
 		
@@ -248,19 +250,20 @@ public class ViewTravelinformation extends JPanel {
 		
 		JLabel lblTextfieldLabel = new JLabel("Kommentar zur Reise und Beschreibung:");
 		pnlContentContainer.add(lblTextfieldLabel, BorderLayout.NORTH);
-		lblTextfieldLabel.setFont(new Font("Arial", Font.BOLD, 11));
+		lblTextfieldLabel.setFont(new Font("Arial", Font.BOLD, 13));
 		
 		JScrollPane scrollPane = new JScrollPane();
 		pnlContentContainer.add(scrollPane, BorderLayout.CENTER);
 		txtpnDescription.setEditable(false);
 		
 		scrollPane.setViewportView(txtpnDescription);
-		txtpnDescription.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtpnDescription.setFont(new Font("Arial", Font.PLAIN, 13));
 		
 		JPanel pnlButtonContainer = new JPanel();
 		pnlContentContainer.add(pnlButtonContainer, BorderLayout.SOUTH);
 		
 		JButton btnEditDescription = new JButton("Bearbeiten");
+		btnEditDescription.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnEditDescription.addActionListener(new SetCommentEnableActionListener(this));
 		pnlButtonContainer.add(btnEditDescription);
 
