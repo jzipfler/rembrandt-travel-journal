@@ -68,7 +68,7 @@ public class ViewTravelinformation extends JPanel {
 				}
 			}
 		});
-		tpnSwitch.setFont(new Font("Arial", Font.PLAIN, 11));
+		tpnSwitch.setFont(new Font("Arial", Font.BOLD, 13));
 		add(tpnSwitch, BorderLayout.CENTER);
 		
 		JPanel pnlInformation = new JPanel();
