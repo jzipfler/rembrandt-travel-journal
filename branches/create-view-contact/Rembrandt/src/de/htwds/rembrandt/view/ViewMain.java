@@ -21,7 +21,6 @@ import com.jgoodies.forms.layout.RowSpec;
 import de.htwds.rembrandt.controler.mainViewController.LoadContacPanelActionListener;
 
 import javax.swing.UIManager;
-import java.awt.Component;
 
 /**
  * 
@@ -131,7 +130,7 @@ public class ViewMain extends JFrame {
 		pnlQuicklunch.add(lblFavorits, "2, 14");
 		
 		btnKontakte = new JButton("Kontakte");
-		btnKontakte.addActionListener(new LoadContacPanelActionListener(this));
+		btnKontakte.addActionListener( new LoadContacPanelActionListener( this ) );
 		btnKontakte.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlQuicklunch.add(btnKontakte, "2, 8");
 		
@@ -141,9 +140,11 @@ public class ViewMain extends JFrame {
 		pnlContent = new JPanel();
 		contentPane.add(pnlContent, BorderLayout.CENTER);
 		pnlContent.setLayout(new BorderLayout(0, 0));
+		
 	}
 
-	public JPanel getPnlContent() {
+	public JPanel getCurrentContentPanel() {
 		return pnlContent;
 	}
+	
 }
