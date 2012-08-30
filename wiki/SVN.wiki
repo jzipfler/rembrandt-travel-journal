@@ -14,3 +14,19 @@ The easiest way is, to check out the Rembrand folder all the time and use the "C
 
 If you have multiple branches you want to working on, you could get problems if you only check out the Rembrand folder.
 You could use "Check out as..." to change the project name and to check out multiple branches.
+
+= Merge with stable =
+
+If you finished your work in your branch, should merge your work with the so called stable part or trunk.
+Follow these steps :
+  # refresh your SVN Repository
+  # "Check out as..." from the trunk/Rembrandt folder
+    * Recommended naming: "Rembrandt stable"
+  # use the update function to sync your local resource.
+  # choose "2Urls" tab in the merge dialog.
+  # select the trunk/Rembradt as URL1 and your branch as URL2.
+  # use the preview button to make sure that all your changes are included, if no make sure that your commit worked properly.
+  # run the merge process with the OK button
+  # the team synchronizing should now open
+  # if there are any problems with your merge, you could remove them with the shown diffs.
+  # if you alter these diff, you have to accept it with rightclick(?!) on the class the error belongs to.
