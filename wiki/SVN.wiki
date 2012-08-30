@@ -1,3 +1,4 @@
+#labels SVN
 #useful informations about svn
 
 = Introduction =
@@ -21,7 +22,7 @@ If you finished your work in your branch, should merge your work with the so cal
 Follow these steps :
   # refresh your SVN Repository
   # "Check out as..." from the trunk/Rembrandt folder
-    * Recommended naming: "Rembrandt stable"
+    * Recommended naming: "Rembrandt-stable"
   # use the update function to sync your local resource.
   # choose "2Urls" tab in the merge dialog.
   # select the trunk/Rembradt as URL1 and your branch as URL2.
