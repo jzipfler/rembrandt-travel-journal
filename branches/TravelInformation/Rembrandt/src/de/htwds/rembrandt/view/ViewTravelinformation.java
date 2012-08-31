@@ -25,7 +25,11 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import de.htwds.rembrandt.controler.travelview.SetCommentEnableActionListener;
 import de.htwds.rembrandt.controler.travelview.SetEditEnableActionListener;
-
+/**
+ * 
+ * @author Daniel
+ * @version 1.2
+ */
 public class ViewTravelinformation extends JPanel {
 	
 	private boolean informationEditable = false;
