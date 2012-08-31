@@ -6,22 +6,21 @@ import java.awt.event.ActionListener;
 import de.htwds.rembrandt.view.ViewMain;
 import de.htwds.rembrandt.view.ViewContacts;
 
-
 public class LoadContacPanelActionListener implements ActionListener {
 
-	private ViewMain viewMain;
 	private ViewContacts viewContacts;
 	
 	public LoadContacPanelActionListener(ViewMain viewMain ) {
-		this.viewMain = viewMain;
-		this.viewContacts = new ViewContacts();
+		
+		this.viewContacts = new ViewContacts( viewMain );
 	}	
-	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		viewMain.getPnlContent().add(viewContacts);
+		
+		ViewMain viewMain = viewContacts.getParentFrame();
+		viewMain.getCurrentContentPanel().removeAll();
+		viewMain.getCurrentContentPanel().add(viewContacts);
 		viewContacts.updateUI();
 	}
 
