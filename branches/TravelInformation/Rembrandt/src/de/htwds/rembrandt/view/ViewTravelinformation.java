@@ -272,7 +272,10 @@ public class ViewTravelinformation extends JPanel {
 		pnlButtonContainer.add(btnEditDescription);
 
 	}
-
+	
+	/**
+	 * 
+	 */
 	public void setInformationEditable(){
 		informationEditable = (!informationEditable);
 		txtArrivalDestinationInput.setEditable(informationEditable);
@@ -285,6 +288,10 @@ public class ViewTravelinformation extends JPanel {
 		txtDepartureStartInput.setEditable(informationEditable);
 		cboOptions.setEnabled(informationEditable);
 	}
+	
+	/**
+	 * 
+	 */
 	public void setCommentEditable(){
 		commentEditable = (!commentEditable);
 		txtpnDescription.setEditable(commentEditable);
