@@ -8,7 +8,7 @@ package de.htwds.rembrandt.model;
  */
 public class TravelInformation {
 	
-	//Constants
+	//Fields
 	private String country;
 	private String city;
 	private String dateArrival;
@@ -18,6 +18,7 @@ public class TravelInformation {
 	private String locationArrivalDestination;
 	private String locationDepartureStart;
 	private String locationDepartureDestination;
+	private String comment;
 	
 	/**
 	 * Constructor for the TravelInformation-class.
@@ -41,5 +42,89 @@ public class TravelInformation {
 		locationArrivalDestination 		= arrivalD;
 		locationDepartureStart 			= departureS;
 		locationDepartureDestination 	= departureD;
+	}
+	
+	//Getter
+	
+	public String getCountry(){
+		return country;
+	}
+	
+	public String getCity(){
+		return city;
+	}
+	
+	public String getDateArrival(){
+		return dateArrival;
+	}
+	
+	public String getDateDeparture(){
+		return dateDeparture;
+	}
+	
+	public int getOption(){
+		return option;
+	}
+	
+	public String getArrivalStart(){
+		return locationArrivalStart;
+	}
+	
+	public String getArrivalDestination(){
+		return locationArrivalDestination;
+	}
+	
+	public String getDepartureStart(){
+		return locationDepartureStart;
+	}
+	
+	public String getDepartureDestionation(){
+		return locationDepartureDestination;
+	}
+	
+	public String getComment(){
+		return comment;
+	}
+	
+	//Setter
+	
+	public void setCountry(String newCountry){
+		country = newCountry;
+	}
+	
+	public void setCity(String newCity){
+		city = newCity;
+	}
+	
+	public void setDateA(String newDate){
+		dateArrival = newDate;
+	}
+	
+	public void setDateD(String newDate){
+		dateDeparture = newDate;
+	}
+	
+	public void setOption(int newOption){
+		option = newOption;
+	}
+	
+	public void setArrivalStart(String newArrivalStart){
+		locationArrivalStart = newArrivalStart;
+	}
+	
+	public void setArrivalDestination(String newArrivalDestination){
+		locationArrivalDestination = newArrivalDestination;
+	}
+	
+	public void setDepartureStart(String newDepartureStart){
+		locationDepartureStart = newDepartureStart;
+	}
+	
+	public void setDepartureDestination(String newDepartureDestination){
+		locationDepartureDestination = newDepartureDestination;
+	}
+	
+	public void setComment(String newComment){
+		comment = newComment;
 	}
 }
