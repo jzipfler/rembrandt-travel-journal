@@ -245,6 +245,7 @@ public class ViewContacts extends JPanel {
 	
 	public ViewContacts( ViewMain frmMainFrame ){
 
+
 		this();
 //		try {
 //			if ( frmMainFrame == null )

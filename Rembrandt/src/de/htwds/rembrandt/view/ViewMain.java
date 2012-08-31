@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
@@ -20,7 +21,10 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import de.htwds.rembrandt.controler.mainViewController.LoadContacPanelActionListener;
 
-import javax.swing.UIManager;
+
+import de.htwds.rembrandt.controler.mainViewController.LoadContacPanelActionListener;
+
+import de.htwds.rembrandt.controler.travelview.LoadTravelInformationPanelActionListener;
 
 /**
  * 
@@ -113,6 +117,9 @@ public class ViewMain extends JFrame {
 		pnlQuicklunch.add(btnPhotos, "2, 2");
 		
 		btnData = new JButton("Daten");
+		btnData.setFont(new Font("Arial", Font.BOLD, 14));
+		pnlQuicklunch.add(btnData, "2, 4");
+		btnData.addActionListener(new LoadTravelInformationPanelActionListener(this));
 		btnData.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlQuicklunch.add(btnData, "2, 4");
 		
