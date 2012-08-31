@@ -6,7 +6,7 @@ package de.htwds.rembrandt.model;
  * @author Daniel
  * @version 1.0
  */
-public class TravelInformation {
+public class TravelInformationModel {
 	
 	//Fields
 	private String country;
@@ -32,7 +32,7 @@ public class TravelInformation {
 	 * @param departueS 	- The start location for the travel back home
 	 * @param departureD 	- The destination for the travel back home
 	 */
-	public TravelInformation(String country, String city, String dateA, String dateD, int option, String arrivalS, String arrivalD, String departureS, String departureD){
+	public TravelInformationModel(String country, String city, String dateA, String dateD, int option, String arrivalS, String arrivalD, String departureS, String departureD){
 		this.country 					= country;
 		this.city 						= city;
 		dateArrival 					= dateA;
