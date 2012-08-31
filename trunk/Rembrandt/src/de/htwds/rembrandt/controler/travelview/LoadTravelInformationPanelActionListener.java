@@ -19,6 +19,7 @@ public class LoadTravelInformationPanelActionListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
+		viewMain.getCurrentContentPanel().removeAll();
 		viewMain.getCurrentContentPanel().add(viewInformation);
 		viewInformation.updateUI();
 	}
