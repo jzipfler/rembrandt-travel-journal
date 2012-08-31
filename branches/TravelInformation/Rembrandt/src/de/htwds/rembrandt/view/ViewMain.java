@@ -19,6 +19,8 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
+import de.htwds.rembrandt.controler.mainViewController.LoadContacPanelActionListener;
+
 import de.htwds.rembrandt.controler.travelview.LoadTravelInformationPanelActionListener;
 
 /**
@@ -38,6 +40,7 @@ public class ViewMain extends JFrame {
 	private JButton btnLists;
 	private JLabel lblFavorits;
 	private JButton btnKontakte;
+	private JButton btnReiseinfos;
 
 	/**
 	 * Launch the application.
@@ -71,7 +74,7 @@ public class ViewMain extends JFrame {
 		setContentPane(contentPane);
 		
 		JPanel pnlQuicklunch = new JPanel();
-		pnlQuicklunch.setFont(new Font("Nimbus Sans L", Font.PLAIN, 15));
+		pnlQuicklunch.setFont(new Font("Arial", Font.PLAIN, 15));
 		pnlQuicklunch.setMaximumSize(new Dimension(188, 32767));
 		pnlQuicklunch.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		pnlQuicklunch.setPreferredSize(new Dimension(188, 10));
@@ -82,6 +85,8 @@ public class ViewMain extends JFrame {
 				ColumnSpec.decode("max(72dlu;pref)"),
 				FormFactory.RELATED_GAP_COLSPEC,},
 			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -105,25 +110,30 @@ public class ViewMain extends JFrame {
 		
 		btnPhotos = new JButton("Fotos");
 		btnPhotos.setBackground(UIManager.getColor("Button.background"));
-		btnPhotos.setFont(new Font("Nimbus Sans L", Font.BOLD, 14));
+		btnPhotos.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlQuicklunch.add(btnPhotos, "2, 2");
 		
 		btnData = new JButton("Daten");
 		btnData.addActionListener(new LoadTravelInformationPanelActionListener(this));
-		btnData.setFont(new Font("Nimbus Sans L", Font.BOLD, 14));
+		btnData.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlQuicklunch.add(btnData, "2, 4");
 		
 		btnLists = new JButton("Listen");
-		btnLists.setFont(new Font("Nimbus Sans L", Font.BOLD, 14));
+		btnLists.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlQuicklunch.add(btnLists, "2, 6");
 		
+		btnReiseinfos = new JButton("Reiseinfos");
+		btnReiseinfos.setFont(new Font("Arial", Font.BOLD, 14));
+		pnlQuicklunch.add(btnReiseinfos, "2, 10");
+		
 		lblFavorits = new JLabel("Favoriten:");
-		lblFavorits.setFont(new Font("Nimbus Sans L", Font.BOLD, 14));
+		lblFavorits.setFont(new Font("Arial", Font.BOLD, 14));
 		lblFavorits.setHorizontalAlignment(SwingConstants.CENTER);
-		pnlQuicklunch.add(lblFavorits, "2, 12");
+		pnlQuicklunch.add(lblFavorits, "2, 14");
 		
 		btnKontakte = new JButton("Kontakte");
-		btnKontakte.setFont(new Font("Nimbus Sans L", Font.BOLD, 14));
+		btnKontakte.addActionListener( new LoadContacPanelActionListener( this ) );
+		btnKontakte.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlQuicklunch.add(btnKontakte, "2, 8");
 		
 		/*
@@ -132,9 +142,11 @@ public class ViewMain extends JFrame {
 		pnlContent = new JPanel();
 		contentPane.add(pnlContent, BorderLayout.CENTER);
 		pnlContent.setLayout(new BorderLayout(0, 0));
+		
 	}
 
-	public JPanel getPnlContent() {
+	public JPanel getCurrentContentPanel() {
 		return pnlContent;
 	}
+	
 }
