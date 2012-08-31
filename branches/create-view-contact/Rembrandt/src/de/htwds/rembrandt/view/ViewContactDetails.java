@@ -4,9 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.RenderingHints.Key;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,6 +27,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import javax.swing.JRadioButton;
+import javax.swing.ImageIcon;
 
 public class ViewContactDetails extends JPanel {
 	private JButton btnBack;
@@ -37,8 +42,8 @@ public class ViewContactDetails extends JPanel {
 	
 	private static final String STD_BUTTON_UNLOCK_UNLOCK = "Entsperren";
 	private static final String STD_BUTTON_UNLOCK_LOCK = "Speichern und Sperren";
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtFirstName;
+	private JTextField txtLastName;
 	private JTextField txtPostfach;
 	private JTextField txtCity;
 	private JTextField txtZipPlz;
@@ -50,6 +55,10 @@ public class ViewContactDetails extends JPanel {
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
+	private JTextField txtPrivatMail;
+	private JTextField txtBusinessMail;
+	private JTextField txtPrivatPhone;
+	private JTextField txtBusinessPhone;
 
 	/**
 	 * Create the panel.
@@ -82,40 +91,140 @@ public class ViewContactDetails extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(30dlu;default)"),
+				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.GROWING_BUTTON_COLSPEC,},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(25dlu;default)"),
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("bottom:pref"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("bottom:pref"),
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
+		JLabel lblGeneralInformation = new JLabel("Generelle Informationen");
+		lblGeneralInformation.setFont(new Font("Arial", Font.BOLD, 13));
+		this.pnlContactDetailsInformations.add(lblGeneralInformation, "2, 2, 7, 1, default, bottom");
+		
 		JButton btnPicture = new JButton("Picture");
-		this.pnlContactDetailsInformations.add(btnPicture, "2, 2, 1, 7");
+		btnPicture.setFont(new Font("Arial", Font.PLAIN, 13));
+		this.pnlContactDetailsInformations.add(btnPicture, "2, 4, 3, 9");
 		
-		JLabel lblVorname = new JLabel("Vorname:");
-		this.pnlContactDetailsInformations.add(lblVorname, "4, 2, right, default");
+		JLabel lblFirstName = new JLabel("Vorname:");
+		lblFirstName.setFont(new Font("Arial", Font.PLAIN, 13));
+		this.pnlContactDetailsInformations.add(lblFirstName, "8, 4, right, default");
 		
-		this.textField = new JTextField();
-		this.pnlContactDetailsInformations.add(this.textField, "6, 2, fill, default");
-		this.textField.setColumns(10);
+		this.txtFirstName = new JTextField();
+		this.txtFirstName.setFont(new Font("Arial", Font.PLAIN, 13));
+		this.pnlContactDetailsInformations.add(this.txtFirstName, "10, 4, 5, 1, fill, default");
+		this.txtFirstName.setColumns(10);
 		
-		JLabel lblNachname = new JLabel("Nachname:");
-		this.pnlContactDetailsInformations.add(lblNachname, "4, 6, right, default");
+		JLabel lblLastName = new JLabel("Nachname:");
+		lblLastName.setFont(new Font("Arial", Font.PLAIN, 13));
+		this.pnlContactDetailsInformations.add(lblLastName, "8, 6, right, default");
 		
-		this.textField_1 = new JTextField();
-		this.pnlContactDetailsInformations.add(this.textField_1, "6, 6, fill, default");
-		this.textField_1.setColumns(10);
+		this.txtLastName = new JTextField();
+		this.txtLastName.setFont(new Font("Arial", Font.PLAIN, 13));
+		this.pnlContactDetailsInformations.add(this.txtLastName, "10, 6, 5, 1, fill, default");
+		this.txtLastName.setColumns(10);
+		
+		JLabel lblCategory = new JLabel("Kategorie:");
+		lblCategory.setFont(new Font("Arial", Font.BOLD, 13));
+		this.pnlContactDetailsInformations.add(lblCategory, "8, 8");
+		
+		JRadioButton rdbtnLocalContact = new JRadioButton("lokaler Kontakt");
+		rdbtnLocalContact.setMnemonic(KeyEvent.VK_L);
+		rdbtnLocalContact.setFont(new Font("Arial", Font.PLAIN, 13));
+		this.pnlContactDetailsInformations.add(rdbtnLocalContact, "10, 8, 5, 1");
+		
+		JRadioButton rdbtnGlobalContact = new JRadioButton("globaler Kontakt");
+		rdbtnGlobalContact.setMnemonic(KeyEvent.VK_G);
+		rdbtnGlobalContact.setFont(new Font("Arial", Font.PLAIN, 13));
+		this.pnlContactDetailsInformations.add(rdbtnGlobalContact, "10, 10, 5, 1");
+		
+		JRadioButton rdbtnGlobalAndLocal = new JRadioButton("globaler und lokaler Kontakt");
+		rdbtnGlobalAndLocal.setMnemonic(KeyEvent.VK_U);
+		rdbtnGlobalAndLocal.setFont(new Font("Arial", Font.PLAIN, 13));
+		this.pnlContactDetailsInformations.add(rdbtnGlobalAndLocal, "10, 12, 5, 1");
 		this.pnlTabbedContactDetails.setEnabledAt(0, true);
+		
+		/*
+		 * Group the radio buttons.
+		 */
+	    ButtonGroup btngrpCategory = new ButtonGroup();
+	    btngrpCategory.add(rdbtnLocalContact);
+	    btngrpCategory.add(rdbtnGlobalContact);
+	    btngrpCategory.add(rdbtnGlobalAndLocal);
+	    
+	    JLabel lblMail = new JLabel("E-Mail");
+	    lblMail.setFont(new Font("Arial", Font.BOLD, 13));
+	    this.pnlContactDetailsInformations.add(lblMail, "2, 14, 3, 1, default, bottom");
+	    
+	    JLabel lblPrivatMail = new JLabel("Privat:");
+	    lblPrivatMail.setFont(new Font("Arial", Font.PLAIN, 13));
+	    this.pnlContactDetailsInformations.add(lblPrivatMail, "4, 16, right, default");
+	    
+	    this.txtPrivatMail = new JTextField();
+	    this.txtPrivatMail.setFont(new Font("Arial", Font.PLAIN, 13));
+	    this.pnlContactDetailsInformations.add(this.txtPrivatMail, "6, 16, 9, 1, fill, default");
+	    this.txtPrivatMail.setColumns(10);
+	    
+	    JLabel lblBusinessMail = new JLabel("Geschäftlich:");
+	    lblBusinessMail.setFont(new Font("Arial", Font.PLAIN, 13));
+	    this.pnlContactDetailsInformations.add(lblBusinessMail, "4, 18, right, default");
+	    
+	    this.txtBusinessMail = new JTextField();
+	    this.txtBusinessMail.setFont(new Font("Arial", Font.PLAIN, 13));
+	    this.pnlContactDetailsInformations.add(this.txtBusinessMail, "6, 18, 9, 1, fill, default");
+	    this.txtBusinessMail.setColumns(10);
+	    
+	    JLabel lblPhone = new JLabel("Telefon");
+	    lblPhone.setFont(new Font("Arial", Font.BOLD, 13));
+	    this.pnlContactDetailsInformations.add(lblPhone, "2, 20, 3, 1, default, bottom");
+	    
+	    JLabel lblPrivatPhone = new JLabel("Privat:");
+	    lblPrivatPhone.setFont(new Font("Arial", Font.PLAIN, 13));
+	    this.pnlContactDetailsInformations.add(lblPrivatPhone, "4, 22, right, default");
+	    
+	    this.txtPrivatPhone = new JTextField();
+	    this.txtPrivatPhone.setFont(new Font("Arial", Font.PLAIN, 13));
+	    this.pnlContactDetailsInformations.add(this.txtPrivatPhone, "6, 22, 9, 1, fill, default");
+	    this.txtPrivatPhone.setColumns(10);
+	    
+	    JLabel lblBusinessPhone = new JLabel("Geschäftlich:");
+	    lblBusinessPhone.setFont(new Font("Arial", Font.PLAIN, 13));
+	    this.pnlContactDetailsInformations.add(lblBusinessPhone, "4, 24, right, default");
+	    
+	    this.txtBusinessPhone = new JTextField();
+	    this.txtBusinessPhone.setFont(new Font("Arial", Font.PLAIN, 13));
+	    this.pnlContactDetailsInformations.add(this.txtBusinessPhone, "6, 24, 9, 1, fill, default");
+	    this.txtBusinessPhone.setColumns(10);
 		
 		JPanel pnlContactDetailsPersonalInformations = new JPanel();
 		this.pnlTabbedContactDetails.addTab("Persönliche Infos", null, pnlContactDetailsPersonalInformations, null);
@@ -134,13 +243,15 @@ public class ViewContactDetails extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
+				RowSpec.decode("bottom:pref"),
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.PREF_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -148,14 +259,9 @@ public class ViewContactDetails extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		JPanel panel = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panel.getLayout();
-		flowLayout_1.setAlignment(FlowLayout.LEFT);
-		pnlContactDetailsPersonalInformations.add(panel, "2, 2, 3, 1, fill, fill");
-		
 		JLabel lblWebadressen = new JLabel("Web-Adressen");
+		pnlContactDetailsPersonalInformations.add(lblWebadressen, "2, 2, 3, 1");
 		lblWebadressen.setFont(new Font("Arial", Font.BOLD, 13));
-		panel.add(lblWebadressen);
 		
 		JLabel lblHomepage = new JLabel("Homepage:");
 		lblHomepage.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -165,14 +271,9 @@ public class ViewContactDetails extends JPanel {
 		pnlContactDetailsPersonalInformations.add(this.textField_2, "6, 4, fill, default");
 		this.textField_2.setColumns(10);
 		
-		JPanel panel_1 = new JPanel();
-		FlowLayout flowLayout_2 = (FlowLayout) panel_1.getLayout();
-		flowLayout_2.setAlignment(FlowLayout.LEFT);
-		pnlContactDetailsPersonalInformations.add(panel_1, "2, 6, 3, 1, fill, fill");
-		
 		JLabel lblBeruf = new JLabel("Beruf");
+		pnlContactDetailsPersonalInformations.add(lblBeruf, "2, 6, 3, 1");
 		lblBeruf.setFont(new Font("Arial", Font.BOLD, 13));
-		panel_1.add(lblBeruf);
 		
 		JLabel lblBeruf_1 = new JLabel("Beruf:");
 		lblBeruf_1.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -198,14 +299,9 @@ public class ViewContactDetails extends JPanel {
 		pnlContactDetailsPersonalInformations.add(this.textField_5, "6, 12, fill, default");
 		this.textField_5.setColumns(10);
 		
-		JPanel panel_2 = new JPanel();
-		FlowLayout flowLayout_3 = (FlowLayout) panel_2.getLayout();
-		flowLayout_3.setAlignment(FlowLayout.LEFT);
-		pnlContactDetailsPersonalInformations.add(panel_2, "2, 14, 3, 1, fill, fill");
-		
 		JLabel lblVerschiedenes = new JLabel("Verschiedenes");
+		pnlContactDetailsPersonalInformations.add(lblVerschiedenes, "2, 14, 3, 1");
 		lblVerschiedenes.setFont(new Font("Arial", Font.BOLD, 13));
-		panel_2.add(lblVerschiedenes);
 		
 		JLabel lblBro = new JLabel("Büro:");
 		lblBro.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -238,7 +334,7 @@ public class ViewContactDetails extends JPanel {
 				FormFactory.DEFAULT_COLSPEC,},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.PREF_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -256,18 +352,15 @@ public class ViewContactDetails extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.PREF_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		JPanel pnlPrivateAdress = new JPanel();
-		FlowLayout fl_pnlPrivateAdress = (FlowLayout) pnlPrivateAdress.getLayout();
-		fl_pnlPrivateAdress.setAlignment(FlowLayout.LEFT);
-		pnlContactDetailsPostal.add(pnlPrivateAdress, "2, 2, 3, 1, fill, fill");
-		
 		JLabel lblPrivat = new JLabel("Privat");
+		pnlContactDetailsPostal.add(lblPrivat, "2, 2, 3, 1");
 		lblPrivat.setFont(new Font("Arial", Font.BOLD, 13));
-		pnlPrivateAdress.add(lblPrivat);
 		
 		JLabel lblAdresse = new JLabel("Adresse:");
 		lblAdresse.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -319,21 +412,16 @@ public class ViewContactDetails extends JPanel {
 		pnlContactDetailsPostal.add(this.txtCountry, "8, 16, fill, default");
 		this.txtCountry.setColumns(10);
 		
-		JPanel pnlBuisnessAdress = new JPanel();
-		FlowLayout fl_pnlBuisnessAdress = (FlowLayout) pnlBuisnessAdress.getLayout();
-		fl_pnlBuisnessAdress.setAlignment(FlowLayout.LEFT);
-		pnlContactDetailsPostal.add(pnlBuisnessAdress, "2, 18, 5, 1, fill, fill");
-		
 		JLabel lblGeschftlich = new JLabel("Geschäftlich");
+		pnlContactDetailsPostal.add(lblGeschftlich, "2, 20, 3, 1");
 		lblGeschftlich.setFont(new Font("Arial", Font.BOLD, 13));
-		pnlBuisnessAdress.add(lblGeschftlich);
 		
 		JLabel lblAdresse_1 = new JLabel("Adresse:");
 		lblAdresse_1.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactDetailsPostal.add(lblAdresse_1, "4, 20, right, default");
+		pnlContactDetailsPostal.add(lblAdresse_1, "4, 22, right, default");
 		
 		JScrollPane pnlScrollPaneBuisnessAdress = new JScrollPane();
-		pnlContactDetailsPostal.add(pnlScrollPaneBuisnessAdress, "6, 20, 3, 3, fill, fill");
+		pnlContactDetailsPostal.add(pnlScrollPaneBuisnessAdress, "6, 22, 3, 3, fill, fill");
 		
 		JTextArea textArea_2 = new JTextArea();
 		pnlScrollPaneBuisnessAdress.setViewportView(textArea_2);
