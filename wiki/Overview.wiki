@@ -9,6 +9,7 @@ If you need any information about this project you may find these information wi
 
  * [Examination]
  * [SVN]
+ * [Help-with-components]
  
  == Markup language for the WIKI ==
  
