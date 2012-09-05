@@ -60,7 +60,7 @@ public class SaveContactDetailsActionListener implements ActionListener {
 		}
 	}
 	
-	private void saveContactToList() {
+	private void saveContactToList() throws ContactException {
 		
 		if ( viewContactDetails.getRdbtnPrivateContact().isSelected() ) {
 			
@@ -83,21 +83,38 @@ public class SaveContactDetailsActionListener implements ActionListener {
 			if ( globalContactList == null )
 				globalContactList = new ArrayList<Contact>();
 			
-			privateContactList.add( contact );
-			globalContactList.add(contact);
-			viewContactDetails.getParentFrame().getJourneyModel().getContactListModel().setPrivateContactList(privateContactList);
-			viewContactDetails.getParentFrame().getJourneyModel().getContactListModel().setGlobalContactList(globalContactList);
+			if ( privateContactList.contains(contact) && globalContactList.contains(contact) )
+				throw new ContactException( ContactException.ERROR_CONTACT_EXISTS_IN_BOTH_LISTS );
+			else if ( privateContactList.contains(contact) && !globalContactList.contains(contact) ) {
+				globalContactList.add( contact );
+				viewContactDetails.getParentFrame().getJourneyModel().getContactListModel().setGlobalContactList(globalContactList);
+				throw new ContactException( ContactException.ERROR_CONTACT_EXISTS_IN_PRIVATE_LIST );
+			}
+			else if ( !privateContactList.contains(contact) && globalContactList.contains(contact) ) {
+				privateContactList.add( contact );
+				viewContactDetails.getParentFrame().getJourneyModel().getContactListModel().setPrivateContactList(privateContactList);
+				throw new ContactException( ContactException.ERROR_CONTACT_EXISTS_IN_GLOBAL_LIST );
+			}
+			else {
+				;
+				privateContactList.add( contact );
+				globalContactList.add(contact);
+				viewContactDetails.getParentFrame().getJourneyModel().getContactListModel().setPrivateContactList(privateContactList);
+				viewContactDetails.getParentFrame().getJourneyModel().getContactListModel().setGlobalContactList(globalContactList);
+			}
 		}
 		else
 			;
 		
 	}
 	
-	private void addContactToList() {
+	private void addContactToList() throws ContactException {
 		
 		if ( contactList == null )
 			contactList = new ArrayList<Contact>();
 		
+		if ( contactList.contains(contact) )
+			throw new ContactException( ContactException.ERROR_CONTACT_ALREADY_EXISTS );
 		contactList.add( contact );
 	}
 	
