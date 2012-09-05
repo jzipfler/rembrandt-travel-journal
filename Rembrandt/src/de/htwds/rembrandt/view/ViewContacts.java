@@ -34,12 +34,18 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import de.htwds.rembrandt.controler.contactViewControler.LoadContactDetailsActionListener;
+import javax.swing.JTextArea;
 
 public class ViewContacts extends JPanel {
 	private JTextField txtName;
+	private JTextField txtMail;
 	private JTextField txtPhone;
-	private JTextField txtOther;
-	private JButton btnBearbeiten;
+	private JTextArea txtAreaDescription;
+	
+	
+	private JButton btnEditContact;
+	private JButton btnAddContact;
+	private JButton btnDeleteContact;
 	
 	private ViewMain frmMainFrame;
 	private ViewContactDetails viewContactDetails;
@@ -86,12 +92,15 @@ public class ViewContacts extends JPanel {
 		 */
 		
 		final JList lstContacts = new JList( lstModelContacts );
-		lstContacts.setFont(new Font("Arial", Font.PLAIN, 12));
+		lstContacts.setFont(new Font("Arial", Font.PLAIN, 13));
 		lstContacts.setMaximumSize(new Dimension(500, 1000));
 		lstContacts.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 //				txtName.setText( GetField.class.toString() );
 				txtName.setText( lstContacts.getModel().getElementAt( lstContacts.getSelectedIndex() ).toString() );
+				btnEditContact.setEnabled(true);
+				btnDeleteContact.setEnabled(true);
+				
 			}
 		});
 		lstContacts.setMinimumSize(new Dimension(50, 408));
@@ -101,31 +110,37 @@ public class ViewContacts extends JPanel {
 		lstContacts.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(lstContacts);
 		
-		JButton button = new JButton("+");
-		button.setFont(new Font("Arial", Font.BOLD, 13));
-		button.setToolTipText("Fügen Sie einen neuen Kontakt hinzu.");
-		button.addActionListener(new ActionListener() {
+		btnAddContact = new JButton("+");
+		btnAddContact.setFont(new Font("Arial", Font.BOLD, 13));
+		btnAddContact.setToolTipText("Fügen Sie einen neuen Kontakt hinzu.");
+		btnAddContact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				lstContacts.setListData(new String[] { "List" } );
 			}
 		});
-		pnlContactButtons.add(button);
+		pnlContactButtons.add(btnAddContact);
 		
-		JButton button_1 = new JButton("-");
-		button_1.setFont(new Font("Arial", Font.BOLD, 13));
-		button_1.setToolTipText("Entfernen Sie den aktuell ausgewählten Kontakt.");
-		pnlContactButtons.add(button_1);
+		btnDeleteContact = new JButton("-");
+		btnDeleteContact.setFont(new Font("Arial", Font.BOLD, 13));
+		btnDeleteContact.setToolTipText("Entfernen Sie den aktuell ausgewählten Kontakt.");
+		// only activate it, if a list element is selected.
+		if ( lstContacts.isSelectionEmpty() )
+			btnDeleteContact.setEnabled(false);
+		pnlContactButtons.add(btnDeleteContact);
 		
-		btnBearbeiten = new JButton("Edit");
-		btnBearbeiten.setFont(new Font("Arial", Font.BOLD, 13));
-		btnBearbeiten.setToolTipText("Bearbeiten des aktullen Kontaktes");
-		pnlContactButtons.add(btnBearbeiten);
+		btnEditContact = new JButton("Edit");
+		btnEditContact.setFont(new Font("Arial", Font.BOLD, 13));
+		btnEditContact.setToolTipText("Bearbeiten des aktullen Kontaktes");
+		// only activate it, if a list element is selected.
+		if ( lstContacts.isSelectionEmpty() )
+			btnEditContact.setEnabled(false);
+		pnlContactButtons.add(btnEditContact);
 		
 		JPanel pnlYourContactsLabel = new JPanel();
 		pnlListAndButtons.add(pnlYourContactsLabel, BorderLayout.NORTH);
 		
 		JLabel lblIhreKontakte = new JLabel("Ihre Kontakte:");
-		lblIhreKontakte.setFont(new Font("Arial", Font.BOLD, 13));
+		lblIhreKontakte.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlYourContactsLabel.add(lblIhreKontakte);
 		
 		JPanel pnlContactHeader = new JPanel();
@@ -147,7 +162,7 @@ public class ViewContacts extends JPanel {
 		pnlInformationsAndChooser.add(pnlWhichContacts, BorderLayout.SOUTH);
 		
 		JLabel lblAuswahl = new JLabel("Auswahl:");
-		lblAuswahl.setFont(new Font("Arial", Font.BOLD, 13));
+		lblAuswahl.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlWhichContacts.add(lblAuswahl);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
@@ -156,7 +171,7 @@ public class ViewContacts extends JPanel {
 		pnlWhichContacts.add(horizontalStrut);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Arial", Font.BOLD, 13));
+		comboBox.setFont(new Font("Arial", Font.PLAIN, 13));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"private Kontakte", "globale Kontakte", "alle Kontakte"}));
 		comboBox.setSelectedIndex(0);
 		pnlWhichContacts.add(comboBox);
@@ -199,37 +214,46 @@ public class ViewContacts extends JPanel {
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
 		JLabel lblName = new JLabel("Name:");
-		lblName.setFont(new Font("Arial", Font.BOLD, 13));
+		lblName.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
 		pnlContactInformations.add(lblName, "2, 4, left, default");
 		
 		txtName = new JTextField();
+		this.txtName.setDisabledTextColor(getForeground());
+		this.txtName.setEditable(false);
+		this.txtName.setEnabled(false);
 		txtName.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlContactInformations.add(txtName, "4, 4, fill, default");
 		txtName.setColumns(10);
 		
-		JLabel lblTelefonnummer = new JLabel("Telefonnummer:");
-		lblTelefonnummer.setFont(new Font("Arial", Font.BOLD, 13));
+		JLabel lblTelefonnummer = new JLabel("E-Mail:");
+		lblTelefonnummer.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblTelefonnummer.setHorizontalAlignment(SwingConstants.RIGHT);
 		pnlContactInformations.add(lblTelefonnummer, "2, 8, left, default");
 		
-		txtPhone = new JTextField();
-		txtPhone.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactInformations.add(txtPhone, "4, 8, fill, default");
-		txtPhone.setColumns(10);
+		txtMail = new JTextField();
+		this.txtMail.setDisabledTextColor(getForeground());
+		this.txtMail.setEditable(false);
+		this.txtMail.setEnabled(false);
+		txtMail.setFont(new Font("Arial", Font.PLAIN, 13));
+		pnlContactInformations.add(txtMail, "4, 8, fill, default");
+		txtMail.setColumns(10);
 		
-		JLabel lblIrgendetwas = new JLabel("Irgendetwas:");
-		lblIrgendetwas.setFont(new Font("Arial", Font.BOLD, 13));
+		JLabel lblIrgendetwas = new JLabel("Telefonnr.:");
+		lblIrgendetwas.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblIrgendetwas.setHorizontalAlignment(SwingConstants.RIGHT);
 		pnlContactInformations.add(lblIrgendetwas, "2, 12, left, default");
 		
-		txtOther = new JTextField();
-		txtOther.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactInformations.add(txtOther, "4, 12, fill, default");
-		txtOther.setColumns(10);
+		txtPhone = new JTextField();
+		this.txtPhone.setDisabledTextColor(getForeground());
+		this.txtPhone.setEditable(false);
+		this.txtPhone.setEnabled(false);
+		txtPhone.setFont(new Font("Arial", Font.PLAIN, 13));
+		pnlContactInformations.add(txtPhone, "4, 12, fill, default");
+		txtPhone.setColumns(10);
 		
 		JLabel lblBeschreibung = new JLabel("Beschreibung:");
-		lblBeschreibung.setFont(new Font("Arial", Font.BOLD, 13));
+		lblBeschreibung.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblBeschreibung.setHorizontalAlignment(SwingConstants.RIGHT);
 		pnlContactInformations.add(lblBeschreibung, "2, 18, left, default");
 		
@@ -237,9 +261,11 @@ public class ViewContacts extends JPanel {
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		pnlContactInformations.add(scrollPane_1, "2, 20, 3, 7, fill, fill");
 		
-		JTextPane txtpaneDescription = new JTextPane();
-		txtpaneDescription.setFont(new Font("Arial", Font.PLAIN, 13));
-		scrollPane_1.setViewportView(txtpaneDescription);
+		txtAreaDescription = new JTextArea();
+		this.txtAreaDescription.setEditable(false);
+		txtAreaDescription.setEnabled(false);
+		txtAreaDescription.setFont(new Font("Arial", Font.PLAIN, 13));
+		scrollPane_1.setViewportView(txtAreaDescription);
 		
 	}
 	
@@ -258,11 +284,15 @@ public class ViewContacts extends JPanel {
 		/*
 		 * ActionListener
 		 */
-		this.btnBearbeiten.addActionListener( new LoadContactDetailsActionListener( viewContactDetails ) );
+		this.btnEditContact.addActionListener( new LoadContactDetailsActionListener( viewContactDetails ) );
 	}
 	
 	public ViewMain getParentFrame(){
 		
 		return frmMainFrame;
+	}
+	
+	public ViewContactDetails getViewContactDetails(){
+		return viewContactDetails;
 	}
 }
