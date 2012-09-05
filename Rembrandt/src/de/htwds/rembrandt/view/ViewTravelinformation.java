@@ -25,6 +25,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import de.htwds.rembrandt.controler.travelview.SetCommentEnableActionListener;
 import de.htwds.rembrandt.controler.travelview.SetEditEnableActionListener;
+import de.htwds.rembrandt.model.TravelInformationModel;
 /**
  * 
  * @author Daniel
@@ -274,7 +275,7 @@ public class ViewTravelinformation extends JPanel {
 	}
 	
 	/**
-	 * 
+	 * Method to set all the textfields editable
 	 */
 	public void setInformationEditable(){
 		informationEditable = (!informationEditable);
@@ -290,10 +291,22 @@ public class ViewTravelinformation extends JPanel {
 	}
 	
 	/**
-	 * 
+	 * Method to set all the comment field editable
 	 */
 	public void setCommentEditable(){
 		commentEditable = (!commentEditable);
 		txtpnDescription.setEditable(commentEditable);
+	}
+	
+	public void readData(TravelInformationModel data){
+		txtCountryInput.setText(data.getCountry());
+		txtCityInput.setText(data.getCity());
+		txtArrivalInput.setText(data.getDateArrival());
+		txtDepartureInput.setText(data.getDateDeparture());
+		cboOptions.setSelectedIndex(data.getOption());
+		txtArrivalDestinationInput.setText(data.getArrivalDestination());
+		txtArrivalStartInput.setText(data.getArrivalStart());
+		txtDepartureDestinationInput.setText(data.getDepartureDestionation());
+		txtDepartureStartInput.setText(data.getDepartureStart());
 	}
 }
