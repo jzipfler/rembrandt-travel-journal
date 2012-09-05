@@ -25,6 +25,7 @@ import de.htwds.rembrandt.controler.mainViewController.LoadContacPanelActionList
 import de.htwds.rembrandt.controler.mainViewController.LoadContacPanelActionListener;
 
 import de.htwds.rembrandt.controler.travelview.LoadTravelInformationPanelActionListener;
+import de.htwds.rembrandt.model.JourneyModel;
 
 /**
  * 
@@ -35,6 +36,9 @@ import de.htwds.rembrandt.controler.travelview.LoadTravelInformationPanelActionL
  *
  */
 public class ViewMain extends JFrame {
+	
+	// Class that holds all informations
+	private JourneyModel journeyModel;
 
 	private JPanel contentPane;
 	private JPanel pnlContent;
@@ -66,6 +70,13 @@ public class ViewMain extends JFrame {
 	 * Contructor for the main menu.
 	 */
 	public ViewMain() {
+		
+		/*
+		 * Create new JourneyModel
+		 * Add wizard specific implementations
+		 */
+		journeyModel = new JourneyModel();
+		
 		setPreferredSize(new Dimension(800, 600));
 		setMinimumSize(new Dimension(640, 480));
 		setTitle("Travel Journal");
@@ -161,6 +172,10 @@ public class ViewMain extends JFrame {
 
 	public JPanel getCurrentContentPanel() {
 		return pnlContent;
+	}
+	
+	public JourneyModel getJourneyModel() {
+		return journeyModel;
 	}
 	
 }

@@ -16,14 +16,18 @@ public class EnableTextFieldsActionListener implements ActionListener {
 		this.viewContactDetails = viewContactDetails;
 	}
 	
-	private void setTextFieldsEnabled( ) {
-		if ( !viewContactDetails.isInformationEditable() )
+	protected void setTextFieldsEnabled( ) {
+		if ( !viewContactDetails.isInformationEditable() ) {
 			viewContactDetails.setInformationEditable();
+			viewContactDetails.getBtnUnlock().setText( viewContactDetails.STD_BUTTON_UNLOCK_LOCK );
+		}
 	}
 	
 	private void setTextFieldsNotEnabled( ) {
-		if ( viewContactDetails.isInformationEditable() )
+		if ( viewContactDetails.isInformationEditable() ) {
 			viewContactDetails.setInformationEditable();
+			viewContactDetails.getBtnUnlock().setText( viewContactDetails.STD_BUTTON_UNLOCK_UNLOCK );
+		}
 	}
 	
 	private void changeCurrendEnableOption( ) {
@@ -32,29 +36,24 @@ public class EnableTextFieldsActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+
 		if ( viewContactDetails.getBtnUnlock().getText().equals( viewContactDetails.STD_BUTTON_UNLOCK_UNLOCK ) ) {
 			
 			setTextFieldsEnabled( );
-			viewContactDetails.getBtnUnlock().setText( viewContactDetails.STD_BUTTON_UNLOCK_LOCK );
 			
 		} else if (viewContactDetails.getBtnUnlock().getText().equals( viewContactDetails.STD_BUTTON_UNLOCK_LOCK )) {
 			
 			try {
-				
-				new SaveContactDetailsActionListener(viewContactDetails).createNewContact();
+				new SaveContactDetailsActionListener(viewContactDetails).saveContactDetails();
 				setTextFieldsNotEnabled( );
-				viewContactDetails.getBtnUnlock().setText( viewContactDetails.STD_BUTTON_UNLOCK_UNLOCK );
-				
 			} catch (ContactException contactException) {
 				
-				JOptionPane.showMessageDialog(null,
-						contactException.getMessage(),
-						ContactException.MSG_ERROR_OCCURED,
-						JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(	null,
+												contactException.getMessage(),
+												ContactException.MSG_ERROR_OCCURED,
+												JOptionPane.ERROR_MESSAGE );
 			}
-			
-			
+							
 		} else {
 			/*
 			 * Should never happen.

@@ -2,8 +2,10 @@ package de.htwds.rembrandt.model;
 
 import de.htwds.rembrandt.exception.ContactException;
 
-public class Contact {
+public class Contact implements Comparable<Contact> {
 
+	private static final String SPACE = " ";
+	
 	private String firstName;
 	private String lastName;
 	private String postfach;
@@ -93,6 +95,61 @@ public class Contact {
 		this.businessAdress = businessAdress;
 		this.notices = notices;
 	}
+
+	public String toString() {
+		return ( lastName + SPACE + firstName );
+	}
+
+	@Override
+	public int compareTo(Contact arg0) {
+		return this.lastName.compareTo( arg0.getLastName() );
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result
+//				+ ((firstName == null) ? 0 : firstName.hashCode());
+//		result = prime * result
+//				+ ((lastName == null) ? 0 : lastName.hashCode());
+//		return result;
+//		
+//		Created from Eclipse
+		return this.toString().hashCode();
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contact other = (Contact) obj;
+		if (firstName == null)
+			if (other.firstName != null)
+				return false;
+		if (lastName == null)
+			if (other.lastName != null)
+				return false;
+		if ( other.toString().equalsIgnoreCase(this.toString()) )
+			return true;
+		return false;
+	}
+	
+	/*
+	 * ######################################################################
+	 *  Now only getter and setter
+	 * ######################################################################
+	 */
 
 	/**
 	 * @return the firstName
@@ -384,4 +441,5 @@ public class Contact {
 	public void setNotices(String notices) {
 		this.notices = notices;
 	}
+
 }
