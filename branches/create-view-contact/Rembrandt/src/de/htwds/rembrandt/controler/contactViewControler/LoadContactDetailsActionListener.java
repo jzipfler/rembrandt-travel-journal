@@ -14,13 +14,17 @@ public class LoadContactDetailsActionListener implements ActionListener {
 		this.viewContactDetails = viewContactDetails;
 	}	
 	
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-
+	protected void loadContactDetails(){
 		ViewMain viewMain = viewContactDetails.getParentFrame();
 		viewMain.getCurrentContentPanel().removeAll();
 		viewMain.getCurrentContentPanel().add(viewContactDetails);
 		viewMain.getCurrentContentPanel().updateUI();
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+
+		loadContactDetails();
 	}
 
 }
