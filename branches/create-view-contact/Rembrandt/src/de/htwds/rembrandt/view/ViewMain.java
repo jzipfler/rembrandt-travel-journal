@@ -44,6 +44,7 @@ public class ViewMain extends JFrame {
 	private JLabel lblFavorits;
 	private JButton btnKontakte;
 	private JButton btnReiseinfos;
+	private JButton btnBeenden;
 
 	/**
 	 * Launch the application.
@@ -109,6 +110,10 @@ public class ViewMain extends JFrame {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
 		btnPhotos = new JButton("Fotos");
@@ -140,6 +145,10 @@ public class ViewMain extends JFrame {
 		btnKontakte.addActionListener( new LoadContacPanelActionListener( this ) );
 		btnKontakte.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlQuicklunch.add(btnKontakte, "2, 8");
+		
+		this.btnBeenden = new JButton("Beenden");
+		this.btnBeenden.setFont(new Font("Arial", Font.BOLD, 14));
+		pnlQuicklunch.add(this.btnBeenden, "2, 24");
 		
 		/*
 		 * Dimensions of the contentPanes = 440,440
