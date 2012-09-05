@@ -85,9 +85,10 @@ public class ViewContacts extends JPanel {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		pnlListAndButtons.add(scrollPane, BorderLayout.CENTER);
 		
-		
 		lstModelContacts = new DefaultListModel();
-				
+		
+		/*
+		 * USE THIS TO ADD STD VALUES TO THE LIST
 		
 		String[] inhalte = {"testeDieHenneDuSau","test1","test2","test3","test4","test5","test6","test","test",
 							"test","test","test","test","test","test","test","test","test","test","test","test","test","test","test"};
@@ -95,6 +96,8 @@ public class ViewContacts extends JPanel {
 		for (String string : inhalte) {
 			lstModelContacts.addElement(string);
 		}
+		
+		*/
 		
 		/*
 		 * 

@@ -64,10 +64,15 @@ public class ReturnToContactsActionListener implements ActionListener {
 	}
 	
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		
+		/*
+		 * TODO: At the moment...the same code is used in if and else!
+		 */
 		int shouldItBeSaved = checkIfSaved();
 		if ( shouldItBeSaved == JOptionPane.YES_OPTION ) {
 			new UpdateListControler(viewContacts).updateList();
@@ -75,6 +80,7 @@ public class ReturnToContactsActionListener implements ActionListener {
 			new LoadContactsActionListener(viewContacts).loadContacts();
 		}
 		else if ( shouldItBeSaved == JOptionPane.NO_OPTION ) {
+			new UpdateListControler(viewContacts).updateList();
 			new ClearAllDetailTextFieldsControler( viewContacts.getViewContactDetails() ).clearAllTextFields();
 			new LoadContactsActionListener(viewContacts).loadContacts();
 		}
