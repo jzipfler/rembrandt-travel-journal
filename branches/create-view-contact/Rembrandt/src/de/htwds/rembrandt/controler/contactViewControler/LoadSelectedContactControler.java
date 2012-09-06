@@ -9,6 +9,7 @@ public class LoadSelectedContactControler {
 
 	private ViewContacts viewContacts;
 	private ArrayList<Contact> selectedContact;
+	private Contact tmpContact;
 	
 	public LoadSelectedContactControler( ViewContacts viewContacts ) {
 		this.viewContacts = viewContacts;
@@ -21,7 +22,7 @@ public class LoadSelectedContactControler {
 		String lastName = tmpWrapperString.substring(0, firstNamePosition );
 		String firstName = tmpWrapperString.substring( firstNamePosition + 1 );
 		
-		Contact tmpContact = new Contact( firstName, lastName );
+		tmpContact = new Contact( firstName, lastName );
 		
 		getMatchedList();
 		
@@ -43,8 +44,10 @@ public class LoadSelectedContactControler {
 			
 			selectedContact = viewContacts.getParentFrame().getJourneyModel().getContactListModel().getGlobalContactList();
 		else
-			// get it from private list...it's wayne cause the value is in both lists
-			selectedContact = viewContacts.getParentFrame().getJourneyModel().getContactListModel().getPrivateContactList();
+			if ( viewContacts.getParentFrame().getJourneyModel().getContactListModel().getPrivateContactList().contains(tmpContact) )
+				selectedContact = viewContacts.getParentFrame().getJourneyModel().getContactListModel().getPrivateContactList();
+			else
+				selectedContact = viewContacts.getParentFrame().getJourneyModel().getContactListModel().getGlobalContactList();
 	}
 
 }

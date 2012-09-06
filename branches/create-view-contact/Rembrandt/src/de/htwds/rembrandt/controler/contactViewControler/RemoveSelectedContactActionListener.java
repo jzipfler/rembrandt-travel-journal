@@ -4,11 +4,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import de.htwds.rembrandt.model.Contact;
 import de.htwds.rembrandt.view.ViewContacts;
 
 public class RemoveSelectedContactActionListener implements ActionListener {
 
+	private static final String MSG_YES_DELETE = "Ja, löschen";
+	private static final String MSG_NOT_DELETE = "Nein, nicht löschen";
+	private static final String MSG_SURE_TO_DELETE_TITLE = "Löschen des Kontakts";
+	private static final String MSG_SURE_TO_DELETE_CONTACT = "Sie versuchen gerade einen Kontakt zu löschen.\n" +
+																"Sind Sie sicher, dass Sie den Kontakt löschen möchten?\n" +
+																"\n" +
+																"Der Kontakt kann nach dem löschen nicht wiederhergestellt werden.";
+	
 	private ViewContacts viewContacts;
 	
 	public RemoveSelectedContactActionListener( ViewContacts viewContacts ) {
@@ -67,13 +77,32 @@ public class RemoveSelectedContactActionListener implements ActionListener {
 		}
 	}
 	
+	private int areYouSureToDelte() {
+		
+		Object[] options = {	MSG_YES_DELETE,
+								MSG_NOT_DELETE };
+
+		return JOptionPane.showOptionDialog(	null,
+						MSG_SURE_TO_DELETE_CONTACT,
+						MSG_SURE_TO_DELETE_TITLE,
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,     		//do not use a custom Icon
+						options,  		//the titles of buttons
+						options[0]);	//default button title
+
+
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
-		
-		removeSelected();
-		new UpdateListControler(viewContacts).updateList();
-		viewContacts.updateUI();
+		int areYouSureValue = areYouSureToDelte();
+		if ( areYouSureValue == JOptionPane.YES_OPTION ) {
+			removeSelected();
+			new UpdateListControler(viewContacts).updateList();
+			viewContacts.updateUI();
+		}
 
 	}
 
