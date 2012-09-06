@@ -45,6 +45,8 @@ public class SaveContactDetailsActionListener implements ActionListener {
 		contact.setZipPlz( viewContactDetails.getTxtZipPlz().getText() );
 		contact.setPrivatPhone( viewContactDetails.getTxtPrivatPhone().getText() );
 		contact.setBusinessPhone( viewContactDetails.getTxtBusinessPhone().getText() );
+		
+		contact.setPicture( viewContactDetails.getBtnPicture().getIcon() );
 		/*
 		try {	
 			if ( viewContactDetails.getTxtZipPlz().getText() != null )
@@ -68,6 +70,7 @@ public class SaveContactDetailsActionListener implements ActionListener {
 	}
 	
 	private void editExistingContact() {
+		
 		contact.setFirstName( viewContactDetails.getTxtFirstName().getText() );
 		contact.setLastName( viewContactDetails.getTxtLastName().getText() );
 		contact.setBusinessAdress(viewContactDetails.getTextAreaBusinessAdress().getText() );	
@@ -172,6 +175,7 @@ public class SaveContactDetailsActionListener implements ActionListener {
 			editExistingContact();
 			saveContactToListWhenEdited();
 		}
+		viewContactDetails.setAlreadyExistingContact( contact );
 	}
 	
 	protected Contact getContact(){

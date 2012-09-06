@@ -1,5 +1,7 @@
 package de.htwds.rembrandt.model;
 
+import javax.swing.Icon;
+
 import de.htwds.rembrandt.exception.ContactException;
 
 public class Contact implements Comparable<Contact> {
@@ -29,6 +31,8 @@ public class Contact implements Comparable<Contact> {
 	private String privatAdress;
 	private String businessAdress;
 	private String notices;
+	
+	private Icon picture;
 	
 	/**
 	 * Minimum constructor that creates a contact only with his first an last name.
@@ -66,6 +70,7 @@ public class Contact implements Comparable<Contact> {
 	 * @param privatAdress
 	 * @param businessAdress
 	 * @param notices
+	 * @param picture
 	 * @throws ContactException
 	 */
 	public Contact(	String firstName, String lastName, String postfach,
@@ -73,7 +78,7 @@ public class Contact implements Comparable<Contact> {
 					String homepage, String job, String company, String department,
 					String office, String spouses, String privatMail,
 					String businessMail, String privatPhone, String businessPhone,
-					String privatAdress, String businessAdress, String notices) throws ContactException {
+					String privatAdress, String businessAdress, String notices, Icon picture) throws ContactException {
 		
 		ContactException.firstNameEmpty( firstName );
 		ContactException.lastNameEmpty( lastName );
@@ -97,6 +102,7 @@ public class Contact implements Comparable<Contact> {
 		this.privatAdress = privatAdress;
 		this.businessAdress = businessAdress;
 		this.notices = notices;
+		this.picture = picture;
 	}
 
 	public String toString() {
@@ -293,6 +299,14 @@ public class Contact implements Comparable<Contact> {
 	public String getNotices() {
 		return notices;
 	}
+	
+	/**
+	 * 
+	 * @return the picture
+	 */
+	public Icon getPicture() {
+		return picture;
+	}
 
 	/*
 	 * ##################################################################
@@ -443,6 +457,14 @@ public class Contact implements Comparable<Contact> {
 	 */
 	public void setNotices(String notices) {
 		this.notices = notices;
+	}
+	
+	/**
+	 * 
+	 * @param picture the picture to set
+	 */
+	public void setPicture( Icon picture ) {
+		this.picture = picture;
 	}
 
 }

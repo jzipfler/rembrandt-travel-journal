@@ -23,6 +23,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import de.htwds.rembrandt.components.JNumberOnlyTextField;
+import de.htwds.rembrandt.controler.contactViewControler.AddPictureActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.EnableTextFieldsActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.ReturnToContactsActionListener;
 import de.htwds.rembrandt.model.Contact;
@@ -149,6 +150,12 @@ public class ViewContactDetails extends JPanel {
 		btnPicture.setEnabled(false);
 		btnPicture.setFont(new Font("Arial", Font.PLAIN, 13));
 		this.pnlContactDetailsInformations.add(btnPicture, "2, 4, 3, 9");
+		
+		/*
+		 * Image image = new ImageIcon(getClass().getResource("pfeil.png")).getImage();
+            ImageIcon icon = new ImageIcon(image.getScaledInstance(btCopy.getWidth(),btCopy.getHeight(),Image.SCALE_FAST ));
+            btCopy.setIcon(icon);
+		 */
 		
 		JLabel lblFirstName = new JLabel("Vorname:");
 		lblFirstName.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -554,6 +561,7 @@ public class ViewContactDetails extends JPanel {
 		this.frmMainFrame = frmMainFrame;
 		this.viewContacts = viewContacts;
 		this.btnBack.addActionListener( new ReturnToContactsActionListener( viewContacts ) );
+		this.btnPicture.addActionListener( new AddPictureActionListener(this) );
 	}
 	
 	public ViewMain getParentFrame(){
@@ -575,6 +583,10 @@ public class ViewContactDetails extends JPanel {
 	
 	public void setAlreadyExistingContact( Contact alreadyExistingContact ) {
 		this.alreadyExistingContact = alreadyExistingContact;
+	}
+	
+	public JButton getBtnPicture() {
+		return btnPicture;
 	}
 	
 	/**

@@ -54,6 +54,10 @@ public class LoadContactDetailsActionListener implements ActionListener {
 		viewContactDetails.getTxtPrivatPhone().setText( editingContact.getPrivatPhone() );
 		viewContactDetails.getTxtBusinessPhone().setText( editingContact.getBusinessPhone() );
 		
+		viewContactDetails.getBtnPicture().setIcon( editingContact.getPicture() );
+		viewContactDetails.getBtnPicture().setDisabledIcon( editingContact.getPicture() );
+		viewContactDetails.getBtnPicture().setText(null);
+		
 		viewContactDetails.setAlreadyExistingContact(editingContact);
 		
 	}
