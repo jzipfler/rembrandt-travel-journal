@@ -76,11 +76,13 @@ public class UpdateListControler {
 			
 				mergeList = removeDublicatesFromArrayList( mergeList );
 			}
-			else if ( viewContacts.getParentFrame().getJourneyModel().getContactListModel().getPrivateContactList() != null )
+			else if ( 	viewContacts.getParentFrame().getJourneyModel().getContactListModel().getPrivateContactList() != null && 
+						viewContacts.getParentFrame().getJourneyModel().getContactListModel().getGlobalContactList() == null)
 				
 				mergeList = viewContacts.getParentFrame().getJourneyModel().getContactListModel().getPrivateContactList();
 			
-			else if ( viewContacts.getParentFrame().getJourneyModel().getContactListModel().getGlobalContactList() != null  )
+			else if ( 	viewContacts.getParentFrame().getJourneyModel().getContactListModel().getPrivateContactList() == null &&
+						viewContacts.getParentFrame().getJourneyModel().getContactListModel().getGlobalContactList() != null  )
 				
 				mergeList = viewContacts.getParentFrame().getJourneyModel().getContactListModel().getGlobalContactList();
 			

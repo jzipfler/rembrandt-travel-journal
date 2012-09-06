@@ -29,12 +29,15 @@ public class LoadSelectedContactListSelectionListener implements ListSelectionLi
 	
 	private void valueSelected() {
 		Contact tmpContact = new LoadSelectedContactControler(viewContacts).loadSelectedContact();
-		if ( tmpContact == null )
+		if ( tmpContact == null ) 
 			noValueSelected();
-		fillContactTextFields( tmpContact );
+		else {
+			
+			fillContactTextFields( tmpContact );
 		
-		viewContacts.getBtnDeleteContact().setEnabled(true);
-		viewContacts.getBtnEditContact().setEnabled(true);
+			viewContacts.getBtnDeleteContact().setEnabled(true);
+			viewContacts.getBtnEditContact().setEnabled(true);
+		}
 	}
 
 	private void clearContactTextFields() {
