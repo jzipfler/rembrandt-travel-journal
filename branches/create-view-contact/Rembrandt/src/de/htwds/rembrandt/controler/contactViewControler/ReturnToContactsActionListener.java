@@ -52,6 +52,7 @@ public class ReturnToContactsActionListener implements ActionListener {
 							contactException.getMessage(),
 							ContactException.MSG_ERROR_OCCURED,
 							JOptionPane.ERROR_MESSAGE );
+					return JOptionPane.ABORT;
 				}
 			}
 			else if ( n == JOptionPane.NO_OPTION )

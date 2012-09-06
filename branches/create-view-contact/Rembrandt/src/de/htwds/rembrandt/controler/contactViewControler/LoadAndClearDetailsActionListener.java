@@ -5,16 +5,17 @@ import java.awt.event.ActionListener;
 
 import de.htwds.rembrandt.view.ViewContacts;
 
-public class AddNewContactActionListener implements ActionListener {
+public class LoadAndClearDetailsActionListener implements ActionListener {
 
 	private ViewContacts viewContacts;
 	
-	public AddNewContactActionListener( ViewContacts viewContacts ) {
+	public LoadAndClearDetailsActionListener( ViewContacts viewContacts ) {
 		this.viewContacts = viewContacts;
 	}
 		
 	private void loadContactDetailView() {
 		
+		viewContacts.getViewContactDetails().setAlreadyExistingContact(null);
 		new LoadContactDetailsActionListener( viewContacts.getViewContactDetails() ).loadContactDetails();
 	}
 	
