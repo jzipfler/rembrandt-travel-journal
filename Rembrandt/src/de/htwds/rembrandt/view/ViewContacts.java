@@ -6,8 +6,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
@@ -18,26 +16,24 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
-import de.htwds.rembrandt.controler.contactViewControler.AddNewContactActionListener;
+import de.htwds.rembrandt.controler.contactViewControler.LoadAndClearDetailsActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.LoadContactDetailsActionListener;
+import de.htwds.rembrandt.controler.contactViewControler.LoadSelectedContactListSelectionListener;
+import de.htwds.rembrandt.controler.contactViewControler.RemoveSelectedContactActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.UpdateListFromComboBoxActionListener;
-
-import javax.swing.JTextArea;
 
 public class ViewContacts extends JPanel {
 	
@@ -108,15 +104,6 @@ public class ViewContacts extends JPanel {
 		lstContacts = new JList( lstModelContacts );
 		lstContacts.setFont(new Font("Arial", Font.PLAIN, 13));
 		lstContacts.setMaximumSize(new Dimension(500, 1000));
-		lstContacts.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-//				txtName.setText( GetField.class.toString() );
-				txtName.setText( "Hier hat sich was geaendert" );
-				btnEditContact.setEnabled(true);
-				btnDeleteContact.setEnabled(true);
-				
-			}
-		});
 		lstContacts.setMinimumSize(new Dimension(50, 408));
 		lstContacts.setPreferredSize(new Dimension(50, 408));
 		lstContacts.setAutoscrolls(false);
@@ -275,6 +262,8 @@ public class ViewContacts extends JPanel {
 		
 		txtAreaDescription = new JTextArea();
 		this.txtAreaDescription.setEditable(false);
+		this.txtAreaDescription.setLineWrap(true);
+		this.txtAreaDescription.setDisabledTextColor(getForeground());
 		txtAreaDescription.setEnabled(false);
 		txtAreaDescription.setFont(new Font("Arial", Font.PLAIN, 13));
 		scrollPane_1.setViewportView(txtAreaDescription);
@@ -297,7 +286,11 @@ public class ViewContacts extends JPanel {
 		 * ActionListener
 		 */
 		this.btnEditContact.addActionListener( new LoadContactDetailsActionListener( viewContactDetails ) );
-		this.btnAddContact.addActionListener( new AddNewContactActionListener( this ) );
+		this.btnAddContact.addActionListener( new LoadAndClearDetailsActionListener( this ) );
+		this.btnDeleteContact.addActionListener( new RemoveSelectedContactActionListener(this) );
+		
+		this.lstContacts.addListSelectionListener( new LoadSelectedContactListSelectionListener( this ) );
+		
 		
 		this.cmbCategory.addActionListener(new UpdateListFromComboBoxActionListener( this ) );
 	}
@@ -319,5 +312,39 @@ public class ViewContacts extends JPanel {
 	}
 	public JComboBox getCmbCategory() {
 		return cmbCategory;
+	}
+	public JButton getBtnDeleteContact() {
+		return btnDeleteContact;
+	}
+	public JButton getBtnEditContact() {
+		return btnEditContact;
+	}
+
+	/**
+	 * @return the txtName
+	 */
+	public JTextField getTxtName() {
+		return txtName;
+	}
+
+	/**
+	 * @return the txtMail
+	 */
+	public JTextField getTxtMail() {
+		return txtMail;
+	}
+
+	/**
+	 * @return the txtPhone
+	 */
+	public JTextField getTxtPhone() {
+		return txtPhone;
+	}
+
+	/**
+	 * @return the txtAreaDescription
+	 */
+	public JTextArea getTxtAreaDescription() {
+		return txtAreaDescription;
 	}
 }

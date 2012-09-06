@@ -24,8 +24,8 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import de.htwds.rembrandt.components.JNumberOnlyTextField;
 import de.htwds.rembrandt.controler.contactViewControler.EnableTextFieldsActionListener;
-import de.htwds.rembrandt.controler.contactViewControler.LoadContactsActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.ReturnToContactsActionListener;
+import de.htwds.rembrandt.model.Contact;
 
 public class ViewContactDetails extends JPanel {
 	
@@ -33,6 +33,9 @@ public class ViewContactDetails extends JPanel {
 	public static final String STD_BUTTON_UNLOCK_LOCK = "Speichern und Sperren";
 	
 	private boolean informationEditable = false;
+	
+	//If contact needs to be edited
+	private Contact alreadyExistingContact;
 	
 	private JButton btnBack;
 	private JButton btnUnlock;
@@ -560,6 +563,18 @@ public class ViewContactDetails extends JPanel {
 	
 	public ViewContacts getViewContact() {
 		return viewContacts;
+	}
+	
+	public JTabbedPane getPnlTabbedContactDetails() {
+		return pnlTabbedContactDetails;
+	}
+	
+	public Contact getAlreadyExistingContact() {
+		return alreadyExistingContact;
+	}
+	
+	public void setAlreadyExistingContact( Contact alreadyExistingContact ) {
+		this.alreadyExistingContact = alreadyExistingContact;
 	}
 	
 	/**

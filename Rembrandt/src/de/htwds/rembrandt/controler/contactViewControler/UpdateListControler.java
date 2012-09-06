@@ -51,7 +51,7 @@ public class UpdateListControler {
 					contactListElementArray = null;
 			}
 			else
-				; // Should never happen --> noop
+				contactListElementArray = null; // Should never happen
 		} catch (NullPointerException nullException) {
 			contactListElementArray = null;
 		}

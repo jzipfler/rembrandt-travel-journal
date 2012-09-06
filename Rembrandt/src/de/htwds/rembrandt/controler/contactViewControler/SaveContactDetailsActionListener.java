@@ -16,6 +16,8 @@ public class SaveContactDetailsActionListener implements ActionListener {
 	
 	public SaveContactDetailsActionListener( ViewContactDetails viewContactDetails ) {
 		this.viewContactDetails = viewContactDetails;
+		this.contact = null;
+		this.contactList = null;
 	}
 	
 	private void createNewContact() throws ContactException {
@@ -39,12 +41,16 @@ public class SaveContactDetailsActionListener implements ActionListener {
 		contact.setBusinessMail( viewContactDetails.getTxtBusinessMail().getText() );
 		contact.setPrivatAdress( viewContactDetails.getTextAreaPrivatAdress().getText() );
 		contact.setNotices( viewContactDetails.getTextAreaNotices().getText() );
-		
+
+		contact.setZipPlz( viewContactDetails.getTxtZipPlz().getText() );
+		contact.setPrivatPhone( viewContactDetails.getTxtPrivatPhone().getText() );
+		contact.setBusinessPhone( viewContactDetails.getTxtBusinessPhone().getText() );
+		/*
 		try {	
 			if ( viewContactDetails.getTxtZipPlz().getText() != null )
 				contact.setZipPlz( Integer.parseInt( viewContactDetails.getTxtZipPlz().getText() ) );
 			else
-				contact.setZipPlz(0);
+				contact.setZipPlz( 0 );
 			if ( viewContactDetails.getTxtPrivatPhone().getText() != null )
 				contact.setPrivatPhone( Integer.parseInt( viewContactDetails.getTxtPrivatPhone().getText() ) );
 			else
@@ -58,6 +64,31 @@ public class SaveContactDetailsActionListener implements ActionListener {
 		} catch (NumberFormatException e) {
 			// Do nothing
 		}
+		*/
+	}
+	
+	private void editExistingContact() {
+		contact.setFirstName( viewContactDetails.getTxtFirstName().getText() );
+		contact.setLastName( viewContactDetails.getTxtLastName().getText() );
+		contact.setBusinessAdress(viewContactDetails.getTextAreaBusinessAdress().getText() );	
+		contact.setPostfach( viewContactDetails.getTxtPostfach().getText() );
+		contact.setCity( viewContactDetails.getTxtCity().getText() );
+		contact.setStateProvinz( viewContactDetails.getTxtStateProvinz().getText() );
+		contact.setCountry( viewContactDetails.getTxtCountry().getText() );
+		contact.setHomepage( viewContactDetails.getTxtHomepage().getText() );
+		contact.setJob( viewContactDetails.getTxtJob().getText() );
+		contact.setCompany( viewContactDetails.getTxtCompany().getText() );
+		contact.setDepartment( viewContactDetails.getTxtDepartment().getText() );
+		contact.setOffice( viewContactDetails.getTxtOffice().getText() );
+		contact.setSpouses( viewContactDetails.getTxtSpouses().getText() );
+		contact.setPrivatMail( viewContactDetails.getTxtPrivatMail().getText() );
+		contact.setBusinessMail( viewContactDetails.getTxtBusinessMail().getText() );
+		contact.setPrivatAdress( viewContactDetails.getTextAreaPrivatAdress().getText() );
+		contact.setNotices( viewContactDetails.getTextAreaNotices().getText() );
+
+		contact.setZipPlz( viewContactDetails.getTxtZipPlz().getText() );
+		contact.setPrivatPhone( viewContactDetails.getTxtPrivatPhone().getText() );
+		contact.setBusinessPhone( viewContactDetails.getTxtBusinessPhone().getText() );
 	}
 	
 	private void saveContactToList() throws ContactException {
@@ -96,7 +127,7 @@ public class SaveContactDetailsActionListener implements ActionListener {
 				throw new ContactException( ContactException.ERROR_CONTACT_EXISTS_IN_GLOBAL_LIST );
 			}
 			else {
-				;
+
 				privateContactList.add( contact );
 				globalContactList.add(contact);
 				viewContactDetails.getParentFrame().getJourneyModel().getContactListModel().setPrivateContactList(privateContactList);
@@ -106,6 +137,16 @@ public class SaveContactDetailsActionListener implements ActionListener {
 		else
 			;
 		
+	}
+	
+	private void saveContactToListWhenEdited() {
+		ArrayList<Contact> privateContactList = viewContactDetails.getParentFrame().getJourneyModel().getContactListModel().getPrivateContactList();
+		ArrayList<Contact> globalContactList = viewContactDetails.getParentFrame().getJourneyModel().getContactListModel().getGlobalContactList();
+		if ( privateContactList != null )
+			privateContactList.remove(contact);
+		if ( globalContactList != null )
+			globalContactList.remove(contact);
+		saveContactToList();
 	}
 	
 	private void addContactToList() throws ContactException {
@@ -119,13 +160,27 @@ public class SaveContactDetailsActionListener implements ActionListener {
 	}
 	
 	protected void saveContactDetails() {
-		createNewContact();
-		saveContactToList();
+		
+		contact = viewContactDetails.getAlreadyExistingContact();
+		if ( contact == null ) {
+			
+			createNewContact();
+			saveContactToList();
+		}
+		else {
+			
+			editExistingContact();
+			saveContactToListWhenEdited();
+		}
+	}
+	
+	protected Contact getContact(){
+		return contact;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		
 		saveContactDetails();
 	}
 

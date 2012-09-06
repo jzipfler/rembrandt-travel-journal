@@ -44,6 +44,7 @@ public class EnableTextFieldsActionListener implements ActionListener {
 		} else if (viewContactDetails.getBtnUnlock().getText().equals( viewContactDetails.STD_BUTTON_UNLOCK_LOCK )) {
 			
 			try {
+				
 				new SaveContactDetailsActionListener(viewContactDetails).saveContactDetails();
 				setTextFieldsNotEnabled( );
 			} catch (ContactException contactException) {

@@ -10,7 +10,8 @@ public class Contact implements Comparable<Contact> {
 	private String lastName;
 	private String postfach;
 	private String city;
-	private int zipPlz;
+//	private int zipPlz;
+	private String zipPlz;
 	private String stateProvinz;
 	private String country;
 	private String homepage;
@@ -21,8 +22,10 @@ public class Contact implements Comparable<Contact> {
 	private String spouses;
 	private String privatMail;
 	private String businessMail;
-	private int privatPhone;
-	private int businessPhone;
+//	private int privatPhone;
+//	private int businessPhone;
+	private String privatPhone;
+	private String businessPhone;
 	private String privatAdress;
 	private String businessAdress;
 	private String notices;
@@ -66,10 +69,10 @@ public class Contact implements Comparable<Contact> {
 	 * @throws ContactException
 	 */
 	public Contact(	String firstName, String lastName, String postfach,
-					String city, int zipPlz, String stateProvinz, String country,
+					String city, String zipPlz, String stateProvinz, String country,
 					String homepage, String job, String company, String department,
 					String office, String spouses, String privatMail,
-					String businessMail, int privatPhone, int businessPhone,
+					String businessMail, String privatPhone, String businessPhone,
 					String privatAdress, String businessAdress, String notices) throws ContactException {
 		
 		ContactException.firstNameEmpty( firstName );
@@ -102,7 +105,7 @@ public class Contact implements Comparable<Contact> {
 
 	@Override
 	public int compareTo(Contact arg0) {
-		return this.lastName.compareTo( arg0.getLastName() );
+		return this.toString().compareTo( arg0.toString() );
 	}
 	
 	/* (non-Javadoc)
@@ -182,7 +185,7 @@ public class Contact implements Comparable<Contact> {
 	/**
 	 * @return the zipPlz
 	 */
-	public int getZipPlz() {
+	public String getZipPlz() {
 		return zipPlz;
 	}
 
@@ -259,14 +262,14 @@ public class Contact implements Comparable<Contact> {
 	/**
 	 * @return the privatPhone
 	 */
-	public int getPrivatPhone() {
+	public String getPrivatPhone() {
 		return privatPhone;
 	}
 
 	/**
 	 * @return the businessPhone
 	 */
-	public int getBusinessPhone() {
+	public String getBusinessPhone() {
 		return businessPhone;
 	}
 
@@ -333,7 +336,7 @@ public class Contact implements Comparable<Contact> {
 	/**
 	 * @param zipPlz the zipPlz to set
 	 */
-	public void setZipPlz(int zipPlz) {
+	public void setZipPlz(String zipPlz) {
 		this.zipPlz = zipPlz;
 	}
 
@@ -410,14 +413,14 @@ public class Contact implements Comparable<Contact> {
 	/**
 	 * @param privatPhone the privatPhone to set
 	 */
-	public void setPrivatPhone(int privatPhone) {
+	public void setPrivatPhone(String privatPhone) {
 		this.privatPhone = privatPhone;
 	}
 
 	/**
 	 * @param businessPhone the businessPhone to set
 	 */
-	public void setBusinessPhone(int businessPhone) {
+	public void setBusinessPhone(String businessPhone) {
 		this.businessPhone = businessPhone;
 	}
 
