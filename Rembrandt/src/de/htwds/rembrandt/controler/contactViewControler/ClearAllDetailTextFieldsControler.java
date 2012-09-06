@@ -32,5 +32,8 @@ public class ClearAllDetailTextFieldsControler {
 		viewContactDetails.getTextAreaPrivatAdress().setText(null);
 		viewContactDetails.getTextAreaBusinessAdress().setText(null);
 		viewContactDetails.getTextAreaNotices().setText(null);
+		
+		viewContactDetails.getBtnPicture().setIcon(null);
+		viewContactDetails.getBtnPicture().setText("Picture");
 	}
 }
