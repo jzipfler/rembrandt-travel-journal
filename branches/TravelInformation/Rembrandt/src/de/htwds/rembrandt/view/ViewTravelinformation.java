@@ -198,7 +198,7 @@ public class ViewTravelinformation extends JPanel {
 		
 		txtArrivalStartInput = new JTextField();
 		txtArrivalStartInput.setEditable(false);
-		txtArrivalStartInput.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtArrivalStartInput.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(txtArrivalStartInput, "4, 20, fill, default");
 		txtArrivalStartInput.setColumns(10);
 		
