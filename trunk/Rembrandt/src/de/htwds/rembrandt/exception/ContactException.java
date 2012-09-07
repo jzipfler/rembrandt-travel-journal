@@ -11,6 +11,16 @@ public class ContactException extends RuntimeException {
 	 */
 	public static final String ERROR_LASTNAME_EMPTY = "Der Nachname darf nicht leer sein.";
 	
+	public static final String ERROR_CONTACT_ALREADY_EXISTS = "Der Kontakt existiert bereits.";
+	
+	public static final String ERROR_CONTACT_EXISTS_IN_BOTH_LISTS = "Der Kontakt existiert bereits in beiden Listen.";
+	
+	public static final String ERROR_CONTACT_EXISTS_IN_PRIVATE_LIST = 	"Der Kontakt existiert bereits in der privaten Liste.\n" +
+																			"Er wurde nur noch der globalen Liste hinzugefügt.";
+	
+	public static final String ERROR_CONTACT_EXISTS_IN_GLOBAL_LIST = 	"Der Kontakt existiert bereits in der globalen Liste.\n" +
+																		"Er wurde nur noch der privaten Liste hinzugefügt.";
+	
 	public static final String MSG_ERROR_OCCURED = "Fehler beim Speichern";
 	
 	

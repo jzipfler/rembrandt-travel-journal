@@ -24,7 +24,7 @@ public class LoadContactsActionListener implements ActionListener {
 		return 0;
 	}
 	
-	private void performChange(){
+	protected void loadContacts(){
 		ViewMain viewMain = viewContacts.getParentFrame();
 		viewMain.getCurrentContentPanel().removeAll();
 		viewMain.getCurrentContentPanel().add(viewContacts);
@@ -35,7 +35,7 @@ public class LoadContactsActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		
 		if ( decideChangeOrNot() == 0 )
-			performChange();
+			loadContacts();
 	}
 
 }

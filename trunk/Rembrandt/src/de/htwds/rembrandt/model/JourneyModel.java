@@ -1,5 +1,7 @@
 package de.htwds.rembrandt.model;
 
+import java.util.ArrayList;
+
 /**
  * 
  * @author Jan Zipfler
@@ -8,8 +10,18 @@ package de.htwds.rembrandt.model;
  */
 public class JourneyModel {
 	
+	private JourneyContactListsModel contactListModel;
+	
 	/*
 	 * Your implementation here
 	 */
+	
+	public JourneyModel() {
+		contactListModel = new JourneyContactListsModel();
+	}
+	
+	public JourneyContactListsModel getContactListModel() {
+		return contactListModel;
+	}
 	
 }
