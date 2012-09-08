@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class JourneyModel {
 	
 	private JourneyContactListsModel contactListModel;
+	private TravelInformationModel traavelInformation;
 	
 	/*
 	 * Your implementation here
@@ -22,6 +23,14 @@ public class JourneyModel {
 	
 	public JourneyContactListsModel getContactListModel() {
 		return contactListModel;
+	}
+	
+	public void setTravelInformation(TravelInformationModel travelInformation){
+		this.traavelInformation = travelInformation;
+	}
+	
+	public TravelInformationModel getTravelInformation(){
+		return traavelInformation;
 	}
 	
 }

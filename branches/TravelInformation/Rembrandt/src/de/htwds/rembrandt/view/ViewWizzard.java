@@ -392,14 +392,15 @@ public class ViewWizzard extends JFrame {
 					pnlSecondView.setVisible(false);
 					break;
 				case LAST:
-					controler.readAndStore();
-					//muss noch beendet werden.
+					controler.readStoreAndExit();
+					setVisible(false); //Hier ist mir nichts besseres eingefallen um den Wizzard zu beenden
+					dispose();
 					break;
 				default:
 					break;
 				}
 				if (cardNumber != FIRST){
-					btnBack.setText("Zurück");
+					btnBack.setText("Zurï¿½ck");
 				}
 				if (cardNumber == THIRD){
 					btnNext.setText("Ende");
