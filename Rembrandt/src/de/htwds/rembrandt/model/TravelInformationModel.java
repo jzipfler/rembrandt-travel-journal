@@ -44,6 +44,13 @@ public class TravelInformationModel {
 		locationDepartureDestination 	= departureD;
 	}
 	
+	/**
+	 * Empty constructor, which may be used, if the specified link in the JourneyModel is null
+	 */
+	public TravelInformationModel(){
+		
+	}
+	
 	//Getter
 	
 	public String getCountry(){
