@@ -1,14 +1,19 @@
 package de.htwds.rembrandt.model;
 
+import javax.swing.Icon;
+
 import de.htwds.rembrandt.exception.ContactException;
 
-public class Contact {
+public class Contact implements Comparable<Contact> {
 
+	private static final String SPACE = " ";
+	
 	private String firstName;
 	private String lastName;
 	private String postfach;
 	private String city;
-	private int zipPlz;
+//	private int zipPlz;
+	private String zipPlz;
 	private String stateProvinz;
 	private String country;
 	private String homepage;
@@ -19,11 +24,15 @@ public class Contact {
 	private String spouses;
 	private String privatMail;
 	private String businessMail;
-	private int privatPhone;
-	private int businessPhone;
+//	private int privatPhone;
+//	private int businessPhone;
+	private String privatPhone;
+	private String businessPhone;
 	private String privatAdress;
 	private String businessAdress;
 	private String notices;
+	
+	private Icon picture;
 	
 	/**
 	 * Minimum constructor that creates a contact only with his first an last name.
@@ -61,14 +70,15 @@ public class Contact {
 	 * @param privatAdress
 	 * @param businessAdress
 	 * @param notices
+	 * @param picture
 	 * @throws ContactException
 	 */
 	public Contact(	String firstName, String lastName, String postfach,
-					String city, int zipPlz, String stateProvinz, String country,
+					String city, String zipPlz, String stateProvinz, String country,
 					String homepage, String job, String company, String department,
 					String office, String spouses, String privatMail,
-					String businessMail, int privatPhone, int businessPhone,
-					String privatAdress, String businessAdress, String notices) throws ContactException {
+					String businessMail, String privatPhone, String businessPhone,
+					String privatAdress, String businessAdress, String notices, Icon picture) throws ContactException {
 		
 		ContactException.firstNameEmpty( firstName );
 		ContactException.lastNameEmpty( lastName );
@@ -92,7 +102,63 @@ public class Contact {
 		this.privatAdress = privatAdress;
 		this.businessAdress = businessAdress;
 		this.notices = notices;
+		this.picture = picture;
 	}
+
+	public String toString() {
+		return ( lastName + SPACE + firstName );
+	}
+
+	@Override
+	public int compareTo(Contact arg0) {
+		return this.toString().compareTo( arg0.toString() );
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result
+//				+ ((firstName == null) ? 0 : firstName.hashCode());
+//		result = prime * result
+//				+ ((lastName == null) ? 0 : lastName.hashCode());
+//		return result;
+//		
+//		Created from Eclipse
+		return this.toString().hashCode();
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contact other = (Contact) obj;
+		if (firstName == null)
+			if (other.firstName != null)
+				return false;
+		if (lastName == null)
+			if (other.lastName != null)
+				return false;
+		if ( other.toString().equalsIgnoreCase(this.toString()) )
+			return true;
+		return false;
+	}
+	
+	/*
+	 * ######################################################################
+	 *  Now only getter and setter
+	 * ######################################################################
+	 */
 
 	/**
 	 * @return the firstName
@@ -125,7 +191,7 @@ public class Contact {
 	/**
 	 * @return the zipPlz
 	 */
-	public int getZipPlz() {
+	public String getZipPlz() {
 		return zipPlz;
 	}
 
@@ -202,14 +268,14 @@ public class Contact {
 	/**
 	 * @return the privatPhone
 	 */
-	public int getPrivatPhone() {
+	public String getPrivatPhone() {
 		return privatPhone;
 	}
 
 	/**
 	 * @return the businessPhone
 	 */
-	public int getBusinessPhone() {
+	public String getBusinessPhone() {
 		return businessPhone;
 	}
 
@@ -232,6 +298,14 @@ public class Contact {
 	 */
 	public String getNotices() {
 		return notices;
+	}
+	
+	/**
+	 * 
+	 * @return the picture
+	 */
+	public Icon getPicture() {
+		return picture;
 	}
 
 	/*
@@ -276,7 +350,7 @@ public class Contact {
 	/**
 	 * @param zipPlz the zipPlz to set
 	 */
-	public void setZipPlz(int zipPlz) {
+	public void setZipPlz(String zipPlz) {
 		this.zipPlz = zipPlz;
 	}
 
@@ -353,14 +427,14 @@ public class Contact {
 	/**
 	 * @param privatPhone the privatPhone to set
 	 */
-	public void setPrivatPhone(int privatPhone) {
+	public void setPrivatPhone(String privatPhone) {
 		this.privatPhone = privatPhone;
 	}
 
 	/**
 	 * @param businessPhone the businessPhone to set
 	 */
-	public void setBusinessPhone(int businessPhone) {
+	public void setBusinessPhone(String businessPhone) {
 		this.businessPhone = businessPhone;
 	}
 
@@ -384,4 +458,13 @@ public class Contact {
 	public void setNotices(String notices) {
 		this.notices = notices;
 	}
+	
+	/**
+	 * 
+	 * @param picture the picture to set
+	 */
+	public void setPicture( Icon picture ) {
+		this.picture = picture;
+	}
+
 }
