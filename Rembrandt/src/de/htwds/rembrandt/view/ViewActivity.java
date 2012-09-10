@@ -1,5 +1,7 @@
 package de.htwds.rembrandt.view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -8,12 +10,34 @@ import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
+
+import de.htwds.rembrandt.controler.contactViewControler.LoadCalendarActionListener;
+import de.htwds.rembrandt.controler.contactViewControler.LoadActivityAbortActionListener;
+import de.htwds.rembrandt.controler.contactViewControler.LoadActivitySaveActionListener;
+
+import java.awt.*;
 
 
 
 
+
+/**
+* This code was edited or generated using CloudGarden's Jigloo
+* SWT/Swing GUI Builder, which is free for non-commercial
+* use. If Jigloo is being used commercially (ie, by a corporation,
+* company or business for any purpose whatever) then you
+* should purchase a license for each developer using Jigloo.
+* Please visit www.cloudgarden.com for details.
+* Use of Jigloo implies acceptance of these licensing terms.
+* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
+* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
+* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+*/
 public class ViewActivity extends JPanel {
 	
 	
@@ -22,49 +46,106 @@ public class ViewActivity extends JPanel {
 	
 	public JPanel activityPane;
 	public JPanel buttonPane;
+	public JPanel pnlActivityAndButtons;
+	private JPanel descriptionPane;
+	private JPanel timePane;
+	private JPanel locationPane;
+	
 	private JTextField description;
 	private JTextField time;
 	private JTextField location;
 	private JTextArea story;
-	private JButton save;
-	private JButton abort;
+	public JButton save;
+	public JButton abort;
+	private JLabel label1;
+	private JLabel label2;
+	private JLabel label3;	
 	
 
 	
 	
 	public ViewActivity() {
 		
-
-			
-		description = new JTextField();
+		
+		
+		setBorder(new EmptyBorder(2, 4, 2, 2));
+		setMinimumSize(new Dimension(440, 440));
+		setPreferredSize(new Dimension(440, 440));
+		setLayout(new BorderLayout(0, 0));
+		
+		
+		FlowLayout myLayout = new FlowLayout();
+		myLayout.setAlignment(FlowLayout.LEADING);
+		
+		
+		label1 = new JLabel("Titel");
+		label1.setFont(new Font("Arial", Font.BOLD, 14));
+		
+		description = new JTextField(17);
 		description.setMaximumSize(new Dimension(1000, 25));
 		description.setFont(new Font("Arial", Font.BOLD|Font.PLAIN, 18));
-		description.setText("Beschreibung");
-		time = new JTextField();
+					
+		descriptionPane = new JPanel();
+		descriptionPane.setLayout(myLayout);
+		descriptionPane.add(label1);
+		label1.setPreferredSize(new java.awt.Dimension(100, 16));
+		descriptionPane.add(description);
+		
+		
+		
+		
+		
+		label2 = new JLabel("Zeitpunkt");
+		label2.setFont(new Font("Arial", Font.BOLD, 14));
+		
+		time = new JTextField(17);
 		time.setMaximumSize(new Dimension(1000, 25));
 		time.setFont(new Font("Arial", Font.BOLD|Font.PLAIN, 18));
-		time.setText("Zeitpunkt");
-		location = new JTextField();
+				
+		timePane = new JPanel();
+		timePane.setLayout(myLayout);
+		timePane.add(label2);
+		label2.setPreferredSize(new java.awt.Dimension(100, 16));
+		timePane.add(time);		
+		
+		
+		
+		
+		
+		label3 = new JLabel("Ort");	
+		label3.setFont(new Font("Arial", Font.BOLD, 14));
+		
+		location = new JTextField(17);
 		location.setMaximumSize(new Dimension(1000, 25));
 		location.setFont(new Font("Arial", Font.BOLD|Font.PLAIN, 18));
-		location.setText("Ort");
+				
+		locationPane = new JPanel();
+		locationPane.setLayout(myLayout);
+		locationPane.add(label3);
+		label3.setPreferredSize(new java.awt.Dimension(100, 16));
+		locationPane.add(location);				
+		
+		
+		
+		
+		
 		story = new JTextArea();
 		story.setFont(new Font("Arial", Font.BOLD|Font.PLAIN, 18));
 		
 		save = new JButton("speichern");
 		save.setFont(new Font("Arial", Font.BOLD, 14));
 		save.setSize(111,111);
+	
 		abort = new JButton("abbruch");
 		abort.setFont(new Font("Arial", Font.BOLD, 14));
 		abort.setSize(111,111);
-		
-		
+			
 		buttonPane = new JPanel();
-		buttonPane.setMaximumSize(new Dimension(1885, 32767));
-		buttonPane.setPreferredSize(new Dimension(425, 380));
-		buttonPane.setMinimumSize(new Dimension(425, 100));
+		buttonPane.setPreferredSize(new Dimension(422, 60));
 		buttonPane.add(save);
 		buttonPane.add(abort);
+				
+		
 		
 		
 		
@@ -76,14 +157,20 @@ public class ViewActivity extends JPanel {
 		activityPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		activityPane.setPreferredSize(new Dimension(425, 380));
 		activityPane.setMinimumSize(new Dimension(425, 380));
-		activityPane.add(description);
-		activityPane.add(time);
-		activityPane.add(location);
+		activityPane.add(descriptionPane);
+		activityPane.add(timePane);
+		activityPane.add(locationPane);
 		activityPane.add(story);	
 
 		
-		add(activityPane);
-		add(buttonPane);
+		
+		pnlActivityAndButtons = new JPanel();
+		pnlActivityAndButtons.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		pnlActivityAndButtons.setLayout(new BorderLayout(0, 0));
+		pnlActivityAndButtons.add(activityPane, BorderLayout.CENTER);
+		pnlActivityAndButtons.add(buttonPane, BorderLayout.SOUTH);		
+		
+		add(pnlActivityAndButtons, BorderLayout.CENTER);
 
 	}
 	
@@ -91,7 +178,11 @@ public class ViewActivity extends JPanel {
 		this();
 		this.frmMainFrame = frmMainFrame;
 		this.viewCalendar = viewCalendar;
+		this.abort.addActionListener(new LoadActivityAbortActionListener(viewCalendar));
+		this.save.addActionListener(new LoadActivitySaveActionListener());
 	}
+
+	
 	
 	public ViewMain getParentFrame(){
 		
