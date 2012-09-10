@@ -20,6 +20,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import de.htwds.rembrandt.controler.mainViewController.LoadContacPanelActionListener;
+import de.htwds.rembrandt.controler.contactViewControler.LoadCalendarActionListener;
 import de.htwds.rembrandt.controler.travelview.LoadTravelInformationPanelActionListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.LoadPhotoAlbumPanelActionListener;
 import de.htwds.rembrandt.model.JourneyModel;
@@ -144,6 +145,7 @@ public class ViewMain extends JPanel {
 		pnlQuicklunch.add(btnLists, "2, 6");
 		
 		btnReiseinfos = new JButton("Reiseinfos");
+		btnReiseinfos.addActionListener(new LoadCalendarActionListener(this));
 		btnReiseinfos.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlQuicklunch.add(btnReiseinfos, "2, 10");
 		
