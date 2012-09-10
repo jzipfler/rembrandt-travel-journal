@@ -6,8 +6,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
@@ -18,25 +16,31 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
+import de.htwds.rembrandt.controler.contactViewControler.LoadAndClearDetailsActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.LoadContactDetailsActionListener;
-import javax.swing.JTextArea;
+import de.htwds.rembrandt.controler.contactViewControler.LoadSelectedContactListSelectionListener;
+import de.htwds.rembrandt.controler.contactViewControler.RemoveSelectedContactActionListener;
+import de.htwds.rembrandt.controler.contactViewControler.UpdateListFromComboBoxActionListener;
 
 public class ViewContacts extends JPanel {
+	
+	public static final String STD_CMB_CATEGORY_PRIVATE 	= "private Kontakte";
+	public static final String STD_CMB_CATEGORY_GLOBAL 	= "globale Kontakte";
+	public static final String STD_CMB_CATEGORY_ALL 		= "alle Kontakte";
+	
 	private JTextField txtName;
 	private JTextField txtMail;
 	private JTextField txtPhone;
@@ -46,6 +50,11 @@ public class ViewContacts extends JPanel {
 	private JButton btnEditContact;
 	private JButton btnAddContact;
 	private JButton btnDeleteContact;
+	
+	private JComboBox cmbCategory;
+	
+	private DefaultListModel lstModelContacts;
+	private JList lstContacts;
 	
 	private ViewMain frmMainFrame;
 	private ViewContactDetails viewContactDetails;
@@ -72,10 +81,10 @@ public class ViewContacts extends JPanel {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		pnlListAndButtons.add(scrollPane, BorderLayout.CENTER);
 		
-		
-		DefaultListModel lstModelContacts;
 		lstModelContacts = new DefaultListModel();
-				
+		
+		/*
+		 * USE THIS TO ADD STD VALUES TO THE LIST
 		
 		String[] inhalte = {"testeDieHenneDuSau","test1","test2","test3","test4","test5","test6","test","test",
 							"test","test","test","test","test","test","test","test","test","test","test","test","test","test","test"};
@@ -84,6 +93,7 @@ public class ViewContacts extends JPanel {
 			lstModelContacts.addElement(string);
 		}
 		
+		*/
 		
 		/*
 		 * 
@@ -91,18 +101,9 @@ public class ViewContacts extends JPanel {
 		 * 
 		 */
 		
-		final JList lstContacts = new JList( lstModelContacts );
+		lstContacts = new JList( lstModelContacts );
 		lstContacts.setFont(new Font("Arial", Font.PLAIN, 13));
 		lstContacts.setMaximumSize(new Dimension(500, 1000));
-		lstContacts.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-//				txtName.setText( GetField.class.toString() );
-				txtName.setText( lstContacts.getModel().getElementAt( lstContacts.getSelectedIndex() ).toString() );
-				btnEditContact.setEnabled(true);
-				btnDeleteContact.setEnabled(true);
-				
-			}
-		});
 		lstContacts.setMinimumSize(new Dimension(50, 408));
 		lstContacts.setPreferredSize(new Dimension(50, 408));
 		lstContacts.setAutoscrolls(false);
@@ -113,11 +114,6 @@ public class ViewContacts extends JPanel {
 		btnAddContact = new JButton("+");
 		btnAddContact.setFont(new Font("Arial", Font.BOLD, 13));
 		btnAddContact.setToolTipText("Fügen Sie einen neuen Kontakt hinzu.");
-		btnAddContact.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				lstContacts.setListData(new String[] { "List" } );
-			}
-		});
 		pnlContactButtons.add(btnAddContact);
 		
 		btnDeleteContact = new JButton("-");
@@ -170,11 +166,14 @@ public class ViewContacts extends JPanel {
 		horizontalStrut.setMinimumSize(new Dimension(5, 0));
 		pnlWhichContacts.add(horizontalStrut);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Arial", Font.PLAIN, 13));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"private Kontakte", "globale Kontakte", "alle Kontakte"}));
-		comboBox.setSelectedIndex(0);
-		pnlWhichContacts.add(comboBox);
+		cmbCategory = new JComboBox();
+		cmbCategory.setFont(new Font("Arial", Font.PLAIN, 13));
+		cmbCategory.setModel(new DefaultComboBoxModel(new String[] {	STD_CMB_CATEGORY_PRIVATE, 
+																		STD_CMB_CATEGORY_GLOBAL, 
+																		STD_CMB_CATEGORY_ALL 
+																	} ) );
+		cmbCategory.setSelectedIndex(0);
+		pnlWhichContacts.add(cmbCategory);
 		
 		JPanel pnlContactInformations = new JPanel();
 		pnlInformationsAndChooser.add(pnlContactInformations, BorderLayout.CENTER);
@@ -263,6 +262,8 @@ public class ViewContacts extends JPanel {
 		
 		txtAreaDescription = new JTextArea();
 		this.txtAreaDescription.setEditable(false);
+		this.txtAreaDescription.setLineWrap(true);
+		this.txtAreaDescription.setDisabledTextColor(getForeground());
 		txtAreaDescription.setEnabled(false);
 		txtAreaDescription.setFont(new Font("Arial", Font.PLAIN, 13));
 		scrollPane_1.setViewportView(txtAreaDescription);
@@ -285,6 +286,13 @@ public class ViewContacts extends JPanel {
 		 * ActionListener
 		 */
 		this.btnEditContact.addActionListener( new LoadContactDetailsActionListener( viewContactDetails ) );
+		this.btnAddContact.addActionListener( new LoadAndClearDetailsActionListener( this ) );
+		this.btnDeleteContact.addActionListener( new RemoveSelectedContactActionListener(this) );
+		
+		this.lstContacts.addListSelectionListener( new LoadSelectedContactListSelectionListener( this ) );
+		
+		
+		this.cmbCategory.addActionListener(new UpdateListFromComboBoxActionListener( this ) );
 	}
 	
 	public ViewMain getParentFrame(){
@@ -294,5 +302,49 @@ public class ViewContacts extends JPanel {
 	
 	public ViewContactDetails getViewContactDetails(){
 		return viewContactDetails;
+	}
+	
+	public DefaultListModel getLstModelContacts() {
+		return lstModelContacts;
+	}
+	public JList getLstContacts() {
+		return lstContacts;
+	}
+	public JComboBox getCmbCategory() {
+		return cmbCategory;
+	}
+	public JButton getBtnDeleteContact() {
+		return btnDeleteContact;
+	}
+	public JButton getBtnEditContact() {
+		return btnEditContact;
+	}
+
+	/**
+	 * @return the txtName
+	 */
+	public JTextField getTxtName() {
+		return txtName;
+	}
+
+	/**
+	 * @return the txtMail
+	 */
+	public JTextField getTxtMail() {
+		return txtMail;
+	}
+
+	/**
+	 * @return the txtPhone
+	 */
+	public JTextField getTxtPhone() {
+		return txtPhone;
+	}
+
+	/**
+	 * @return the txtAreaDescription
+	 */
+	public JTextArea getTxtAreaDescription() {
+		return txtAreaDescription;
 	}
 }
