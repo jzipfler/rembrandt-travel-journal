@@ -4,7 +4,7 @@ package de.htwds.rembrandt.controler.datastructure;
  * This class provides informations about the operation system you are on.
  * 
  * @author Jan Zipfler
- *@version 1.0
+ * @version 20120910
  */
 public final class OperationSystemPropertiesControler {
 
