@@ -13,7 +13,7 @@ public class LoadTravelInformationPanelActionListener implements ActionListener{
 	
 	public LoadTravelInformationPanelActionListener(ViewMain viewMain){
 		this.viewMain = viewMain;
-		this.viewInformation = new ViewTravelinformation();
+		this.viewInformation = new ViewTravelinformation(viewMain);
 	}
 	
 	@Override
