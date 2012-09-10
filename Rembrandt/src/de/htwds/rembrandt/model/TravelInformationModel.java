@@ -134,4 +134,8 @@ public class TravelInformationModel {
 	public void setComment(String newComment){
 		comment = newComment;
 	}
+	
+	public String toString(){
+		return country + "_" + dateArrival;
+	}
 }
