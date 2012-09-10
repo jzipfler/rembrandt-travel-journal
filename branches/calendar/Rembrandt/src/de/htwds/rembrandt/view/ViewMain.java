@@ -21,6 +21,8 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import de.htwds.rembrandt.controler.mainViewController.LoadContacPanelActionListener;
 
+import de.htwds.rembrandt.controler.contactViewControler.LoadCalendarActionListener;
+
 import de.htwds.rembrandt.controler.travelview.LoadTravelInformationPanelActionListener;
 
 /**
@@ -41,7 +43,7 @@ public class ViewMain extends JFrame {
 	private JLabel lblFavorits;
 	private JButton btnKontakte;
 	private JButton btnReiseinfos;
-	private JButton btnBeenden;
+	public String test = "AHA";
 
 	/**
 	 * Launch the application.
@@ -107,10 +109,6 @@ public class ViewMain extends JFrame {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
 		btnPhotos = new JButton("Fotos");
@@ -128,6 +126,7 @@ public class ViewMain extends JFrame {
 		pnlQuicklunch.add(btnLists, "2, 6");
 		
 		btnReiseinfos = new JButton("Reiseinfos");
+		btnReiseinfos.addActionListener(new LoadCalendarActionListener(this));
 		btnReiseinfos.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlQuicklunch.add(btnReiseinfos, "2, 10");
 		
@@ -140,10 +139,6 @@ public class ViewMain extends JFrame {
 		btnKontakte.addActionListener( new LoadContacPanelActionListener( this ) );
 		btnKontakte.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlQuicklunch.add(btnKontakte, "2, 8");
-		
-		this.btnBeenden = new JButton("Beenden");
-		this.btnBeenden.setFont(new Font("Arial", Font.BOLD, 14));
-		pnlQuicklunch.add(this.btnBeenden, "2, 24");
 		
 		/*
 		 * Dimensions of the contentPanes = 440,440

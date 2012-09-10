@@ -52,12 +52,13 @@ public class ViewCalendar extends JPanel{
 
 	
 	
-	private JButton jButton1;
+	public JButton jButton1 ;
 	private JButton jButton2;
 	private JButton jButton3;
 	private JCalendar calendar;
 	public JPanel calendarPane;
 	public JPanel buttonPane;
+	public JPanel pnlCalendarAndButtons;
 	private MyDateListener listener;
 	private ViewMain frmMainFrame;
 	private ViewActivity viewActivity;
@@ -69,54 +70,49 @@ public class ViewCalendar extends JPanel{
 
 	public ViewCalendar() {
 		
-		
-		
+
+		setBorder(new EmptyBorder(2, 4, 2, 2));
+		setMinimumSize(new Dimension(440, 440));
+		setPreferredSize(new Dimension(440, 440));
+		setLayout(new BorderLayout(0, 0));
+
 		
 		listener = new MyDateListener();
 		
-		calendar= new JCalendar();
-	
+		calendar= new JCalendar();	
 		calendar.setTitleFont(new Font("Serif", Font.BOLD|Font.ITALIC, 20));
 	    calendar.setDayOfWeekFont(new Font("SansSerif", Font.ITALIC, 20));
 	    calendar.setDayFont(new Font("SansSerif", Font.BOLD, 20));
 		calendar.setTimeFont(new Font("DialogInput", Font.PLAIN, 20));
 		calendar.setTodayFont(new Font("Dialog", Font.PLAIN, 20));
-		
-
-
 		calendar.addDateListener(listener);
-		
 		
 		jButton1 = new JButton("hinzufügen");
 		jButton2 = new JButton("bearbeiten");
-		jButton3 = new JButton("löschen");
+		jButton3 = new JButton(" löschen  ");
 		
 		
 		buttonPane = new JPanel();
-		buttonPane.setMaximumSize(new Dimension(1885, 32767));
-		buttonPane.setPreferredSize(new Dimension(425, 380));
-		buttonPane.setMinimumSize(new Dimension(425, 100));
+		buttonPane.setPreferredSize(new Dimension(422, 60));
 		buttonPane.add(jButton1);
 		buttonPane.add(jButton2);
 		buttonPane.add(jButton3);		
 		
 		
 		calendarPane = new JPanel();
-		calendarPane.setLayout(new BoxLayout(calendarPane, BoxLayout.Y_AXIS));
-		calendarPane.setFont(new Font("Nimbus Sans L", Font.PLAIN, 15));
-		calendarPane.setMaximumSize(new Dimension(1885, 32767));
-		calendarPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		calendarPane.setPreferredSize(new Dimension(425, 380));
-		calendarPane.setMinimumSize(new Dimension(425, 380));
+		calendarPane.setLayout(new BorderLayout(0, 0));
 		calendarPane.add(calendar);
-		calendarPane.add(buttonPane);
-		add(calendarPane);
-		add(buttonPane);
-	};
+		
 		
 
-	
-	
+		pnlCalendarAndButtons = new JPanel();
+		pnlCalendarAndButtons.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		pnlCalendarAndButtons.setLayout(new BorderLayout(0, 0));
+		pnlCalendarAndButtons.add(calendarPane, BorderLayout.CENTER);
+		pnlCalendarAndButtons.add(buttonPane, BorderLayout.SOUTH);
+		
+		add(pnlCalendarAndButtons, BorderLayout.CENTER);	
+	};
 	
 
 	
@@ -125,7 +121,7 @@ public class ViewCalendar extends JPanel{
 
 		this();
 		this.frmMainFrame = frmMainFrame;
-		this.viewActivity = new ViewActivity( getParentFrame(), this );
+		ViewActivity viewActivity = new ViewActivity(frmMainFrame, this);
 		jButton1.addActionListener(new LoadActivityActionListener(viewActivity));
 	}
 	
@@ -146,6 +142,5 @@ public class ViewCalendar extends JPanel{
 			}
 		}
 	}
-	
 	
 }
