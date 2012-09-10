@@ -400,7 +400,7 @@ public class ViewWizzard extends JFrame {
 					break;
 				}
 				if (cardNumber != FIRST){
-					btnBack.setText("Zur�ck");
+					btnBack.setText("Zurück");
 				}
 				if (cardNumber == THIRD){
 					btnNext.setText("Ende");
