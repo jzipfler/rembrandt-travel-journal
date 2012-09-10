@@ -2,9 +2,11 @@ package de.htwds.rembrandt.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -19,6 +21,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import de.htwds.rembrandt.controler.mainViewController.LoadContacPanelActionListener;
 import de.htwds.rembrandt.controler.travelview.LoadTravelInformationPanelActionListener;
+import de.htwds.rembrandt.controller.photoAlbumViewController.LoadPhotoAlbumPanelActionListener;
 import de.htwds.rembrandt.model.JourneyModel;
 
 /**
@@ -128,6 +131,7 @@ public class ViewMain extends JPanel {
 		btnPhotos = new JButton("Fotos");
 		btnPhotos.setBackground(UIManager.getColor("Button.background"));
 		btnPhotos.setFont(new Font("Arial", Font.BOLD, 14));
+		btnPhotos.addActionListener(new LoadPhotoAlbumPanelActionListener(this));
 		pnlQuicklunch.add(btnPhotos, "2, 2");
 		
 		btnData = new JButton("Daten");
