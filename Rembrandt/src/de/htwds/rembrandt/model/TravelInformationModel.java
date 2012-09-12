@@ -4,7 +4,7 @@ package de.htwds.rembrandt.model;
  * Class for all the gathered information about the journey.
  * 
  * @author Daniel
- * @version 1.0
+ * @version 1.1 (12.09.2012)
  */
 public class TravelInformationModel {
 	
