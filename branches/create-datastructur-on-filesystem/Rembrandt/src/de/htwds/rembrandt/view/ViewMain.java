@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.text.WrappedPlainView;
 
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -20,6 +21,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import de.htwds.rembrandt.controler.mainViewController.LoadContacPanelActionListener;
+import de.htwds.rembrandt.controler.mainViewController.LoadStartViewActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.LoadCalendarActionListener;
 import de.htwds.rembrandt.controler.travelview.LoadTravelInformationPanelActionListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.LoadPhotoAlbumPanelActionListener;
@@ -37,6 +39,8 @@ public class ViewMain extends JPanel {
 	
 	// Class that holds all informations
 	private JourneyModel journeyModel;
+	
+	private ViewWrapperWindow viewWrapper;
 
 	private JPanel pnlViewMain;
 	private JPanel pnlContent;
@@ -67,7 +71,14 @@ public class ViewMain extends JPanel {
 	/**
 	 * Contructor for the main menu.
 	 */
-	public ViewMain() {
+	public ViewMain( ViewWrapperWindow viewWrapper, JourneyModel journeyModel ) {
+		
+		/*
+		 * Create new JourneyModel
+		 * Add wizard specific implementations
+		 */
+		this.journeyModel = journeyModel;
+		this.viewWrapper = viewWrapper;
 		
 		setPreferredSize(new Dimension(800, 600));
 		setMinimumSize(new Dimension(640, 480));
@@ -79,11 +90,7 @@ public class ViewMain extends JPanel {
 		setFont(new Font("Arial", Font.PLAIN, 11));
 		setMinimumSize(new Dimension(440, 440));
 		setLayout(new BorderLayout(0, 3));
-		/*
-		 * Create new JourneyModel
-		 * Add wizard specific implementations
-		 */
-		journeyModel = new JourneyModel();
+		
 
 		pnlViewMain = new JPanel();
 		pnlViewMain.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -161,6 +168,7 @@ public class ViewMain extends JPanel {
 		
 		this.btnBeenden = new JButton("Beenden");
 		this.btnBeenden.setFont(new Font("Arial", Font.BOLD, 14));
+		this.btnBeenden.addActionListener( new LoadStartViewActionListener( viewWrapper ));
 		pnlQuicklunch.add(this.btnBeenden, "2, 24");
 		
 		/*
@@ -186,4 +194,7 @@ public class ViewMain extends JPanel {
 		return journeyModel;
 	}
 	
+	public ViewWrapperWindow getViewWrapper() {
+		return viewWrapper;
+	}
 }

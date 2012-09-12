@@ -1,9 +1,15 @@
 package de.htwds.rembrandt.controler.wizzardControler;
 
+import de.htwds.rembrandt.controler.viewStartController.LoadMainViewController;
 import de.htwds.rembrandt.model.JourneyModel;
 import de.htwds.rembrandt.model.TravelInformationModel;
 import de.htwds.rembrandt.view.ViewWizzard;
 
+/**
+ * 
+ * @author Daniel Horbach
+ * @version ( Jan Zipfler 2012-09-12 )
+ */
 public class readInputData {
 
 	private TravelInformationModel data;
@@ -39,5 +45,7 @@ public class readInputData {
 	
 	private void openMainWindow(){
 		//Hauptview oefnnen und Daten uebergeben!
+		//Ordnerstruktur
+		new LoadMainViewController( reference.getViewStart().getViewWrapper(), journey ).loadMainView();
 	}
 }

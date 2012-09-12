@@ -30,14 +30,18 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.Sizes;
 
 import de.htwds.rembrandt.controler.wizzardControler.readInputData;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  * Diese Klasse implementiert den Wizzard zur Sammlung der Reisedaten
  * 
  * @author Daniel
- * @version 1.1
+ * @version ( Jan Zipfler 2012-09-12 )
  */
 public class ViewWizzard extends JFrame {
+	
+	private ViewStart viewStart;
 	
 	private JPanel pnlQuestionCards;
 	private JTextField txtInputCountry;
@@ -55,6 +59,11 @@ public class ViewWizzard extends JFrame {
 	private JTextField txtDepartureStartInput;
 	private JTextField txtDepartureDestinationInput;
 	private JComboBox cboOptions;
+	private String extension;
+	private JLabel lblStartArrival;
+	private JLabel lblDestinationArrival;
+	private JLabel lblDepartureStart;
+	private JLabel lblDepartureDestination;
 	
 	//Konstanten und Felder
 	private int cardNumber;
@@ -71,7 +80,7 @@ public class ViewWizzard extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ViewWizzard frame = new ViewWizzard();
+					ViewWizzard frame = new ViewWizzard( null );
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -83,13 +92,18 @@ public class ViewWizzard extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ViewWizzard() {
+	public ViewWizzard( ViewStart viewStart ) {
+		
+		this.viewStart = viewStart;
+		setLocationRelativeTo(viewStart);
+		setVisible(true);
+		
 		setFont(new Font("Arial", Font.PLAIN, 12));
 		cardNumber = 0;
 		controler = new readInputData(this);
 		setTitle("Reise anlegen");
 		setMinimumSize(new Dimension(640, 480));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 807, 497);
 		pnlQuestionCards = new JPanel();
 		pnlQuestionCards.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -275,6 +289,12 @@ public class ViewWizzard extends JFrame {
 		pnlContainer_1.add(lblNote, "4, 14, 5, 1, left, top");
 		
 		pnlThirdView = new JPanel();
+		pnlThirdView.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				
+			}
+		});
 		pnlCards.add(pnlThirdView, "name_2758029025195");
 		pnlThirdView.setLayout(new BorderLayout(0, 0));
 		
@@ -321,11 +341,11 @@ public class ViewWizzard extends JFrame {
 		lblArrivalTxt.setFont(new Font("Arial", Font.BOLD, 13));
 		pnlContainer_2.add(lblArrivalTxt, "3, 2");
 		
-		JLabel lblStartArrival = new JLabel("Start ?");
+		lblStartArrival = new JLabel("Start " + extension);
 		lblStartArrival.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlContainer_2.add(lblStartArrival, "3, 4");
 		
-		JLabel lblDestinationArrival = new JLabel("Ziel ?");
+		lblDestinationArrival = new JLabel("Ziel " + extension);
 		lblDestinationArrival.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlContainer_2.add(lblDestinationArrival, "7, 4");
 		
@@ -343,11 +363,11 @@ public class ViewWizzard extends JFrame {
 		lblDeparture.setFont(new Font("Arial", Font.BOLD, 13));
 		pnlContainer_2.add(lblDeparture, "3, 12");
 		
-		JLabel lblDepartureStart = new JLabel("Start ?");
+		lblDepartureStart = new JLabel("Start " + extension);
 		lblDepartureStart.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlContainer_2.add(lblDepartureStart, "3, 14");
 		
-		JLabel lblDepartureDestination = new JLabel("Ziel ?");
+		lblDepartureDestination = new JLabel("Ziel " + extension);
 		lblDepartureDestination.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlContainer_2.add(lblDepartureDestination, "7, 14");
 		
@@ -388,6 +408,7 @@ public class ViewWizzard extends JFrame {
 					pnlFirstView.setVisible(false);
 					break;
 				case THIRD:
+					getChoosed();
 					pnlThirdView.setVisible(true);
 					pnlSecondView.setVisible(false);
 					break;
@@ -485,5 +506,61 @@ public class ViewWizzard extends JFrame {
 	
 	public int getOption(){
 		return cboOptions.getSelectedIndex();
+	}
+	
+	public JLabel getLblStartArrival() {
+		return lblStartArrival;
+	}
+	
+	public JLabel getLblDestinationArrival() {
+		return lblDestinationArrival;
+	}
+
+	public JLabel getLblDepartureStart() {
+		return lblDepartureStart;
+	}
+
+	public JLabel getLblDepartureDestination() {
+		return lblDepartureDestination;
+	}
+	
+	private void getChoosed(){
+		int choosed = cboOptions.getSelectedIndex();
+		System.out.println(cboOptions.getSelectedIndex());
+		switch (choosed){
+		case 0:
+			extension = "Ort";
+			break;
+		case 1:
+			extension = "Haltestelle";
+			break;
+		case 2:
+			extension = "Ort";
+			break;
+		case 3:
+			extension = "Flughafen";
+			break;
+		case 4:
+			extension = "Ort";
+			break;
+		case 5:
+			extension = "Hafen";
+			break;
+		case 6:
+			extension = "Bahnhof";
+			break;
+		default:
+			extension = null;
+		}
+		if (extension != null) {
+			getLblStartArrival().setText("Start " + extension);
+			getLblDestinationArrival().setText("Ziel " + extension);
+			getLblDepartureStart().setText("Start " + extension);
+			getLblDepartureDestination().setText("Start " + extension);
+		}
+	}
+	
+	public ViewStart getViewStart() {
+		return viewStart;
 	}
 }
