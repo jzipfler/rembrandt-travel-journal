@@ -12,82 +12,47 @@ import de.htwds.rembrandt.exception.DataStructureException;
  * @version 20120910
  */
 public class CheckExistingDataStructureControler {
-
-	private static String MAIN_DIRECTORY_NAME 				= ".travel-journal";
-	private static String GLOBAL_CONTACT_DIRECTORY_NAME 	= "contacts";
 	
-	private String fileSeperator;
-	private String homeDirectory;
+	private String journey;
 	
 	public CheckExistingDataStructureControler() {
-		// TODO Auto-generated constructor stub
-		checkExistingDataStructure();
+		
 	}
 	
 	public void checkExistingDataStructure() throws DataStructureException {
 		
-		homeDirectory = OperationSystemPropertiesControler.getHomeDirecroty();
-		
-		if ( OperationSystemPropertiesControler.isUnix() )
-			fileSeperator = OperationSystemPropertiesControler.UNIX_FILE_SEPERATOR; 
-		else
-			fileSeperator = OperationSystemPropertiesControler.WINDOWS_FILE_SEPERATOR;
-		
-		checkAndCreateMainFolder();
-		checkAndCreateGlobalContactFolder();
-		
-		
+		checkExistingDataStructure(null);
 	}
 	
-	
+
 	public void checkExistingDataStructure( String journey ) throws DataStructureException {
 		
-		homeDirectory = OperationSystemPropertiesControler.getHomeDirecroty();
+		checkAndCreateFile( FolderPathController.getMainFolder() );
+		checkAndCreateFile( FolderPathController.getGeneralInformationFolder() );
+		checkAndCreateFile( FolderPathController.getGlobalContactFolder() );
 		
-		if ( OperationSystemPropertiesControler.isUnix() )
-			fileSeperator = OperationSystemPropertiesControler.UNIX_FILE_SEPERATOR; 
-		else
-			fileSeperator = OperationSystemPropertiesControler.WINDOWS_FILE_SEPERATOR;
-		
-		checkAndCreateMainFolder();
-		checkAndCreateGlobalContactFolder();
-		
+		if ( journey != null ) {
+			this.journey = journey;
+			checkAndCreateFile( FolderPathController.getJourneyFolder(journey) );
+			checkAndCreateFile( FolderPathController.getPhotosFolder(journey) );
+			checkAndCreateFile( FolderPathController.getPrivateContactFolder(journey) );
+			checkAndCreateFile( FolderPathController.getCecklistsFolder(journey) );
+			checkAndCreateFile( FolderPathController.getActivitiesFolder(journey) );
+		}
 		
 	}
 	
-	
-	private void checkAndCreateGlobalContactFolder() {
+	private void checkAndCreateFile( String fileName ) {
 		
+		File checkingFile = new File( fileName );
 		
-		File globalContactDirectory = new File( 	homeDirectory + 
-													fileSeperator + 
-													MAIN_DIRECTORY_NAME +
-													fileSeperator +
-													GLOBAL_CONTACT_DIRECTORY_NAME );
-		
-		if ( globalContactDirectory.exists() ) {
-			if (globalContactDirectory.isFile())
-				throw new DataStructureException();
+		if ( checkingFile.exists() ) {
+			if (checkingFile.isFile())
+				throw new DataStructureException( fileName + DataStructureException.ERROR_EXISTS_AS_FILE );
 		}
-		if ( !globalContactDirectory.exists() )
-			if ( !(globalContactDirectory.mkdir()) )
-				throw new DataStructureException();		
+		if ( !checkingFile.exists() )
+			if ( !(checkingFile.mkdir()) )
+				throw new DataStructureException( fileName + DataStructureException.ERROR_CREATE_FOLDER );
 	}
-
-	private void checkAndCreateMainFolder() throws DataStructureException {
-		
-		File projectDirectory = new File( 			homeDirectory + 
-													fileSeperator + 
-													MAIN_DIRECTORY_NAME );
-		
-		if ( projectDirectory.exists() ) {
-			if (projectDirectory.isFile())
-				throw new DataStructureException();
-		}
-		if ( !projectDirectory.exists() )
-			if ( !(projectDirectory.mkdir()) )
-				throw new DataStructureException();
-				
-	}	
 	
 }

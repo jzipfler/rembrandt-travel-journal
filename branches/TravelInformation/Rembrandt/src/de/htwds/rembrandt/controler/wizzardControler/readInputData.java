@@ -1,5 +1,6 @@
 package de.htwds.rembrandt.controler.wizzardControler;
 
+import de.htwds.rembrandt.controler.datastructure.CheckExistingDataStructureControler;
 import de.htwds.rembrandt.controler.viewStartController.LoadMainViewController;
 import de.htwds.rembrandt.model.JourneyModel;
 import de.htwds.rembrandt.model.TravelInformationModel;
@@ -45,7 +46,7 @@ public class readInputData {
 	
 	private void openMainWindow(){
 		//Hauptview oefnnen und Daten uebergeben!
-		//Ordnerstruktur
+		new CheckExistingDataStructureControler().checkExistingDataStructure( data.toString() );
 		new LoadMainViewController( reference.getViewStart().getViewWrapper(), journey ).loadMainView();
 	}
 }
