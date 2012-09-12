@@ -16,25 +16,29 @@ public class FolderPathController {
 	 */
 	public static final String GLOBAL_CONTACT_DIRECTORY_NAME 		= "contacts";
 	/**
-	 * The general information folder that contains all travel information
+	 * The general information folder that contains all travel information that appears in the info field of the ViewStart
 	 */
 	public static final String GENERAL_INFORMATION_DIRECTORY_NAME	= "generalInformation";
 	/**
-	 * The contacts folder that contains all private contacts in each journey 
+	 * The contact folder that contains all private contacts in each journey 
 	 */
 	public static final String PRIVATE_CONTACT_DIRECTORY_NAME		= "contacts";
 	/**
-	 * The contacts folder that contains all photos in each journey 
+	 * The photo folder that contains all photos in each journey 
 	 */
 	public static final String PHOTOS_DIRECTORY_NAME				= "photos";
 	/**
-	 * The contacts folder that contains all checklists in each journey 
+	 * The checklist folder that contains all checklists in each journey 
 	 */
 	public static final String CHECKLISTS_DIRECTORY_NAME 			= "checklists";
 	/**
-	 * The contacts folder that contains all activities in each journey 
+	 * The acitvity folder that contains all activities in each journey 
 	 */
 	public static final String ACTIVITIES_DIRECTORY_NAME 			= "activities";
+	/**
+	 * The travel information folder that contains all general information about a journey in each journey
+	 */
+	public static final String TRAVEL_INFORMATION_DIRECTROY_NAME	= "travelInformation";
 	
 	/**
 	 * Private cause - this class contains only static methods
@@ -101,7 +105,13 @@ public class FolderPathController {
 				+ ACTIVITIES_DIRECTORY_NAME );
 	}
 	
-	private static String getFileSeperator() {
+	public static String getTravelInformationFolder( String journeyName ) {
+		return ( getJourneyFolder(journeyName)
+				+ getFileSeperator()
+				+ TRAVEL_INFORMATION_DIRECTROY_NAME );
+	}
+	
+	public static String getFileSeperator() {
 		if ( OperationSystemPropertiesControler.isUnix() )
 			return OperationSystemPropertiesControler.UNIX_FILE_SEPERATOR; 
 		else

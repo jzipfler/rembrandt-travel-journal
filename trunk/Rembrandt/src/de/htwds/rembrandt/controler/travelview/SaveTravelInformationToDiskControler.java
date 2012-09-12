@@ -4,13 +4,15 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import de.htwds.rembrandt.controler.datastructure.FolderPathController;
+import de.htwds.rembrandt.controler.datastructure.OperationSystemPropertiesControler;
 import de.htwds.rembrandt.model.TravelInformationModel;
 import de.htwds.rembrandt.view.ViewMain;
 
 /**
  * 
  * @author Daniel
- * @version 1.0 (12.09.2012)
+ * @version 1.1 (12.09.2012)
  */
 public class SaveTravelInformationToDiskControler {
 	
@@ -39,7 +41,7 @@ public class SaveTravelInformationToDiskControler {
 	private void save(){
 		String dateiname;
         File data;
-        dateiname = "Muss jan noch Methode schreiben/travelInformation.dat";
+        dateiname = FolderPathController.getGeneralInformationFolder() + FolderPathController.getFileSeperator() + "travelInformation.dat";
         data = new File(dateiname);
         FileWriter fw = null;
         try {
