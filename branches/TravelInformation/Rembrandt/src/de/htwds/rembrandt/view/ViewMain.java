@@ -21,6 +21,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import de.htwds.rembrandt.controler.mainViewController.LoadContacPanelActionListener;
 import de.htwds.rembrandt.controler.mainViewController.LoadStartViewActionListener;
+import de.htwds.rembrandt.controler.mainViewController.SaveAllToDiscActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.LoadCalendarActionListener;
 import de.htwds.rembrandt.controler.travelview.LoadTravelInformationPanelActionListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.LoadPhotoAlbumPanelActionListener;
@@ -167,6 +168,7 @@ public class ViewMain extends JPanel {
 		
 		this.btnBeenden = new JButton("Beenden");
 		this.btnBeenden.setFont(new Font("Arial", Font.BOLD, 14));
+		this.btnBeenden.addActionListener( new SaveAllToDiscActionListener( this ) );
 		this.btnBeenden.addActionListener( new LoadStartViewActionListener( viewWrapper ));
 		pnlQuicklunch.add(this.btnBeenden, "2, 24");
 		

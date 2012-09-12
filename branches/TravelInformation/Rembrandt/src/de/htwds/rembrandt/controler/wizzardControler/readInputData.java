@@ -1,6 +1,9 @@
 package de.htwds.rembrandt.controler.wizzardControler;
 
+import java.io.IOException;
+
 import de.htwds.rembrandt.controler.datastructure.CheckExistingDataStructureControler;
+import de.htwds.rembrandt.controler.datastructure.GeneralInformationFromDiskControler;
 import de.htwds.rembrandt.controler.viewStartController.LoadMainViewController;
 import de.htwds.rembrandt.model.GeneralInformationModel;
 import de.htwds.rembrandt.model.JourneyModel;
@@ -51,6 +54,17 @@ public class readInputData {
 	private void openMainWindow(){
 		//Hauptview oefnnen und Daten uebergeben!
 		new CheckExistingDataStructureControler().checkExistingDataStructure( data.toString() );
+		try {
+			 GeneralInformationModel[] array = new GeneralInformationFromDiskControler().load( generalData );
+			 System.out.println(array);
+			 for (GeneralInformationModel generalInformationModel : array) {
+				System.out.println(generalInformationModel);
+			}
+			 journey.setGeneralInformationModelArray(array);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		new LoadMainViewController( reference.getViewStart().getViewWrapper(), journey ).loadMainView();
 	}
 }
