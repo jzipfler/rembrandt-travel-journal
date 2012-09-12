@@ -63,7 +63,7 @@ public class ViewWrapperWindow extends JFrame {
 		this.panel.setLayout(new BorderLayout(0, 0));
 		
 		new LoadStartViewActionListener(this).loadStartView();
-		new CheckExistingDataStructureControler();
+		new CheckExistingDataStructureControler().checkExistingDataStructure();
 		
 	}
 
