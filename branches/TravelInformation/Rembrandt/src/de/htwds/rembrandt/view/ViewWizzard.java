@@ -414,13 +414,16 @@ public class ViewWizzard extends JFrame {
 					pnlSecondView.setVisible(true);
 					pnlFirstView.setVisible(false);
 					try{
-						if(txtInputCountry.getText().trim() == "" || txtInputCountry.getText() == null)
+						if(txtInputCountry.getText().trim().length() == 0 || txtInputCountry.getText() == null)
 							throw new WizzardInputException("Land" + WizzardInputException.ERROR_FIELD);
 					} catch(Exception e){
 						JOptionPane.showMessageDialog(	wizzard,
 								e.getMessage(),
 								WizzardInputException.MSG_ERROR_OCCURED,
 								JOptionPane.ERROR_MESSAGE );
+						btnBack.setText("Abbrechen");
+						pnlSecondView.setVisible(false);
+						pnlFirstView.setVisible(true);
 					}
 					break;
 				case THIRD:
