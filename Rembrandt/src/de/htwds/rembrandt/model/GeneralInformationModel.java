@@ -10,7 +10,7 @@ public class GeneralInformationModel implements Serializable {
 	private String dateDeparture;
 	
 	
-	public GeneralInformationModel(String city, String country, String dateArrival, String dateDeparture, String folder){
+	public GeneralInformationModel(String city, String country, String dateArrival, String dateDeparture){
 		this.city 			= city;
 		this.country 		= country;
 		this.dateArrival 	= dateArrival;
