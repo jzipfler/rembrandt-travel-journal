@@ -20,6 +20,8 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -29,6 +31,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
+import de.htwds.rembrandt.controler.viewStartController.LoadSelectedJouneyActionListener;
 import de.htwds.rembrandt.controler.viewStartController.LoadWizzardActionListener;
 
 /**
@@ -48,6 +51,7 @@ public class ViewStart extends JPanel {
 	private String[] tableTitles;
 	private Vector<String> tableDataVector;
 	private JButton btnRemoveJourney;
+	private JButton btnShowJourney;
 	private JTextField txtTarget;
 	private JTextField txtDeparture;
 	private JTextField txtCountry;
@@ -58,11 +62,10 @@ public class ViewStart extends JPanel {
 	/**
 	 * Create the frame.
 	 */
-	public ViewStart( ViewWrapperWindow wrapperView ) {
+	public ViewStart( ViewWrapperWindow wrapperView )  {
 		
 		this.wrapperView = wrapperView;
 		
-//			setTitle("Mainmenu Travel Journal Software");
 		setName("Mainmenu Journey Log");
 		setMinimumSize(new Dimension(640, 480));
 		setBounds(100, 100, 640, 480);
@@ -72,7 +75,6 @@ public class ViewStart extends JPanel {
 		this.panelViewStart.setMinimumSize(new Dimension(440, 440));
 		panelViewStart.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panelViewStart.setLayout(new BorderLayout(0, 0));
-//			setContentPane(contentPane);
 
 		JPanel quicklunchPanel = new JPanel();
 		quicklunchPanel.setPreferredSize(new Dimension(180, 10));
@@ -98,6 +100,14 @@ public class ViewStart extends JPanel {
 				removeTableRow(null);
 			}
 		});
+		
+		btnShowJourney = new JButton("Reise anzeigen");
+		btnShowJourney.addActionListener( new LoadSelectedJouneyActionListener() );
+		btnShowJourney.setEnabled(false);
+		btnShowJourney.setFont(new Font("Arial", Font.BOLD, 13));
+		btnShowJourney.setPreferredSize(new Dimension(150, 25));
+		btnShowJourney.setMinimumSize(new Dimension(135, 25));
+		quicklunchPanel.add(btnShowJourney);
 		btnRemoveJourney.setEnabled(false);
 		quicklunchPanel.add(btnRemoveJourney);
 		
@@ -122,6 +132,24 @@ public class ViewStart extends JPanel {
 				return defaultRendererTest;
 			}
 		};
+		/*
+		 * Inlime imlementation --> Kann später immer noch rausgezogen werden.
+		 */
+		tableModel.addRow(new String[] {"Test"});
+		tblJourneyOverview.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				
+				// TODO: work on this....
+				int column =tblJourneyOverview.getSelectedColumn();
+				int row = tblJourneyOverview.getSelectedRow();
+				getTxtTarget().setText((String)tblJourneyOverview.getValueAt(row, column));
+				infoAboutTravelPane.setVisible(true);
+				getBtnShowJourney().setEnabled(true);
+				getBtnRemoveJourney().setEnabled(true);
+			}
+		});
 		this.tblJourneyOverview.setFont(new Font("Arial", Font.PLAIN, 13));
 		tblJourneyOverview.setRowHeight(20);
 		tblJourneyOverview.setRowMargin(2);
@@ -246,6 +274,14 @@ public class ViewStart extends JPanel {
 		return formatter.format(currentTime).toString();
 	}
 	
+	public JButton getBtnRemoveJourney() {
+		return btnRemoveJourney;
+	}
+	
+	public JButton getBtnShowJourney() {
+		return btnShowJourney;
+	}
+	
 	public JPanel getViewStart(){
 		return panelViewStart;
 	}
@@ -257,4 +293,9 @@ public class ViewStart extends JPanel {
 	public ViewWrapperWindow getViewWrapper() {
 		return wrapperView;
 	}
+	 
+	 public JTextField getTxtTarget() {
+		 return txtTarget;
+	 }
+	
 }
