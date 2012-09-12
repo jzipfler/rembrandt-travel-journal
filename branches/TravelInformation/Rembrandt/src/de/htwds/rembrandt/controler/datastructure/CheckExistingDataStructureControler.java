@@ -27,22 +27,23 @@ public class CheckExistingDataStructureControler {
 
 	public void checkExistingDataStructure( String journey ) throws DataStructureException {
 		
-		checkAndCreateFile( FolderPathController.getMainFolder() );
-		checkAndCreateFile( FolderPathController.getGeneralInformationFolder() );
-		checkAndCreateFile( FolderPathController.getGlobalContactFolder() );
+		checkAndCreateFolder( FolderPathController.getMainFolder() );
+		checkAndCreateFolder( FolderPathController.getGeneralInformationFolder() );
+		checkAndCreateFolder( FolderPathController.getGlobalContactFolder() );
 		
 		if ( journey != null ) {
 			this.journey = journey;
-			checkAndCreateFile( FolderPathController.getJourneyFolder(journey) );
-			checkAndCreateFile( FolderPathController.getPhotosFolder(journey) );
-			checkAndCreateFile( FolderPathController.getPrivateContactFolder(journey) );
-			checkAndCreateFile( FolderPathController.getCecklistsFolder(journey) );
-			checkAndCreateFile( FolderPathController.getActivitiesFolder(journey) );
+			checkAndCreateFolder( FolderPathController.getJourneyFolder(journey) );
+			checkAndCreateFolder( FolderPathController.getPhotosFolder(journey) );
+			checkAndCreateFolder( FolderPathController.getPrivateContactFolder(journey) );
+			checkAndCreateFolder( FolderPathController.getCecklistsFolder(journey) );
+			checkAndCreateFolder( FolderPathController.getActivitiesFolder(journey) );
+			checkAndCreateFolder( FolderPathController.getTravelInformationFolder(journey) );
 		}
 		
 	}
 	
-	private void checkAndCreateFile( String fileName ) {
+	private void checkAndCreateFolder( String fileName ) {
 		
 		File checkingFile = new File( fileName );
 		
