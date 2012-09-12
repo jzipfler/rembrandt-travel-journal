@@ -29,10 +29,12 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
+import de.htwds.rembrandt.controler.viewStartController.LoadWizzardActionListener;
+
 /**
  * 
  * @author Jan Zipfler
- * @version Ported the BetaView in Stable - 20120910
+ * @version ( Jan Zipfler 2012-09-12 )
  */
 public class ViewStart extends JPanel {
 
@@ -41,7 +43,7 @@ public class ViewStart extends JPanel {
 
 	private JPanel panelViewStart;
 	private JTextField txtFilter;
-	private JTable table;
+	private JTable tblJourneyOverview;
 	private DefaultTableModel tableModel;
 	private String[] tableTitles;
 	private Vector<String> tableDataVector;
@@ -57,6 +59,9 @@ public class ViewStart extends JPanel {
 	 * Create the frame.
 	 */
 	public ViewStart( ViewWrapperWindow wrapperView ) {
+		
+		this.wrapperView = wrapperView;
+		
 //			setTitle("Mainmenu Travel Journal Software");
 		setName("Mainmenu Journey Log");
 		setMinimumSize(new Dimension(640, 480));
@@ -79,7 +84,8 @@ public class ViewStart extends JPanel {
 		btnCreateJourney.setFont(new Font("Arial", Font.BOLD, 13));
 		btnCreateJourney.setPreferredSize(new Dimension(150, 25));
 		btnCreateJourney.setAlignmentX(Component.CENTER_ALIGNMENT);
-
+		btnCreateJourney.addActionListener( new LoadWizzardActionListener(this));
+		
 		quicklunchPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		quicklunchPanel.add(btnCreateJourney);
 		
@@ -104,7 +110,7 @@ public class ViewStart extends JPanel {
 		
 		tableTitles = new String[]{ "Reise:" };
 		tableModel = new DefaultTableModel( tableTitles, 0);
-		table = new JTable( tableModel ){
+		tblJourneyOverview = new JTable( tableModel ){
 			/**
 			 * Ermöglicht Alighment = Rechts
 			 */
@@ -116,17 +122,17 @@ public class ViewStart extends JPanel {
 				return defaultRendererTest;
 			}
 		};
-		this.table.setFont(new Font("Arial", Font.PLAIN, 13));
-		table.setRowHeight(20);
-		table.setRowMargin(2);
-		table.setAutoCreateRowSorter(true);
-		table.setBorder(null);
-		table.setDragEnabled(true);
-		table.setFillsViewportHeight(true);
-		table.setRowSelectionAllowed(false);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setShowVerticalLines(false);
-		scrollPane.setViewportView(table);
+		this.tblJourneyOverview.setFont(new Font("Arial", Font.PLAIN, 13));
+		tblJourneyOverview.setRowHeight(20);
+		tblJourneyOverview.setRowMargin(2);
+		tblJourneyOverview.setAutoCreateRowSorter(true);
+		tblJourneyOverview.setBorder(null);
+		tblJourneyOverview.setDragEnabled(true);
+		tblJourneyOverview.setFillsViewportHeight(true);
+		tblJourneyOverview.setRowSelectionAllowed(false);
+		tblJourneyOverview.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tblJourneyOverview.setShowVerticalLines(false);
+		scrollPane.setViewportView(tblJourneyOverview);
 		
 		JPanel panel = new JPanel();
 		initialContentPane.add(panel, BorderLayout.NORTH);
@@ -242,5 +248,13 @@ public class ViewStart extends JPanel {
 	
 	public JPanel getViewStart(){
 		return panelViewStart;
+	}
+	
+	public DefaultTableModel getTableModel() {
+		return tableModel;
+	}
+	
+	public ViewWrapperWindow getViewWrapper() {
+		return wrapperView;
 	}
 }

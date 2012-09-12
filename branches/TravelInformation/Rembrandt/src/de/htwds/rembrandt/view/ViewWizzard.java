@@ -37,9 +37,11 @@ import java.awt.event.ComponentEvent;
  * Diese Klasse implementiert den Wizzard zur Sammlung der Reisedaten
  * 
  * @author Daniel
- * @version 1.1
+ * @version ( Jan Zipfler 2012-09-12 )
  */
 public class ViewWizzard extends JFrame {
+	
+	private ViewStart viewStart;
 	
 	private JPanel pnlQuestionCards;
 	private JTextField txtInputCountry;
@@ -78,7 +80,7 @@ public class ViewWizzard extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ViewWizzard frame = new ViewWizzard();
+					ViewWizzard frame = new ViewWizzard( null );
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -90,13 +92,18 @@ public class ViewWizzard extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ViewWizzard() {
+	public ViewWizzard( ViewStart viewStart ) {
+		
+		this.viewStart = viewStart;
+		setLocationRelativeTo(viewStart);
+		setVisible(true);
+		
 		setFont(new Font("Arial", Font.PLAIN, 12));
 		cardNumber = 0;
 		controler = new readInputData(this);
 		setTitle("Reise anlegen");
 		setMinimumSize(new Dimension(640, 480));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 807, 497);
 		pnlQuestionCards = new JPanel();
 		pnlQuestionCards.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -398,7 +405,6 @@ public class ViewWizzard extends JFrame {
 					break;
 				case SECOND:
 					pnlSecondView.setVisible(true);
-					getChoosed();
 					pnlFirstView.setVisible(false);
 					break;
 				case THIRD:
@@ -502,8 +508,25 @@ public class ViewWizzard extends JFrame {
 		return cboOptions.getSelectedIndex();
 	}
 	
+	public JLabel getLblStartArrival() {
+		return lblStartArrival;
+	}
+	
+	public JLabel getLblDestinationArrival() {
+		return lblDestinationArrival;
+	}
+
+	public JLabel getLblDepartureStart() {
+		return lblDepartureStart;
+	}
+
+	public JLabel getLblDepartureDestination() {
+		return lblDepartureDestination;
+	}
+	
 	private void getChoosed(){
 		int choosed = cboOptions.getSelectedIndex();
+		System.out.println(cboOptions.getSelectedIndex());
 		switch (choosed){
 		case 0:
 			extension = "Ort";
@@ -526,10 +549,18 @@ public class ViewWizzard extends JFrame {
 		case 6:
 			extension = "Bahnhof";
 			break;
+		default:
+			extension = null;
 		}
-		lblStartArrival.setText("Start " + extension);
-		lblDestinationArrival.setText("Ziel " + extension);
-		lblDepartureStart.setText("Start " + extension);
-		lblDepartureDestination.setText("Start " + extension);
+		if (extension != null) {
+			getLblStartArrival().setText("Start " + extension);
+			getLblDestinationArrival().setText("Ziel " + extension);
+			getLblDepartureStart().setText("Start " + extension);
+			getLblDepartureDestination().setText("Start " + extension);
+		}
+	}
+	
+	public ViewStart getViewStart() {
+		return viewStart;
 	}
 }
