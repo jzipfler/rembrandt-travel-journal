@@ -19,7 +19,6 @@ public class LoadInformationControler{
 		this.view = view;
 		loadData();
 		view.readData(data);
-		System.out.println(data.toString());
 	}
 	
 	private void loadData(){
