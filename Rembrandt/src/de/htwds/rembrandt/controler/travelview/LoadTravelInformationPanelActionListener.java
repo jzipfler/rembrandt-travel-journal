@@ -6,6 +6,11 @@ import java.awt.event.ActionListener;
 import de.htwds.rembrandt.view.ViewMain;
 import de.htwds.rembrandt.view.ViewTravelinformation;
 
+/**
+ *
+ * @version ( Jan Zipfler 2012-09-12 )
+ *
+ */
 public class LoadTravelInformationPanelActionListener implements ActionListener{
 
 	private ViewMain viewMain;
