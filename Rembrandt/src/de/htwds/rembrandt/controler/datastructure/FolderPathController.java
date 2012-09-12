@@ -101,7 +101,7 @@ public class FolderPathController {
 				+ ACTIVITIES_DIRECTORY_NAME );
 	}
 	
-	private static String getFileSeperator() {
+	public static String getFileSeperator() {
 		if ( OperationSystemPropertiesControler.isUnix() )
 			return OperationSystemPropertiesControler.UNIX_FILE_SEPERATOR; 
 		else
