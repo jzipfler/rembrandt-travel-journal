@@ -8,7 +8,7 @@ import de.htwds.rembrandt.view.ViewTravelinformation;
 
 /**
  *
- * @version ( Jan Zipfler 2012-09-12 )
+ * @version ( Daniel Horbach 2012-09-12 )
  *
  */
 public class LoadTravelInformationPanelActionListener implements ActionListener{
@@ -24,7 +24,7 @@ public class LoadTravelInformationPanelActionListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
-		new LoadInformationActionListener(viewInformation);
+		new LoadInformationControler(viewInformation);
 		
 		viewMain.getCurrentContentPanel().removeAll();
 		viewMain.getCurrentContentPanel().add(viewInformation);
