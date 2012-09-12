@@ -526,7 +526,6 @@ public class ViewWizzard extends JFrame {
 	
 	private void getChoosed(){
 		int choosed = cboOptions.getSelectedIndex();
-		System.out.println(cboOptions.getSelectedIndex());
 		switch (choosed){
 		case 0:
 			extension = "Ort";
