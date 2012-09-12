@@ -424,6 +424,7 @@ public class ViewWizzard extends JFrame {
 						btnBack.setText("Abbrechen");
 						pnlSecondView.setVisible(false);
 						pnlFirstView.setVisible(true);
+						cardNumber --;
 					}
 					break;
 				case THIRD:
@@ -454,6 +455,8 @@ public class ViewWizzard extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if (cardNumber > FIRST){
 					cardNumber -= 1;
+				} else {
+					dispose();
 				}
 				switch (cardNumber){
 				case FIRST:
