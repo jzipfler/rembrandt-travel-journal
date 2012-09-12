@@ -23,10 +23,10 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
+import de.htwds.rembrandt.components.JTravelInformationTextfield;
 import de.htwds.rembrandt.controler.travelview.SaveTravelInformationControler;
 import de.htwds.rembrandt.controler.travelview.SetCommentEnableActionListener;
 import de.htwds.rembrandt.controler.travelview.SetEditEnableActionListener;
-import de.htwds.rembrandt.model.JourneyModel;
 import de.htwds.rembrandt.model.TravelInformationModel;
 /**
  * 
@@ -37,9 +37,9 @@ public class ViewTravelinformation extends JPanel {
 	
 	private boolean informationEditable = false;
 	private boolean commentEditable = false;
-	private JTextField txtCountryInput;
+	private JTravelInformationTextfield txtCountryInput;
 	private JTextField txtCityInput;
-	private JTextField txtArrivalInput;
+	private JTravelInformationTextfield txtArrivalInput;
 	private JTextField txtDepartureInput;
 	private JTextField txtArrivalStartInput;
 	private JTextField txtArrivalDestinationInput;
@@ -143,7 +143,7 @@ public class ViewTravelinformation extends JPanel {
 		lblCountry.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(lblCountry, "2, 4, right, default");
 		
-		txtCountryInput = new JTextField();
+		txtCountryInput = new JTravelInformationTextfield();
 		txtCountryInput.setEditable(false);
 		txtCountryInput.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(txtCountryInput, "4, 4, fill, default");
@@ -167,7 +167,7 @@ public class ViewTravelinformation extends JPanel {
 		lblDateArrival.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(lblDateArrival, "2, 10, right, default");
 		
-		txtArrivalInput = new JTextField();
+		txtArrivalInput = new JTravelInformationTextfield();
 		txtArrivalInput.setEditable(false);
 		txtArrivalInput.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(txtArrivalInput, "4, 10, fill, default");
