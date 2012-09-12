@@ -13,6 +13,7 @@ public class JourneyModel {
 	
 	private JourneyContactListsModel contactListModel;
 	private TravelInformationModel travelInformation;
+	private GeneralInformationModel generalInformation;
 	
 	/*
 	 * Your implementation here
@@ -34,4 +35,11 @@ public class JourneyModel {
 		return travelInformation;
 	}
 	
+	public void setGeneralInformationModel(GeneralInformationModel generalInformation){
+		this.generalInformation = generalInformation;
+	}
+	
+	public GeneralInformationModel getGeneralInformationModel(){
+		return generalInformation;
+	}
 }
