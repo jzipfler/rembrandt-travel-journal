@@ -1,9 +1,12 @@
 package de.htwds.rembrandt.controler.datastructure;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import de.htwds.rembrandt.model.Contact;
@@ -66,7 +69,30 @@ public class ContactToDiscControler {
 	}
 	
 	public void writeContactsToDisc() {
-		
+		ObjectOutputStream out;
+        try {
+             out = new ObjectOutputStream(
+                   new BufferedOutputStream(
+                   new FileOutputStream(	FolderPathController.getGlobalContactFolder()
+							 				+ FolderPathController.getFileSeperator() 
+							 				+ GLOBAL_CONTACTS_FILE_NAME ) ) );
+        
+             out.writeObject ( journeyModel.getContactListModel().getGlobalContactList() );
+             out.close();
+             
+             out = new ObjectOutputStream(
+                     new BufferedOutputStream(
+                     new FileOutputStream(	FolderPathController.getPrivateContactFolder( journeyModel.getTravelInformation().toString() )
+                    		 				+ FolderPathController.getFileSeperator() 
+                    		 				+ PRIVATE_CONTACTS_FILE_NAME ) ) );
+          
+               out.writeObject ( journeyModel.getContactListModel().getPrivateContactList() );
+               out.close();
+               
+       } catch (IOException e) {
+            System.err.println("Fehler beim Schreiben der Kontaktlisten!");
+            e.printStackTrace();
+       }
 	}
 	
 }

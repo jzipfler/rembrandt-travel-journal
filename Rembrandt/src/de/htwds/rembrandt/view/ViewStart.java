@@ -20,8 +20,6 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -33,6 +31,8 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import de.htwds.rembrandt.controler.viewStartController.LoadSelectedJouneyActionListener;
 import de.htwds.rembrandt.controler.viewStartController.LoadWizzardActionListener;
+import de.htwds.rembrandt.controler.viewStartController.RemoveSelectedJourneyActionListener;
+import de.htwds.rembrandt.controler.viewStartController.TableOverviewListSelectionListener;
 
 /**
  * 
@@ -89,27 +89,23 @@ public class ViewStart extends JPanel {
 		btnCreateJourney.addActionListener( new LoadWizzardActionListener(this));
 		
 		quicklunchPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		quicklunchPanel.add(btnCreateJourney);
+		quicklunchPanel.add( btnCreateJourney );
 		
 		btnRemoveJourney = new JButton("Reise entfernen");
 		this.btnRemoveJourney.setFont(new Font("Arial", Font.BOLD, 13));
 		btnRemoveJourney.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnRemoveJourney.setPreferredSize(new Dimension(150, 25));
-		btnRemoveJourney.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				removeTableRow(null);
-			}
-		});
+		btnRemoveJourney.addActionListener( new RemoveSelectedJourneyActionListener( this ) );
+		btnRemoveJourney.setEnabled(false);
+		quicklunchPanel.add(btnRemoveJourney);
 		
 		btnShowJourney = new JButton("Reise anzeigen");
-		btnShowJourney.addActionListener( new LoadSelectedJouneyActionListener() );
+		btnShowJourney.addActionListener( new LoadSelectedJouneyActionListener( this ) );
 		btnShowJourney.setEnabled(false);
 		btnShowJourney.setFont(new Font("Arial", Font.BOLD, 13));
 		btnShowJourney.setPreferredSize(new Dimension(150, 25));
 		btnShowJourney.setMinimumSize(new Dimension(135, 25));
-		quicklunchPanel.add(btnShowJourney);
-		btnRemoveJourney.setEnabled(false);
-		quicklunchPanel.add(btnRemoveJourney);
+		quicklunchPanel.add( btnShowJourney );
 		
 		JPanel initialContentPane = new JPanel();
 		panelViewStart.add(initialContentPane, BorderLayout.CENTER);
@@ -119,7 +115,16 @@ public class ViewStart extends JPanel {
 		initialContentPane.add(scrollPane);
 		
 		tableTitles = new String[]{ "Reise:" };
-		tableModel = new DefaultTableModel( tableTitles, 0);
+		/*
+		 * Override isCellEditable() --> makes all cells not editable.
+		 */
+		tableModel = new DefaultTableModel( tableTitles, 0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
 		tblJourneyOverview = new JTable( tableModel ){
 			/**
 			 * Ermöglicht Alighment = Rechts
@@ -132,24 +137,11 @@ public class ViewStart extends JPanel {
 				return defaultRendererTest;
 			}
 		};
-		/*
-		 * Inlime imlementation --> Kann später immer noch rausgezogen werden.
-		 */
+		
+		// Nur Testdatum
 		tableModel.addRow(new String[] {"Test"});
-		tblJourneyOverview.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				
-				// TODO: work on this....
-				int column =tblJourneyOverview.getSelectedColumn();
-				int row = tblJourneyOverview.getSelectedRow();
-				getTxtTarget().setText((String)tblJourneyOverview.getValueAt(row, column));
-				infoAboutTravelPane.setVisible(true);
-				getBtnShowJourney().setEnabled(true);
-				getBtnRemoveJourney().setEnabled(true);
-			}
-		});
+		tableModel.addRow(new String[] {"Test2"});
+		//
 		this.tblJourneyOverview.setFont(new Font("Arial", Font.PLAIN, 13));
 		tblJourneyOverview.setRowHeight(20);
 		tblJourneyOverview.setRowMargin(2);
@@ -160,6 +152,10 @@ public class ViewStart extends JPanel {
 		tblJourneyOverview.setRowSelectionAllowed(false);
 		tblJourneyOverview.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tblJourneyOverview.setShowVerticalLines(false);
+		/*
+		 * Event when mouse clicks on row ( row is selected )
+		 */
+		tblJourneyOverview.getSelectionModel().addListSelectionListener( new TableOverviewListSelectionListener( this ) );
 		scrollPane.setViewportView(tblJourneyOverview);
 		
 		JPanel panel = new JPanel();
@@ -249,23 +245,11 @@ public class ViewStart extends JPanel {
 		txtJounreyEnd.setColumns(10);
 	}
 	
-	void addTableRow( String item ){
-		//int size = tableModel.getColumnCount();
-		tableDataVector = new Vector<String>();
-		tableDataVector.add( item );
-		//tableDataVector.add( getCurrentDate() );
-		
-		tableModel.addRow(tableDataVector);
-
-		btnRemoveJourney.setEnabled(true);
-	}
-	
-	void removeTableRow( String item ){
-		int size = tableModel.getRowCount();
-		//int index = (int)(Math.random() * size);
-		tableModel.removeRow( size - 1 );
-		
-		btnRemoveJourney.setEnabled( size > 1 );	
+	/**
+	 * @return the infoAboutTravelPane
+	 */
+	public JPanel getInfoAboutTravelPane() {
+		return infoAboutTravelPane;
 	}
 	
 	String getCurrentDate() {	
@@ -297,5 +281,40 @@ public class ViewStart extends JPanel {
 	 public JTextField getTxtTarget() {
 		 return txtTarget;
 	 }
+
+	/**
+	 * @return the txtFilter
+	 */
+	public JTextField getTxtFilter() {
+		return txtFilter;
+	}
+
+	/**
+	 * @return the tblJourneyOverview
+	 */
+	public JTable getTblJourneyOverview() {
+		return tblJourneyOverview;
+	}
+
+	/**
+	 * @return the txtDeparture
+	 */
+	public JTextField getTxtDeparture() {
+		return txtDeparture;
+	}
+
+	/**
+	 * @return the txtCountry
+	 */
+	public JTextField getTxtCountry() {
+		return txtCountry;
+	}
+
+	/**
+	 * @return the txtJounreyEnd
+	 */
+	public JTextField getTxtJounreyEnd() {
+		return txtJounreyEnd;
+	}
 	
 }

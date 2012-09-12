@@ -63,4 +63,8 @@ public class GeneralInformationModel implements Serializable {
 		if(!(o instanceof GeneralInformationModel)) return false;
 		return getFolderName().equals(((GeneralInformationModel)o).getFolderName());
 	}
+	
+	public String toString() {
+		return getFolderName();
+	}
 }

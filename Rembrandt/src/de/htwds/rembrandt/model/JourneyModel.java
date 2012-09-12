@@ -14,6 +14,7 @@ public class JourneyModel {
 	private JourneyContactListsModel contactListModel;
 	private TravelInformationModel travelInformation;
 	private GeneralInformationModel generalInformation;
+	private GeneralInformationModel[] generalInformationArray;
 	
 	/*
 	 * Your implementation here
@@ -41,5 +42,13 @@ public class JourneyModel {
 	
 	public GeneralInformationModel getGeneralInformationModel(){
 		return generalInformation;
+	}
+	
+	public GeneralInformationModel[] getGeneralInformationArray() {
+		return generalInformationArray;
+	}
+	
+	public void setGeneralInformationModelArray( GeneralInformationModel[] generalInformationArray ) {
+		this.generalInformationArray = generalInformationArray;
 	}
 }
