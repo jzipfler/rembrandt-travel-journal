@@ -1,26 +1,25 @@
 package de.htwds.rembrandt.controler.travelview;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import de.htwds.rembrandt.model.TravelInformationModel;
 import de.htwds.rembrandt.view.ViewMain;
 import de.htwds.rembrandt.view.ViewTravelinformation;
 
-public class LoadInformationActionListener implements ActionListener{
+/**
+ * 
+ * @author Daniel
+ * @version 1.2 (12.09.2012)
+ */
+public class LoadInformationControler{
 
 	private ViewTravelinformation view;
 	private TravelInformationModel data;
 	private ViewMain mainView;
 	
-	public LoadInformationActionListener(ViewTravelinformation view){
+	public LoadInformationControler(ViewTravelinformation view){
 		this.view = view;
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
 		loadData();
 		view.readData(data);
+		System.out.println(data.toString());
 	}
 	
 	private void loadData(){
