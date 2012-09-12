@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -29,7 +30,11 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.Sizes;
 
+import de.htwds.rembrandt.components.JTravelInformationTextfield;
 import de.htwds.rembrandt.controler.wizzardControler.readInputData;
+import de.htwds.rembrandt.exception.ContactException;
+import de.htwds.rembrandt.exception.WizzardInputException;
+
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -42,11 +47,12 @@ import java.awt.event.ComponentEvent;
 public class ViewWizzard extends JFrame {
 	
 	private ViewStart viewStart;
+	private ViewWizzard wizzard;
 	
 	private JPanel pnlQuestionCards;
-	private JTextField txtInputCountry;
+	private JTravelInformationTextfield txtInputCountry;
 	private JTextField txtInputCity;
-	private JTextField txtDate;
+	private JTravelInformationTextfield txtDate;
 	private JTextField txtEndDate;
 	private JPanel pnlCards;
 	private JPanel pnlFirstView;
@@ -94,6 +100,7 @@ public class ViewWizzard extends JFrame {
 	 */
 	public ViewWizzard( ViewStart viewStart ) {
 		
+		this.wizzard = this;
 		this.viewStart = viewStart;
 		setLocationRelativeTo(viewStart);
 		setVisible(true);
@@ -185,7 +192,7 @@ public class ViewWizzard extends JFrame {
 		lblCity.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlQuestion.add(lblCity, "8, 4");
 		
-		txtInputCountry = new JTextField();
+		txtInputCountry = new JTravelInformationTextfield();
 		txtInputCountry.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlQuestion.add(txtInputCountry, "4, 6");
 		txtInputCountry.setColumns(10);
@@ -250,7 +257,7 @@ public class ViewWizzard extends JFrame {
 		lblEndDate.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlContainer_1.add(lblEndDate, "8, 4, left, top");
 		
-		txtDate = new JTextField();
+		txtDate = new JTravelInformationTextfield();
 		txtDate.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlContainer_1.add(txtDate, "4, 6, fill, top");
 		txtDate.setColumns(10);
@@ -406,6 +413,15 @@ public class ViewWizzard extends JFrame {
 				case SECOND:
 					pnlSecondView.setVisible(true);
 					pnlFirstView.setVisible(false);
+					try{
+						if(txtInputCountry.getText().trim() == "" || txtInputCountry.getText() == null)
+							throw new WizzardInputException("Land" + WizzardInputException.ERROR_FIELD);
+					} catch(Exception e){
+						JOptionPane.showMessageDialog(	wizzard,
+								e.getMessage(),
+								WizzardInputException.MSG_ERROR_OCCURED,
+								JOptionPane.ERROR_MESSAGE );
+					}
 					break;
 				case THIRD:
 					getChoosed();
