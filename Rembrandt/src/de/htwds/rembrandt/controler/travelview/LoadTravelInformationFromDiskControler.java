@@ -66,7 +66,7 @@ public class LoadTravelInformationFromDiskControler {
 		data.setArrivalDestination(result[5]);
 		data.setDepartureStart(result[6]);
 		data.setDepartureDestination(result[7]);
-		data.setOption(Integer.parseInt(result[8]));
+		data.setOption(Integer.parseInt(result[8].trim()));
 		data.setComment(result[9]);
 		
 	}
