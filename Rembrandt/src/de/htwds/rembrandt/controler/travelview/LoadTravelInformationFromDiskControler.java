@@ -17,7 +17,7 @@ public class LoadTravelInformationFromDiskControler {
 	private TravelInformationModel data;
 	
 	public LoadTravelInformationFromDiskControler(){
-		
+		readDataFromDisk();
 	}
 	
 	private void readDataFromDisk(){
