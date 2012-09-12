@@ -12,21 +12,24 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 
 import de.htwds.rembrandt.controler.datastructure.CheckExistingDataStructureControler;
+import de.htwds.rembrandt.controler.mainViewController.LoadStartViewActionListener;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * 
  * Wrapper class for all views.
  * 
  * @author Jan Zipfler
- * @version 20120910
+ * @version ( Jan Zipfler 2012-09-12 )
  *
  */
 public class ViewWrapperWindow extends JFrame {
 	
-	private ViewStart panel;
+	private JPanel panel;
 
 	/**
 	 * Launch the application.
@@ -55,10 +58,12 @@ public class ViewWrapperWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 626, 439);
 		
-		this.panel = new ViewStart( this );
-		setContentPane(panel.getViewStart( ) );
+		this.panel = new JPanel();
+		setContentPane( this.panel );
+		this.panel.setLayout(new BorderLayout(0, 0));
 		
-		new CheckExistingDataStructureControler();
+		new LoadStartViewActionListener(this).loadStartView();
+		new CheckExistingDataStructureControler().checkExistingDataStructure();
 		
 	}
 

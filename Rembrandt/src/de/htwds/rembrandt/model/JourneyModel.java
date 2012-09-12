@@ -5,13 +5,14 @@ import java.util.ArrayList;
 /**
  * 
  * @author Jan Zipfler
+ * @version (Jan Zipfler 2012-09-12 )
  *
  * Superclass for all model classes, needed to get the data for the rembrandt project.
  */
 public class JourneyModel {
 	
 	private JourneyContactListsModel contactListModel;
-	private TravelInformationModel traavelInformation;
+	private TravelInformationModel travelInformation;
 	
 	/*
 	 * Your implementation here
@@ -26,11 +27,11 @@ public class JourneyModel {
 	}
 	
 	public void setTravelInformation(TravelInformationModel travelInformation){
-		this.traavelInformation = travelInformation;
+		this.travelInformation = travelInformation;
 	}
 	
 	public TravelInformationModel getTravelInformation(){
-		return traavelInformation;
+		return travelInformation;
 	}
 	
 }
