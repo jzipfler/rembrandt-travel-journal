@@ -12,7 +12,7 @@ import de.htwds.rembrandt.view.ViewMain;
 /**
  * 
  * @author Daniel
- * @version 1.1 (12.09.2012)
+ * @version 1.2 (12.09.2012)
  */
 public class SaveTravelInformationToDiskControler {
 	
@@ -41,7 +41,7 @@ public class SaveTravelInformationToDiskControler {
 	private void save(){
 		String dateiname;
         File data;
-        dateiname = FolderPathController.getGeneralInformationFolder() + FolderPathController.getFileSeperator() + "travelInformation.dat";
+        dateiname = FolderPathController.getTravelInformationFolder(toString()) + FolderPathController.getFileSeperator() + "travelInformation.dat";
         data = new File(dateiname);
         FileWriter fw = null;
         try {

@@ -1,6 +1,8 @@
 package de.htwds.rembrandt.model;
 
-public class GeneralInformationModel {
+import java.io.Serializable;
+
+public class GeneralInformationModel implements Serializable {
 	
 	private String city;
 	private String country;
@@ -54,5 +56,11 @@ public class GeneralInformationModel {
 	
 	public void setDateDeparture(String newDateDeparture){
 		dateDeparture = newDateDeparture;
+	}
+	
+	public boolean equals(Object o){
+		if(o == null) return false;
+		if(!(o instanceof GeneralInformationModel)) return false;
+		return getFolderName().equals(((GeneralInformationModel)o).getFolderName());
 	}
 }
