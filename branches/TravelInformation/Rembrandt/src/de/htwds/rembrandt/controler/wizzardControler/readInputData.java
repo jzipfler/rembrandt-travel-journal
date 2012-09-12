@@ -33,10 +33,7 @@ public class readInputData {
 										  reference.getArrivalDestination(),
 										  reference.getDepartureStart(),
 										  reference.getDepartureDestination());
-		generalData = new GeneralInformationModel(reference.getCity(),
-												  reference.getCountry(),
-												  reference.getDate(),
-												  reference.getEndDate());
+		generalData =  data.createGeneralInformation();
 	}
 	
 	private void store(){

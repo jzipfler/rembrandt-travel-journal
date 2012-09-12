@@ -138,4 +138,11 @@ public class TravelInformationModel {
 	public String toString(){
 		return country + "_" + dateArrival;
 	}
+	
+	public GeneralInformationModel createGeneralInformation(){
+		return new GeneralInformationModel(getCity(),
+				  						   getCountry(),
+				  						   getDateArrival(),
+				  						   getDateDeparture());
+	}
 }
