@@ -1,10 +1,12 @@
 package de.htwds.rembrandt.model;
 
+import java.io.Serializable;
+
 import javax.swing.Icon;
 
 import de.htwds.rembrandt.exception.ContactException;
 
-public class Contact implements Comparable<Contact> {
+public class Contact implements Comparable<Contact>, Serializable {
 
 	private static final String SPACE = " ";
 	
