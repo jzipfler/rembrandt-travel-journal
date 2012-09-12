@@ -1,12 +1,15 @@
 package de.htwds.rembrandt.controler.travelview;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import de.htwds.rembrandt.model.TravelInformationModel;
 import de.htwds.rembrandt.view.ViewMain;
 import de.htwds.rembrandt.view.ViewTravelinformation;
 
+/**
+ * 
+ * @author Daniel
+ * @version 1.1 (12.09.2012)
+ */
 public class SaveTravelInformationControler {
 
 	private ViewTravelinformation view;
