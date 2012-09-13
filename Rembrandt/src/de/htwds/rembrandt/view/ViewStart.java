@@ -33,6 +33,7 @@ import de.htwds.rembrandt.controler.viewStartController.LoadSelectedJouneyAction
 import de.htwds.rembrandt.controler.viewStartController.LoadWizzardActionListener;
 import de.htwds.rembrandt.controler.viewStartController.RemoveSelectedJourneyActionListener;
 import de.htwds.rembrandt.controler.viewStartController.TableOverviewListSelectionListener;
+import de.htwds.rembrandt.model.GeneralInformationModel;
 
 /**
  * 
@@ -43,6 +44,7 @@ public class ViewStart extends JPanel {
 
 	private ViewWrapperWindow wrapperView;
 
+	private GeneralInformationModel[] generalInformationArray;
 
 	private JPanel panelViewStart;
 	private JTextField txtFilter;
@@ -65,6 +67,7 @@ public class ViewStart extends JPanel {
 	public ViewStart( ViewWrapperWindow wrapperView )  {
 		
 		this.wrapperView = wrapperView;
+		this.generalInformationArray = null;
 		
 		setName("Mainmenu Journey Log");
 		setMinimumSize(new Dimension(640, 480));
@@ -315,6 +318,14 @@ public class ViewStart extends JPanel {
 	 */
 	public JTextField getTxtJounreyEnd() {
 		return txtJounreyEnd;
+	}
+	
+	public GeneralInformationModel[] getGeneralInformationArray() {
+		return generalInformationArray;
+	}
+	
+	public void setGeneralInformationArray( GeneralInformationModel[] generalInformationArray ) {
+		this.generalInformationArray = generalInformationArray;
 	}
 	
 }
