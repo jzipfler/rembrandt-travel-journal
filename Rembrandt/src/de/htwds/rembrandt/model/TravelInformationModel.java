@@ -4,7 +4,7 @@ package de.htwds.rembrandt.model;
  * Class for all the gathered information about the journey.
  * 
  * @author Daniel
- * @version 1.0
+ * @version 1.1 (12.09.2012)
  */
 public class TravelInformationModel {
 	
@@ -42,6 +42,13 @@ public class TravelInformationModel {
 		locationArrivalDestination 		= arrivalD;
 		locationDepartureStart 			= departureS;
 		locationDepartureDestination 	= departureD;
+	}
+	
+	/**
+	 * Empty constructor, which may be used, if the specified link in the JourneyModel is null
+	 */
+	public TravelInformationModel(){
+		
 	}
 	
 	//Getter
@@ -126,5 +133,9 @@ public class TravelInformationModel {
 	
 	public void setComment(String newComment){
 		comment = newComment;
+	}
+	
+	public String toString(){
+		return country + "_" + dateArrival;
 	}
 }

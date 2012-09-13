@@ -23,6 +23,8 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
+import de.htwds.rembrandt.components.JTravelInformationTextfield;
+import de.htwds.rembrandt.controler.travelview.SaveTravelInformationControler;
 import de.htwds.rembrandt.controler.travelview.SetCommentEnableActionListener;
 import de.htwds.rembrandt.controler.travelview.SetEditEnableActionListener;
 import de.htwds.rembrandt.model.TravelInformationModel;
@@ -35,9 +37,9 @@ public class ViewTravelinformation extends JPanel {
 	
 	private boolean informationEditable = false;
 	private boolean commentEditable = false;
-	private JTextField txtCountryInput;
+	private JTravelInformationTextfield txtCountryInput;
 	private JTextField txtCityInput;
-	private JTextField txtArrivalInput;
+	private JTravelInformationTextfield txtArrivalInput;
 	private JTextField txtDepartureInput;
 	private JTextField txtArrivalStartInput;
 	private JTextField txtArrivalDestinationInput;
@@ -46,11 +48,17 @@ public class ViewTravelinformation extends JPanel {
 	private JPanel pnlInformationContent;
 	private JComboBox cboOptions = new JComboBox();
 	private JEditorPane txtpnDescription = new JEditorPane();
-
+	private JButton btnEditDescription;
+	private JButton btnEdit;
+	private ViewMain mainView;
+	private SaveTravelInformationControler controler;
+	
 	/**
 	 * Create the panel.
 	 */
-	public ViewTravelinformation() {
+	public ViewTravelinformation(ViewMain mainView) {
+		this.mainView = mainView;
+		controler = new SaveTravelInformationControler(this);
 		setFont(new Font("Arial", Font.PLAIN, 11));
 		setMinimumSize(new Dimension(440, 440));
 		setLayout(new BorderLayout(0, 3));
@@ -135,7 +143,7 @@ public class ViewTravelinformation extends JPanel {
 		lblCountry.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(lblCountry, "2, 4, right, default");
 		
-		txtCountryInput = new JTextField();
+		txtCountryInput = new JTravelInformationTextfield();
 		txtCountryInput.setEditable(false);
 		txtCountryInput.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(txtCountryInput, "4, 4, fill, default");
@@ -159,7 +167,7 @@ public class ViewTravelinformation extends JPanel {
 		lblDateArrival.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(lblDateArrival, "2, 10, right, default");
 		
-		txtArrivalInput = new JTextField();
+		txtArrivalInput = new JTravelInformationTextfield();
 		txtArrivalInput.setEditable(false);
 		txtArrivalInput.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(txtArrivalInput, "4, 10, fill, default");
@@ -198,7 +206,7 @@ public class ViewTravelinformation extends JPanel {
 		
 		txtArrivalStartInput = new JTextField();
 		txtArrivalStartInput.setEditable(false);
-		txtArrivalStartInput.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtArrivalStartInput.setFont(new Font("Arial", Font.PLAIN, 13));
 		pnlInformationContent.add(txtArrivalStartInput, "4, 20, fill, default");
 		txtArrivalStartInput.setColumns(10);
 		
@@ -239,7 +247,7 @@ public class ViewTravelinformation extends JPanel {
 		JPanel pnlEditbuttonContainer = new JPanel();
 		pnlInformation.add(pnlEditbuttonContainer, BorderLayout.SOUTH);
 		
-		JButton btnEdit = new JButton("Bearbeiten");
+		btnEdit = new JButton("Bearbeiten");
 		btnEdit.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnEdit.addActionListener(new SetEditEnableActionListener(this));
 		pnlEditbuttonContainer.add(btnEdit);
@@ -267,7 +275,7 @@ public class ViewTravelinformation extends JPanel {
 		JPanel pnlButtonContainer = new JPanel();
 		pnlContentContainer.add(pnlButtonContainer, BorderLayout.SOUTH);
 		
-		JButton btnEditDescription = new JButton("Bearbeiten");
+		btnEditDescription = new JButton("Bearbeiten");
 		btnEditDescription.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnEditDescription.addActionListener(new SetCommentEnableActionListener(this));
 		pnlButtonContainer.add(btnEditDescription);
@@ -288,6 +296,12 @@ public class ViewTravelinformation extends JPanel {
 		txtDepartureInput.setEditable(informationEditable);
 		txtDepartureStartInput.setEditable(informationEditable);
 		cboOptions.setEnabled(informationEditable);
+		if(informationEditable){
+			btnEdit.setText("Speichern");
+		} else {
+			btnEdit.setText("Bearbeiten");
+			controler.save();
+		}
 	}
 	
 	/**
@@ -296,6 +310,12 @@ public class ViewTravelinformation extends JPanel {
 	public void setCommentEditable(){
 		commentEditable = (!commentEditable);
 		txtpnDescription.setEditable(commentEditable);
+		if(commentEditable){
+			btnEditDescription.setText("Speichern");
+		} else {
+			btnEditDescription.setText("Bearbeiten");
+			controler.save();
+		}
 	}
 	
 	public void readData(TravelInformationModel data){
@@ -308,5 +328,49 @@ public class ViewTravelinformation extends JPanel {
 		txtArrivalStartInput.setText(data.getArrivalStart());
 		txtDepartureDestinationInput.setText(data.getDepartureDestionation());
 		txtDepartureStartInput.setText(data.getDepartureStart());
+	}
+	
+	public ViewMain getMainView(){
+		return mainView;
+	}
+	
+	public String getCountryText(){
+		return txtCountryInput.getText();
+	}
+	
+	public String getCityText(){
+		return txtCityInput.getText();
+	}
+	
+	public String getArrivalText(){
+		return txtArrivalInput.getText();
+	}
+	
+	public String getDaprtureText(){
+		return txtDepartureInput.getText();
+	}
+	
+	public String getArrivalDestinationText(){
+		return txtArrivalDestinationInput.getText();
+	}
+	
+	public String getArrivalStartText(){
+		return txtArrivalStartInput.getText();
+	}
+	
+	public String getDepartureStartText(){
+		return txtDepartureStartInput.getText();
+	}
+	
+	public String getDepartureDestinationText(){
+		return txtDepartureDestinationInput.getText();
+	}
+	
+	public int getOptionsInput(){
+		return cboOptions.getSelectedIndex();
+	}
+	
+	public String getCommentText(){
+		return txtpnDescription.getText();
 	}
 }

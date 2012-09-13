@@ -1,24 +1,23 @@
 package de.htwds.rembrandt.view;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import java.awt.FlowLayout;
-import javax.swing.JTextField;
-import javax.swing.BoxLayout;
-import javax.swing.JTextArea;
-import javax.swing.DropMode;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JEditorPane;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
+import javax.swing.text.JTextComponent;
+
+import net.miginfocom.swing.MigLayout;
+import de.htwds.rembrandt.controller.photoAlbumViewController.toggleEditCommentStatusListener;
 
 /**
  * Photo Album View
@@ -28,101 +27,151 @@ import java.awt.Font;
  */
 public class ViewPhotoAlbumDetails extends JPanel {
 
+    // constants
     private static final long serialVersionUID = 1L;
-    private JTextField txtFileName;
-    private JTextField txtFileDate;
-    private JTextField txtComment;
-
+    
+        // colors
+        private Color COLOR_DISABLED = (Color) UIManager.get("TextField.inactiveBackground");
+        private Color COLOR_ENABLED  = (Color) UIManager.get("TextField.background");
+    
+    // fields
+    private boolean    commentEditable = false;
+    private JTextField txtPhotoFileName;
+    private JTextField txtPhotoDate;
+    private JButton btnPhotoCommentEditToggle;
+    private JTextComponent epnPhotoComment;
+    private JScrollPane scpThumbnailArea;
+    private JScrollPane scpPhotoComment;
+    private JLabel lblPhotoComment;
+    private JPanel pnlPhotoComment;
+    private JLabel lblPhotoDate;
+    private JLabel lblPhotoFileName;
+    private JPanel pnlPhotoFileNameDate;
+    private JPanel pnlPhotoInformation;
+    private JLabel lblCurrentPhoto;
+    private JPanel pnlCurrentPhoto;
+    private JButton btnPhotoForward;
+    private JButton btnPhotoBack;
+    private JPanel pnlPhotoPreview;
+    private JPanel pnlPhotoArea;
+    private JLabel lblPhotoAlbumHeader;
+    
+    // constructor
     public ViewPhotoAlbumDetails() {
+        setFont(new Font("Arial", Font.PLAIN, 13));
+        setPreferredSize(new Dimension(440, 440));
+        setMinimumSize(new Dimension(440, 440));
         setLayout(new BorderLayout(0, 0));
         
-        JPanel pnlPhotoArea = new JPanel();
+        lblPhotoAlbumHeader = new JLabel("Fotoalbum");
+        lblPhotoAlbumHeader.setFont(new Font("Arial", Font.BOLD, 15));
+        add(lblPhotoAlbumHeader, BorderLayout.NORTH);
+        
+        pnlPhotoArea = new JPanel();
+        pnlPhotoArea.setFont(new Font("Arial", Font.PLAIN, 13));
         add(pnlPhotoArea, BorderLayout.CENTER);
         pnlPhotoArea.setLayout(new BorderLayout(0, 0));
         
-        JButton btnPhotoBack = new JButton("<");
+        pnlPhotoPreview = new JPanel();
+        pnlPhotoPreview.setFont(new Font("Arial", Font.PLAIN, 13));
+        pnlPhotoPreview.setBorder(new LineBorder(Color.GRAY));
+        pnlPhotoPreview.setPreferredSize(new Dimension(10, 200));
+        pnlPhotoPreview.setMinimumSize(new Dimension(10, 200));
+        pnlPhotoArea.add(pnlPhotoPreview, BorderLayout.NORTH);
+        pnlPhotoPreview.setLayout(new BorderLayout(0, 0));
+        
+        btnPhotoBack = new JButton("<");
         btnPhotoBack.setFont(new Font("Arial", Font.PLAIN, 13));
-        pnlPhotoArea.add(btnPhotoBack, BorderLayout.WEST);
+        pnlPhotoPreview.add(btnPhotoBack, BorderLayout.WEST);
         
-        JButton btnPhotoForward = new JButton(">");
+        btnPhotoForward = new JButton(">");
         btnPhotoForward.setFont(new Font("Arial", Font.PLAIN, 13));
-        pnlPhotoArea.add(btnPhotoForward, BorderLayout.EAST);
+        pnlPhotoPreview.add(btnPhotoForward, BorderLayout.EAST);
         
-        JLabel lblCurrentPhoto = new JLabel("current");
+        pnlCurrentPhoto = new JPanel();
+        pnlCurrentPhoto.setFont(new Font("Arial", Font.PLAIN, 13));
+        pnlPhotoPreview.add(pnlCurrentPhoto, BorderLayout.CENTER);
+        
+        lblCurrentPhoto = new JLabel("");
         lblCurrentPhoto.setFont(new Font("Arial", Font.PLAIN, 13));
-        pnlPhotoArea.add(lblCurrentPhoto, BorderLayout.CENTER);
+        pnlCurrentPhoto.add(lblCurrentPhoto);
         
-        JPanel pnlInformation = new JPanel();
-        add(pnlInformation, BorderLayout.EAST);
+        pnlPhotoInformation = new JPanel();
+        pnlPhotoInformation.setFont(new Font("Arial", Font.PLAIN, 13));
+        pnlPhotoInformation.setBorder(new LineBorder(Color.GRAY));
+        pnlPhotoArea.add(pnlPhotoInformation, BorderLayout.CENTER);
+        pnlPhotoInformation.setLayout(new BorderLayout(0, 0));
         
-        JLabel lblFileName = new JLabel("Name");
-        lblFileName.setFont(new Font("Arial", Font.PLAIN, 13));
+        pnlPhotoFileNameDate = new JPanel();
+        pnlPhotoFileNameDate.setFont(new Font("Arial", Font.PLAIN, 13));
+        pnlPhotoInformation.add(pnlPhotoFileNameDate, BorderLayout.NORTH);
+        pnlPhotoFileNameDate.setLayout(new MigLayout("", "[46px][grow]", "[14px][]"));
         
-        txtFileName = new JTextField();
-        txtFileName.setFont(new Font("Arial", Font.PLAIN, 13));
-        txtFileName.setColumns(10);
+        lblPhotoFileName = new JLabel("Name");
+        lblPhotoFileName.setFont(new Font("Arial", Font.PLAIN, 13));
+        pnlPhotoFileNameDate.add(lblPhotoFileName, "cell 0 0,alignx left,aligny top");
         
-        JLabel lblFileDate = new JLabel("Date");
-        lblFileDate.setFont(new Font("Arial", Font.PLAIN, 13));
+        txtPhotoFileName = new JTextField();
+        txtPhotoFileName.setFont(new Font("Arial", Font.PLAIN, 13));
+        txtPhotoFileName.setEditable(false);
+        pnlPhotoFileNameDate.add(txtPhotoFileName, "cell 1 0,growx");
+        txtPhotoFileName.setColumns(10);
         
-        txtFileDate = new JTextField();
-        txtFileDate.setFont(new Font("Arial", Font.PLAIN, 13));
-        txtFileDate.setColumns(10);
+        lblPhotoDate = new JLabel("Datum");
+        lblPhotoDate.setFont(new Font("Arial", Font.PLAIN, 13));
+        pnlPhotoFileNameDate.add(lblPhotoDate, "cell 0 1,alignx left,aligny baseline");
         
-        JLabel lblComment = new JLabel("Comment");
-        lblComment.setFont(new Font("Arial", Font.PLAIN, 13));
-        pnlInformation.setLayout(new MigLayout("", "[87px,grow]", "[14px][20px][14px][20px][14px][22px,grow]"));
-        pnlInformation.add(lblFileName, "cell 0 0,alignx left,aligny top");
-        pnlInformation.add(txtFileName, "cell 0 1,alignx right,aligny top");
-        pnlInformation.add(lblFileDate, "cell 0 2,alignx left,aligny top");
-        pnlInformation.add(txtFileDate, "cell 0 3,alignx right,aligny top");
-        pnlInformation.add(lblComment, "cell 0 4,alignx left,aligny top");
+        txtPhotoDate = new JTextField();
+        txtPhotoDate.setFont(new Font("Arial", Font.PLAIN, 13));
+        txtPhotoDate.setEditable(false);
+        pnlPhotoFileNameDate.add(txtPhotoDate, "cell 1 1,growx");
+        txtPhotoDate.setColumns(10);
         
-        JScrollPane spnComment = new JScrollPane();
-        spnComment.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        pnlInformation.add(spnComment, "cell 0 5,growy");
+        pnlPhotoComment = new JPanel();
+        pnlPhotoComment.setFont(new Font("Arial", Font.PLAIN, 13));
+        pnlPhotoInformation.add(pnlPhotoComment, BorderLayout.CENTER);
+        pnlPhotoComment.setLayout(new MigLayout("", "[grow]", "[][grow][]"));
         
-        txtComment = new JTextField();
-        txtComment.setFont(new Font("Arial", Font.PLAIN, 13));
-        spnComment.setViewportView(txtComment);
-        txtComment.setColumns(10);
+        lblPhotoComment = new JLabel("Kommentar");
+        lblPhotoComment.setFont(new Font("Arial", Font.PLAIN, 13));
+        pnlPhotoComment.add(lblPhotoComment, "cell 0 0");
         
-        JPanel pnlThumbnail = new JPanel();
-        add(pnlThumbnail, BorderLayout.SOUTH);
-        pnlThumbnail.setLayout(new GridLayout(0, 8, 0, 0));
+        scpPhotoComment = new JScrollPane();
+        scpPhotoComment.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scpPhotoComment.setFont(new Font("Arial", Font.PLAIN, 13));
+        pnlPhotoComment.add(scpPhotoComment, "cell 0 1,grow");
         
-        JButton btnThumbnailBack = new JButton("<");
-        btnThumbnailBack.setFont(new Font("Arial", Font.PLAIN, 13));
-        pnlThumbnail.add(btnThumbnailBack);
+        epnPhotoComment = new JEditorPane();
+        epnPhotoComment.setFont(new Font("Arial", Font.PLAIN, 13));
+        epnPhotoComment.setEditable(false);
+        epnPhotoComment.setBackground(COLOR_DISABLED);
+        scpPhotoComment.setViewportView(epnPhotoComment);
         
-        JLabel lblThumbnail1 = new JLabel("1");
-        lblThumbnail1.setFont(new Font("Arial", Font.PLAIN, 13));
-        pnlThumbnail.add(lblThumbnail1);
+        btnPhotoCommentEditToggle = new JButton("bearbeiten");
+        btnPhotoCommentEditToggle.setFont(new Font("Arial", Font.PLAIN, 13));
+        btnPhotoCommentEditToggle.addActionListener(new toggleEditCommentStatusListener(this));
+        pnlPhotoComment.add(btnPhotoCommentEditToggle, "cell 0 2");
         
-        JLabel lblThumbnail2 = new JLabel("2");
-        lblThumbnail2.setFont(new Font("Arial", Font.PLAIN, 13));
-        pnlThumbnail.add(lblThumbnail2);
+        scpThumbnailArea = new JScrollPane();
+        scpThumbnailArea.setFont(new Font("Arial", Font.PLAIN, 13));
+        scpThumbnailArea.setBorder(new LineBorder(Color.GRAY));
+        scpThumbnailArea.setPreferredSize(new Dimension(2, 65));
+        add(scpThumbnailArea, BorderLayout.SOUTH);
         
-        JLabel lblThumbnail3 = new JLabel("3");
-        lblThumbnail3.setFont(new Font("Arial", Font.PLAIN, 13));
-        pnlThumbnail.add(lblThumbnail3);
-        
-        JLabel lblThumbnail4 = new JLabel("4");
-        lblThumbnail4.setFont(new Font("Arial", Font.PLAIN, 13));
-        pnlThumbnail.add(lblThumbnail4);
-        
-        JLabel lblThumbnail5 = new JLabel("5");
-        lblThumbnail5.setFont(new Font("Arial", Font.PLAIN, 13));
-        pnlThumbnail.add(lblThumbnail5);
-        
-        JButton btnThumbnailForward = new JButton(">");
-        btnThumbnailForward.setFont(new Font("Arial", Font.PLAIN, 13));
-        pnlThumbnail.add(btnThumbnailForward);
-        
-        JButton btnOverview = new JButton("Overview");
-        btnOverview.setFont(new Font("Arial", Font.PLAIN, 13));
-        pnlThumbnail.add(btnOverview);
-
+        JPanel pnlThumbnailArea = new JPanel();
+        pnlThumbnailArea.setFont(new Font("Arial", Font.PLAIN, 13));
+        scpThumbnailArea.setViewportView(pnlThumbnailArea);
     }
-
+    
+    /**
+     * toggles the edit status of the comment textarea
+     */
+    public void toggleCommmentEditStatus() {
+        commentEditable = !commentEditable;
+        epnPhotoComment.setEditable(commentEditable);
+        
+        // toggle color
+        if(commentEditable == false) epnPhotoComment.setBackground(COLOR_DISABLED);
+        else epnPhotoComment.setBackground(COLOR_ENABLED);
+    }
 }
