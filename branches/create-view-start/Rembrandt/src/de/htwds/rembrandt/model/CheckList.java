@@ -20,11 +20,11 @@ public class CheckList
 		else
 		{
 			CheckElement actElement = root;
-			while(actElement.next != null)
+			while(actElement.getNext() != null)
 			{
-				actElement = actElement.next;
+				actElement = actElement.getNext();
 			}
-			actElement.next = element;
+			actElement.setNext(element);
 		}
 		elementCounter++;
 	}
@@ -39,11 +39,11 @@ public class CheckList
 		else
 		{
 			CheckElement actElement = root;
-			while(actElement.next != null)
+			while(actElement.getNext() != null)
 			{
-				actElement = actElement.next;
+				actElement = actElement.getNext();
 			}
-			actElement.next = element;
+			actElement.setNext(element);
 		}
 		elementCounter++;
 	}
@@ -52,16 +52,16 @@ public class CheckList
 	{
 		if(index == 0)
 		{
-			root = root.next;
+			root = root.getNext();
 		}
 		else
 		{
 			CheckElement actElement = root;
 			for(int i = 1; i < index; i++)
 			{
-				actElement = actElement.next;
+				actElement = actElement.getNext();
 			}
-			actElement.next = actElement.next.next;
+			actElement.setNext(actElement.getNext().getNext());
 		}
 		elementCounter--;
 	}
@@ -77,7 +77,7 @@ public class CheckList
 			CheckElement actElement = root;
 			for(int i = 0; i < index; i++)
 			{
-				actElement = actElement.next;
+				actElement = actElement.getNext();
 			}
 			actElement.check();
 		}
