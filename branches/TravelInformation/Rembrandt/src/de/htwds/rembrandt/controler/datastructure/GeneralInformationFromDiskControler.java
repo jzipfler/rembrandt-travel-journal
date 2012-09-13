@@ -15,7 +15,7 @@ import de.htwds.rembrandt.model.GeneralInformationModel;
 /**
  * 
  * @author Daniel
- * @version 1.0 (12.09.2012)
+ * @version 1.1 ( 13.09.2012 - Jan Zipfler )
  */
 public class GeneralInformationFromDiskControler {
 	
@@ -57,6 +57,10 @@ public class GeneralInformationFromDiskControler {
         	informationArray = new ArrayList<GeneralInformationModel>();
         if(newModel != null)
         	informationArray.add(newModel);
+        if ( informationArray == null )
+        	return ( new GeneralInformationModel[0] );
+        System.out.println("GeneralInformationFromDisc, newModel: " + newModel );
+        System.out.println( "GeneralInformationFromDisc, Länge ArrayList: " + informationArray.size());
         
 		return informationArray.toArray( new GeneralInformationModel[informationArray.size()] );
 	}

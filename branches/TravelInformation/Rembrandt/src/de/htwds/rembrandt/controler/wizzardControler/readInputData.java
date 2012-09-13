@@ -13,7 +13,7 @@ import de.htwds.rembrandt.view.ViewWizzard;
 /**
  * 
  * @author Daniel Horbach
- * @version ( Jan Zipfler 2012-09-12 )
+ * @version ( Jan Zipfler 2012-09-13 )
  */
 public class readInputData {
 
@@ -56,10 +56,11 @@ public class readInputData {
 		new CheckExistingDataStructureControler().checkExistingDataStructure( data.toString() );
 		try {
 			 GeneralInformationModel[] array = new GeneralInformationFromDiskControler().load( generalData );
-			 System.out.println(array);
-			 for (GeneralInformationModel generalInformationModel : array) {
-				System.out.println(generalInformationModel);
-			}
+			 System.out.println("readInoutData, Array is Null?: " + ( array == null ));
+			 System.out.println("readInoutData, Array Länge: " + array.length);
+//			 for (GeneralInformationModel generalInformationModel : array) {
+//				System.out.println(generalInformationModel);
+//			}
 			 journey.setGeneralInformationModelArray(array);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

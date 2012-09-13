@@ -40,6 +40,13 @@ public class GeneralInformationModel implements Serializable {
 		return country + "_" + dateArrival;
 	}
 	
+	public void setCountryAndArrivalFromFolderName( String countryAndArrivalString ) {
+		
+		String[] countryAndArrivalArray = countryAndArrivalString.split("_");
+		setCity(countryAndArrivalArray[0]);
+		setDateArrival(countryAndArrivalArray[1]);
+	}
+	
 	//Setter
 	
 	public void setCity(String newCity){
