@@ -2,10 +2,10 @@ package de.htwds.rembrandt.model;
 
 public class CheckElement 
 {
-	CheckElement next;
-	String description;
-	boolean checked;
-	int amount;
+	private CheckElement next;
+	private String description;
+	private boolean checked;
+	private int amount;
 	
 	public CheckElement(String description, int amount)
 	{
@@ -26,4 +26,32 @@ public class CheckElement
 			checked = false;
 		}
 	}
+	
+	public int getAmount()
+	{
+		return amount;
+	}
+	
+	public boolean getChecked()
+	{
+		return checked;
+	}
+	
+	public String getDescription()
+	{
+		return description;
+	}
+	
+	public CheckElement getNext()
+	{
+		return next;
+	}
+	
+	public void setNext(CheckElement element)
+	{
+		next = element;
+	}
+	
+	
+	
 }
