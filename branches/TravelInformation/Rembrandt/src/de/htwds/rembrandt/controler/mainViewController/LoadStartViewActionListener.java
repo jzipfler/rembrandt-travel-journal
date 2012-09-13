@@ -36,16 +36,16 @@ public class LoadStartViewActionListener implements ActionListener {
 	private void loadTableItems() {
 
 		try {
-			GeneralInformationModel[] generalInformationArray = new GeneralInformationFromDiskControler().load();
-			System.out.println( "Lade Start View, Ist Array null?: " + ( generalInformationArray == null ) );
-			System.out.println( "Lade Start View, Array Länge: " + generalInformationArray.length );
-			for (GeneralInformationModel generalInformationModel : generalInformationArray) {
+			viewStart.setGeneralInformationArray( new GeneralInformationFromDiskControler().load() );
+			System.out.println( "Lade Start View, Ist Array null?: " + ( viewStart.getGeneralInformationArray() == null ) );
+			System.out.println( "Lade Start View, Array Länge: " + viewStart.getGeneralInformationArray().length );
+			for (GeneralInformationModel generalInformationModel : viewStart.getGeneralInformationArray() ) {
 				System.out.println( generalInformationModel == null );
 				System.out.println(generalInformationModel);
 			}
-			if ( generalInformationArray == null )
+			if ( viewStart.getGeneralInformationArray() == null )
 				throw new RuntimeException("Laden der Startview: RückgabeArray ist NULL");
-			for (GeneralInformationModel generalInformationModel : generalInformationArray) {
+			for (GeneralInformationModel generalInformationModel : viewStart.getGeneralInformationArray() ) {
 				if ( generalInformationModel != null )
 					viewStart.getTableModel().addRow( new String[] { generalInformationModel.getFolderName() } );
 			}
