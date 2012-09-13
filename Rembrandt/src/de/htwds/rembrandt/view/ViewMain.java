@@ -30,7 +30,7 @@ import de.htwds.rembrandt.model.JourneyModel;
 /**
  * 
  * @author Jan Zipfler
- * @version 20120910
+ * @version ( Jan Zipfler - 2012-09-13 )
  * 
  * This class provides the main menu for the Rembrandt project. 
  *
@@ -169,7 +169,6 @@ public class ViewMain extends JPanel {
 		this.btnBeenden = new JButton("Beenden");
 		this.btnBeenden.setFont(new Font("Arial", Font.BOLD, 14));
 		this.btnBeenden.addActionListener( new SaveAllToDiscActionListener( this ) );
-		this.btnBeenden.addActionListener( new LoadStartViewActionListener( viewWrapper ));
 		pnlQuicklunch.add(this.btnBeenden, "2, 24");
 		
 		/*

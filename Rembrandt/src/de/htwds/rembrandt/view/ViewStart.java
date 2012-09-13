@@ -37,7 +37,7 @@ import de.htwds.rembrandt.controler.viewStartController.TableOverviewListSelecti
 /**
  * 
  * @author Jan Zipfler
- * @version ( Jan Zipfler 2012-09-12 )
+ * @version ( Jan Zipfler 2012-09-13 )
  */
 public class ViewStart extends JPanel {
 
@@ -139,8 +139,8 @@ public class ViewStart extends JPanel {
 		};
 		
 		// Nur Testdatum
-		tableModel.addRow(new String[] {"Test"});
-		tableModel.addRow(new String[] {"Test2"});
+		//tableModel.addRow(new String[] {"Test"});
+		//tableModel.addRow(new String[] {"Test2"});
 		//
 		this.tblJourneyOverview.setFont(new Font("Arial", Font.PLAIN, 13));
 		tblJourneyOverview.setRowHeight(20);

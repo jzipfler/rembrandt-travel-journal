@@ -12,7 +12,7 @@ import de.htwds.rembrandt.view.ViewWrapperWindow;
 /**
  * 
  * @author jan
- * @version ( Jan Zipfler 2012-09-12 )
+ * @version ( Jan Zipfler 2012-09-13 )
  *
  */
 public class LoadStartViewActionListener implements ActionListener {
@@ -29,6 +29,7 @@ public class LoadStartViewActionListener implements ActionListener {
 		
 		viewWrapper.getPanel().removeAll();
 		viewWrapper.getPanel().add( viewStart.getViewStart() );
+		loadTableItems();
 		viewWrapper.getPanel().updateUI();
 	}
 	
@@ -36,6 +37,12 @@ public class LoadStartViewActionListener implements ActionListener {
 
 		try {
 			GeneralInformationModel[] generalInformationArray = new GeneralInformationFromDiskControler().load();
+			System.out.println( "Lade Start View, Ist Array null?: " + ( generalInformationArray == null ) );
+			System.out.println( "Lade Start View, Array Länge: " + generalInformationArray.length );
+			for (GeneralInformationModel generalInformationModel : generalInformationArray) {
+				System.out.println( generalInformationModel == null );
+				System.out.println(generalInformationModel);
+			}
 			if ( generalInformationArray == null )
 				throw new RuntimeException("Laden der Startview: RückgabeArray ist NULL");
 			for (GeneralInformationModel generalInformationModel : generalInformationArray) {
@@ -52,7 +59,6 @@ public class LoadStartViewActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		
 		loadStartView();
-		loadTableItems();
 	}
 
 }
