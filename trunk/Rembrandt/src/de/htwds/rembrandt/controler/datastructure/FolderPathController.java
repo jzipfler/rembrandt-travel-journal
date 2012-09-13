@@ -2,7 +2,9 @@ package de.htwds.rembrandt.controler.datastructure;
 
 /**
  * 
- * @author jan
+ * Use this class to get the information about the folder locations and the used file separator.
+ * 
+ * @author Jan Zipfler
  * @version ( Jan Zipfler 2012-09-12 )
  */
 public class FolderPathController {
@@ -69,48 +71,94 @@ public class FolderPathController {
 				+ GENERAL_INFORMATION_DIRECTORY_NAME );
 	}
 	
+	/**
+	 * 
+	 * @return The path name of the global contact folder
+	 */
 	public static String getGlobalContactFolder() {
 		return ( getMainFolder()
 				+ getFileSeperator()
 				+ GLOBAL_CONTACT_DIRECTORY_NAME );
 	}
 	
+	/**
+	 * Returns the journey folder and need the folder name of this journey which is explained in the param part of this doc
+	 * 
+	 * @param journeyName For this object use the GerneralInformationMode.getFolderName() --> viewStart.getJourneyModel().getGeneralInformationMode().getFolderName()
+	 * @return 
+	 */
 	public static String getJourneyFolder( String journeyName ) {
 		return ( getMainFolder()
 				+ getFileSeperator()
 				+ journeyName );
 	}
 	
+	/**
+	 * Returns the private contact folder inside an existing journey, because of this it needs the journey name as parameter.
+	 * 
+	 * @param journeyName For this object use the GerneralInformationMode.getFolderName() --> viewStart.getJourneyModel().getGeneralInformationMode().getFolderName()
+	 * @return The path to the private contact folder
+	 */
 	public static String getPrivateContactFolder( String journeyName ) {
 		return ( getJourneyFolder(journeyName)
 				+ getFileSeperator()
 				+ PRIVATE_CONTACT_DIRECTORY_NAME );
 	}
 	
+	/**
+	 * Returns the photo folder inside an existing journey, because of this it needs the journey name as parameter.
+	 * 
+	 * @param journeyName For this object use the GerneralInformationMode.getFolderName() --> viewStart.getJourneyModel().getGeneralInformationMode().getFolderName()
+	 * @return The path to the photos folder
+	 */
 	public static String getPhotosFolder( String journeyName ) {
 		return ( getJourneyFolder(journeyName)
 				+ getFileSeperator()
 				+ PHOTOS_DIRECTORY_NAME );
 	}
 	
+	/**
+	 * Returns the checklist folder inside an existing journey, because of this it needs the journey name as parameter.
+	 * 
+	 * @param journeyName For this object use the GerneralInformationMode.getFolderName() --> viewStart.getJourneyModel().getGeneralInformationMode().getFolderName()
+	 * @return The path to the checklists folder
+	 */
 	public static String getCecklistsFolder( String journeyName ) {
 		return ( getJourneyFolder(journeyName)
 				+ getFileSeperator()
 				+ CHECKLISTS_DIRECTORY_NAME );
 	}
 	
+	/**
+	 * Returns the activities folder inside an existing journey, because of this it needs the journey name as parameter.
+	 * 
+	 * @param journeyName  For this object use the GerneralInformationMode.getFolderName() --> viewStart.getJourneyModel().getGeneralInformationMode().getFolderName()
+	 * @return The path to the activities folder
+	 */
 	public static String getActivitiesFolder( String journeyName ) {
 		return ( getJourneyFolder(journeyName)
 				+ getFileSeperator()
 				+ ACTIVITIES_DIRECTORY_NAME );
 	}
 	
+	/**
+	 * Returns the travel information folder inside an existing journey, because of this it needs the journey name as parameter.
+	 * 
+	 * @param journeyName For this object use the GerneralInformationMode.getFolderName() --> viewStart.getJourneyModel().getGeneralInformationMode().getFolderName()
+	 *
+	 * @return The path to the travel information folder
+	 */
 	public static String getTravelInformationFolder( String journeyName ) {
 		return ( getJourneyFolder(journeyName)
 				+ getFileSeperator()
 				+ TRAVEL_INFORMATION_DIRECTROY_NAME );
 	}
 	
+	/**
+	 * Returns the relevant file separator for unix or windows. Depends on which system you are working on.
+	 * 
+	 * @return the unix or windows file separator ( / or \ )
+	 */
 	public static String getFileSeperator() {
 		if ( OperationSystemPropertiesControler.isUnix() )
 			return OperationSystemPropertiesControler.UNIX_FILE_SEPERATOR; 
@@ -118,6 +166,11 @@ public class FolderPathController {
 			return OperationSystemPropertiesControler.WINDOWS_FILE_SEPERATOR;
 	}
 	
+	/**
+	 * Returns the home folder of the currend logged in user.
+	 * 
+	 * @return Home folder of the currend logged in user.
+	 */
 	private static String getHomeFolder() {
 		return OperationSystemPropertiesControler.getHomeDirecroty();
 	}

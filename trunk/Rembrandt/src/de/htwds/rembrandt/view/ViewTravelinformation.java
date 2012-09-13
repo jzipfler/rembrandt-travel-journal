@@ -288,10 +288,10 @@ public class ViewTravelinformation extends JPanel {
 	public void setInformationEditable(){
 		informationEditable = (!informationEditable);
 		txtArrivalDestinationInput.setEditable(informationEditable);
-		txtArrivalInput.setEditable(informationEditable);
+		//txtArrivalInput.setEditable(informationEditable); //Noch nicht editierbar, da sonst Ordnername falsch
 		txtArrivalStartInput.setEditable(informationEditable);
 		txtCityInput.setEditable(informationEditable);
-		txtCountryInput.setEditable(informationEditable);
+		//txtCountryInput.setEditable(informationEditable); //Noch nicht editierbar, da sonst Ordnername falsch
 		txtDepartureDestinationInput.setEditable(informationEditable);
 		txtDepartureInput.setEditable(informationEditable);
 		txtDepartureStartInput.setEditable(informationEditable);
