@@ -5,29 +5,34 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import de.htwds.rembrandt.controler.datastructure.FolderPathController;
+import de.htwds.rembrandt.exception.TravelInformationException;
 import de.htwds.rembrandt.model.TravelInformationModel;
 
 /**
  * 
  * @author Daniel
- * @version 1.0 (12.09.2012)
+ * @version 1.1 (12.09.2012)
  */
 public class LoadTravelInformationFromDiskControler {
 
 	private TravelInformationModel data;
+	private String journeyName;
 	
-	public LoadTravelInformationFromDiskControler(){
+	public LoadTravelInformationFromDiskControler(String journeyName) throws TravelInformationException{
+		this.journeyName = journeyName;
 		readDataFromDisk();
 	}
 	
-	private void readDataFromDisk(){
+	private void readDataFromDisk() throws TravelInformationException{
 		String[] result = new String[10];
 		StringBuffer comment = new StringBuffer();
 		int counter = 0;
-		String dateiname;
+		String fileName;
         File data;
-        dateiname = "Muss jan noch Methode schreiben/travelInformation.dat";
-        data = new File(dateiname);
+        fileName = FolderPathController.getTravelInformationFolder(journeyName) + FolderPathController.getFileSeperator() + "travelInformation.dat";
+        data = new File(fileName);
+        if(!data.exists()) throw new TravelInformationException(TravelInformationException.ERROR_FILE_NOT_FOUND);
         FileReader fr = null;
         try {
             fr = new FileReader(data);

@@ -42,7 +42,7 @@ import java.awt.event.ComponentEvent;
  * Diese Klasse implementiert den Wizzard zur Sammlung der Reisedaten
  * 
  * @author Daniel
- * @version ( Jan Zipfler 2012-09-12 )
+ * @version ( Daniel Horbach 2012-09-12 16:50 )
  */
 public class ViewWizzard extends JFrame {
 	
@@ -411,11 +411,11 @@ public class ViewWizzard extends JFrame {
 				case FIRST:
 					break;
 				case SECOND:
-					pnlSecondView.setVisible(true);
-					pnlFirstView.setVisible(false);
 					try{
 						if(txtInputCountry.getText().trim().length() == 0 || txtInputCountry.getText() == null)
 							throw new WizzardInputException("Land" + WizzardInputException.ERROR_FIELD);
+						pnlSecondView.setVisible(true);
+						pnlFirstView.setVisible(false);
 					} catch(Exception e){
 						JOptionPane.showMessageDialog(	wizzard,
 								e.getMessage(),
@@ -429,8 +429,20 @@ public class ViewWizzard extends JFrame {
 					break;
 				case THIRD:
 					getChoosed();
-					pnlThirdView.setVisible(true);
-					pnlSecondView.setVisible(false);
+					try{
+						if(txtDate.getText().trim().length() == 0 || txtInputCountry.getText() == null)
+							throw new WizzardInputException("Datum" + WizzardInputException.ERROR_FIELD);
+						pnlThirdView.setVisible(true);
+						pnlSecondView.setVisible(false);
+					} catch(Exception e){
+						JOptionPane.showMessageDialog(	wizzard,
+								e.getMessage(),
+								WizzardInputException.MSG_ERROR_OCCURED,
+								JOptionPane.ERROR_MESSAGE );
+						pnlThirdView.setVisible(false);
+						pnlSecondView.setVisible(true);
+						cardNumber --;
+					}
 					break;
 				case LAST:
 					controler.readStoreAndExit();
