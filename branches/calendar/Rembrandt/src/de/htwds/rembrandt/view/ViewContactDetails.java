@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonGroup;
@@ -25,9 +23,10 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import de.htwds.rembrandt.components.JNumberOnlyTextField;
+import de.htwds.rembrandt.controler.contactViewControler.AddPictureActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.EnableTextFieldsActionListener;
-import de.htwds.rembrandt.controler.contactViewControler.EnsureSavedDataControler;
-import de.htwds.rembrandt.controler.contactViewControler.LoadContactsActionListener;
+import de.htwds.rembrandt.controler.contactViewControler.ReturnToContactsActionListener;
+import de.htwds.rembrandt.model.Contact;
 
 public class ViewContactDetails extends JPanel {
 	
@@ -35,6 +34,9 @@ public class ViewContactDetails extends JPanel {
 	public static final String STD_BUTTON_UNLOCK_LOCK = "Speichern und Sperren";
 	
 	private boolean informationEditable = false;
+	
+	//If contact needs to be edited
+	private Contact alreadyExistingContact;
 	
 	private JButton btnBack;
 	private JButton btnUnlock;
@@ -68,7 +70,7 @@ public class ViewContactDetails extends JPanel {
 	private JTextArea textAreaBusinessAdress;
 	private JTextArea textAreaNotices;
 	
-	private JRadioButton rdbtnLocalContact;
+	private JRadioButton rdbtnPrivateContact;
 	private JRadioButton rdbtnGlobalContact;
 	private JRadioButton rdbtnGlobalAndLocal;
 
@@ -149,6 +151,12 @@ public class ViewContactDetails extends JPanel {
 		btnPicture.setFont(new Font("Arial", Font.PLAIN, 13));
 		this.pnlContactDetailsInformations.add(btnPicture, "2, 4, 3, 9");
 		
+		/*
+		 * Image image = new ImageIcon(getClass().getResource("pfeil.png")).getImage();
+            ImageIcon icon = new ImageIcon(image.getScaledInstance(btCopy.getWidth(),btCopy.getHeight(),Image.SCALE_FAST ));
+            btCopy.setIcon(icon);
+		 */
+		
 		JLabel lblFirstName = new JLabel("Vorname:");
 		lblFirstName.setFont(new Font("Arial", Font.PLAIN, 13));
 		this.pnlContactDetailsInformations.add(lblFirstName, "8, 4, right, default");
@@ -177,12 +185,12 @@ public class ViewContactDetails extends JPanel {
 		lblCategory.setFont(new Font("Arial", Font.BOLD, 13));
 		this.pnlContactDetailsInformations.add(lblCategory, "8, 8");
 		
-		rdbtnLocalContact = new JRadioButton("lokaler Kontakt");
-		rdbtnLocalContact.setSelected(true);
-		rdbtnLocalContact.setEnabled(false);
-		rdbtnLocalContact.setMnemonic(KeyEvent.VK_L);
-		rdbtnLocalContact.setFont(new Font("Arial", Font.PLAIN, 13));
-		this.pnlContactDetailsInformations.add(rdbtnLocalContact, "10, 8, 5, 1");
+		rdbtnPrivateContact = new JRadioButton("privater Kontakt");
+		rdbtnPrivateContact.setSelected(true);
+		rdbtnPrivateContact.setEnabled(false);
+		rdbtnPrivateContact.setMnemonic(KeyEvent.VK_L);
+		rdbtnPrivateContact.setFont(new Font("Arial", Font.PLAIN, 13));
+		this.pnlContactDetailsInformations.add(rdbtnPrivateContact, "10, 8, 5, 1");
 		
 		rdbtnGlobalContact = new JRadioButton("globaler Kontakt");
 		rdbtnGlobalContact.setEnabled(false);
@@ -201,7 +209,7 @@ public class ViewContactDetails extends JPanel {
 		 * Group the radio buttons.
 		 */
 	    ButtonGroup btngrpCategory = new ButtonGroup();
-	    btngrpCategory.add(rdbtnLocalContact);
+	    btngrpCategory.add(rdbtnPrivateContact);
 	    btngrpCategory.add(rdbtnGlobalContact);
 	    btngrpCategory.add(rdbtnGlobalAndLocal);
 	    
@@ -552,13 +560,33 @@ public class ViewContactDetails extends JPanel {
 //		}
 		this.frmMainFrame = frmMainFrame;
 		this.viewContacts = viewContacts;
-		this.btnBack.addActionListener( new EnsureSavedDataControler( this ) );
-		this.btnBack.addActionListener( new LoadContactsActionListener( viewContacts ) );
+		this.btnBack.addActionListener( new ReturnToContactsActionListener( viewContacts ) );
+		this.btnPicture.addActionListener( new AddPictureActionListener(this) );
 	}
 	
 	public ViewMain getParentFrame(){
 		
 		return frmMainFrame;
+	}
+	
+	public ViewContacts getViewContact() {
+		return viewContacts;
+	}
+	
+	public JTabbedPane getPnlTabbedContactDetails() {
+		return pnlTabbedContactDetails;
+	}
+	
+	public Contact getAlreadyExistingContact() {
+		return alreadyExistingContact;
+	}
+	
+	public void setAlreadyExistingContact( Contact alreadyExistingContact ) {
+		this.alreadyExistingContact = alreadyExistingContact;
+	}
+	
+	public JButton getBtnPicture() {
+		return btnPicture;
 	}
 	
 	/**
@@ -629,7 +657,7 @@ public class ViewContactDetails extends JPanel {
 		textAreaNotices.setEditable(informationEditable);
 		textAreaNotices.setEnabled(informationEditable);
 		
-		rdbtnLocalContact.setEnabled(informationEditable);
+		rdbtnPrivateContact.setEnabled(informationEditable);
 		rdbtnGlobalContact.setEnabled(informationEditable);
 		rdbtnGlobalAndLocal.setEnabled(informationEditable);
 		
@@ -791,8 +819,8 @@ public class ViewContactDetails extends JPanel {
 	/**
 	 * @return the rdbtnLocalContact
 	 */
-	public JRadioButton getRdbtnLocalContact() {
-		return rdbtnLocalContact;
+	public JRadioButton getRdbtnPrivateContact() {
+		return rdbtnPrivateContact;
 	}
 
 	/**
