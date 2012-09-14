@@ -1,18 +1,18 @@
 package de.htwds.rembrandt.controler.travelview;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import de.htwds.rembrandt.controler.datastructure.FolderPathController;
-import de.htwds.rembrandt.controler.datastructure.OperationSystemPropertiesControler;
 import de.htwds.rembrandt.model.TravelInformationModel;
 import de.htwds.rembrandt.view.ViewMain;
 
 /**
  * 
  * @author Daniel
- * @version 1.1 (12.09.2012)
+ * @version 1.2 (14.09.2012)
  */
 public class SaveTravelInformationToDiskControler {
 	
@@ -40,19 +40,30 @@ public class SaveTravelInformationToDiskControler {
 	
 	private void save(){
 		String dateiname;
-        File data;
-        dateiname = FolderPathController.getGeneralInformationFolder() + FolderPathController.getFileSeperator() + "travelInformation.dat";
-        data = new File(dateiname);
+		String[] toWrite = dataToString().toString().split("\n");
+        File file;
+        dateiname = FolderPathController.getTravelInformationFolder(data.toString()) + FolderPathController.getFileSeperator() + "travelInformation.dat";
+        file = new File(dateiname);
         FileWriter fw = null;
+        BufferedWriter bw = null;
         try {
-            fw = new FileWriter(data, false);
-            fw.write(dataToString());     
+        	fw = new FileWriter(file, false);
+            bw = new BufferedWriter(fw);
+            for(int i=0; i < toWrite.length; i++){
+            	if(toWrite[i].equals("null")){
+            		bw.write("");
+            	} else {
+            		bw.write(toWrite[i]);
+            	}
+            	if(i < toWrite.length -1)
+            		bw.newLine();
+    		}   
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (fw != null) {
+            if (bw != null) {
                 try {
-                    fw.close();
+                    bw.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
