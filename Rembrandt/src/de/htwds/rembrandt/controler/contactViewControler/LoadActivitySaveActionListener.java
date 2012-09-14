@@ -1,3 +1,4 @@
+
 package de.htwds.rembrandt.controler.contactViewControler;
 
 import java.awt.event.ActionEvent;
@@ -7,12 +8,7 @@ import de.htwds.rembrandt.model.ActivityModel;
 import de.htwds.rembrandt.controler.activityController.ActivityFile;
 
 
-/**
- * 
- * @author Mathias Neef
- * @version ( Mathias Neef - 2012-09-13 )
- *
- */
+
 public class LoadActivitySaveActionListener implements ActionListener {
 
 	private ActivityModel activityModel;

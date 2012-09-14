@@ -33,8 +33,17 @@ import de.htwds.rembrandt.controler.contactViewControler.LoadAndClearDetailsActi
 import de.htwds.rembrandt.controler.contactViewControler.LoadContactDetailsActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.LoadSelectedContactListSelectionListener;
 import de.htwds.rembrandt.controler.contactViewControler.RemoveSelectedContactActionListener;
+import de.htwds.rembrandt.controler.contactViewControler.UpdateListControler;
 import de.htwds.rembrandt.controler.contactViewControler.UpdateListFromComboBoxActionListener;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.AncestorEvent;
 
+/**
+ * 
+ * @author Jan Zipfler
+ * @version ( Jan Zipfler - 2012-09-14 )
+ *
+ */
 public class ViewContacts extends JPanel {
 	
 	public static final String STD_CMB_CATEGORY_PRIVATE 	= "private Kontakte";
@@ -63,6 +72,15 @@ public class ViewContacts extends JPanel {
 	 * Create the panel.
 	 */
 	public ViewContacts() {
+		addAncestorListener(new AncestorListener() {
+			public void ancestorAdded(AncestorEvent arg0) {
+				new UpdateListControler(getViewContacts()).updateList();
+			}
+			public void ancestorMoved(AncestorEvent arg0) {
+			}
+			public void ancestorRemoved(AncestorEvent arg0) {
+			}
+		});
 		setBorder(new EmptyBorder(2, 4, 2, 2));
 		setMinimumSize(new Dimension(440, 440));
 		setPreferredSize(new Dimension(440, 440));
@@ -298,6 +316,10 @@ public class ViewContacts extends JPanel {
 	public ViewMain getParentFrame(){
 		
 		return frmMainFrame;
+	}
+	
+	public ViewContacts getViewContacts() {
+		return this;
 	}
 	
 	public ViewContactDetails getViewContactDetails(){

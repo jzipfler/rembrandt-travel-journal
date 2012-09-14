@@ -3,6 +3,7 @@ package de.htwds.rembrandt.controler.datastructure;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -35,28 +36,41 @@ public class ContactToDiscControler {
 	
 	public void loadContactsFromDisc() {
 		
-		loadPrivateContactFromDisc();
+		loadPrivateContactFromDisc( null );
 		loadGlobalContactFromDisc();
 	}
 	
-	public void loadPrivateContactFromDisc() {
+	public void loadContactsFromDisc( String folderName ) {
+		
+		if ( folderName == null )
+			folderName = journeyModel.getGeneralInformationModel().getFolderName();
+		loadPrivateContactFromDisc( folderName );
+		loadGlobalContactFromDisc();
+	}
+	
+	public void loadPrivateContactFromDisc( String journeyFolder ) {
 		ObjectInputStream in;
 	     try {
 	    	 
-	    	 in = 	new ObjectInputStream(
-		    			new BufferedInputStream(
-		    			new FileInputStream( FolderPathController.getPrivateContactFolder( journeyModel.getGeneralInformationModel().getFolderName() )
-		    								 + FolderPathController.getFileSeperator() 
-		    								 + PRIVATE_CONTACTS_FILE_NAME ) ) );
+	    	 
+			in = 	new ObjectInputStream(
+					new BufferedInputStream(
+					new FileInputStream( FolderPathController.getPrivateContactFolder( journeyFolder )
+										 + FolderPathController.getFileSeperator() 
+										 + PRIVATE_CONTACTS_FILE_NAME ) ) );
+			
 	    	 
 	    	 privateList = ( ArrayList<Contact> ) in.readObject();
 	    	 
 	    	 in.close();
 	    	 
-	        } catch (IOException e) {
+	        } catch (FileNotFoundException fileNotFount ) {
+				
+				//Do nothing, cause no contacts are saved then
+			} catch (IOException e) {
 	        	
 	        	privateList = null;
-	            //e.printStackTrace();
+	            e.printStackTrace();
 	            //throw new RuntimeException( "Die zu lesende Datei existiert nicht." );
 	        } catch (ClassNotFoundException e) {
 	        	
@@ -64,7 +78,7 @@ public class ContactToDiscControler {
 	            System.err.println("Falschen Klassentyp gelesen");
 	        } finally {
 
-	        	journeyModel.getContactListModel().setPrivateContactList(privateList);
+	        	journeyModel.getContactListModel().setPrivateContactList( privateList );
 	        }
 	}
 	
@@ -98,32 +112,32 @@ public class ContactToDiscControler {
 	
 	
 	public void writeContactsToDisc() {
-		ObjectOutputStream out;
+		ObjectOutputStream global_out, private_out;
         try {
         	
         	if ( journeyModel.getContactListModel().getGlobalContactList() != null ) {
         	
-	            out = new ObjectOutputStream(
-	                  new BufferedOutputStream(
-	                  new FileOutputStream(	FolderPathController.getGlobalContactFolder()
-								 				+ FolderPathController.getFileSeperator() 
-								 				+ GLOBAL_CONTACTS_FILE_NAME ) ) );
+        		global_out = 	new ObjectOutputStream(
+        						new BufferedOutputStream(
+        						new FileOutputStream(	FolderPathController.getGlobalContactFolder()
+								 						+ FolderPathController.getFileSeperator() 
+								 						+ GLOBAL_CONTACTS_FILE_NAME ) ) );
 	        
-	            out.writeObject ( journeyModel.getContactListModel().getGlobalContactList() );
-	            out.close();
+        		global_out.writeObject ( journeyModel.getContactListModel().getGlobalContactList() );
+        		global_out.close();
             
         	}
         	
 	        	if ( journeyModel.getContactListModel().getPrivateContactList() != null ) {
 	             
-	            out = new ObjectOutputStream(
-	                  new BufferedOutputStream(
-	                  new FileOutputStream(	FolderPathController.getPrivateContactFolder( journeyModel.getGeneralInformationModel().getFolderName() )
-	                   		 				+ FolderPathController.getFileSeperator() 
-	                   		 				+ PRIVATE_CONTACTS_FILE_NAME ) ) );
+	        	private_out = 	new ObjectOutputStream(
+	        					new BufferedOutputStream(
+	        					new FileOutputStream(	FolderPathController.getPrivateContactFolder( journeyModel.getGeneralInformationModel().getFolderName() )
+	                   		 							+ FolderPathController.getFileSeperator() 
+	                   		 							+ PRIVATE_CONTACTS_FILE_NAME ) ) );
 	          
-	            out.writeObject ( journeyModel.getContactListModel().getPrivateContactList() );
-	            out.close();
+	        	private_out.writeObject ( journeyModel.getContactListModel().getPrivateContactList() );
+	        	private_out.close();
             
         	}
                

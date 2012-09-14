@@ -11,11 +11,12 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import de.htwds.rembrandt.exception.TravelToDiscException;
 import de.htwds.rembrandt.model.GeneralInformationModel;
 /**
  * 
  * @author Daniel
- * @version 1.1 ( 13.09.2012 - Jan Zipfler )
+ * @version 1.2 ( 14.09.2012 - Jan Zipfler )
  */
 public class GeneralInformationFromDiskControler {
 	
@@ -25,11 +26,11 @@ public class GeneralInformationFromDiskControler {
 		informationArray = null;
 	}
 	
-	public GeneralInformationModel[] load() throws IOException{
+	public GeneralInformationModel[] load() throws TravelToDiscException{
 		return load(null);
 	}
 	
-	public GeneralInformationModel[] load(GeneralInformationModel newModel) throws IOException{
+	public GeneralInformationModel[] load(GeneralInformationModel newModel) throws TravelToDiscException{
 		
 		String filename;
         File data;
@@ -38,17 +39,19 @@ public class GeneralInformationFromDiskControler {
         if( data.exists() ){
         	
         	ObjectInputStream in = null;
-	        in = new ObjectInputStream( new BufferedInputStream( new FileInputStream(data)));
-	        try {
+        	try {
+        		
+        		in = new ObjectInputStream( new BufferedInputStream( new FileInputStream(data)));
+	        
 	        	informationArray = (ArrayList<GeneralInformationModel>)in.readObject();
 	        } catch (Exception e) {
-	            e.printStackTrace();
+	            throw new TravelToDiscException( e.getMessage() );
 	        } finally {
 	            if (in != null) {
 	                try {
 	                    in.close();
 	                } catch (IOException e) {
-	                    e.printStackTrace();
+	                	throw new TravelToDiscException( e.getMessage() );
 	                }
 	            }
 	        }
@@ -59,35 +62,44 @@ public class GeneralInformationFromDiskControler {
         	informationArray.add(newModel);
         if ( informationArray == null )
         	return ( new GeneralInformationModel[0] );
-        System.out.println("GeneralInformationFromDisc, newModel: " + newModel );
-        System.out.println( "GeneralInformationFromDisc, Länge ArrayList: " + informationArray.size());
+//        System.out.println("GeneralInformationFromDisc, newModel: " + newModel );
+//        System.out.println( "GeneralInformationFromDisc, Länge ArrayList: " + informationArray.size());
         
 		return informationArray.toArray( new GeneralInformationModel[informationArray.size()] );
 	}
 	
-	public void save(GeneralInformationModel[] data) throws IOException{
-		ObjectOutputStream out;
+	public void save(GeneralInformationModel[] data) throws TravelToDiscException{
+		ObjectOutputStream out = null;
 		File file;
 		file = new File(FolderPathController.getGeneralInformationFolder() + FolderPathController.getFileSeperator() + "generalInformation.dat");
 		if(file.exists()){
 			file.delete();
 		}
-		out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
 		try{
+			
+			out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+		
 			informationArray = new ArrayList<GeneralInformationModel>();
 			for (GeneralInformationModel generalInformationModel : data) {
 				informationArray.add(generalInformationModel);
 			}
 			out.writeObject(informationArray);
 		} catch(Exception e){
-			//To Do!!
-			e.printStackTrace();
+
+			throw new TravelToDiscException( e.getMessage() );
 		} finally {
-			out.close();
+			if (out != null) {
+				try {
+					out.close();
+				} catch (IOException e) {
+
+					throw new TravelToDiscException(e.getMessage());
+				}
+			}
 		}
 	}
 	
 	public void remove(GeneralInformationModel newModel){
-		informationArray.remove(newModel); //testen
+		informationArray.remove(newModel);
 	}
 }
