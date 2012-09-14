@@ -41,7 +41,7 @@ public class LoadSelectedJouneyActionListener implements ActionListener {
 		
 		try {
 			viewMain.getJourneyModel().setGeneralInformationModelArray( new GeneralInformationFromDiskControler().load() );
-			new ContactToDiscControler(viewMain.getJourneyModel()).loadContactsFromDisc();
+			new ContactToDiscControler(viewMain.getJourneyModel()).loadContactsFromDisc( getJourneyName() );
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
