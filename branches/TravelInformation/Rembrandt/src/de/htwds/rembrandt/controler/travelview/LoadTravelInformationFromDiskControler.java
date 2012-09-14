@@ -12,7 +12,7 @@ import de.htwds.rembrandt.model.TravelInformationModel;
 /**
  * 
  * @author Daniel
- * @version 1.1 (12.09.2012)
+ * @version 1.1 (14.09.2012)
  */
 public class LoadTravelInformationFromDiskControler {
 
@@ -21,6 +21,7 @@ public class LoadTravelInformationFromDiskControler {
 	
 	public LoadTravelInformationFromDiskControler(String journeyName) throws TravelInformationException{
 		this.journeyName = journeyName;
+		data = new TravelInformationModel();
 		readDataFromDisk();
 	}
 	
@@ -40,26 +41,26 @@ public class LoadTravelInformationFromDiskControler {
     		String line = null;
     		while ((line = in.readLine()) != null) {
     			if (counter < 9){
-    				line = line.replaceAll("\n", "");
     				result[counter] = line;
     			} else {
-    				comment.append(line);
-    				result[9] = comment.toString();
+    				if(line != null && line.length() > 0)
+    					comment.append(line + "\n");
     			}
     			counter ++;
     		}   
+    		result[9] = comment.toString();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             if (fr != null) {
                 try {
                     fr.close();
-                    fillData(result);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
+        fillData(result);
 	}
 	
 	private void fillData(String[] result){
@@ -73,7 +74,6 @@ public class LoadTravelInformationFromDiskControler {
 		data.setDepartureDestination(result[7]);
 		data.setOption(Integer.parseInt(result[8].trim()));
 		data.setComment(result[9]);
-		
 	}
 	
 	/**

@@ -6,12 +6,13 @@ import java.io.IOException;
 
 import de.htwds.rembrandt.controler.datastructure.ContactToDiscControler;
 import de.htwds.rembrandt.controler.datastructure.GeneralInformationFromDiskControler;
+import de.htwds.rembrandt.controler.travelview.SaveTravelInformationToDiskControler;
 import de.htwds.rembrandt.view.ViewMain;
 
 /**
  * 
  * @author Jan Zipfler
- * @version ( Jan Zipfler - 2012-09-13 )
+ * @version ( Daniel Horbach - 2012-09-14 )
  *
  */
 public class SaveAllToDiscActionListener implements ActionListener {
@@ -28,6 +29,7 @@ public class SaveAllToDiscActionListener implements ActionListener {
 		try {
 			new GeneralInformationFromDiskControler().save( viewMain.getJourneyModel().getGeneralInformationArray() );
 			new ContactToDiscControler( viewMain.getJourneyModel() ).writeContactsToDisc();
+			new SaveTravelInformationToDiskControler(viewMain).store();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
