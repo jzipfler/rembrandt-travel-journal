@@ -4,9 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import de.htwds.rembrandt.controler.datastructure.ContactToDiscControler;
 import de.htwds.rembrandt.controler.datastructure.GeneralInformationFromDiskControler;
 import de.htwds.rembrandt.controler.travelview.LoadTravelInformationFromDiskControler;
+import de.htwds.rembrandt.exception.TravelInformationException;
+import de.htwds.rembrandt.exception.TravelToDiscException;
 import de.htwds.rembrandt.model.GeneralInformationModel;
 import de.htwds.rembrandt.model.JourneyModel;
 import de.htwds.rembrandt.view.ViewMain;
@@ -16,7 +20,7 @@ import de.htwds.rembrandt.view.ViewWrapperWindow;
 /**
  * 
  * @author Jan Zipfler
- * @version ( Daniel Horbach - 2012-09-14 )
+ * @version ( Jan Zipfler - 2012-09-14 )
  *
  */
 public class LoadSelectedJouneyActionListener implements ActionListener {
@@ -31,21 +35,26 @@ public class LoadSelectedJouneyActionListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 
 		ViewMain viewMain = new ViewMain( viewWrapper, new JourneyModel() );
 		
-		if ( viewStart.getTblJourneyOverview().getSelectedRow() >= 0 )
-			loadSelectedGeneralInformationObject( viewMain);
-			loadSelectedTravelInformationObject (viewMain);
-		
 		try {
+			
+			loadSelectedTravelInformationObject (viewMain);
+			loadSelectedGeneralInformationObject( viewMain);
+		
+		
 			viewMain.getJourneyModel().setGeneralInformationModelArray( new GeneralInformationFromDiskControler().load() );
 			new ContactToDiscControler(viewMain.getJourneyModel()).loadContactsFromDisc( getJourneyName() );
 			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch ( TravelToDiscException discException ) {
+			
+			JOptionPane.showMessageDialog(viewStart, 
+					discException.getMessage() 
+					+ "\n" 
+					+TravelToDiscException.ERROR_LOAD_SELECTED_JOURNEY, 
+					TravelToDiscException.MSG_ERROR_DURING_SAVE_OR_LOAD, 
+					JOptionPane.ERROR_MESSAGE );
 		}
 		
 		viewWrapper.getPanel().removeAll();
@@ -54,18 +63,19 @@ public class LoadSelectedJouneyActionListener implements ActionListener {
 		
 	}
 	
+	/*
+	 * Cause of the TravelInformation Object is always loadet at this time...just create a GeneralInformation object from this...
+	 */
 	private void loadSelectedGeneralInformationObject( ViewMain viewMain ) {
 		
-		int column = viewStart.getTblJourneyOverview().getSelectedColumn();
-		int row = viewStart.getTblJourneyOverview().getSelectedRow();
-		String journeyName = (String) viewStart.getTblJourneyOverview().getValueAt(row, column);
-		
-		GeneralInformationModel tmpModel = new GeneralInformationModel(null, null, null, null);
-		tmpModel.setCountryAndArrivalFromFolderName(journeyName);
-		viewMain.getJourneyModel().setGeneralInformationModel(tmpModel);
+		viewMain.getJourneyModel().setGeneralInformationModel( viewMain.getJourneyModel().getTravelInformation().createGeneralInformation() );
+
+//		GeneralInformationModel tmpModel = new GeneralInformationModel(null, null, null, null);
+//		tmpModel.setCountryAndArrivalFromFolderName(journeyName);
+//		viewMain.getJourneyModel().setGeneralInformationModel(tmpModel);
 	}
 	
-	private void loadSelectedTravelInformationObject( ViewMain viewMain){
+	private void loadSelectedTravelInformationObject( ViewMain viewMain) throws TravelInformationException {
 		viewMain.getJourneyModel().setTravelInformation(new LoadTravelInformationFromDiskControler(getJourneyName()).getReadData());
 	}
 	

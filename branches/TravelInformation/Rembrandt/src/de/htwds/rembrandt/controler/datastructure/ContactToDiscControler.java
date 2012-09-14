@@ -3,6 +3,7 @@ package de.htwds.rembrandt.controler.datastructure;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -51,17 +52,22 @@ public class ContactToDiscControler {
 		ObjectInputStream in;
 	     try {
 	    	 
-	    	 in = 	new ObjectInputStream(
-		    			new BufferedInputStream(
-		    			new FileInputStream( FolderPathController.getPrivateContactFolder( journeyFolder )
-		    								 + FolderPathController.getFileSeperator() 
-		    								 + PRIVATE_CONTACTS_FILE_NAME ) ) );
+	    	 
+			in = 	new ObjectInputStream(
+					new BufferedInputStream(
+					new FileInputStream( FolderPathController.getPrivateContactFolder( journeyFolder )
+										 + FolderPathController.getFileSeperator() 
+										 + PRIVATE_CONTACTS_FILE_NAME ) ) );
+			
 	    	 
 	    	 privateList = ( ArrayList<Contact> ) in.readObject();
 	    	 
 	    	 in.close();
 	    	 
-	        } catch (IOException e) {
+	        } catch (FileNotFoundException fileNotFount ) {
+				
+				//Do nothing, cause no contacts are saved then
+			} catch (IOException e) {
 	        	
 	        	privateList = null;
 	            e.printStackTrace();

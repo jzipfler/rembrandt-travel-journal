@@ -4,7 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import de.htwds.rembrandt.controler.datastructure.GeneralInformationFromDiskControler;
+import de.htwds.rembrandt.exception.TravelToDiscException;
 import de.htwds.rembrandt.model.GeneralInformationModel;
 import de.htwds.rembrandt.view.ViewStart;
 import de.htwds.rembrandt.view.ViewWrapperWindow;
@@ -12,7 +15,7 @@ import de.htwds.rembrandt.view.ViewWrapperWindow;
 /**
  * 
  * @author jan
- * @version ( Jan Zipfler 2012-09-13 )
+ * @version ( Jan Zipfler 2012-09-14 )
  *
  */
 public class LoadStartViewActionListener implements ActionListener {
@@ -37,21 +40,24 @@ public class LoadStartViewActionListener implements ActionListener {
 
 		try {
 			viewStart.setGeneralInformationArray( new GeneralInformationFromDiskControler().load() );
-			System.out.println( "Lade Start View, Ist Array null?: " + ( viewStart.getGeneralInformationArray() == null ) );
-			System.out.println( "Lade Start View, Array Länge: " + viewStart.getGeneralInformationArray().length );
-			for (GeneralInformationModel generalInformationModel : viewStart.getGeneralInformationArray() ) {
-				System.out.println( generalInformationModel == null );
-				System.out.println(generalInformationModel);
-			}
+//			System.out.println( "Lade Start View, Ist Array null?: " + ( viewStart.getGeneralInformationArray() == null ) );
+//			System.out.println( "Lade Start View, Array Länge: " + viewStart.getGeneralInformationArray().length );
+//			for (GeneralInformationModel generalInformationModel : viewStart.getGeneralInformationArray() ) {
+//				System.out.println( generalInformationModel == null );
+//				System.out.println(generalInformationModel);
+//			}
 			if ( viewStart.getGeneralInformationArray() == null )
-				throw new RuntimeException("Laden der Startview: RückgabeArray ist NULL");
+				throw new TravelToDiscException( TravelToDiscException.ERROR_LOAD_GENERAL_INFO_FOR_START_VIEW );
 			for (GeneralInformationModel generalInformationModel : viewStart.getGeneralInformationArray() ) {
 				if ( generalInformationModel != null )
 					viewStart.getTableModel().addRow( new String[] { generalInformationModel.getFolderName() } );
 			}
-		} catch (IOException e) {
+		} catch ( TravelToDiscException discException) {
 
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(viewStart, 
+					discException.getMessage(),
+					TravelToDiscException.MSG_ERROR_DURING_SAVE_OR_LOAD, 
+					JOptionPane.ERROR_MESSAGE );
 		}
 	}
 	
