@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import de.htwds.rembrandt.controler.datastructure.FolderPathController;
 import de.htwds.rembrandt.exception.TravelInformationException;
+import de.htwds.rembrandt.exception.TravelToDiscException;
 import de.htwds.rembrandt.model.TravelInformationModel;
 
 /**
@@ -50,13 +51,13 @@ public class LoadTravelInformationFromDiskControler {
     		}   
     		result[9] = comment.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+        	throw new TravelToDiscException( e.getMessage() );
         } finally {
             if (fr != null) {
                 try {
                     fr.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                	throw new TravelToDiscException( e.getMessage() );
                 }
             }
         }
