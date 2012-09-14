@@ -22,10 +22,6 @@ public class SaveTravelInformationControler {
 		this.view = view;
 		this.mainView = mainView;
 		data = mainView.getJourneyModel().getTravelInformation();
-		if(data==null)
-			System.out.println("War Null!!");
-		else
-			System.out.println(data.toString());
 	}
 	
 
