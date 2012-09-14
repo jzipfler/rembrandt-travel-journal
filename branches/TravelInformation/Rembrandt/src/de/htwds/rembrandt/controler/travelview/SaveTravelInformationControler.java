@@ -34,6 +34,7 @@ public class SaveTravelInformationControler {
 	private void getInput(){
 		if(data == null){
 			mainView.getJourneyModel().setTravelInformation(new TravelInformationModel());
+			data = mainView.getJourneyModel().getTravelInformation();
 		}
 		data.setCity(view.getCityText());
 		data.setCountry(view.getCountryText());
