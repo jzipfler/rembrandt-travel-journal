@@ -28,6 +28,8 @@ import de.htwds.rembrandt.controler.travelview.SaveTravelInformationControler;
 import de.htwds.rembrandt.controler.travelview.SetCommentEnableActionListener;
 import de.htwds.rembrandt.controler.travelview.SetEditEnableActionListener;
 import de.htwds.rembrandt.model.TravelInformationModel;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.AncestorEvent;
 /**
  * 
  * @author Daniel
@@ -57,6 +59,20 @@ public class ViewTravelinformation extends JPanel {
 	 * Create the panel.
 	 */
 	public ViewTravelinformation(ViewMain mainView) {
+		addAncestorListener(new AncestorListener() {
+			public void ancestorAdded(AncestorEvent event) {
+			}
+			public void ancestorMoved(AncestorEvent event) {
+			}
+			public void ancestorRemoved(AncestorEvent event) {
+				if(informationEditable){
+					setInformationEditable();
+				}
+				if(commentEditable){
+					setCommentEditable();
+				}
+			}
+		});
 		this.mainView = mainView;
 		controler = new SaveTravelInformationControler(this, mainView);
 		setFont(new Font("Arial", Font.PLAIN, 11));
