@@ -58,7 +58,7 @@ public class ViewTravelinformation extends JPanel {
 	 */
 	public ViewTravelinformation(ViewMain mainView) {
 		this.mainView = mainView;
-		controler = new SaveTravelInformationControler(this);
+		controler = new SaveTravelInformationControler(this, mainView);
 		setFont(new Font("Arial", Font.PLAIN, 11));
 		setMinimumSize(new Dimension(440, 440));
 		setLayout(new BorderLayout(0, 3));
@@ -328,6 +328,7 @@ public class ViewTravelinformation extends JPanel {
 		txtArrivalStartInput.setText(data.getArrivalStart());
 		txtDepartureDestinationInput.setText(data.getDepartureDestionation());
 		txtDepartureStartInput.setText(data.getDepartureStart());
+		txtpnDescription.setText(data.getComment());
 	}
 	
 	public ViewMain getMainView(){

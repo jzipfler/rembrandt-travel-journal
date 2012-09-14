@@ -8,7 +8,7 @@ import de.htwds.rembrandt.view.ViewTravelinformation;
 /**
  * 
  * @author Daniel
- * @version 1.1 (12.09.2012)
+ * @version 1.1 (14.09.2012)
  */
 public class SaveTravelInformationControler {
 
@@ -16,9 +16,14 @@ public class SaveTravelInformationControler {
 	private TravelInformationModel data;
 	private ViewMain mainView;
 	
-	public SaveTravelInformationControler(ViewTravelinformation view){
+	public SaveTravelInformationControler(ViewTravelinformation view, ViewMain mainView){
 		this.view = view;
-		data = view.getMainView().getJourneyModel().getTravelInformation();
+		this.mainView = mainView;
+		data = mainView.getJourneyModel().getTravelInformation();
+		if(data==null)
+			System.out.println("War Null!!");
+		else
+			System.out.println(data.toString());
 	}
 	
 
