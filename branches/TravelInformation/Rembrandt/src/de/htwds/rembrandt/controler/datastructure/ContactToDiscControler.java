@@ -53,7 +53,7 @@ public class ContactToDiscControler {
 	    	 
 	    	 in = 	new ObjectInputStream(
 		    			new BufferedInputStream(
-		    			new FileInputStream( FolderPathController.getPrivateContactFolder( journeyModel.getGeneralInformationModel().getFolderName() )
+		    			new FileInputStream( FolderPathController.getPrivateContactFolder( journeyFolder )
 		    								 + FolderPathController.getFileSeperator() 
 		    								 + PRIVATE_CONTACTS_FILE_NAME ) ) );
 	    	 
