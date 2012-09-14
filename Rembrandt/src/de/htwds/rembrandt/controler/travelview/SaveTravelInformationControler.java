@@ -29,6 +29,7 @@ public class SaveTravelInformationControler {
 
 	public void save() {
 		getInput();
+		mainView.getJourneyModel().setGeneralInformationModel(data.createGeneralInformation()); //Brauch man das?
 	}
 	
 	private void getInput(){
