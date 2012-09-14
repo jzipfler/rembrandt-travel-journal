@@ -21,6 +21,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import de.htwds.rembrandt.controler.mainViewController.LoadContacPanelActionListener;
 import de.htwds.rembrandt.controler.mainViewController.LoadStartViewActionListener;
+import de.htwds.rembrandt.controler.mainViewController.SaveAllToDiscActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.LoadCalendarActionListener;
 import de.htwds.rembrandt.controler.travelview.LoadTravelInformationPanelActionListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.LoadPhotoAlbumPanelActionListener;
@@ -29,7 +30,7 @@ import de.htwds.rembrandt.model.JourneyModel;
 /**
  * 
  * @author Jan Zipfler
- * @version 20120910
+ * @version ( Jan Zipfler - 2012-09-13 )
  * 
  * This class provides the main menu for the Rembrandt project. 
  *
@@ -167,7 +168,7 @@ public class ViewMain extends JPanel {
 		
 		this.btnBeenden = new JButton("Beenden");
 		this.btnBeenden.setFont(new Font("Arial", Font.BOLD, 14));
-		this.btnBeenden.addActionListener( new LoadStartViewActionListener( viewWrapper ));
+		this.btnBeenden.addActionListener( new SaveAllToDiscActionListener( this ) );
 		pnlQuicklunch.add(this.btnBeenden, "2, 24");
 		
 		/*
