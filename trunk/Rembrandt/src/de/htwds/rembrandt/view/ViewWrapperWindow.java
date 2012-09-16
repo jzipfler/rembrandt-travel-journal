@@ -18,13 +18,15 @@ import javax.swing.JPopupMenu;
 
 import de.htwds.rembrandt.controler.datastructure.CheckExistingDataStructureControler;
 import de.htwds.rembrandt.controler.mainViewController.LoadStartViewActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * 
  * Wrapper class for all views.
  * 
  * @author Jan Zipfler
- * @version ( Jan Zipfler 2012-09-12 )
+ * @version ( Jan Zipfler 2012-09-16 )
  *
  */
 public class ViewWrapperWindow extends JFrame {
@@ -32,6 +34,7 @@ public class ViewWrapperWindow extends JFrame {
 	private JPanel panel;
 	private JPopupMenu popupMenu;
 	private JMenuItem mntmHilfe;
+	private boolean isMainView;
 
 	/**
 	 * Launch the application.
@@ -53,6 +56,17 @@ public class ViewWrapperWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewWrapperWindow() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				/*
+				 * This action starts, when the user close the window 
+				 * with the X option in the window decoration panel.
+				 */
+				if ( getIsMainView() )
+					;
+			}
+		});
 		
 		setPreferredSize(new Dimension(800, 600));
 		setMinimumSize(new Dimension(640, 480));
@@ -103,5 +117,18 @@ public class ViewWrapperWindow extends JFrame {
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
+
+	}
+	
+	/**
+	 * 
+	 * @return true if mainView. false if startView.
+	 */
+	public boolean getIsMainView() {
+		return isMainView;
+	}
+	
+	public void setIsMainView( boolean isMainView ) {
+		this.isMainView = isMainView;
 	}
 }

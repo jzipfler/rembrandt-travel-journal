@@ -42,7 +42,7 @@ import java.awt.event.ComponentEvent;
  * Diese Klasse implementiert den Wizzard zur Sammlung der Reisedaten
  * 
  * @author Daniel
- * @version ( Daniel Horbach 2012-09-12 16:50 )
+ * @version ( Jan Zipfler 2012-09-16 )
  */
 public class ViewWizzard extends JFrame {
 	
@@ -446,8 +446,6 @@ public class ViewWizzard extends JFrame {
 					break;
 				case LAST:
 					controler.readStoreAndExit();
-					setVisible(false); //Hier ist mir nichts besseres eingefallen um den Wizzard zu beenden
-					dispose();
 					break;
 				default:
 					break;
@@ -589,7 +587,7 @@ public class ViewWizzard extends JFrame {
 			getLblStartArrival().setText("Start " + extension);
 			getLblDestinationArrival().setText("Ziel " + extension);
 			getLblDepartureStart().setText("Start " + extension);
-			getLblDepartureDestination().setText("Start " + extension);
+			getLblDepartureDestination().setText("Ziel " + extension);
 		}
 	}
 	
