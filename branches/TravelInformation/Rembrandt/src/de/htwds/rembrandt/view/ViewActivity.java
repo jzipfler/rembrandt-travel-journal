@@ -47,14 +47,14 @@ public class ViewActivity extends JPanel {
 	public JPanel activityPane;
 	public JPanel buttonPane;
 	public JPanel pnlActivityAndButtons;
-	private JPanel descriptionPane;
-	private JPanel timePane;
-	private JPanel locationPane;
+	public JPanel descriptionPane;
+	public JPanel timePane;
+	public JPanel locationPane;
 	
-	private JTextField description;
-	private JTextField time;
-	private JTextField location;
-	private JTextArea story;
+	public JTextField description;
+	public JTextField time;
+	public JTextField location;
+	public JTextArea story;
 	public JButton save;
 	public JButton abort;
 	private JLabel label1;
@@ -179,7 +179,7 @@ public class ViewActivity extends JPanel {
 		this.frmMainFrame = frmMainFrame;
 		this.viewCalendar = viewCalendar;
 		this.abort.addActionListener(new LoadActivityAbortActionListener(viewCalendar));
-		this.save.addActionListener(new LoadActivitySaveActionListener());
+		this.save.addActionListener(new LoadActivitySaveActionListener(this));
 	}
 
 	
@@ -188,5 +188,23 @@ public class ViewActivity extends JPanel {
 		
 		return frmMainFrame;
 	}
+	
+	
+	public String get_Description(){
+		return description.getText();
+	}
+	
+	public String get_Time(){
+		return time.getText();
+	}
+	
+	public String get_Location(){
+		return location.getText();
+	}
+	
+	public String get_Story(){
+		return story.getText();
+	}
+	
 		
 }

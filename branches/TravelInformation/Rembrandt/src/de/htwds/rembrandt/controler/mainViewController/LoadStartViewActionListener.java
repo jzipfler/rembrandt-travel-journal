@@ -15,7 +15,7 @@ import de.htwds.rembrandt.view.ViewWrapperWindow;
 /**
  * 
  * @author jan
- * @version ( Jan Zipfler 2012-09-14 )
+ * @version ( Jan Zipfler 2012-09-16 )
  *
  */
 public class LoadStartViewActionListener implements ActionListener {
@@ -48,14 +48,19 @@ public class LoadStartViewActionListener implements ActionListener {
 //			}
 			if ( viewStart.getGeneralInformationArray() == null )
 				throw new TravelToDiscException( TravelToDiscException.ERROR_LOAD_GENERAL_INFO_FOR_START_VIEW );
-			for (GeneralInformationModel generalInformationModel : viewStart.getGeneralInformationArray() ) {
-				if ( generalInformationModel != null )
-					viewStart.getTableModel().addRow( new String[] { generalInformationModel.getFolderName() } );
+			else
+				for (GeneralInformationModel generalInformationModel : viewStart.getGeneralInformationArray() ) {
+					if ( generalInformationModel != null )
+						viewStart.getTableModel().addRow( new String[] { generalInformationModel.getFolderName() } );
 			}
 		} catch ( TravelToDiscException discException) {
 
+			discException.printStackTrace();
+			
 			JOptionPane.showMessageDialog(viewStart, 
-					discException.getMessage(),
+					discException.getMessage()
+					+ TravelToDiscException.NEW_LINE_HELPER_STRING
+					+ TravelToDiscException.ERROR_LOAD_START_VIEW,
 					TravelToDiscException.MSG_ERROR_DURING_SAVE_OR_LOAD, 
 					JOptionPane.ERROR_MESSAGE );
 		}
