@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
+import de.htwds.rembrandt.controler.datastructure.CheckExistingDataStructureControler;
 import de.htwds.rembrandt.controler.datastructure.FolderPathController;
 import de.htwds.rembrandt.controler.datastructure.GeneralInformationFromDiskControler;
 import de.htwds.rembrandt.exception.TravelToDiscException;
@@ -16,7 +17,7 @@ import de.htwds.rembrandt.view.ViewStart;
 /**
  * 
  * @author Jan Zipfler & Daniel
- * @version ( Jan Zipfler - 2012-09-14 )
+ * @version ( Jan Zipfler - 2012-09-16 )
  *
  */
 public class RemoveSelectedJourneyActionListener implements ActionListener {
@@ -50,15 +51,18 @@ public class RemoveSelectedJourneyActionListener implements ActionListener {
 		}
 		
 		try {
+			new CheckExistingDataStructureControler().checkExistingDataStructure();
 			new GeneralInformationFromDiskControler().save( newGeneralInformationArray );
 			viewStart.setGeneralInformationArray( newGeneralInformationArray );
 			viewStart.getTableModel().removeRow(row);
 		} catch ( TravelToDiscException discException ) {
 			
+			discException.printStackTrace();
+			
 			JOptionPane.showMessageDialog(viewStart, 
 					discException.getMessage() 
-					+ "\n" 
-					+TravelToDiscException.ERROR_SAVE_GENERAL_INFORMATION, 
+					+ TravelToDiscException.NEW_LINE_HELPER_STRING 
+					+ TravelToDiscException.ERROR_SAVE_GENERAL_INFORMATION, 
 					TravelToDiscException.MSG_ERROR_DURING_SAVE_OR_LOAD, 
 					JOptionPane.ERROR_MESSAGE );
 			
@@ -88,7 +92,7 @@ public class RemoveSelectedJourneyActionListener implements ActionListener {
 						+ oldGeneralInformationArray[ itemPosition ].getFolderName() + "_old" ) );
 		
 		new File( FolderPathController.getGeneralInformationFolder() ).delete();
-		viewStart.setGeneralInformationArray( newGeneralInformationArray );
+//		viewStart.setGeneralInformationArray( newGeneralInformationArray );
 	}
 	
 	private void removeItemAndReplaceArray( String folderName ) {

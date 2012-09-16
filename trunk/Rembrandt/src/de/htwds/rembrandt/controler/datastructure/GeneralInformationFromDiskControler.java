@@ -16,7 +16,7 @@ import de.htwds.rembrandt.model.GeneralInformationModel;
 /**
  * 
  * @author Daniel
- * @version 1.2 ( 14.09.2012 - Jan Zipfler )
+ * @version 1.2 ( 16.09.2012 - Jan Zipfler )
  */
 public class GeneralInformationFromDiskControler {
 	
@@ -45,6 +45,7 @@ public class GeneralInformationFromDiskControler {
 	        
 	        	informationArray = (ArrayList<GeneralInformationModel>)in.readObject();
 	        } catch (Exception e) {
+	        	e.printStackTrace();
 	            throw new TravelToDiscException( e.getMessage() );
 	        } finally {
 	            if (in != null) {
@@ -80,12 +81,13 @@ public class GeneralInformationFromDiskControler {
 			out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
 		
 			informationArray = new ArrayList<GeneralInformationModel>();
-			for (GeneralInformationModel generalInformationModel : data) {
-				informationArray.add(generalInformationModel);
+			if ( data != null )
+				for (GeneralInformationModel generalInformationModel : data) {
+					informationArray.add(generalInformationModel);
 			}
 			out.writeObject(informationArray);
-		} catch(Exception e){
-
+		} catch(IOException e){
+			e.printStackTrace();
 			throw new TravelToDiscException( e.getMessage() );
 		} finally {
 			if (out != null) {
