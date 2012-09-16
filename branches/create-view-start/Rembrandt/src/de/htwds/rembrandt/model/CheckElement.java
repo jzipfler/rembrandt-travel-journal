@@ -1,5 +1,6 @@
 package de.htwds.rembrandt.model;
 
+
 public class CheckElement 
 {
 	private CheckElement next;
