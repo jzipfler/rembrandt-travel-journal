@@ -1,7 +1,7 @@
 package de.htwds.rembrandt.view;
 
+
 import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -24,13 +24,22 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.JScrollPane;
 
+import de.htwds.rembrandt.model.CheckElement;
+import de.htwds.rembrandt.model.CheckList;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class ViewChecklist extends JPanel {
 	private JTextField txtBagElement;
 	private JTextField txtCount;
 	private JTextField txtCheckElement;
+	private DefaultTableModel bagModel;
+	private Object[][] bagData;
 	private JTable tblBag;
 	private JTable tblCheck;
-	private DefaultTableModel bagModel;
+	private CheckList listBag;
+	private CheckList listCheck;
 
 	/**
 	 * Create the panel.
@@ -56,34 +65,52 @@ public class ViewChecklist extends JPanel {
 		txtCount.setColumns(10);
 		
 		JButton btnBagCheck = new JButton("Abhaken");
-		
-		JButton btnBagAdd = new JButton("Hinzufügen");
-		btnBagAdd.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Object[] rowData = new Object[3];
-				rowData[0] = txtBagElement.getText();
-				rowData[1] = txtCount.getText();
-				rowData[2] = false;
-				bagModel.addRow(rowData);
+		btnBagCheck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int index = tblBag.getSelectedRow();
+				if(index != -1)
+				{
+					listBag.checkElement(index);
+					fillBagTable();
+				}
 			}
+		});
+		
+		JButton btnBagAdd = new JButton("Hinzuf\u00FCgen");
+		btnBagAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(listBag == null)
+				{
+					listBag = new CheckList();
+				}
+				listBag.addLast(txtBagElement.getText(), Integer.parseInt(txtCount.getText()));
+				fillBagTable();
+				}
 		});
 		
 		
 		
 		JButton btnBagDelete = new JButton("X");
+		btnBagDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int index = tblBag.getSelectedRow();
+				if(index != -1)
+				{
+					listBag.deleteElement(index);
+					fillBagTable();
+				}
+			}
+		});
 		btnBagDelete.setForeground(Color.RED);
 		btnBagDelete.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		JScrollPane scrpnlBag = new JScrollPane();
+		
 		GroupLayout gl_pnlBag = new GroupLayout(pnlBag);
 		gl_pnlBag.setHorizontalGroup(
 			gl_pnlBag.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_pnlBag.createSequentialGroup()
 					.addGroup(gl_pnlBag.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_pnlBag.createSequentialGroup()
-							.addGap(65)
-							.addComponent(lblBagHeader))
 						.addGroup(gl_pnlBag.createSequentialGroup()
 							.addContainerGap()
 							.addGroup(gl_pnlBag.createParallelGroup(Alignment.TRAILING)
@@ -100,6 +127,9 @@ public class ViewChecklist extends JPanel {
 									.addComponent(btnBagAdd, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(btnBagDelete, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))))
+						.addGroup(gl_pnlBag.createSequentialGroup()
+							.addGap(65)
+							.addComponent(lblBagHeader))
 						.addGroup(gl_pnlBag.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(scrpnlBag, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
@@ -129,11 +159,15 @@ public class ViewChecklist extends JPanel {
 					.addContainerGap())
 		);
 		
+		tblBag = new JTable();
+		
+		scrpnlBag.setViewportView(tblBag);
+		
 		bagModel = new DefaultTableModel(
 				new Object[][] {
-					},
+				},
 				new String[] {
-					"Bezeichnung", "Menge", "Abgehakt"
+					"Bezeichnung", "Menge", "Abgearbeitet"
 				}
 			) {
 				Class[] columnTypes = new Class[] {
@@ -150,22 +184,10 @@ public class ViewChecklist extends JPanel {
 				}
 			};
 		
-		tblBag = new JTable();
-		tblBag.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Bezeichnung", "Menge", "Abgehakt"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, Integer.class, Boolean.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		scrpnlBag.setViewportView(tblBag);
+		tblBag.setModel(bagModel);
+		
+		
+		
 		pnlBag.setLayout(gl_pnlBag);
 		
 		JPanel pnlCheck = new JPanel();
@@ -175,15 +197,45 @@ public class ViewChecklist extends JPanel {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JButton btnCheck = new JButton("Abhaken");
+		btnCheck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int index = tblCheck.getSelectedRow();
+				if(index != -1)
+				{
+					listCheck.checkElement(index);
+					fillCheckTable();
+				}
+			}
+		});
 		
 		JLabel lblCheckElement = new JLabel("Checkelement:");
 		
 		txtCheckElement = new JTextField();
 		txtCheckElement.setColumns(10);
 		
-		JButton btnCheckAdd = new JButton("Hinzufügen");
+		JButton btnCheckAdd = new JButton("Hinzuf\u00FCgen");
+		btnCheckAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(listCheck == null)
+				{
+					listCheck = new CheckList();
+				}
+				listCheck.addLast(txtCheckElement.getText(), 0);
+				fillCheckTable();
+			}
+		});
 		
 		JButton btnCheckDelete = new JButton("X");
+		btnCheckDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int index = tblCheck.getSelectedRow();
+				if(index != -1)
+				{
+					listCheck.deleteElement(index);
+					fillCheckTable();
+				}
+			}
+		});
 		btnCheckDelete.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnCheckDelete.setForeground(Color.RED);
 		
@@ -234,29 +286,67 @@ public class ViewChecklist extends JPanel {
 		);
 		
 		tblCheck = new JTable();
-		tblCheck.setModel(new DefaultTableModel(
+		TableModel checkModel = new DefaultTableModel(
 			new Object[][] {
-				},
+			},
 			new String[] {
-				"Bezeichnung", "Menge", "Abgehakt"
+				"Bezeichnung", "Abgearbeitet"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, Integer.class, Boolean.class
+				String.class, Boolean.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 			boolean[] columnEditables = new boolean[] {
-				false, false, false
+				false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
-		});
+		};
 		scrpnlCheck.setViewportView(tblCheck);
 		pnlCheck.setLayout(gl_pnlCheck);
-		
-		
+		tblCheck.setModel(checkModel);
+	}
+	
+	private void fillBagTable()
+	{
+		int rows = ((DefaultTableModel)tblBag.getModel()).getRowCount();
+		for(int i = 0; i < rows; i++)
+		{
+			((DefaultTableModel)tblBag.getModel()).removeRow(0);
+		}
+		CheckElement actelement = listBag.getRoot();
+		for(int i = 0; i < listBag.getElementNumber(); i++)
+		{
+			Object[] rowdata = new Object[3];
+			rowdata[0] = actelement.getDescription();
+			rowdata[1] = actelement.getAmount();
+			rowdata[2] = actelement.getChecked();
+			((DefaultTableModel)tblBag.getModel()).addRow(rowdata);
+			actelement = actelement.getNext();
+		}
+		((DefaultTableModel)tblBag.getModel()).fireTableDataChanged();
+	}
+	
+	private void fillCheckTable()
+	{
+		int rows = ((DefaultTableModel)tblCheck.getModel()).getRowCount();
+		for(int i = 0; i < rows; i++)
+		{
+			((DefaultTableModel)tblCheck.getModel()).removeRow(0);
+		}
+		CheckElement actelement = listCheck.getRoot();
+		for(int i = 0; i < listCheck.getElementNumber(); i++)
+		{
+			Object[] rowdata = new Object[3];
+			rowdata[0] = actelement.getDescription();
+			rowdata[1] = actelement.getChecked();
+			((DefaultTableModel)tblCheck.getModel()).addRow(rowdata);
+			actelement = actelement.getNext();
+		}
+		((DefaultTableModel)tblCheck.getModel()).fireTableDataChanged();
 	}
 }

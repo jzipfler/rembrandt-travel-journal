@@ -1,9 +1,10 @@
 package de.htwds.rembrandt.model;
 
+
 public class CheckList 
 {
-	CheckElement root;
-	int elementCounter;
+	private CheckElement root;
+	private int elementCounter;
 	
 	public CheckList()
 	{
@@ -81,5 +82,15 @@ public class CheckList
 			}
 			actElement.check();
 		}
+	}
+	
+	public int getElementNumber()
+	{
+		return this.elementCounter;
+	}
+	
+	public CheckElement getRoot()
+	{
+		return root;
 	}
 }
