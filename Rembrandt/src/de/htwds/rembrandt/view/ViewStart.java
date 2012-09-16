@@ -38,7 +38,7 @@ import de.htwds.rembrandt.model.GeneralInformationModel;
 /**
  * 
  * @author Jan Zipfler
- * @version ( Jan Zipfler 2012-09-13 )
+ * @version ( Jan Zipfler 2012-09-16 )
  */
 public class ViewStart extends JPanel {
 
@@ -68,6 +68,7 @@ public class ViewStart extends JPanel {
 		
 		this.wrapperView = wrapperView;
 		this.generalInformationArray = null;
+		this.wrapperView.setIsMainView(false);
 		
 		setName("Mainmenu Journey Log");
 		setMinimumSize(new Dimension(640, 480));

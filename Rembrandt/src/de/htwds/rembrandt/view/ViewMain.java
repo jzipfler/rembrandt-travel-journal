@@ -79,6 +79,7 @@ public class ViewMain extends JPanel {
 		 */
 		this.journeyModel = journeyModel;
 		this.viewWrapper = viewWrapper;
+		this.viewWrapper.setIsMainView(true);
 		
 		setPreferredSize(new Dimension(800, 600));
 		setMinimumSize(new Dimension(640, 480));
