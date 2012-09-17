@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import de.htwds.rembrandt.controler.datastructure.ContactToDiscControler;
 import de.htwds.rembrandt.controler.datastructure.GeneralInformationFromDiskControler;
 import de.htwds.rembrandt.controler.travelview.LoadTravelInformationFromDiskControler;
+import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumIOController;
 import de.htwds.rembrandt.exception.TravelInformationException;
 import de.htwds.rembrandt.exception.TravelToDiscException;
 import de.htwds.rembrandt.model.GeneralInformationModel;
@@ -46,6 +47,8 @@ public class LoadSelectedJouneyActionListener implements ActionListener {
 		
 			viewMain.getJourneyModel().setGeneralInformationModelArray( new GeneralInformationFromDiskControler().load() );
 			new ContactToDiscControler(viewMain.getJourneyModel()).loadContactsFromDisc( getJourneyName() );
+			// photoAlbum
+			viewMain.getJourneyModel().setPhotoAlbumModel( new PhotoAlbumIOController( viewMain.getJourneyModel() ).load() );
 			
 		} catch ( TravelToDiscException discException ) {
 			

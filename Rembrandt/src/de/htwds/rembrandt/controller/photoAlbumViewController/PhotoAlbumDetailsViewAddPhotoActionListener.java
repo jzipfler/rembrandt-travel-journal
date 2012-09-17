@@ -1,13 +1,11 @@
 package de.htwds.rembrandt.controller.photoAlbumViewController;
 
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Date;
 import java.util.LinkedList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -19,14 +17,14 @@ import de.htwds.rembrandt.view.photoAlbum.ViewPhotoAlbumDetails;
 
 /**
  * @author sFey
- * @version 13.09.2012
+ * @version 16.09.2012
  */
-public class AddPhotoActionListener implements ActionListener {
+public class PhotoAlbumDetailsViewAddPhotoActionListener implements ActionListener {
 	
 	private ViewPhotoAlbumDetails viewPhotoAlbumDetails;
 	private LinkedList<Photo> photoAlbum;
 	
-	public AddPhotoActionListener( ViewPhotoAlbumDetails viewPhotoAlbumDetails ) {
+	public PhotoAlbumDetailsViewAddPhotoActionListener( ViewPhotoAlbumDetails viewPhotoAlbumDetails ) {
 		this.viewPhotoAlbumDetails = viewPhotoAlbumDetails;
 	}
 
@@ -44,15 +42,15 @@ public class AddPhotoActionListener implements ActionListener {
 		
 		if( selection == JFileChooser.APPROVE_OPTION ) {
 			
-	    	// create icon (i.e. the image)
 			String path = fileChooser.getSelectedFile().getPath();
-	    	ImageIcon image = new ImageIcon( path );
-	    	if( image.getIconHeight() > 180 ) { // resize
-	    		image = new ImageIcon( image.getImage().getScaledInstance( -1, 185, Image.SCALE_DEFAULT ) );
-	    	} 
-	    	
-	    	// create thumbail (i.e. smaller version of the icon)
-	    	ImageIcon thumbnail = new ImageIcon( image.getImage().getScaledInstance(-1, 50, Image.SCALE_DEFAULT) );
+//	    	// create icon (i.e. the image)
+//	    	ImageIcon image = new ImageIcon( path );
+//	    	if( image.getIconHeight() > 180 ) { // resize
+//	    		image = new ImageIcon( image.getImage().getScaledInstance( -1, 185, Image.SCALE_DEFAULT ) );
+//	    	} 
+//	    	
+//	    	// create thumbail (i.e. smaller version of the icon)
+//	    	ImageIcon thumbnail = new ImageIcon( image.getImage().getScaledInstance(-1, 50, Image.SCALE_DEFAULT) );
 	    	
 	    	// determine file name and last modified date
 	    	File file = new File( path );
@@ -60,8 +58,9 @@ public class AddPhotoActionListener implements ActionListener {
 	    	String fileName = file.getName();			    	
 	    	
 	    	// create Photo object
-			Photo photo = new Photo( image, thumbnail, fileName, fileDate, path, "" );
-			photoAlbum = viewPhotoAlbumDetails.getPhotoAlbumModel().getPhotoAlbum();
+//			Photo photo = new Photo( image, thumbnail, fileName, fileDate, path, "" );
+			Photo photo = new Photo( fileName, fileDate, path, "" );
+			photoAlbum = viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel().getPhotoAlbum();
 			
 			// photo already in album? 
 			if( photoAlbum.contains(photo)  ) {
@@ -70,13 +69,16 @@ public class AddPhotoActionListener implements ActionListener {
 				// add photo to album
 				photoAlbum.add( photo );
 				
+				viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel().setCurrentPhoto( photo );
 				viewPhotoAlbumDetails.populatePhotoArea(photo);
-				viewPhotoAlbumDetails.getPhotoAlbumModel().setCurrentPhoto( photo );
 				viewPhotoAlbumDetails.populateThumbnailArea( photoAlbum );
-				
-				// save
-				new PhotoAlbumIOController().save( viewPhotoAlbumDetails.getPhotoAlbumModel() );
 			}
+			
+			//new PhotoAlbumIOController( viewPhotoAlbumDetails.getParentFrame().getJourneyModel() ).save( viewPhotoAlbumDetails.getPhotoAlbumModel() );
+			
+			// save
+			new PhotoAlbumIOController( viewPhotoAlbumDetails.getParentFrame().getJourneyModel() ).save();
+			
 		}
 	}
 }

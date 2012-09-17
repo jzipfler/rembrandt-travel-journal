@@ -2,8 +2,6 @@ package de.htwds.rembrandt.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 
 /**
  * @author sFey
@@ -18,13 +16,13 @@ public class Photo implements Serializable {
     private String comment;
     private String path;
 
-    private ImageIcon thumbnail;
-	private ImageIcon image;
+//    private ImageIcon thumbnail;
+//	private ImageIcon image;
     
-    public Photo( ImageIcon image, ImageIcon thumbnail, String name, Date date, String path, String comment ) {
+    public Photo( String name, Date date, String path, String comment ) {
         // TODO: check if empty/null -> throw Exception
-    	this.image = image;
-    	this.thumbnail = thumbnail;
+//    	this.image = image;
+//    	this.thumbnail = thumbnail;
     	this.name = name;
         this.date = date;
         this.path = path;
@@ -41,13 +39,13 @@ public class Photo implements Serializable {
         return date;
     }
     
-    public Icon getImage() {
-        return image;
-    }
-    
-    public Icon getThumbnail() {
-        return thumbnail;
-    }    
+//    public Icon getImage() {
+//        return image;
+//    }
+//    
+//    public Icon getThumbnail() {
+//        return thumbnail;
+//    }    
     
     public String getComment() {
         return comment;

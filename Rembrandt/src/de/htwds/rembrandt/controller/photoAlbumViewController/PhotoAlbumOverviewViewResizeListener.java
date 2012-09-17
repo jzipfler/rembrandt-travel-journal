@@ -7,24 +7,22 @@ import de.htwds.rembrandt.view.photoAlbum.ViewPhotoAlbumOverview;
 
 /**
  * @author sFey
- * @version 13.09.2012
+ * @version 16.09.2012
  */
-public class PhotoAlbumResizeListener implements ComponentListener {
+public class PhotoAlbumOverviewViewResizeListener implements ComponentListener {
 
 	private ViewPhotoAlbumOverview viewPhotoAlbumOverview;
 
-	public PhotoAlbumResizeListener(ViewPhotoAlbumOverview viewPhotoAlbumOverview) {
+	public PhotoAlbumOverviewViewResizeListener(ViewPhotoAlbumOverview viewPhotoAlbumOverview) {
 		this.viewPhotoAlbumOverview = viewPhotoAlbumOverview;
 	}
-	
-	public void componentHidden(ComponentEvent event) {}
-
-	public void componentMoved(ComponentEvent event) {}
-	
-	public void componentShown(ComponentEvent event) { }	
 
 	public void componentResized(ComponentEvent event) {
 		viewPhotoAlbumOverview.adjustPhotoArea();
-		
 	}
+	
+	// not needed
+	public void componentHidden ( ComponentEvent event ) {}
+	public void componentMoved  ( ComponentEvent event ) {}
+	public void componentShown  ( ComponentEvent event ) {}	
 }

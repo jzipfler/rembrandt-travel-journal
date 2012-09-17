@@ -1,11 +1,9 @@
 package de.htwds.rembrandt.model;
 
-import java.util.ArrayList;
-
 /**
  * 
  * @author Jan Zipfler
- * @version (Jan Zipfler 2012-09-12 )
+ * @version sFey 15.09.12
  *
  * Superclass for all model classes, needed to get the data for the rembrandt project.
  */
@@ -15,6 +13,7 @@ public class JourneyModel {
 	private TravelInformationModel travelInformation;
 	private GeneralInformationModel generalInformation;
 	private GeneralInformationModel[] generalInformationArray;
+	
 	
 	/*
 	 * Your implementation here
@@ -51,4 +50,10 @@ public class JourneyModel {
 	public void setGeneralInformationModelArray( GeneralInformationModel[] generalInformationArray ) {
 		this.generalInformationArray = generalInformationArray;
 	}
+	
+	// photoAlbumModel 
+	private PhotoAlbumModel photoAlbumModel;
+	
+	public void setPhotoAlbumModel( PhotoAlbumModel photoAlbumModel ) { this.photoAlbumModel = photoAlbumModel; }
+	public PhotoAlbumModel getPhotoAlbumModel() { return this.photoAlbumModel; }
 }
