@@ -24,18 +24,20 @@ import de.htwds.rembrandt.controler.mainViewController.LoadStartViewActionListen
 import de.htwds.rembrandt.controler.mainViewController.SaveAllToDiscActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.LoadCalendarActionListener;
 import de.htwds.rembrandt.controler.travelview.LoadTravelInformationPanelActionListener;
-import de.htwds.rembrandt.controller.photoAlbumViewController.LoadPhotoAlbumPanelActionListener;
+import de.htwds.rembrandt.controller.photoAlbumViewController.LoadPhotoAlbumDetailsPanelActionListener;
 import de.htwds.rembrandt.model.JourneyModel;
 
 /**
  * 
  * @author Jan Zipfler
- * @version ( Jan Zipfler - 2012-09-13 )
+ * @version ( sfey 17.09.2012 )
  * 
  * This class provides the main menu for the Rembrandt project. 
  *
  */
 public class ViewMain extends JPanel {
+	
+	private static final long serialVersionUID = 1L;
 	
 	// Class that holds all informations
 	private JourneyModel journeyModel;
@@ -140,7 +142,7 @@ public class ViewMain extends JPanel {
 		btnPhotos = new JButton("Fotos");
 		btnPhotos.setBackground(UIManager.getColor("Button.background"));
 		btnPhotos.setFont(new Font("Arial", Font.BOLD, 14));
-		btnPhotos.addActionListener(new LoadPhotoAlbumPanelActionListener(this));
+		btnPhotos.addActionListener(new LoadPhotoAlbumDetailsPanelActionListener(this));
 		pnlQuicklunch.add(btnPhotos, "2, 2");
 		
 		btnData = new JButton("Daten");

@@ -30,6 +30,8 @@ import de.htwds.rembrandt.model.Contact;
 
 public class ViewContactDetails extends JPanel {
 	
+	private static final long serialVersionUID = 1L;
+	
 	public static final String STD_BUTTON_UNLOCK_UNLOCK = "Entsperren";
 	public static final String STD_BUTTON_UNLOCK_LOCK = "Speichern und Sperren";
 	
