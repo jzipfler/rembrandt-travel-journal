@@ -1,21 +1,31 @@
 package de.htwds.rembrandt.model;
 
+import java.io.Serializable;
 import java.util.Date;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 
-public class Photo {
+/**
+ * @author sFey
+ * @version 13.09.2012
+ */
+public class Photo implements Serializable {
 
-    private String name;
+	private static final long serialVersionUID = 1L;
+	
+	private String name;
     private Date date;
-    private ImageIcon icon;
     private String comment;
+    private String path;
+
+//    private ImageIcon thumbnail;
+//	private ImageIcon image;
     
     public Photo( String name, Date date, String path, String comment ) {
         // TODO: check if empty/null -> throw Exception
-        this.name = name;
+//    	this.image = image;
+//    	this.thumbnail = thumbnail;
+    	this.name = name;
         this.date = date;
-        this.icon = new ImageIcon(path);
+        this.path = path;
         this.comment = comment;
     }
     
@@ -29,12 +39,34 @@ public class Photo {
         return date;
     }
     
-    public Icon getIcon() {
-        return icon;
-    }
+//    public Icon getImage() {
+//        return image;
+//    }
+//    
+//    public Icon getThumbnail() {
+//        return thumbnail;
+//    }    
     
     public String getComment() {
         return comment;
     }
     
+    public String getPath() { return path; }
+    
+    // FUNCTIONS
+
+    public boolean equals(Object other) {
+    	
+    	if( other == this ) return true;
+
+    	if( !( other instanceof Photo ) ) return false;
+    	   
+    	Photo photo = (Photo) other;
+    	
+    	return this.path.equals( photo.getPath() ); 
+    }
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 }
