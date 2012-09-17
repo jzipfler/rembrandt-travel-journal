@@ -17,19 +17,16 @@ import de.htwds.rembrandt.view.photoAlbum.ViewPhotoAlbumOverview;
 public class PhotoAlbumOverviewViewMouseListener implements MouseListener {
 
 	private ViewPhotoAlbumOverview viewPhotoAlbumOverview;
-	private PhotoAlbumModel photoAlbumModel;
-	private Photo photo;
 
 	public PhotoAlbumOverviewViewMouseListener( ViewPhotoAlbumOverview viewPhotoAlbumOverview ) {
 		this.viewPhotoAlbumOverview = viewPhotoAlbumOverview;
 	}
 
 	public void mouseClicked(MouseEvent event) {
-		photoAlbumModel = viewPhotoAlbumOverview.getPhotoAlbumModel();
-		photo = photoAlbumModel.findPhotoByPath( ((ImageIcon) ((JLabel) event.getComponent()).getIcon()).getDescription() );
+		PhotoAlbumModel photoAlbumModel = viewPhotoAlbumOverview.getParentFrame().getJourneyModel().getPhotoAlbumModel();
+		Photo photo = photoAlbumModel.findPhotoByPath( ((ImageIcon) ((JLabel) event.getComponent()).getIcon()).getDescription() );
 
 		// switch to detail view
-		
 		photoAlbumModel.setCurrentPhoto(photo);
 		new LoadPhotoAlbumDetailsPanelActionListener(viewPhotoAlbumOverview.getParentFrame()).loadPhotoAlbum();
 	}
