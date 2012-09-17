@@ -24,16 +24,16 @@ import de.htwds.rembrandt.view.ViewMain;
 
 /**
  * @author sFey
- * @version 13.09.2012
+ * @version 17.09.2012
  */
 public class ViewPhotoAlbumOverview extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	
 	private ViewMain frmMain;
-	private PhotoAlbumModel photoAlbumModel;
-	private LinkedList<Photo> photoAlbum;
 	private JPanel pnlPhotoArea;
 	private JButton btnSwitchToDetails;
+	private LinkedList<JLabel> labelList;
 
 	public ViewPhotoAlbumOverview() {
 		setLayout(new BorderLayout(0, 0));
@@ -68,6 +68,9 @@ public class ViewPhotoAlbumOverview extends JPanel {
 
 		this.addComponentListener(new PhotoAlbumOverviewViewResizeListener(this));
 		btnSwitchToDetails.addActionListener(new ReturnToPhotoAlbumDetailsViewActionListener(this));
+		
+		// init labelList
+		labelList = new LinkedList<JLabel>();
 	}
 
 	public ViewPhotoAlbumOverview(ViewMain viewMain) {
@@ -80,7 +83,7 @@ public class ViewPhotoAlbumOverview extends JPanel {
 	}
 
 	public void populate() {
-		photoAlbumModel = this.getParentFrame().getJourneyModel().getPhotoAlbumModel();
+		PhotoAlbumModel photoAlbumModel = this.getParentFrame().getJourneyModel().getPhotoAlbumModel();
 
 		// should never happen, just in case ...
 		if (photoAlbumModel == null) {
@@ -88,51 +91,66 @@ public class ViewPhotoAlbumOverview extends JPanel {
 			getParentFrame().getJourneyModel().setPhotoAlbumModel(photoAlbumModel);
 		}
 
-		LinkedList<Photo> photoAlbum = photoAlbumModel.getPhotoAlbum();
-
-		if (photoAlbum.size() > 0) {
-			populatePhotoArea();
-		}
+		// add photo thumbnails to the overview
+		if (photoAlbumModel.getPhotoAlbum().size() > 0) populatePhotoArea();
 	}
 
 	public void populatePhotoArea() {
-		photoAlbum = photoAlbumModel.getPhotoAlbum();
-
 		pnlPhotoArea.removeAll();
 		pnlPhotoArea.validate();
 		pnlPhotoArea.repaint();
 
-		for (Photo photo : photoAlbum) {
-			JLabel lblTemp = new JLabel();
-
-			ImageIcon photoIcon = new ImageIcon(photo.getPath(), photo.getPath());
-			if (photoIcon.getIconHeight() > 185) {
-				photoIcon = new ImageIcon(photoIcon.getImage().getScaledInstance(-1, 185, Image.SCALE_DEFAULT), photo.getPath());
-			}
-			lblTemp.setIcon(photoIcon);
-
+		// add the photos to the panel
+		LinkedList<Photo> photoAlbum = this.getParentFrame().getJourneyModel().getPhotoAlbumModel().getPhotoAlbum();
+		JLabel lblTemp = null;
+		ImageIcon currentIcon;
+		
+		for (Photo currentPhoto : photoAlbum ) {
+			// create new icon
+			currentIcon = new ImageIcon(currentPhoto.getPath(), currentPhoto.getPath());
+			
+			// create new label
+			lblTemp = new JLabel();
+			lblTemp.setIcon(currentIcon);
 			lblTemp.addMouseListener(new PhotoAlbumOverviewViewMouseListener(this));
 			lblTemp.setVerticalAlignment(JLabel.TOP);
+			
 			pnlPhotoArea.add(lblTemp);
+			// add label to the list so we can iterate that list later to resize the icons
+			labelList.add(lblTemp);
 		}
 
 		pnlPhotoArea.validate();
 		pnlPhotoArea.repaint();
 	}
 
-	public JPanel getPnlPhotoArea() {
-		return pnlPhotoArea;
-	}
-
 	public void adjustPhotoArea() {
-		int numCols = (int) (Math.ceil(this.getWidth() / 250.0f));
-		int numRows = (int) (Math.ceil(this.getHeight() / 180.0f));
+		// get number of cols and rows we need
+		int numPhotos = this.getParentFrame().getJourneyModel().getPhotoAlbumModel().getPhotoAlbum().size();
+		int numCols = (int) Math.ceil( Math.sqrt(numPhotos) );
+		int numRows = (int) Math.ceil( (double)numPhotos / (double)numCols );
 		
+		// update the layout
 		pnlPhotoArea.setLayout(new GridLayout(numRows, numCols, 2, 2));
-	}
+		
+		String currentPath;
+		ImageIcon currentIcon;
+		
+		for (JLabel currentLabel : labelList) {
+			// get path of current Label
+			currentPath = ((ImageIcon) currentLabel.getIcon()).getDescription();
 
-	public PhotoAlbumModel getPhotoAlbumModel() {
-		return photoAlbumModel;
-	}
+			// resize icon to fit the gridWidth
+			int gridWidth = pnlPhotoArea.getWidth()/numCols;
+			currentIcon = new ImageIcon(currentPath, currentPath);
+			currentIcon = new ImageIcon( currentIcon.getImage().getScaledInstance(gridWidth, -1, Image.SCALE_DEFAULT), currentPath);
 
+			// resize if the height of the grid is lower than the height of the icon
+			int gridHeight = pnlPhotoArea.getHeight() / numRows;
+			if( gridHeight < currentIcon.getIconHeight() ) {
+				currentIcon = new ImageIcon( currentIcon.getImage().getScaledInstance(-1, gridHeight, Image.SCALE_DEFAULT), currentPath);
+			}
+			currentLabel.setIcon(currentIcon);
+		}
+	}
 }

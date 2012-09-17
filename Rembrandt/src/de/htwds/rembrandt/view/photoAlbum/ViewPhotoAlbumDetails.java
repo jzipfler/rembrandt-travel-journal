@@ -84,13 +84,6 @@ public class ViewPhotoAlbumDetails extends JPanel {
 	private ViewMain frmMain;
 	private JTabbedPane tpPhotoArea;
 
-	public ViewPhotoAlbumDetails(ViewMain viewMain, Photo photo) {
-		this(viewMain);
-		populatePhotoArea();
-		populateThumbnailArea(viewMain.getJourneyModel().getPhotoAlbumModel().getPhotoAlbum());
-		viewMain.getJourneyModel().getPhotoAlbumModel().setCurrentPhoto(photo);
-	}
-
 	public ViewPhotoAlbumDetails(ViewMain viewMain) {
 		this();
 		this.frmMain = viewMain;
@@ -277,20 +270,16 @@ public class ViewPhotoAlbumDetails extends JPanel {
 	}
 
 	public void populate() {
-
 		PhotoAlbumModel photoAlbumModel = this.getParentFrame().getJourneyModel().getPhotoAlbumModel();
 
+		// if there is not yet a photoAlbumModel create and set one
 		if (photoAlbumModel == null) {
 			photoAlbumModel = new PhotoAlbumModel();
 			getParentFrame().getJourneyModel().setPhotoAlbumModel(photoAlbumModel);
 		}
 
-		LinkedList<Photo> photoAlbum = photoAlbumModel.getPhotoAlbum();
-
 		populatePhotoArea();
-		populateThumbnailArea(photoAlbum);
-
-		//toggleActivationState();
+		populateThumbnailArea();
 	}
 
 	public void populatePhotoArea() {
@@ -320,11 +309,10 @@ public class ViewPhotoAlbumDetails extends JPanel {
 			this.tpPhotoArea.setSelectedIndex(0);		
 		}
 		
-		toggleActivationState();
+		toggleUIElementsEnabledState();
 	}
 	
-	
-	public void toggleActivationState() {
+	public void toggleUIElementsEnabledState() {
 		
 		Photo photo = this.getParentFrame().getJourneyModel().getPhotoAlbumModel().getCurrentPhoto();
 		LinkedList<Photo> photoAlbum = this.getParentFrame().getJourneyModel().getPhotoAlbumModel().getPhotoAlbum();
@@ -348,10 +336,11 @@ public class ViewPhotoAlbumDetails extends JPanel {
 			// last photo in the list disable the forward-button
 			if( photoAlbum.getLast().equals(photo) ) this.btnPhotoForward.setEnabled(false);
 		}
-		
 	}
 
-	public void populateThumbnailArea(LinkedList<Photo> photoAlbum) {
+	public void populateThumbnailArea() {
+		LinkedList<Photo> photoAlbum = this.getParentFrame().getJourneyModel().getPhotoAlbumModel().getPhotoAlbum();
+		
 		pnlThumbnailArea.removeAll();
 		pnlThumbnailArea.validate();
 		pnlThumbnailArea.repaint();
@@ -373,18 +362,24 @@ public class ViewPhotoAlbumDetails extends JPanel {
 	}
 
 	public void adjustPhotoArea() {
-
 		Photo currentPhoto = getParentFrame().getJourneyModel().getPhotoAlbumModel().getCurrentPhoto();
 		
-		if(  currentPhoto != null ) {
+		// photoAlbum not empty?
+		if( currentPhoto != null ) {
 			ImageIcon photoIcon = new ImageIcon(currentPhoto.getPath(), currentPhoto.getPath());
 	
+			// resize if icon height is bigger than the panel height
 			int photoPreviewPanelHeight = (int) pnlCurrentPhoto.getBounds().getSize().getHeight() - 10;
-	
-			if (photoIcon.getIconHeight() > photoPreviewPanelHeight && photoPreviewPanelHeight != 0) {
+				if (photoIcon.getIconHeight() > photoPreviewPanelHeight && photoPreviewPanelHeight != 0) {
 				photoIcon = new ImageIcon(photoIcon.getImage().getScaledInstance(-1, photoPreviewPanelHeight, Image.SCALE_DEFAULT), currentPhoto.getPath());
 			}
 	
+			// resize if the icon width is bigger than the lanel width
+			int photoPreviewPanelWidth = (int) pnlCurrentPhoto.getBounds().getSize().getWidth();
+			if( photoIcon.getIconWidth() >  photoPreviewPanelWidth && photoPreviewPanelWidth != 0)  {
+				photoIcon = new ImageIcon(photoIcon.getImage().getScaledInstance(photoPreviewPanelWidth, -1, Image.SCALE_DEFAULT), currentPhoto.getPath());
+			}
+			
 			lblCurrentPhoto.setIcon(photoIcon);
 		}
 	}
