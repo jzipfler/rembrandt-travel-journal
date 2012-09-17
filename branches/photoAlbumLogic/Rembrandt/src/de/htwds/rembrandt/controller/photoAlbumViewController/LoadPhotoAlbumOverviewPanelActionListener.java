@@ -8,7 +8,7 @@ import de.htwds.rembrandt.view.photoAlbum.ViewPhotoAlbumOverview;
 
 /**
  * @author sFey
- * @version 13.09.2012
+ * @version 16.09.2012
  */
 public class LoadPhotoAlbumOverviewPanelActionListener implements ActionListener {
 
@@ -20,6 +20,9 @@ public class LoadPhotoAlbumOverviewPanelActionListener implements ActionListener
     
 	public void actionPerformed(ActionEvent event) {
         ViewMain viewMain = viewPhotoAlbum.getParentFrame(); 
+
+        viewPhotoAlbum.populate();
+        
 		viewMain.getCurrentContentPanel().removeAll();
 		viewMain.getCurrentContentPanel().add(viewPhotoAlbum);
 		viewPhotoAlbum.updateUI();

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-import javax.swing.Icon;
+//import javax.swing.Icon;
 
 /**
  * @author sFey
@@ -38,32 +38,47 @@ public class PhotoAlbumModel  implements Serializable {
 	
 	// FUNCTIONS 
 	
-	public Photo findPhotoByThumbnail( Icon thumbnail ) {
-		ListIterator<Photo> iterator = photoAlbum.listIterator();
-	    
-		while( iterator.hasNext() ) {
-			Photo photo = iterator.next();
-
-			if( photo.getThumbnail().equals( thumbnail ) )
-				return photo; // found
-		}
-
-		// not found
-		return null;
-	}
+//	public Photo findPhotoByThumbnail( Icon thumbnail ) {
+//		ListIterator<Photo> iterator = photoAlbum.listIterator();
+//	    
+//		while( iterator.hasNext() ) {
+//			Photo photo = iterator.next();
+//
+//			if( photo.getThumbnail().equals( thumbnail ) )
+//				return photo; // found
+//		}
+//
+//		// not found
+//		return null;
+//	}
 	
-	public Photo findPhotoByImage( Icon image ) {
+//	public Photo findPhotoByImage( Icon image ) {
+//		ListIterator<Photo> iterator = photoAlbum.listIterator();
+//	    
+//		while( iterator.hasNext() ) {
+//			Photo photo = iterator.next();
+//
+//			if( photo.getImage().equals( image ) )
+//				return photo; // found
+//		}
+//
+//		// not found
+//		return null;
+//	}	
+	
+	
+	public Photo findPhotoByPath( String path ) {
 		ListIterator<Photo> iterator = photoAlbum.listIterator();
 	    
 		while( iterator.hasNext() ) {
 			Photo photo = iterator.next();
 
-			if( photo.getImage().equals( image ) )
+			if( photo.getPath().equals( path ) )
 				return photo; // found
 		}
 
 		// not found
 		return null;
-	}	
+	}		
 
 }

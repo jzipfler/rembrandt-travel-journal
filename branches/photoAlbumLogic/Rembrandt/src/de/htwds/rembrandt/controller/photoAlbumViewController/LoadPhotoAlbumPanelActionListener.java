@@ -9,17 +9,19 @@ import de.htwds.rembrandt.view.photoAlbum.ViewPhotoAlbumDetails;
 
 /**
  * @author sFey
- * @version 13.09.2012
+ * @version 16.09.2012
  */
 public class LoadPhotoAlbumPanelActionListener implements ActionListener {
 
     private ViewPhotoAlbumDetails viewPhotoAlbum;
-    
-    public LoadPhotoAlbumPanelActionListener(ViewMain viewMain) {
+	private Photo photo;
+	
+	public LoadPhotoAlbumPanelActionListener(ViewMain viewMain) {
         this.viewPhotoAlbum = new ViewPhotoAlbumDetails( viewMain );
     }
     
     public LoadPhotoAlbumPanelActionListener(ViewMain viewMain, Photo photo){
+    	this.photo = photo;
     	this.viewPhotoAlbum = new ViewPhotoAlbumDetails( viewMain, photo );
     }
     
@@ -29,9 +31,11 @@ public class LoadPhotoAlbumPanelActionListener implements ActionListener {
     
     public void loadPhotoAlbum() {
     	ViewMain viewMain = viewPhotoAlbum.getParentFrame();
+    	
+    	if( photo == null ) viewPhotoAlbum.populate();
+    	
     	viewMain.getCurrentContentPanel().removeAll();
         viewMain.getCurrentContentPanel().add(viewPhotoAlbum);
         viewPhotoAlbum.updateUI();    	
     }
-
 }

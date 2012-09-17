@@ -13,7 +13,7 @@ import de.htwds.rembrandt.view.photoAlbum.ViewPhotoAlbumDetails;
  * @author sFey
  * @version 13.09.2012
  */
-public class SetCurrentPhotoActionListener implements ActionListener {
+public class PhotoAlbumDetailsViewSetCurrentPhotoActionListener implements ActionListener {
 
 	private ViewPhotoAlbumDetails viewPhotoAlbumDetails;
 	private boolean forward;
@@ -21,15 +21,15 @@ public class SetCurrentPhotoActionListener implements ActionListener {
 	private Photo currentPhoto;
 	private Photo photo;
 
-	public SetCurrentPhotoActionListener( ViewPhotoAlbumDetails viewPhotoAlbumDetails, boolean forward ) {
+	public PhotoAlbumDetailsViewSetCurrentPhotoActionListener( ViewPhotoAlbumDetails viewPhotoAlbumDetails, boolean forward ) {
 		this.viewPhotoAlbumDetails = viewPhotoAlbumDetails;
 		this.forward = forward;
 	}	
 	
 	public void actionPerformed(ActionEvent event) {
 		
-		photoAlbum = viewPhotoAlbumDetails.getPhotoAlbumModel().getPhotoAlbum();
-		currentPhoto = viewPhotoAlbumDetails.getPhotoAlbumModel().getCurrentPhoto();
+		photoAlbum = viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel().getPhotoAlbum();
+		currentPhoto = viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel().getCurrentPhoto();
 		
 		// comment not locked, save?
 		if( viewPhotoAlbumDetails.getEpnPhotoComment().isEditable() ) {
@@ -37,7 +37,7 @@ public class SetCurrentPhotoActionListener implements ActionListener {
 			int choice = JOptionPane.showOptionDialog( viewPhotoAlbumDetails, "Möchten Sie ihre Änderungen speichern?", "Speichern?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0] );
 			
 			if( choice == JOptionPane.YES_OPTION ) {
-				new SavePhotoCommentActionListener( viewPhotoAlbumDetails ).saveComment();
+				new PhotoAlbumDetailsViewSaveCommentActionListener( viewPhotoAlbumDetails ).saveComment();
 			} 
 			
 			viewPhotoAlbumDetails.toggleCommmentEditStatus();
@@ -59,11 +59,8 @@ public class SetCurrentPhotoActionListener implements ActionListener {
 				
 				photo = photoAlbum.get( index );
 				
+				viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel().setCurrentPhoto( photo );
 				viewPhotoAlbumDetails.populatePhotoArea( photo );
-				viewPhotoAlbumDetails.getPhotoAlbumModel().setCurrentPhoto( photo );
-				
-				// debug
-				System.out.println( "index:" + index + "size:" + photoAlbum.size() ) ;
 			}
 		} else {
 			// debug

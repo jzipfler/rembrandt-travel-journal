@@ -7,20 +7,21 @@ import de.htwds.rembrandt.view.photoAlbum.ViewPhotoAlbumDetails;
  * @author sFey
  * @version 13.09.2012
  */
-public class SavePhotoCommentActionListener {
+public class PhotoAlbumDetailsViewSaveCommentActionListener {
 
 	private ViewPhotoAlbumDetails viewPhotoAlbumDetails;
 
-	public SavePhotoCommentActionListener(ViewPhotoAlbumDetails viewPhotoAlbum) {
+	public PhotoAlbumDetailsViewSaveCommentActionListener(ViewPhotoAlbumDetails viewPhotoAlbum) {
 		this.viewPhotoAlbumDetails = viewPhotoAlbum;
 	}
 
 	public void saveComment() {
 		String comment = viewPhotoAlbumDetails.getEpnPhotoComment().getText();
-		Photo currentPhoto = viewPhotoAlbumDetails.getPhotoAlbumModel().getCurrentPhoto();
+		Photo currentPhoto = viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel().getCurrentPhoto();
 		currentPhoto.setComment( comment );
 		
-		new PhotoAlbumIOController().save( viewPhotoAlbumDetails.getPhotoAlbumModel() );
+		// save
+		new PhotoAlbumIOController( viewPhotoAlbumDetails.getParentFrame().getJourneyModel() ).save();
 	}
 
 }
