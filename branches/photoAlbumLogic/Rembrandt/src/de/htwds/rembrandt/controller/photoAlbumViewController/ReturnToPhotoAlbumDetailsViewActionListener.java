@@ -7,7 +7,7 @@ import de.htwds.rembrandt.view.photoAlbum.ViewPhotoAlbumOverview;
 
 /**
  * @author sFey
- * @version 16.09.2012
+ * @version 17.09.2012
  */
 public class ReturnToPhotoAlbumDetailsViewActionListener implements ActionListener {
 
@@ -18,7 +18,7 @@ public class ReturnToPhotoAlbumDetailsViewActionListener implements ActionListen
 	}
 	
 	public void actionPerformed(ActionEvent event) {
-		new LoadPhotoAlbumPanelActionListener( viewPhotoAlbumOverview.getParentFrame() ).loadPhotoAlbum();
+		new LoadPhotoAlbumDetailsPanelActionListener( viewPhotoAlbumOverview.getParentFrame() ).loadPhotoAlbum();
 	}
 
 }

@@ -11,7 +11,7 @@ import de.htwds.rembrandt.view.photoAlbum.ViewPhotoAlbumDetails;
 
 /**
  * @author sFey
- * @version 13.09.2012
+ * @version 17.09.2012
  */
 public class PhotoAlbumDetailsViewSetCurrentPhotoActionListener implements ActionListener {
 
@@ -60,7 +60,7 @@ public class PhotoAlbumDetailsViewSetCurrentPhotoActionListener implements Actio
 				photo = photoAlbum.get( index );
 				
 				viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel().setCurrentPhoto( photo );
-				viewPhotoAlbumDetails.populatePhotoArea( photo );
+				viewPhotoAlbumDetails.populatePhotoArea();
 			}
 		} else {
 			// debug

@@ -12,7 +12,7 @@ import de.htwds.rembrandt.view.photoAlbum.ViewPhotoAlbumOverview;
 
 /**
  * @author sFey
- * @version 16.09.2012
+ * @version 17.09.2012
  */
 public class PhotoAlbumOverviewViewMouseListener implements MouseListener {
 
@@ -29,7 +29,9 @@ public class PhotoAlbumOverviewViewMouseListener implements MouseListener {
 		photo = photoAlbumModel.findPhotoByPath( ((ImageIcon) ((JLabel) event.getComponent()).getIcon()).getDescription() );
 
 		// switch to detail view
-		new LoadPhotoAlbumPanelActionListener(viewPhotoAlbumOverview.getParentFrame(),photo).loadPhotoAlbum();
+		
+		photoAlbumModel.setCurrentPhoto(photo);
+		new LoadPhotoAlbumDetailsPanelActionListener(viewPhotoAlbumOverview.getParentFrame()).loadPhotoAlbum();
 	}
 
 	// not needed

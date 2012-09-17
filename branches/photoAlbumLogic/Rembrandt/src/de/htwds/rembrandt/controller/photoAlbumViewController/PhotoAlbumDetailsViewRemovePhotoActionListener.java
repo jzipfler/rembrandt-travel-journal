@@ -9,7 +9,7 @@ import de.htwds.rembrandt.view.photoAlbum.ViewPhotoAlbumDetails;
 
 /**
  * @author sFey
- * @version 16.09.2012
+ * @version 17.09.2012
  */
 public class PhotoAlbumDetailsViewRemovePhotoActionListener implements ActionListener {
 
@@ -36,13 +36,11 @@ public class PhotoAlbumDetailsViewRemovePhotoActionListener implements ActionLis
 			Photo photo = photoAlbum.get( index );
 			
 			viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel().setCurrentPhoto(photo);
-			viewPhotoAlbumDetails.populatePhotoArea(photo);
 		} else {
 			viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel().setCurrentPhoto(null);
-			viewPhotoAlbumDetails.clearPhotoArea();
 		}
 		
-		viewPhotoAlbumDetails.populateThumbnailArea( photoAlbum );
+		viewPhotoAlbumDetails.populate();
 		
 		// save
 		new PhotoAlbumIOController( viewPhotoAlbumDetails.getParentFrame().getJourneyModel() ).save();
