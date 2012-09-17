@@ -37,7 +37,7 @@ import de.htwds.rembrandt.view.ViewMain;
 
 /**
  * @author sFey
- * @version 16.09.2012
+ * @version 17.09.2012
  */
 public class ViewPhotoAlbumDetails extends JPanel {
 
@@ -86,7 +86,7 @@ public class ViewPhotoAlbumDetails extends JPanel {
 
 	public ViewPhotoAlbumDetails(ViewMain viewMain, Photo photo) {
 		this(viewMain);
-		populatePhotoArea(photo);
+		populatePhotoArea();
 		populateThumbnailArea(viewMain.getJourneyModel().getPhotoAlbumModel().getPhotoAlbum());
 		viewMain.getJourneyModel().getPhotoAlbumModel().setCurrentPhoto(photo);
 	}
@@ -287,38 +287,70 @@ public class ViewPhotoAlbumDetails extends JPanel {
 
 		LinkedList<Photo> photoAlbum = photoAlbumModel.getPhotoAlbum();
 
-		if (photoAlbum.size() > 0) {
-			populatePhotoArea(photoAlbumModel.getCurrentPhoto());
-			populateThumbnailArea(photoAlbum);
+		populatePhotoArea();
+		populateThumbnailArea(photoAlbum);
+
+		//toggleActivationState();
+	}
+
+	public void populatePhotoArea() {
+
+		Photo photo = this.getParentFrame().getJourneyModel().getPhotoAlbumModel().getCurrentPhoto();
+		
+		if( photo == null ) {
+			lblCurrentPhoto.setIcon(null);
+			txtPhotoFileName.setText("");
+			txtPhotoDate.setText("");
+			epnPhotoComment.setText("");
+		} else {
+			ImageIcon photoIcon = new ImageIcon(photo.getPath(), photo.getPath());
+			lblCurrentPhoto.setIcon(photoIcon);
+			adjustPhotoArea();
+	
+			// determine file name and last modified date
+			File file = new File(photo.getPath());
+			Date fileDate = new Date(file.lastModified());
+			String fileName = file.getName();
+	
+			txtPhotoFileName.setText(fileName);
+			txtPhotoDate.setText(String.valueOf(fileDate));
+			epnPhotoComment.setText(photo.getComment());
+			
+			// activate first tab
+			this.tpPhotoArea.setSelectedIndex(0);		
 		}
+		
+		toggleActivationState();
+	}
+	
+	
+	public void toggleActivationState() {
+		
+		Photo photo = this.getParentFrame().getJourneyModel().getPhotoAlbumModel().getCurrentPhoto();
+		LinkedList<Photo> photoAlbum = this.getParentFrame().getJourneyModel().getPhotoAlbumModel().getPhotoAlbum();
+
+		if( photoAlbum.size() == 0 ) {
+			// photoAlbum is empty disable some of the UI elements
+			this.btnPhotoBack.setEnabled(false);
+			this.btnPhotoForward.setEnabled(false);
+			this.btnSwitchToOverview.setEnabled(false);
+			this.btnRemovePhoto.setEnabled(false);
+		} else {
+			// photoAlbum is not empty reenable the UI elements
+			this.btnSwitchToOverview.setEnabled(true);
+			this.btnRemovePhoto.setEnabled(true);
+			this.btnPhotoBack.setEnabled(true);
+			this.btnPhotoForward.setEnabled(true);
+			
+			// first photo in the list disable the back-button
+			if( photoAlbum.getFirst().equals(photo) ) this.btnPhotoBack.setEnabled(false);
+			
+			// last photo in the list disable the forward-button
+			if( photoAlbum.getLast().equals(photo) ) this.btnPhotoForward.setEnabled(false);
+		}
+		
 	}
 
-	public void clearPhotoArea() {
-		lblCurrentPhoto.setIcon(null);
-		txtPhotoFileName.setText("");
-		txtPhotoDate.setText("");
-		epnPhotoComment.setText("");
-	}
-
-	public void populatePhotoArea(Photo photo) {
-
-		ImageIcon photoIcon = new ImageIcon(photo.getPath(), photo.getPath());
-		lblCurrentPhoto.setIcon(photoIcon);
-		adjustPhotoArea();
-
-		// determine file name and last modified date
-		File file = new File(photo.getPath());
-		Date fileDate = new Date(file.lastModified());
-		String fileName = file.getName();
-
-		txtPhotoFileName.setText(fileName);
-		txtPhotoDate.setText(String.valueOf(fileDate));
-		epnPhotoComment.setText(photo.getComment());
-	}
-
-	/**
-	 * populates the scrollpane
-	 */
 	public void populateThumbnailArea(LinkedList<Photo> photoAlbum) {
 		pnlThumbnailArea.removeAll();
 		pnlThumbnailArea.validate();

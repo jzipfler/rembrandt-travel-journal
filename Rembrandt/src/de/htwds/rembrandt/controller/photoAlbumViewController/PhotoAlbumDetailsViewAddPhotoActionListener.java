@@ -24,7 +24,7 @@ import de.htwds.rembrandt.controler.datastructure.FolderPathController;
 
 /**
  * @author sFey
- * @version 16.09.2012
+ * @version 17.09.2012
  */
 public class PhotoAlbumDetailsViewAddPhotoActionListener implements ActionListener {
 	
@@ -93,8 +93,7 @@ public class PhotoAlbumDetailsViewAddPhotoActionListener implements ActionListen
 				photoAlbum.add( photo );
 				
 				viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel().setCurrentPhoto( photo );
-				viewPhotoAlbumDetails.populatePhotoArea(photo);
-				viewPhotoAlbumDetails.populateThumbnailArea( photoAlbum );
+				viewPhotoAlbumDetails.populate();
 			}			
 			
 			// save

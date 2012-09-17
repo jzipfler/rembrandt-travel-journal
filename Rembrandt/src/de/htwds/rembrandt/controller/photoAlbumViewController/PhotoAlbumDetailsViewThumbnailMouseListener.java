@@ -12,7 +12,7 @@ import de.htwds.rembrandt.view.photoAlbum.ViewPhotoAlbumDetails;
 
 /**
  * @author sFey
- * @version 16.09.2012
+ * @version 17.09.2012
  */
 public class PhotoAlbumDetailsViewThumbnailMouseListener implements MouseListener {
 
@@ -41,7 +41,7 @@ public class PhotoAlbumDetailsViewThumbnailMouseListener implements MouseListene
 		}
 		// update preview
 		viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel().setCurrentPhoto(photo);
-		viewPhotoAlbumDetails.populatePhotoArea(photo);
+		viewPhotoAlbumDetails.populatePhotoArea();
 	}
 
 	// not needed
