@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
@@ -27,13 +28,16 @@ import net.miginfocom.swing.MigLayout;
 import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewAddPhotoActionListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.LoadPhotoAlbumOverviewPanelActionListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewResizeListener;
+import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewSlideShowTimerListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewThumbnailMouseListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewRemovePhotoActionListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewSetCurrentPhotoActionListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsEditCommentStatusToggleListener;
+import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewToggleSlideShowListener;
 import de.htwds.rembrandt.model.Photo;
 import de.htwds.rembrandt.model.PhotoAlbumModel;
 import de.htwds.rembrandt.view.ViewMain;
+import javax.swing.JCheckBox;
 
 /**
  * @author sFey
@@ -43,6 +47,8 @@ public class ViewPhotoAlbumDetails extends JPanel {
 
 	// constants
 	private static final long serialVersionUID = 1L;
+	
+	private static final int SLIDE_SHOW_TIMER_INTERVAL = 2000;
 
 	// colors
 	private Color COLOR_DISABLED = (Color) UIManager.get("TextField.inactiveBackground");
@@ -83,6 +89,9 @@ public class ViewPhotoAlbumDetails extends JPanel {
 
 	private ViewMain frmMain;
 	private JTabbedPane tpPhotoArea;
+	private JCheckBox chckbxSlideShow;
+
+	private Timer timer;
 
 	public ViewPhotoAlbumDetails(ViewMain viewMain) {
 		this();
@@ -216,6 +225,13 @@ public class ViewPhotoAlbumDetails extends JPanel {
 
 		btnAddPhoto = new JButton("+");
 		btnAddPhoto.addActionListener(new PhotoAlbumDetailsViewAddPhotoActionListener(this));
+		
+		chckbxSlideShow = new JCheckBox("Diashow");
+		chckbxSlideShow.setFont(new Font("Arial", Font.PLAIN, 13));
+		chckbxSlideShow.addActionListener(new PhotoAlbumDetailsViewToggleSlideShowListener(this));
+		
+		
+		pnlHeaderNavigation.add(chckbxSlideShow);
 		pnlHeaderNavigation.add(btnAddPhoto);
 		btnAddPhoto.setFont(new Font("Arial", Font.PLAIN, 13));
 
@@ -226,6 +242,8 @@ public class ViewPhotoAlbumDetails extends JPanel {
 
 		btnSwitchToOverview = new JButton("Übersicht");
 		pnlHeaderNavigation.add(btnSwitchToOverview);
+		
+		this.timer = new Timer(SLIDE_SHOW_TIMER_INTERVAL, new PhotoAlbumDetailsViewSlideShowTimerListener(this));
 	}
 
 	// # GETTER #
@@ -323,12 +341,18 @@ public class ViewPhotoAlbumDetails extends JPanel {
 			this.btnPhotoForward.setEnabled(false);
 			this.btnSwitchToOverview.setEnabled(false);
 			this.btnRemovePhoto.setEnabled(false);
+			this.chckbxSlideShow.setEnabled(false);
 		} else {
+			// slide show with only 1 photo does not make sense
+			if( photoAlbum.size() == 1 ) this.chckbxSlideShow.setEnabled(false);
+			if( photoAlbum.size() > 1 )  this.chckbxSlideShow.setEnabled(true);
+			
 			// photoAlbum is not empty reenable the UI elements
 			this.btnSwitchToOverview.setEnabled(true);
 			this.btnRemovePhoto.setEnabled(true);
 			this.btnPhotoBack.setEnabled(true);
 			this.btnPhotoForward.setEnabled(true);
+			
 			
 			// first photo in the list disable the back-button
 			if( photoAlbum.getFirst().equals(photo) ) this.btnPhotoBack.setEnabled(false);
@@ -381,6 +405,14 @@ public class ViewPhotoAlbumDetails extends JPanel {
 			}
 			
 			lblCurrentPhoto.setIcon(photoIcon);
+		}
+	}
+
+	public void toggleSlideShow() {
+		if( this.chckbxSlideShow.isSelected() ) {
+			timer.start();
+		} else {
+			timer.stop();
 		}
 	}
 }
