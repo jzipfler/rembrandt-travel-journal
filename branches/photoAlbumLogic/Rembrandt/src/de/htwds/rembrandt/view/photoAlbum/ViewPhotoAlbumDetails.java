@@ -343,14 +343,17 @@ public class ViewPhotoAlbumDetails extends JPanel {
 	public void adjustPhotoArea() {
 
 		Photo currentPhoto = getParentFrame().getJourneyModel().getPhotoAlbumModel().getCurrentPhoto();
-		ImageIcon photoIcon = new ImageIcon(currentPhoto.getPath(), currentPhoto.getPath());
-
-		int photoPreviewPanelHeight = (int) pnlCurrentPhoto.getBounds().getSize().getHeight() - 10;
-
-		if (photoIcon.getIconHeight() > photoPreviewPanelHeight && photoPreviewPanelHeight != 0) {
-			photoIcon = new ImageIcon(photoIcon.getImage().getScaledInstance(-1, photoPreviewPanelHeight, Image.SCALE_DEFAULT), currentPhoto.getPath());
+		
+		if(  currentPhoto != null ) {
+			ImageIcon photoIcon = new ImageIcon(currentPhoto.getPath(), currentPhoto.getPath());
+	
+			int photoPreviewPanelHeight = (int) pnlCurrentPhoto.getBounds().getSize().getHeight() - 10;
+	
+			if (photoIcon.getIconHeight() > photoPreviewPanelHeight && photoPreviewPanelHeight != 0) {
+				photoIcon = new ImageIcon(photoIcon.getImage().getScaledInstance(-1, photoPreviewPanelHeight, Image.SCALE_DEFAULT), currentPhoto.getPath());
+			}
+	
+			lblCurrentPhoto.setIcon(photoIcon);
 		}
-
-		lblCurrentPhoto.setIcon(photoIcon);
 	}
 }
