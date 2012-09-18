@@ -19,6 +19,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
+import de.htwds.rembrandt.controler.mainViewController.LoadChecklistPanelControler;
 import de.htwds.rembrandt.controler.mainViewController.LoadContacPanelActionListener;
 import de.htwds.rembrandt.controler.mainViewController.LoadStartViewActionListener;
 import de.htwds.rembrandt.controler.mainViewController.SaveAllToDiscActionListener;
@@ -151,6 +152,7 @@ public class ViewMain extends JPanel {
 		pnlQuicklunch.add(btnData, "2, 4");
 		
 		btnLists = new JButton("Listen");
+		btnLists.addActionListener(new LoadChecklistPanelControler(this));
 		btnLists.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlQuicklunch.add(btnLists, "2, 6");
 		
