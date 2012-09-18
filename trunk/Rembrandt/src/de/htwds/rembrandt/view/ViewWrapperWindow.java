@@ -63,8 +63,27 @@ public class ViewWrapperWindow extends JFrame {
 				 * This action starts, when the user close the window 
 				 * with the X option in the window decoration panel.
 				 */
-				if ( getIsMainView() )
-					;
+				if ( getIsMainView() ) {
+					Object[] options = {	"Beenden",
+											"Nicht beeden"};
+
+					int n = JOptionPane.showOptionDialog(	getPanel(),
+									"Wenn Sie das Programm so beenden, werden ihne Änderungen nicht gespeichert.",
+									"Änderungen werden nicht gespeichert",
+									JOptionPane.YES_NO_OPTION,
+									JOptionPane.QUESTION_MESSAGE,
+									null,     		//do not use a custom Icon
+									options,  		//the titles of buttons
+									options[0]);	//default button title
+
+					if ( n == JOptionPane.YES_OPTION ) {
+						setDefaultCloseOperation(EXIT_ON_CLOSE);
+					} else {
+						setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+					}
+				} else {
+					setDefaultCloseOperation(EXIT_ON_CLOSE);
+				}
 			}
 		});
 		
