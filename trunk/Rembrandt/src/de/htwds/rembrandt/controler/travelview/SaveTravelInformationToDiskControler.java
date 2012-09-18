@@ -8,6 +8,8 @@ import java.io.IOException;
 import de.htwds.rembrandt.controler.datastructure.FolderPathController;
 import de.htwds.rembrandt.model.TravelInformationModel;
 import de.htwds.rembrandt.view.ViewMain;
+import de.htwds.rembrandt.controler.activityController.ActivityListFile;
+
 
 /**
  * 
@@ -57,7 +59,16 @@ public class SaveTravelInformationToDiskControler {
             	}
             	if(i < toWrite.length -1)
             		bw.newLine();
-    		}   
+    		}  
+            
+            
+           ActivityListFile alf = new ActivityListFile();
+           alf.save(data.getActivityList(),FolderPathController.getActivitiesFolder(data.toString()),data.toString());
+            
+            
+            
+            
+            
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

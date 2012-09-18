@@ -179,7 +179,7 @@ public class ViewActivity extends JPanel {
 		this.frmMainFrame = frmMainFrame;
 		this.viewCalendar = viewCalendar;
 		this.abort.addActionListener(new LoadActivityAbortActionListener(viewCalendar));
-		this.save.addActionListener(new LoadActivitySaveActionListener(this));
+		this.save.addActionListener(new LoadActivitySaveActionListener(this, frmMainFrame.getJourneyModel()));
 	}
 
 	

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import de.htwds.rembrandt.controler.activityController.ActivityListFile;
 import de.htwds.rembrandt.controler.datastructure.FolderPathController;
 import de.htwds.rembrandt.exception.TravelInformationException;
 import de.htwds.rembrandt.exception.TravelToDiscException;
@@ -75,6 +76,14 @@ public class LoadTravelInformationFromDiskControler {
 		data.setDepartureDestination(result[7]);
 		data.setOption(Integer.parseInt(result[8].trim()));
 		data.setComment(result[9]);
+		loadActivityList();
+	}
+	
+	
+	
+	private void loadActivityList(){
+        ActivityListFile alf = new ActivityListFile();
+        data.setActivityList(alf.load(FolderPathController.getActivitiesFolder(data.toString()),data.toString()));
 	}
 	
 	/**

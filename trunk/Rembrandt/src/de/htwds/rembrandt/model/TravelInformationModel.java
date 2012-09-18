@@ -19,6 +19,7 @@ public class TravelInformationModel {
 	private String locationDepartureStart;
 	private String locationDepartureDestination;
 	private String comment;
+	private ActivityList activityList;
 	
 	/**
 	 * Constructor for the TravelInformation-class.
@@ -42,6 +43,7 @@ public class TravelInformationModel {
 		locationArrivalDestination 		= arrivalD;
 		locationDepartureStart 			= departureS;
 		locationDepartureDestination 	= departureD;
+		activityList = new ActivityList();
 	}
 	
 	/**
@@ -52,6 +54,10 @@ public class TravelInformationModel {
 	}
 	
 	//Getter
+	
+	public ActivityList getActivityList(){
+		return activityList;
+	}
 	
 	public String getCountry(){
 		return country;
@@ -94,6 +100,10 @@ public class TravelInformationModel {
 	}
 	
 	//Setter
+	
+	public void setActivityList(ActivityList activityList){
+		this.activityList = activityList;
+	}
 	
 	public void setCountry(String newCountry){
 		country = newCountry;
