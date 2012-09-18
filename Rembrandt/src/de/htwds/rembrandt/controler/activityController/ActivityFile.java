@@ -10,9 +10,9 @@ public class ActivityFile {
 	 
 
 	
-	public void save(ActivityModel activityModel){
+	public void save(ActivityModel activityModel, String directory){
 		try {	
-			FileOutputStream fos = new FileOutputStream(activityModel.get_titel() + "_" + activityModel.get_time());
+			FileOutputStream fos = new FileOutputStream(directory + "/" +  activityModel.get_titel() + "_" + activityModel.get_time());
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(activityModel);
 			oos.close();
