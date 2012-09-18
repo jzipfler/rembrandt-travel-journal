@@ -145,7 +145,7 @@ public class ViewMain extends JPanel {
 		btnPhotos.addActionListener(new LoadPhotoAlbumDetailsPanelActionListener(this));
 		pnlQuicklunch.add(btnPhotos, "2, 2");
 		
-		btnData = new JButton("Daten");
+		btnData = new JButton("Reiseinfos");
 		btnData.addActionListener(new LoadTravelInformationPanelActionListener(this));
 		btnData.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlQuicklunch.add(btnData, "2, 4");
@@ -154,7 +154,7 @@ public class ViewMain extends JPanel {
 		btnLists.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlQuicklunch.add(btnLists, "2, 6");
 		
-		btnReiseinfos = new JButton("Reiseinfos");
+		btnReiseinfos = new JButton("Aktivitäten");
 		btnReiseinfos.addActionListener(new LoadCalendarActionListener(this));
 		btnReiseinfos.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlQuicklunch.add(btnReiseinfos, "2, 10");
