@@ -1,25 +1,31 @@
 package de.htwds.rembrandt.view;
 
+import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.SystemTray;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
+import de.htwds.rembrandt.components.JTrayIcon;
 import de.htwds.rembrandt.controler.datastructure.CheckExistingDataStructureControler;
 import de.htwds.rembrandt.controler.mainViewController.LoadStartViewActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.Toolkit;
 
 /**
  * 
@@ -30,6 +36,8 @@ import java.awt.event.WindowEvent;
  *
  */
 public class ViewWrapperWindow extends JFrame {
+	
+	public static final String APPLICATION_NAME = "Reisetagebuch";
 	
 	private JPanel panel;
 	private JPopupMenu popupMenu;
@@ -56,6 +64,7 @@ public class ViewWrapperWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewWrapperWindow() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ViewWrapperWindow.class.getResource("/de/htwds/rembrandt/resources/images/Travel.png")));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -87,9 +96,12 @@ public class ViewWrapperWindow extends JFrame {
 			}
 		});
 		
+		
+		addTrayIcon();
+		
 		setPreferredSize(new Dimension(800, 600));
 		setMinimumSize(new Dimension(640, 480));
-		setTitle("Reisetagebuch");
+		setTitle( APPLICATION_NAME );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 626, 439);
 		
@@ -149,5 +161,50 @@ public class ViewWrapperWindow extends JFrame {
 	
 	public void setIsMainView( boolean isMainView ) {
 		this.isMainView = isMainView;
+	}
+	
+	private void addTrayIcon() {
+
+		 //Check the SystemTray is supported
+       if (!SystemTray.isSupported()) {
+//           System.out.println("SystemTray is not supported");
+           return;
+       }
+       final JPopupMenu popup = new JPopupMenu();
+       ImageIcon image = new ImageIcon( ViewWrapperWindow.class.getResource("/de/htwds/rembrandt/resources/images/Travel.png" ));
+//       final JXTrayIcon trayIcon = new JXTrayIcon( image.getImage() );
+       final JTrayIcon trayIcon = new JTrayIcon( image.getImage(), APPLICATION_NAME );
+       final SystemTray tray = SystemTray.getSystemTray();
+       
+       // Create a pop-up menu components
+       JMenuItem aboutItem = new JMenuItem("About");
+       JMenu displayMenu = new JMenu("Display");
+       JMenuItem errorItem = new JMenuItem("Error");
+       JMenuItem warningItem = new JMenuItem("Warning");
+       JMenuItem infoItem = new JMenuItem("Info");
+       JMenuItem noneItem = new JMenuItem("None");
+       JMenuItem exitItem = new JMenuItem("Exit");
+      
+       //Add components to pop-up menu
+       popup.add(aboutItem);
+       popup.addSeparator();
+       popup.addSeparator();
+       popup.add(displayMenu);
+       displayMenu.add(errorItem);
+       displayMenu.add(warningItem);
+       displayMenu.add(infoItem);
+       displayMenu.add(noneItem);
+       popup.add(exitItem);
+
+       trayIcon.setMenu(popup);
+//       Use this for JXTrayIcon
+//       trayIcon.setJPopupMenu(popup);
+       
+       try {
+           tray.add(trayIcon);
+       } catch (AWTException e) {
+           System.out.println("TrayIcon could not be added.");
+       }
+		
 	}
 }
