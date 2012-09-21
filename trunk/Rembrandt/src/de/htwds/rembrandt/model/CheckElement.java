@@ -16,6 +16,14 @@ public class CheckElement
 		this.description = description;
 	}
 	
+	public CheckElement(String description, int amount, boolean checked)
+	{
+		this.checked = checked;
+		next = null;
+		this.amount = amount;
+		this.description = description;
+	}
+	
 	public void check()
 	{
 		if(!checked)

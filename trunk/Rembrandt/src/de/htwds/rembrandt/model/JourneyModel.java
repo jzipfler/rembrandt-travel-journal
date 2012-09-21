@@ -13,7 +13,7 @@ public class JourneyModel {
 	private TravelInformationModel travelInformation;
 	private GeneralInformationModel generalInformation;
 	private GeneralInformationModel[] generalInformationArray;
-	
+	private CheckListInformationModel checklistInformation;
 	
 	/*
 	 * Your implementation here
@@ -21,6 +21,7 @@ public class JourneyModel {
 	
 	public JourneyModel() {
 		contactListModel = new JourneyContactListsModel();
+		checklistInformation = new CheckListInformationModel();
 	}
 	
 	public JourneyContactListsModel getContactListModel() {
@@ -34,6 +35,7 @@ public class JourneyModel {
 	public TravelInformationModel getTravelInformation(){
 		return travelInformation;
 	}
+	
 	
 	public void setGeneralInformationModel(GeneralInformationModel generalInformation){
 		this.generalInformation = generalInformation;
@@ -49,6 +51,16 @@ public class JourneyModel {
 	
 	public void setGeneralInformationModelArray( GeneralInformationModel[] generalInformationArray ) {
 		this.generalInformationArray = generalInformationArray;
+	}
+	
+	public void setCheckListInformationModel(CheckListInformationModel checklistInformation)
+	{
+		this.checklistInformation = checklistInformation;
+	}
+	
+	public CheckListInformationModel getCheckListInformationModel()
+	{
+		return this.checklistInformation;
 	}
 	
 	// photoAlbumModel 

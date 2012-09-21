@@ -24,11 +24,18 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.JScrollPane;
 
+import de.htwds.rembrandt.controler.viewChecklistControler.ViewChecklistLoad;
+import de.htwds.rembrandt.controler.viewChecklistControler.ViewChecklistLoadFromDisc;
 import de.htwds.rembrandt.model.CheckElement;
 import de.htwds.rembrandt.model.CheckList;
+import de.htwds.rembrandt.model.TravelInformationModel;
+import de.htwds.rembrandt.controler.viewChecklistControler.ViewChecklistSave;
+
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.AncestorEvent;
 
 public class ViewChecklist extends JPanel {
 	private JTextField txtBagElement;
@@ -40,11 +47,27 @@ public class ViewChecklist extends JPanel {
 	private JTable tblCheck;
 	private CheckList listBag;
 	private CheckList listCheck;
+	private ViewMain main;
 
 	/**
 	 * Create the panel.
 	 */
-	public ViewChecklist() {
+	public ViewChecklist(final ViewMain main) {
+		this.main = main;
+		listBag = new CheckList();
+		listCheck = new CheckList();
+		loadChecklists();
+		
+		
+		addAncestorListener(new AncestorListener() {
+			public void ancestorAdded(AncestorEvent arg0) {
+			}
+			public void ancestorMoved(AncestorEvent arg0) {
+			}
+			public void ancestorRemoved(AncestorEvent arg0) {
+				saveChecklists();
+			}
+		});
 		setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JPanel pnlBag = new JPanel();
@@ -315,6 +338,15 @@ public class ViewChecklist extends JPanel {
 		scrpnlCheck.setViewportView(tblCheck);
 		pnlCheck.setLayout(gl_pnlCheck);
 		tblCheck.setModel(checkModel);
+		
+		if(listBag != null)
+		{
+			this.fillBagTable();
+		}
+		if(listCheck != null)
+		{
+			this.fillCheckTable();
+		}
 	}
 	
 	private void fillBagTable()
@@ -355,4 +387,29 @@ public class ViewChecklist extends JPanel {
 		}
 		((DefaultTableModel)tblCheck.getModel()).fireTableDataChanged();
 	}
+	
+	public ViewMain getParentFrame() {
+		return main;
+	}
+	
+	public void loadChecklists()
+	{
+		ViewChecklistLoad loader = new ViewChecklistLoad(main.getJourneyModel());
+		listBag = loader.loadChecklistBag();
+		listCheck = loader.loadChecklistCheck();
+	}
+	
+	public void saveChecklists()
+	{
+		ViewChecklistSave saver = new ViewChecklistSave(main.getJourneyModel());
+		saver.save(listBag, listCheck);
+	}
+	
+	public void refreshTables()
+	{
+		loadChecklists();
+		fillCheckTable();
+		fillBagTable();
+	}
+	
 }
