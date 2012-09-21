@@ -180,9 +180,8 @@ public class ViewStart extends JPanel {
 		txtFilter = new JTextField();
 		txtFilter.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent arg0) {
-				if (arg0.getKeyCode() == KeyEvent.VK_ENTER)
-					new FilterListControler(viewStart);
+			public void keyReleased(KeyEvent arg0) {
+				new FilterListControler(viewStart);
 			}
 		});
 		this.txtFilter.setFont(new Font("Arial", Font.PLAIN, 13));
