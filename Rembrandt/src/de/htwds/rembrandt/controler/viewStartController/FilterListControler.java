@@ -41,16 +41,20 @@ public class FilterListControler {
 	
 	
 	private void loadTableItems() {
-
-		for(int i=0; i < viewStart.getTableModel().getRowCount(); i++){
-			viewStart.getTableModel().removeRow(i);
+//		for(int i=0; i < viewStart.getTableModel().getRowCount(); i++){
+//			System.out.println(i + ".Reihe: " + viewStart.getTableModel().getValueAt(i, 0));
+//			viewStart.getTableModel().removeRow(i);
+//		}
+		while(viewStart.getTableModel().getRowCount() > 0){
+			viewStart.getTableModel().removeRow(0);
 		}
 		if ( filtered == null )
 			viewStart.getTableModel().addRow( new String[] { "Keine Einträge für Ihr Suchkriterium vorhanden" } );
 		else {
 			for (GeneralInformationModel generalInformationModel : filtered ) {
-				if ( generalInformationModel != null )
+				if ( generalInformationModel != null ){
 					viewStart.getTableModel().addRow( new String[] { generalInformationModel.getFolderName() } );
+				}
 			}
 		}
 	}
