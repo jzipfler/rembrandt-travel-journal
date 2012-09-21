@@ -75,19 +75,24 @@ public class ViewChecklist extends JPanel {
 		
 		JLabel lblBagHeader = new JLabel("Kofferinhalt");
 		lblBagHeader.setHorizontalAlignment(SwingConstants.LEFT);
-		lblBagHeader.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblBagHeader.setFont(new Font("Arial", Font.BOLD, 15));
 		
 		txtBagElement = new JTextField();
+		txtBagElement.setFont(new Font("Arial", Font.PLAIN, 13));
 		txtBagElement.setColumns(10);
 		
 		JLabel lblBagElement = new JLabel("Kofferelement:");
+		lblBagElement.setFont(new Font("Arial", Font.PLAIN, 13));
 		
 		JLabel lblCount = new JLabel("Anzahl:");
+		lblCount.setFont(new Font("Arial", Font.PLAIN, 13));
 		
 		txtCount = new JTextField();
+		txtCount.setFont(new Font("Arial", Font.PLAIN, 13));
 		txtCount.setColumns(10);
 		
 		JButton btnBagCheck = new JButton("Abhaken");
+		btnBagCheck.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnBagCheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = tblBag.getSelectedRow();
@@ -100,6 +105,7 @@ public class ViewChecklist extends JPanel {
 		});
 		
 		JButton btnBagAdd = new JButton("Hinzuf\u00FCgen");
+		btnBagAdd.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnBagAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(!txtCount.getText().trim().equals("") && !txtBagElement.getText().trim().equals(""))
@@ -128,9 +134,10 @@ public class ViewChecklist extends JPanel {
 			}
 		});
 		btnBagDelete.setForeground(Color.RED);
-		btnBagDelete.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnBagDelete.setFont(new Font("Arial", Font.BOLD, 13));
 		
 		JScrollPane scrpnlBag = new JScrollPane();
+		scrpnlBag.setFont(new Font("Arial", Font.PLAIN, 13));
 		
 		GroupLayout gl_pnlBag = new GroupLayout(pnlBag);
 		gl_pnlBag.setHorizontalGroup(
@@ -140,25 +147,25 @@ public class ViewChecklist extends JPanel {
 						.addGroup(gl_pnlBag.createSequentialGroup()
 							.addContainerGap()
 							.addGroup(gl_pnlBag.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnBagCheck, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+								.addComponent(btnBagCheck, GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
 								.addGroup(gl_pnlBag.createSequentialGroup()
 									.addGroup(gl_pnlBag.createParallelGroup(Alignment.LEADING)
 										.addComponent(lblBagElement)
 										.addComponent(lblCount))
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(gl_pnlBag.createParallelGroup(Alignment.LEADING)
-										.addComponent(txtCount, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-										.addComponent(txtBagElement, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)))
+										.addComponent(txtCount, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+										.addComponent(txtBagElement, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)))
 								.addGroup(gl_pnlBag.createSequentialGroup()
-									.addComponent(btnBagAdd, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnBagDelete, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))))
+									.addComponent(btnBagAdd, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+									.addGap(4)
+									.addComponent(btnBagDelete))))
 						.addGroup(gl_pnlBag.createSequentialGroup()
 							.addGap(65)
 							.addComponent(lblBagHeader))
 						.addGroup(gl_pnlBag.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(scrpnlBag, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
+							.addComponent(scrpnlBag, GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		gl_pnlBag.setVerticalGroup(
@@ -167,7 +174,7 @@ public class ViewChecklist extends JPanel {
 					.addContainerGap()
 					.addComponent(lblBagHeader)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrpnlBag, GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+					.addComponent(scrpnlBag, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnBagCheck)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -220,9 +227,10 @@ public class ViewChecklist extends JPanel {
 		add(pnlCheck);
 		
 		JLabel lblNewLabel = new JLabel("Checkliste");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 15));
 		
 		JButton btnCheck = new JButton("Abhaken");
+		btnCheck.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnCheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = tblCheck.getSelectedRow();
@@ -235,11 +243,14 @@ public class ViewChecklist extends JPanel {
 		});
 		
 		JLabel lblCheckElement = new JLabel("Checkelement:");
+		lblCheckElement.setFont(new Font("Arial", Font.PLAIN, 13));
 		
 		txtCheckElement = new JTextField();
+		txtCheckElement.setFont(new Font("Arial", Font.PLAIN, 13));
 		txtCheckElement.setColumns(10);
 		
 		JButton btnCheckAdd = new JButton("Hinzuf\u00FCgen");
+		btnCheckAdd.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnCheckAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!txtCheckElement.getText().trim().equals(""))
@@ -265,33 +276,34 @@ public class ViewChecklist extends JPanel {
 				}
 			}
 		});
-		btnCheckDelete.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnCheckDelete.setFont(new Font("Arial", Font.BOLD, 13));
 		btnCheckDelete.setForeground(Color.RED);
 		
 		JScrollPane scrpnlCheck = new JScrollPane();
+		scrpnlCheck.setFont(new Font("Arial", Font.PLAIN, 13));
 		GroupLayout gl_pnlCheck = new GroupLayout(pnlCheck);
 		gl_pnlCheck.setHorizontalGroup(
 			gl_pnlCheck.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlCheck.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_pnlCheck.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_pnlCheck.createSequentialGroup()
+					.addGroup(gl_pnlCheck.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_pnlCheck.createSequentialGroup()
 							.addComponent(lblNewLabel)
 							.addGap(74))
-						.addGroup(Alignment.TRAILING, gl_pnlCheck.createSequentialGroup()
+						.addGroup(gl_pnlCheck.createSequentialGroup()
 							.addComponent(lblCheckElement)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtCheckElement, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+							.addComponent(txtCheckElement, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
 							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_pnlCheck.createSequentialGroup()
-							.addComponent(btnCheckAdd, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnCheckDelete, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_pnlCheck.createSequentialGroup()
+							.addComponent(btnCheckAdd, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnCheckDelete, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_pnlCheck.createSequentialGroup()
+						.addGroup(gl_pnlCheck.createSequentialGroup()
 							.addGroup(gl_pnlCheck.createParallelGroup(Alignment.TRAILING)
-								.addComponent(scrpnlCheck, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-								.addComponent(btnCheck, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+								.addComponent(scrpnlCheck, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+								.addComponent(btnCheck, GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
 							.addContainerGap())))
 		);
 		gl_pnlCheck.setVerticalGroup(
@@ -309,8 +321,8 @@ public class ViewChecklist extends JPanel {
 						.addComponent(txtCheckElement, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_pnlCheck.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnCheckAdd, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-						.addComponent(btnCheckDelete, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
+						.addComponent(btnCheckDelete, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnCheckAdd, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		
