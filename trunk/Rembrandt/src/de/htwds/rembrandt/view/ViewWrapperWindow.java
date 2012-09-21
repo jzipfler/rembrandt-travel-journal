@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemTray;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -16,7 +17,6 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,7 +25,6 @@ import javax.swing.JPopupMenu;
 import de.htwds.rembrandt.components.JTrayIcon;
 import de.htwds.rembrandt.controler.datastructure.CheckExistingDataStructureControler;
 import de.htwds.rembrandt.controler.mainViewController.LoadStartViewActionListener;
-import java.awt.Toolkit;
 
 /**
  * 
@@ -64,7 +63,9 @@ public class ViewWrapperWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewWrapperWindow() {
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ViewWrapperWindow.class.getResource("/de/htwds/rembrandt/resources/images/Travel.png")));
+		
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -172,30 +173,34 @@ public class ViewWrapperWindow extends JFrame {
        }
        final JPopupMenu popup = new JPopupMenu();
        ImageIcon image = new ImageIcon( ViewWrapperWindow.class.getResource("/de/htwds/rembrandt/resources/images/Travel.png" ));
-//       final JXTrayIcon trayIcon = new JXTrayIcon( image.getImage() );
        final JTrayIcon trayIcon = new JTrayIcon( image.getImage(), APPLICATION_NAME );
        final SystemTray tray = SystemTray.getSystemTray();
        
        // Create a pop-up menu components
-       JMenuItem aboutItem = new JMenuItem("About");
-       JMenu displayMenu = new JMenu("Display");
-       JMenuItem errorItem = new JMenuItem("Error");
-       JMenuItem warningItem = new JMenuItem("Warning");
-       JMenuItem infoItem = new JMenuItem("Info");
-       JMenuItem noneItem = new JMenuItem("None");
+       JMenuItem aboutItem = new JMenuItem("Info");
+       aboutItem.setFont(new Font("Arial", Font.BOLD, 17));
+       aboutItem.setIcon( new ImageIcon( ViewWrapperWindow.class.getResource("/de/htwds/rembrandt/resources/images/Info.png" ) ) );
+       // Set size to make the popup menu a little bigger.
+       aboutItem.setMinimumSize(new Dimension(150, 25));
+       aboutItem.setPreferredSize(new Dimension(150, 25));
+       
        JMenuItem exitItem = new JMenuItem("Exit");
+       exitItem.setFont(new Font("Arial", Font.BOLD, 17));
+       exitItem.setIcon( new ImageIcon( ViewWrapperWindow.class.getResource("/de/htwds/rembrandt/resources/images/close.png" ) ) );
+       exitItem.addActionListener( new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				System.exit(0);
+			}
+		});
       
        //Add components to pop-up menu
        popup.add(aboutItem);
        popup.addSeparator();
-       popup.addSeparator();
-       popup.add(displayMenu);
-       displayMenu.add(errorItem);
-       displayMenu.add(warningItem);
-       displayMenu.add(infoItem);
-       displayMenu.add(noneItem);
        popup.add(exitItem);
-
+       
        trayIcon.setMenu(popup);
 //       Use this for JXTrayIcon
 //       trayIcon.setJPopupMenu(popup);
@@ -207,4 +212,5 @@ public class ViewWrapperWindow extends JFrame {
        }
 		
 	}
+
 }
