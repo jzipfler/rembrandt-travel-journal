@@ -29,11 +29,14 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
+import de.htwds.rembrandt.controler.viewStartController.FilterListControler;
 import de.htwds.rembrandt.controler.viewStartController.LoadSelectedJouneyActionListener;
 import de.htwds.rembrandt.controler.viewStartController.LoadWizzardActionListener;
 import de.htwds.rembrandt.controler.viewStartController.RemoveSelectedJourneyActionListener;
 import de.htwds.rembrandt.controler.viewStartController.TableOverviewListSelectionListener;
 import de.htwds.rembrandt.model.GeneralInformationModel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * 
@@ -59,6 +62,7 @@ public class ViewStart extends JPanel {
 	private JTextField txtCountry;
 	private JTextField txtJounreyEnd;
 	private JPanel infoAboutTravelPane;
+	private ViewStart viewStart;
 
 
 	/**
@@ -66,6 +70,7 @@ public class ViewStart extends JPanel {
 	 */
 	public ViewStart( ViewWrapperWindow wrapperView )  {
 		
+		this.viewStart = this;
 		this.wrapperView = wrapperView;
 		this.generalInformationArray = null;
 		this.wrapperView.setIsMainView(false);
@@ -173,6 +178,13 @@ public class ViewStart extends JPanel {
 		panel.add(lblReisenFiltern);
 		
 		txtFilter = new JTextField();
+		txtFilter.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER)
+					new FilterListControler(viewStart);
+			}
+		});
 		this.txtFilter.setFont(new Font("Arial", Font.PLAIN, 13));
 		panel.add(txtFilter);
 		txtFilter.setColumns(15);
