@@ -49,6 +49,25 @@ public class CheckList
 		elementCounter++;
 	}
 	
+	public void addLast(String description, int amount, boolean checked)
+	{
+		CheckElement element = new CheckElement(description, amount, checked); 
+		if(elementCounter == 0)
+		{
+			root = element;
+		}
+		else
+		{
+			CheckElement actElement = root;
+			while(actElement.getNext() != null)
+			{
+				actElement = actElement.getNext();
+			}
+			actElement.setNext(element);
+		}
+		elementCounter++;
+	}
+	
 	public void deleteElement(int index)
 	{
 		if(index == 0)

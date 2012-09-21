@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import de.htwds.rembrandt.controler.datastructure.ContactToDiscControler;
 import de.htwds.rembrandt.controler.datastructure.GeneralInformationFromDiskControler;
 import de.htwds.rembrandt.controler.travelview.SaveTravelInformationToDiskControler;
+import de.htwds.rembrandt.controler.viewChecklistControler.ViewChecklistSaveToDisc;
 import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumIOController;
 import de.htwds.rembrandt.exception.TravelToDiscException;
 import de.htwds.rembrandt.view.ViewMain;
@@ -38,6 +39,7 @@ public class SaveAllToDiscActionListener implements ActionListener {
 			new ContactToDiscControler( viewMain.getJourneyModel() ).writeContactsToDisc();
 			new SaveTravelInformationToDiskControler(viewMain).store();
 			new PhotoAlbumIOController( viewMain.getJourneyModel() ).save();
+			new ViewChecklistSaveToDisc( viewMain.getJourneyModel()).save();
 		} catch ( TravelToDiscException discException ) {
 
 			JOptionPane.showMessageDialog(viewMain, 
