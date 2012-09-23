@@ -37,6 +37,7 @@ import de.htwds.rembrandt.exception.WizzardInputException;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.Toolkit;
 
 /**
  * Diese Klasse implementiert den Wizzard zur Sammlung der Reisedaten
@@ -99,6 +100,7 @@ public class ViewWizzard extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewWizzard( ViewStart viewStart ) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ViewWizzard.class.getResource("/de/htwds/rembrandt/resources/images/wizzard.png")));
 		
 		this.wizzard = this;
 		this.viewStart = viewStart;
