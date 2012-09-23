@@ -101,7 +101,7 @@ public class ViewWrapperWindow extends JFrame {
 		addTrayIcon();
 		
 		setPreferredSize(new Dimension(800, 600));
-		setMinimumSize(new Dimension(640, 480));
+		setMinimumSize(new Dimension(690, 530));
 		setTitle( APPLICATION_NAME );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 626, 439);
