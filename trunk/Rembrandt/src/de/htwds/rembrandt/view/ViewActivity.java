@@ -19,6 +19,8 @@ import javax.swing.border.LineBorder;
 import de.htwds.rembrandt.controler.contactViewControler.LoadCalendarActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.LoadActivityAbortActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.LoadActivitySaveActionListener;
+import de.htwds.rembrandt.controler.contactViewControler.LoadActivityDeleteActionListener;
+import de.htwds.rembrandt.controler.contactViewControler.LoadActivityEditActionListener;
 
 import java.awt.*;
 
@@ -57,6 +59,8 @@ public class ViewActivity extends JPanel {
 	public JTextArea story;
 	public JButton save;
 	public JButton abort;
+	public JButton delete;
+	public JButton edit;
 	private JLabel label1;
 	private JLabel label2;
 	private JLabel label3;	
@@ -133,26 +137,34 @@ public class ViewActivity extends JPanel {
 		story.setFont(new Font("Arial", Font.BOLD|Font.PLAIN, 18));
 		
 		save = new JButton("speichern");
-		save.setFont(new Font("Arial", Font.BOLD, 14));
-		save.setSize(111,111);
+		save.setFont(new Font("Arial", Font.BOLD, 16));
+		save.setPreferredSize(new java.awt.Dimension(120, 50));
 	
-		abort = new JButton("abbruch");
-		abort.setFont(new Font("Arial", Font.BOLD, 14));
-		abort.setSize(111,111);
+		abort = new JButton("zurück");
+		abort.setFont(new Font("Arial", Font.BOLD, 16));
+		abort.setPreferredSize(new java.awt.Dimension(120, 50));
+		
+		delete = new JButton("löschen");
+		delete.setFont(new Font("Arial", Font.BOLD, 16));
+		delete.setPreferredSize(new java.awt.Dimension(120, 50));
+		
+		edit = new JButton("bearbeiten");
+		edit.setFont(new Font("Arial", Font.BOLD, 16));
+		edit.setPreferredSize(new java.awt.Dimension(120, 50));
+		
+	
 			
 		buttonPane = new JPanel();
 		buttonPane.setPreferredSize(new Dimension(422, 60));
 		buttonPane.add(save);
 		buttonPane.add(abort);
-				
-		
-		
-		
-		
-		
+		buttonPane.add(delete);
+		buttonPane.add(edit);
+	
+
 		activityPane = new JPanel();
 		activityPane.setLayout(new BoxLayout(activityPane, BoxLayout.Y_AXIS));
-		activityPane.setFont(new Font("Nimbus Sans L", Font.PLAIN, 15));
+		activityPane.setFont(new Font("Arial", Font.PLAIN, 14));
 		activityPane.setMaximumSize(new Dimension(1885, 32767));
 		activityPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		activityPane.setPreferredSize(new Dimension(425, 380));
@@ -177,11 +189,12 @@ public class ViewActivity extends JPanel {
 	public ViewActivity( ViewMain frmMainFrame, ViewCalendar viewCalendar){
 		this();
 		this.frmMainFrame = frmMainFrame;
-		this.viewCalendar = viewCalendar;
-		this.abort.addActionListener(new LoadActivityAbortActionListener(viewCalendar));
+		this.viewCalendar = new ViewCalendar();		
+		this.abort.addActionListener(new LoadActivityAbortActionListener(this));
 		this.save.addActionListener(new LoadActivitySaveActionListener(this, frmMainFrame.getJourneyModel()));
+		this.delete.addActionListener(new LoadActivityDeleteActionListener(this));
+		this.edit.addActionListener(new LoadActivityEditActionListener(this));
 	}
-
 	
 	
 	public ViewMain getParentFrame(){
@@ -189,6 +202,37 @@ public class ViewActivity extends JPanel {
 		return frmMainFrame;
 	}
 	
+	public JTextField get_descriptionField(){
+		return description;
+	}	
+	
+	public JTextField get_timeField(){
+		return time;
+	}	
+	
+	public JTextField get_locationField(){
+		return location;
+	}	
+	
+	public JTextArea get_storyArea(){
+		return story;
+	}		
+	
+	public JButton get_deleteButton(){
+		return delete;
+	}		
+	
+	public JButton get_saveButton(){
+		return save;
+	}
+	
+	public JButton get_editButton(){
+		return edit;
+	}
+
+	public JButton get_abortButton(){
+		return abort;
+	}
 	
 	public String get_Description(){
 		return description.getText();
@@ -206,5 +250,19 @@ public class ViewActivity extends JPanel {
 		return story.getText();
 	}
 	
+	public void set_Description(String s){
+		description.setText(s);
+	}
 		
+	public void set_Time(String s){
+		time.setText(s);
+	}
+	
+	public void set_Location(String s){
+		location.setText(s);
+	}
+	
+	public void set_Story(String s){
+		story.setText(s);
+	}
 }
