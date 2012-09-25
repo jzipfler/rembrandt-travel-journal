@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumOverviewViewMouseListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumOverviewViewResizeListener;
@@ -47,14 +48,14 @@ public class ViewPhotoAlbumOverview extends JPanel {
 		fl_pnlHeader.setAlignment(FlowLayout.LEFT);
 		pnlHeaderArea.add(pnlHeader, BorderLayout.CENTER);
 
-		JLabel lblPhotoAlbumHeader = new JLabel("Fotoalbum");
+		JLabel lblPhotoAlbumHeader = new JLabel(Messages.getString("ViewPhotoAlbumOverview.0")); //$NON-NLS-1$
 		pnlHeader.add(lblPhotoAlbumHeader);
-		lblPhotoAlbumHeader.setFont(new Font("Arial", Font.BOLD, 15));
+		lblPhotoAlbumHeader.setFont(new Font(Messages.getString("ViewPhotoAlbumOverview.1"), Font.BOLD, 15)); //$NON-NLS-1$
 
 		JPanel pnlHeaderNavigation = new JPanel();
 		pnlHeaderArea.add(pnlHeaderNavigation, BorderLayout.EAST);
 
-		btnSwitchToDetails = new JButton("zurück");
+		btnSwitchToDetails = new JButton(Messages.getString("ViewPhotoAlbumOverview.2")); //$NON-NLS-1$
 		pnlHeaderNavigation.add(btnSwitchToDetails);
 
 		JScrollPane scpPhotoArea = new JScrollPane();
@@ -113,7 +114,7 @@ public class ViewPhotoAlbumOverview extends JPanel {
 			lblTemp = new JLabel();
 			lblTemp.setIcon(currentIcon);
 			lblTemp.addMouseListener(new PhotoAlbumOverviewViewMouseListener(this));
-			lblTemp.setVerticalAlignment(JLabel.TOP);
+			lblTemp.setVerticalAlignment(SwingConstants.TOP);
 			
 			pnlPhotoArea.add(lblTemp);
 			// add label to the list so we can iterate that list later to resize the icons

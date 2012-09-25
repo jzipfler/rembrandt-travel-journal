@@ -18,7 +18,7 @@ public class LoadSelectedContactControler {
 	
 	protected Contact loadSelectedContact(){
 		String tmpWrapperString = (String) viewContacts.getLstContacts().getSelectedValue();
-		int firstNamePosition = tmpWrapperString.indexOf(" ");
+		int firstNamePosition = tmpWrapperString.indexOf(Messages.getString("LoadSelectedContactControler.0")); //$NON-NLS-1$
 		String lastName = tmpWrapperString.substring(0, firstNamePosition );
 		String firstName = tmpWrapperString.substring( firstNamePosition + 1 );
 		
@@ -37,10 +37,10 @@ public class LoadSelectedContactControler {
 	}
 	
 	private void getMatchedList() {
-		if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals(viewContacts.STD_CMB_CATEGORY_PRIVATE) )
+		if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals(ViewContacts.STD_CMB_CATEGORY_PRIVATE) )
 			
 			selectedContact = viewContacts.getParentFrame().getJourneyModel().getContactListModel().getPrivateContactList();
-		else if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals(viewContacts.STD_CMB_CATEGORY_GLOBAL) )
+		else if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals(ViewContacts.STD_CMB_CATEGORY_GLOBAL) )
 			
 			selectedContact = viewContacts.getParentFrame().getJourneyModel().getContactListModel().getGlobalContactList();
 		else

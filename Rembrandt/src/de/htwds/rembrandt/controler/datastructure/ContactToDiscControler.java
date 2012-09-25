@@ -21,8 +21,8 @@ import de.htwds.rembrandt.model.JourneyModel;
  */
 public class ContactToDiscControler {
 	
-	private final String PRIVATE_CONTACTS_FILE_NAME 	= "privateContacts.dat";
-	private final String GLOBAL_CONTACTS_FILE_NAME 	= "globalContacts.dat";
+	private final String PRIVATE_CONTACTS_FILE_NAME 	= Messages.getString("ContactToDiscControler.0"); //$NON-NLS-1$
+	private final String GLOBAL_CONTACTS_FILE_NAME 	= Messages.getString("ContactToDiscControler.1"); //$NON-NLS-1$
 	
 	private ArrayList<Contact> privateList;
 	private ArrayList<Contact> globalList;
@@ -75,7 +75,7 @@ public class ContactToDiscControler {
 	        } catch (ClassNotFoundException e) {
 	        	
 	        	privateList = null;
-	            System.err.println("Falschen Klassentyp gelesen");
+	            System.err.println(Messages.getString("ContactToDiscControler.2")); //$NON-NLS-1$
 	        } finally {
 
 	        	journeyModel.getContactListModel().setPrivateContactList( privateList );
@@ -103,7 +103,7 @@ public class ContactToDiscControler {
 	        } catch (ClassNotFoundException e) {
 	        	
 	        	globalList = null;
-	            System.err.println("Falschen Klassentyp gelesen");
+	            System.err.println(Messages.getString("ContactToDiscControler.3")); //$NON-NLS-1$
 	        } finally {
 
 	        	journeyModel.getContactListModel().setGlobalContactList(globalList);
@@ -142,7 +142,7 @@ public class ContactToDiscControler {
         	}
                
        } catch (IOException e) {
-            System.err.println("Fehler beim Schreiben der Kontaktlisten!");
+            System.err.println(Messages.getString("ContactToDiscControler.4")); //$NON-NLS-1$
             e.printStackTrace();
        }
 	}

@@ -1,10 +1,8 @@
 package de.htwds.rembrandt.controler.viewChecklistControler;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import de.htwds.rembrandt.controler.datastructure.FolderPathController;
@@ -21,7 +19,7 @@ public class ViewChecklistLoadFromDisc {
 	public ViewChecklistLoadFromDisc(JourneyModel model)
 	{
 		this.model = model;
-		journeyname = model.getTravelInformation().getCountry() + "_" + model.getTravelInformation().getDateArrival();
+		journeyname = model.getTravelInformation().getCountry() + Messages.getString("ViewChecklistLoadFromDisc.0") + model.getTravelInformation().getDateArrival(); //$NON-NLS-1$
 	}
 
 	public void load()
@@ -34,7 +32,7 @@ public class ViewChecklistLoadFromDisc {
 	private void fillChecklistBag()
 	{
 		bag = new CheckList();
-		String datei = FolderPathController.getCecklistsFolder(journeyname) + FolderPathController.getFileSeperator() + "ChecklistBag.dat";
+		String datei = FolderPathController.getCecklistsFolder(journeyname) + FolderPathController.getFileSeperator() + Messages.getString("ViewChecklistLoadFromDisc.1"); //$NON-NLS-1$
 		File file = new File(datei);
 		FileReader fw = null;
         BufferedReader bw = null;
@@ -44,8 +42,8 @@ public class ViewChecklistLoadFromDisc {
             String zeile;
             while((zeile = bw.readLine()) != null)
             {
-            	String[] zeilenele = zeile.split(";");
-            	if(zeilenele[2].equals("true"))
+            	String[] zeilenele = zeile.split(Messages.getString("ViewChecklistLoadFromDisc.2")); //$NON-NLS-1$
+            	if(zeilenele[2].equals(Messages.getString("ViewChecklistLoadFromDisc.3"))) //$NON-NLS-1$
             	{
             		bag.addLast(zeilenele[0], Integer.parseInt(zeilenele[1]), true);
             	}
@@ -71,7 +69,7 @@ public class ViewChecklistLoadFromDisc {
 	private void fillChecklistCheck()
 	{
 		check = new CheckList();
-		String datei = FolderPathController.getCecklistsFolder(journeyname) + FolderPathController.getFileSeperator() + "ChecklistCheck.dat";
+		String datei = FolderPathController.getCecklistsFolder(journeyname) + FolderPathController.getFileSeperator() + Messages.getString("ViewChecklistLoadFromDisc.4"); //$NON-NLS-1$
 		File file = new File(datei);
 		FileReader fw = null;
         BufferedReader bw = null;
@@ -81,8 +79,8 @@ public class ViewChecklistLoadFromDisc {
             String zeile;
             while((zeile = bw.readLine()) != null)
             {
-            	String[] zeilenele = zeile.split(";");
-            	if(zeilenele[2].equals("true"))
+            	String[] zeilenele = zeile.split(Messages.getString("ViewChecklistLoadFromDisc.5")); //$NON-NLS-1$
+            	if(zeilenele[2].equals(Messages.getString("ViewChecklistLoadFromDisc.6"))) //$NON-NLS-1$
             	{
             		check.addLast(zeilenele[0], Integer.parseInt(zeilenele[1]), true);
             	}

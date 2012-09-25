@@ -33,7 +33,7 @@ public class LoadTravelInformationFromDiskControler {
 		int counter = 0;
 		String fileName;
         File data;
-        fileName = FolderPathController.getTravelInformationFolder(journeyName) + FolderPathController.getFileSeperator() + "travelInformation.dat";
+        fileName = FolderPathController.getTravelInformationFolder(journeyName) + FolderPathController.getFileSeperator() + Messages.getString("LoadTravelInformationFromDiskControler.0"); //$NON-NLS-1$
         data = new File(fileName);
         if(!data.exists()) throw new TravelInformationException(TravelInformationException.ERROR_FILE_NOT_FOUND);
         FileReader fr = null;
@@ -46,7 +46,7 @@ public class LoadTravelInformationFromDiskControler {
     				result[counter] = line;
     			} else {
     				if(line != null && line.length() > 0)
-    					comment.append(line + "\n");
+    					comment.append(line + Messages.getString("LoadTravelInformationFromDiskControler.1")); //$NON-NLS-1$
     			}
     			counter ++;
     		}   

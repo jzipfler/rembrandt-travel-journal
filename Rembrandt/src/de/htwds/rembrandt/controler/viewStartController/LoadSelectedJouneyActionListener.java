@@ -2,7 +2,6 @@ package de.htwds.rembrandt.controler.viewStartController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
@@ -12,7 +11,6 @@ import de.htwds.rembrandt.controler.travelview.LoadTravelInformationFromDiskCont
 import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumIOController;
 import de.htwds.rembrandt.exception.TravelInformationException;
 import de.htwds.rembrandt.exception.TravelToDiscException;
-import de.htwds.rembrandt.model.GeneralInformationModel;
 import de.htwds.rembrandt.model.JourneyModel;
 import de.htwds.rembrandt.view.ViewMain;
 import de.htwds.rembrandt.view.ViewStart;
@@ -54,7 +52,7 @@ public class LoadSelectedJouneyActionListener implements ActionListener {
 			
 			JOptionPane.showMessageDialog(viewStart, 
 					discException.getMessage() 
-					+ "\n" 
+					+ Messages.getString("LoadSelectedJouneyActionListener.0")  //$NON-NLS-1$
 					+TravelToDiscException.ERROR_LOAD_SELECTED_JOURNEY, 
 					TravelToDiscException.MSG_ERROR_DURING_SAVE_OR_LOAD, 
 					JOptionPane.ERROR_MESSAGE );

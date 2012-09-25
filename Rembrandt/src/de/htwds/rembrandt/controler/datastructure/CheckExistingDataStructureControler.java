@@ -1,7 +1,6 @@
 package de.htwds.rembrandt.controler.datastructure;
 
 import java.io.File;
-import java.util.Properties;
 
 import de.htwds.rembrandt.exception.DataStructureException;
 

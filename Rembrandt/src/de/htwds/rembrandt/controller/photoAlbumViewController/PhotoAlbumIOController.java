@@ -23,7 +23,7 @@ public class PhotoAlbumIOController {
 
 	public PhotoAlbumIOController( JourneyModel journeyModel ) {
 		this.journeyModel = journeyModel;
-		this.fileName = FolderPathController.getPhotosFolder( journeyModel.getGeneralInformationModel().getFolderName() ) + FolderPathController.getFileSeperator() + "photoAlbum.dat";
+		this.fileName = FolderPathController.getPhotosFolder( journeyModel.getGeneralInformationModel().getFolderName() ) + FolderPathController.getFileSeperator() + Messages.getString("PhotoAlbumIOController.0"); //$NON-NLS-1$
 	}
 
 	public void save() {

@@ -26,6 +26,7 @@ public class PhotoAlbumDetailsViewSetCurrentPhotoActionListener implements Actio
 		this.forward = forward;
 	}	
 	
+	@Override
 	public void actionPerformed(ActionEvent event) {
 		
 		photoAlbum = viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel().getPhotoAlbum();
@@ -33,8 +34,8 @@ public class PhotoAlbumDetailsViewSetCurrentPhotoActionListener implements Actio
 		
 		// comment not locked, save?
 		if( viewPhotoAlbumDetails.getEpnPhotoComment().isEditable() ) {
-			Object[] options = { "Ja, speichern", "Nein, Änderungen verwerfen" };
-			int choice = JOptionPane.showOptionDialog( viewPhotoAlbumDetails, "Möchten Sie ihre Änderungen speichern?", "Speichern?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0] );
+			Object[] options = { Messages.getString("PhotoAlbumDetailsViewSetCurrentPhotoActionListener.0"), Messages.getString("PhotoAlbumDetailsViewSetCurrentPhotoActionListener.1") }; //$NON-NLS-1$ //$NON-NLS-2$
+			int choice = JOptionPane.showOptionDialog( viewPhotoAlbumDetails, Messages.getString("PhotoAlbumDetailsViewSetCurrentPhotoActionListener.2"), Messages.getString("PhotoAlbumDetailsViewSetCurrentPhotoActionListener.3"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0] ); //$NON-NLS-1$ //$NON-NLS-2$
 			
 			if( choice == JOptionPane.YES_OPTION ) {
 				new PhotoAlbumDetailsViewSaveCommentActionListener( viewPhotoAlbumDetails ).saveComment();
@@ -47,10 +48,10 @@ public class PhotoAlbumDetailsViewSetCurrentPhotoActionListener implements Actio
 
 			if( !forward && currentPhoto.equals( photoAlbum.getFirst() ) ) { // beginning of list?
 				// debug
-				System.out.println("Listenanfang");
+				System.out.println(Messages.getString("PhotoAlbumDetailsViewSetCurrentPhotoActionListener.4")); //$NON-NLS-1$
 			} else if( forward && currentPhoto.equals( photoAlbum.getLast() ) ) { // end of list?
 				// debug
-				System.out.println("Listenende");
+				System.out.println(Messages.getString("PhotoAlbumDetailsViewSetCurrentPhotoActionListener.5")); //$NON-NLS-1$
 			} else { 
 				int index = photoAlbum.indexOf(currentPhoto);
 				
@@ -64,7 +65,7 @@ public class PhotoAlbumDetailsViewSetCurrentPhotoActionListener implements Actio
 			}
 		} else {
 			// debug
-			System.out.println("Liste leer");
+			System.out.println(Messages.getString("PhotoAlbumDetailsViewSetCurrentPhotoActionListener.6")); //$NON-NLS-1$
 		}
 	}
 

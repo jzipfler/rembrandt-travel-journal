@@ -7,8 +7,9 @@ import javax.swing.JTextField;
 public class JTravelInformationTextfield extends JTextField{
 	
 	final static String BAD_CHARS 
-	= "`~!@#$%^&*()+=\\|\"':;?/><";
+	= Messages.getString("JTravelInformationTextfield.0"); //$NON-NLS-1$
 	
+	@Override
 	public void processKeyEvent(KeyEvent ev) {
 
 		char c = ev.getKeyChar();

@@ -22,6 +22,7 @@ public class PhotoAlbumOverviewViewMouseListener implements MouseListener {
 		this.viewPhotoAlbumOverview = viewPhotoAlbumOverview;
 	}
 
+	@Override
 	public void mouseClicked(MouseEvent event) {
 		PhotoAlbumModel photoAlbumModel = viewPhotoAlbumOverview.getParentFrame().getJourneyModel().getPhotoAlbumModel();
 		Photo photo = photoAlbumModel.findPhotoByPath( ((ImageIcon) ((JLabel) event.getComponent()).getIcon()).getDescription() );
@@ -32,8 +33,12 @@ public class PhotoAlbumOverviewViewMouseListener implements MouseListener {
 	}
 
 	// not needed
+	@Override
 	public void mouseExited   ( MouseEvent event ) {}
+	@Override
 	public void mouseEntered  ( MouseEvent event ) {}
+	@Override
 	public void mousePressed  ( MouseEvent event ) {}
+	@Override
 	public void mouseReleased ( MouseEvent event ) {}
 }

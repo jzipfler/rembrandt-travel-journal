@@ -74,7 +74,8 @@ public class ImagePreview extends JComponent
         }
     }
 
-    public void propertyChange(PropertyChangeEvent e) {
+    @Override
+	public void propertyChange(PropertyChangeEvent e) {
         boolean update = false;
         String prop = e.getPropertyName();
 
@@ -99,7 +100,8 @@ public class ImagePreview extends JComponent
         }
     }
 
-    protected void paintComponent(Graphics g) {
+    @Override
+	protected void paintComponent(Graphics g) {
         if (thumbnail == null) {
             loadImage();
         }

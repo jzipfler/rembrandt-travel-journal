@@ -27,7 +27,6 @@ package de.htwds.rembrandt.components;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.TrayIcon;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

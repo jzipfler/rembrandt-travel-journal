@@ -4,12 +4,11 @@ package de.htwds.rembrandt.controler.contactViewControler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import de.htwds.rembrandt.controler.datastructure.FolderPathController;
-import de.htwds.rembrandt.view.ViewContacts;
-import de.htwds.rembrandt.view.ViewMain;
-import de.htwds.rembrandt.view.ViewCalendar;
-import de.htwds.rembrandt.model.ActivityList;
 import de.htwds.rembrandt.controler.activityController.ActivityListFile;
+import de.htwds.rembrandt.controler.datastructure.FolderPathController;
+import de.htwds.rembrandt.model.ActivityList;
+import de.htwds.rembrandt.view.ViewCalendar;
+import de.htwds.rembrandt.view.ViewMain;
 
 
 public class LoadCalendarActionListener implements ActionListener {

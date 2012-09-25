@@ -18,7 +18,8 @@ public class LoadPhotoAlbumDetailsPanelActionListener implements ActionListener 
         this.viewPhotoAlbum = new ViewPhotoAlbumDetails( viewMain );
     }
     
-    public void actionPerformed(ActionEvent event) {
+    @Override
+	public void actionPerformed(ActionEvent event) {
     	loadPhotoAlbum();
     }
     

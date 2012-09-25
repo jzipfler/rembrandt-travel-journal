@@ -45,9 +45,9 @@ public class AddPictureActionListener implements ActionListener {
 		 */
 		fileChooser.setAccessory(new ImagePreview(fileChooser));
 		
-		int selection = fileChooser.showDialog(viewContactDetails, "Als Kontaktbild setzen");
+		int selection = fileChooser.showDialog(viewContactDetails, Messages.getString("AddPictureActionListener.0")); //$NON-NLS-1$
 		
-		if ( selection == fileChooser.APPROVE_OPTION ) {
+		if ( selection == JFileChooser.APPROVE_OPTION ) {
 			
 //			DEBUG OUTPUT
 //			System.out.println(fileChooser.getSelectedFile().getName());

@@ -8,7 +8,7 @@ import de.htwds.rembrandt.exception.ContactException;
 
 public class Contact implements Comparable<Contact>, Serializable {
 
-	private static final String SPACE = " ";
+	private static final String SPACE = Messages.getString("Contact.0"); //$NON-NLS-1$
 	
 	private String firstName;
 	private String lastName;
@@ -107,6 +107,7 @@ public class Contact implements Comparable<Contact>, Serializable {
 		this.picture = picture;
 	}
 
+	@Override
 	public String toString() {
 		return ( lastName + SPACE + firstName );
 	}

@@ -17,6 +17,7 @@ public class ReturnToPhotoAlbumDetailsViewActionListener implements ActionListen
 		this.viewPhotoAlbumOverview = viewPhotoAlbumOverview;
 	}
 	
+	@Override
 	public void actionPerformed(ActionEvent event) {
 		new LoadPhotoAlbumDetailsPanelActionListener( viewPhotoAlbumOverview.getParentFrame() ).loadPhotoAlbum();
 	}

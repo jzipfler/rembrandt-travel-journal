@@ -7,8 +7,9 @@ import javax.swing.JTextField;
 public class JNumberOnlyTextField extends JTextField {
 	
 	final static String BAD_CHARS 
-    	= "`~!@#$%^&*()_+=\\|\"':;?/>.<, ";
+    	= Messages.getString("JNumberOnlyTextField.0"); //$NON-NLS-1$
 
+	@Override
 	public void processKeyEvent(KeyEvent ev) {
 
 		char c = ev.getKeyChar();

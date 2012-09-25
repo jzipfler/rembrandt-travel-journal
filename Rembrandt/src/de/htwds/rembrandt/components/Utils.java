@@ -32,16 +32,17 @@
 package de.htwds.rembrandt.components;
 
 import java.io.File;
+
 import javax.swing.ImageIcon;
 
 /* Utils.java is used by FileChooserDemo2.java. */
 public class Utils {
-    public final static String jpeg = "jpeg";
-    public final static String jpg = "jpg";
-    public final static String gif = "gif";
-    public final static String tiff = "tiff";
-    public final static String tif = "tif";
-    public final static String png = "png";
+    public final static String jpeg = Messages.getString("Utils.0"); //$NON-NLS-1$
+    public final static String jpg = Messages.getString("Utils.1"); //$NON-NLS-1$
+    public final static String gif = Messages.getString("Utils.2"); //$NON-NLS-1$
+    public final static String tiff = Messages.getString("Utils.3"); //$NON-NLS-1$
+    public final static String tif = Messages.getString("Utils.4"); //$NON-NLS-1$
+    public final static String png = Messages.getString("Utils.5"); //$NON-NLS-1$
 
     /*
      * Get the extension of a file.
@@ -63,7 +64,7 @@ public class Utils {
         if (imgURL != null) {
             return new ImageIcon(imgURL);
         } else {
-            System.err.println("Couldn't find file: " + path);
+            System.err.println(Messages.getString("Utils.6") + path); //$NON-NLS-1$
             return null;
         }
     }

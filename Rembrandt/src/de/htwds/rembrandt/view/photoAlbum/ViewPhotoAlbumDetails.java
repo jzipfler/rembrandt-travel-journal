@@ -13,6 +13,7 @@ import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,24 +21,24 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
-import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewAddPhotoActionListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.LoadPhotoAlbumOverviewPanelActionListener;
+import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsEditCommentStatusToggleListener;
+import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewAddPhotoActionListener;
+import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewRemovePhotoActionListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewResizeListener;
+import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewSetCurrentPhotoActionListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewSlideShowTimerListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewThumbnailMouseListener;
-import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewRemovePhotoActionListener;
-import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewSetCurrentPhotoActionListener;
-import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsEditCommentStatusToggleListener;
 import de.htwds.rembrandt.controller.photoAlbumViewController.PhotoAlbumDetailsViewToggleSlideShowListener;
 import de.htwds.rembrandt.model.Photo;
 import de.htwds.rembrandt.model.PhotoAlbumModel;
 import de.htwds.rembrandt.view.ViewMain;
-import javax.swing.JCheckBox;
 
 /**
  * @author sFey
@@ -51,12 +52,12 @@ public class ViewPhotoAlbumDetails extends JPanel {
 	private static final int SLIDE_SHOW_TIMER_INTERVAL = 2000;
 
 	// colors
-	private Color COLOR_DISABLED = (Color) UIManager.get("TextField.inactiveBackground");
-	private Color COLOR_ENABLED = (Color) UIManager.get("TextField.background");
+	private Color COLOR_DISABLED = (Color) UIManager.get(Messages.getString("ViewPhotoAlbumDetails.0")); //$NON-NLS-1$
+	private Color COLOR_ENABLED = (Color) UIManager.get(Messages.getString("ViewPhotoAlbumDetails.1")); //$NON-NLS-1$
 
 	// texts
-	public static final String COMMENT_BUTTON_EDIT = "bearbeiten";
-	public static final String COMMENT_BUTTON_SAVE = "speichern";
+	public static final String COMMENT_BUTTON_EDIT = Messages.getString("ViewPhotoAlbumDetails.2"); //$NON-NLS-1$
+	public static final String COMMENT_BUTTON_SAVE = Messages.getString("ViewPhotoAlbumDetails.3"); //$NON-NLS-1$
 
 	// fields
 	private boolean commentEditable = false;
@@ -106,105 +107,105 @@ public class ViewPhotoAlbumDetails extends JPanel {
 
 	// constructor
 	public ViewPhotoAlbumDetails() {
-		setFont(new Font("Arial", Font.PLAIN, 13));
+		setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.4"), Font.PLAIN, 13)); //$NON-NLS-1$
 		setPreferredSize(new Dimension(440, 440));
 		setMinimumSize(new Dimension(440, 440));
 		setLayout(new BorderLayout(0, 0));
 
-		tpPhotoArea = new JTabbedPane(JTabbedPane.TOP);
+		tpPhotoArea = new JTabbedPane(SwingConstants.TOP);
 		add(tpPhotoArea, BorderLayout.CENTER);
 
 		pnlPhotoPreview = new JPanel();
-		tpPhotoArea.addTab("Foto", null, pnlPhotoPreview, null);
-		pnlPhotoPreview.setFont(new Font("Arial", Font.PLAIN, 13));
+		tpPhotoArea.addTab(Messages.getString("ViewPhotoAlbumDetails.5"), null, pnlPhotoPreview, null); //$NON-NLS-1$
+		pnlPhotoPreview.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.6"), Font.PLAIN, 13)); //$NON-NLS-1$
 		pnlPhotoPreview.setBorder(new LineBorder(Color.GRAY));
 		pnlPhotoPreview.setPreferredSize(new Dimension(10, 200));
 		pnlPhotoPreview.setMinimumSize(new Dimension(10, 200));
 		pnlPhotoPreview.setLayout(new BorderLayout(0, 0));
 
-		btnPhotoBack = new JButton("<");
+		btnPhotoBack = new JButton(Messages.getString("ViewPhotoAlbumDetails.7")); //$NON-NLS-1$
 		btnPhotoBack.addActionListener(new PhotoAlbumDetailsViewSetCurrentPhotoActionListener(this, false));
-		btnPhotoBack.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnPhotoBack.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.8"), Font.PLAIN, 13)); //$NON-NLS-1$
 		pnlPhotoPreview.add(btnPhotoBack, BorderLayout.WEST);
 
-		btnPhotoForward = new JButton(">");
+		btnPhotoForward = new JButton(Messages.getString("ViewPhotoAlbumDetails.9")); //$NON-NLS-1$
 		btnPhotoForward.addActionListener(new PhotoAlbumDetailsViewSetCurrentPhotoActionListener(this, true));
-		btnPhotoForward.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnPhotoForward.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.10"), Font.PLAIN, 13)); //$NON-NLS-1$
 		pnlPhotoPreview.add(btnPhotoForward, BorderLayout.EAST);
 
 		pnlCurrentPhoto = new JPanel();
-		pnlCurrentPhoto.setFont(new Font("Arial", Font.PLAIN, 13));
+		pnlCurrentPhoto.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.11"), Font.PLAIN, 13)); //$NON-NLS-1$
 		pnlPhotoPreview.add(pnlCurrentPhoto, BorderLayout.CENTER);
 
-		lblCurrentPhoto = new JLabel("");
-		lblCurrentPhoto.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblCurrentPhoto = new JLabel(Messages.getString("ViewPhotoAlbumDetails.12")); //$NON-NLS-1$
+		lblCurrentPhoto.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.13"), Font.PLAIN, 13)); //$NON-NLS-1$
 		pnlCurrentPhoto.add(lblCurrentPhoto);
 
 		pnlPhotoInformation = new JPanel();
-		tpPhotoArea.addTab("Informationen", null, pnlPhotoInformation, null);
-		pnlPhotoInformation.setFont(new Font("Arial", Font.PLAIN, 13));
+		tpPhotoArea.addTab(Messages.getString("ViewPhotoAlbumDetails.14"), null, pnlPhotoInformation, null); //$NON-NLS-1$
+		pnlPhotoInformation.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.15"), Font.PLAIN, 13)); //$NON-NLS-1$
 		pnlPhotoInformation.setBorder(new LineBorder(Color.GRAY));
 		pnlPhotoInformation.setLayout(new BorderLayout(0, 0));
 
 		pnlPhotoFileNameDate = new JPanel();
-		pnlPhotoFileNameDate.setFont(new Font("Arial", Font.PLAIN, 13));
+		pnlPhotoFileNameDate.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.16"), Font.PLAIN, 13)); //$NON-NLS-1$
 		pnlPhotoInformation.add(pnlPhotoFileNameDate, BorderLayout.NORTH);
-		pnlPhotoFileNameDate.setLayout(new MigLayout("", "[46px][grow]", "[14px][]"));
+		pnlPhotoFileNameDate.setLayout(new MigLayout(Messages.getString("ViewPhotoAlbumDetails.17"), Messages.getString("ViewPhotoAlbumDetails.18"), Messages.getString("ViewPhotoAlbumDetails.19"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
-		lblPhotoFileName = new JLabel("Name");
-		lblPhotoFileName.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlPhotoFileNameDate.add(lblPhotoFileName, "cell 0 0,alignx left,aligny top");
+		lblPhotoFileName = new JLabel(Messages.getString("ViewPhotoAlbumDetails.20")); //$NON-NLS-1$
+		lblPhotoFileName.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.21"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlPhotoFileNameDate.add(lblPhotoFileName, Messages.getString("ViewPhotoAlbumDetails.22")); //$NON-NLS-1$
 
 		txtPhotoFileName = new JTextField();
-		txtPhotoFileName.setFont(new Font("Arial", Font.PLAIN, 13));
+		txtPhotoFileName.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.23"), Font.PLAIN, 13)); //$NON-NLS-1$
 		txtPhotoFileName.setEditable(false);
-		pnlPhotoFileNameDate.add(txtPhotoFileName, "cell 1 0,growx");
+		pnlPhotoFileNameDate.add(txtPhotoFileName, Messages.getString("ViewPhotoAlbumDetails.24")); //$NON-NLS-1$
 		txtPhotoFileName.setColumns(10);
 
-		lblPhotoDate = new JLabel("Datum");
-		lblPhotoDate.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlPhotoFileNameDate.add(lblPhotoDate, "cell 0 1,alignx left,aligny baseline");
+		lblPhotoDate = new JLabel(Messages.getString("ViewPhotoAlbumDetails.25")); //$NON-NLS-1$
+		lblPhotoDate.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.26"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlPhotoFileNameDate.add(lblPhotoDate, Messages.getString("ViewPhotoAlbumDetails.27")); //$NON-NLS-1$
 
 		txtPhotoDate = new JTextField();
-		txtPhotoDate.setFont(new Font("Arial", Font.PLAIN, 13));
+		txtPhotoDate.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.28"), Font.PLAIN, 13)); //$NON-NLS-1$
 		txtPhotoDate.setEditable(false);
-		pnlPhotoFileNameDate.add(txtPhotoDate, "cell 1 1,growx");
+		pnlPhotoFileNameDate.add(txtPhotoDate, Messages.getString("ViewPhotoAlbumDetails.29")); //$NON-NLS-1$
 		txtPhotoDate.setColumns(10);
 
 		pnlPhotoComment = new JPanel();
-		pnlPhotoComment.setFont(new Font("Arial", Font.PLAIN, 13));
+		pnlPhotoComment.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.30"), Font.PLAIN, 13)); //$NON-NLS-1$
 		pnlPhotoInformation.add(pnlPhotoComment, BorderLayout.CENTER);
-		pnlPhotoComment.setLayout(new MigLayout("", "[grow]", "[][grow][]"));
+		pnlPhotoComment.setLayout(new MigLayout(Messages.getString("ViewPhotoAlbumDetails.31"), Messages.getString("ViewPhotoAlbumDetails.32"), Messages.getString("ViewPhotoAlbumDetails.33"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
-		lblPhotoComment = new JLabel("Kommentar");
-		lblPhotoComment.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlPhotoComment.add(lblPhotoComment, "cell 0 0");
+		lblPhotoComment = new JLabel(Messages.getString("ViewPhotoAlbumDetails.34")); //$NON-NLS-1$
+		lblPhotoComment.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.35"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlPhotoComment.add(lblPhotoComment, Messages.getString("ViewPhotoAlbumDetails.36")); //$NON-NLS-1$
 
 		scpPhotoComment = new JScrollPane();
 		scpPhotoComment.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scpPhotoComment.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlPhotoComment.add(scpPhotoComment, "cell 0 1,grow");
+		scpPhotoComment.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.37"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlPhotoComment.add(scpPhotoComment, Messages.getString("ViewPhotoAlbumDetails.38")); //$NON-NLS-1$
 
 		epnPhotoComment = new JEditorPane();
-		epnPhotoComment.setFont(new Font("Arial", Font.PLAIN, 13));
+		epnPhotoComment.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.39"), Font.PLAIN, 13)); //$NON-NLS-1$
 		epnPhotoComment.setEditable(false);
 		epnPhotoComment.setBackground(COLOR_DISABLED);
 		scpPhotoComment.setViewportView(epnPhotoComment);
 
 		btnPhotoCommentEditToggle = new JButton(COMMENT_BUTTON_EDIT);
-		btnPhotoCommentEditToggle.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnPhotoCommentEditToggle.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.40"), Font.PLAIN, 13)); //$NON-NLS-1$
 		btnPhotoCommentEditToggle.addActionListener(new PhotoAlbumDetailsEditCommentStatusToggleListener(this));
-		pnlPhotoComment.add(btnPhotoCommentEditToggle, "cell 0 2");
+		pnlPhotoComment.add(btnPhotoCommentEditToggle, Messages.getString("ViewPhotoAlbumDetails.41")); //$NON-NLS-1$
 
 		scpThumbnailArea = new JScrollPane();
 		scpThumbnailArea.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scpThumbnailArea.setFont(new Font("Arial", Font.PLAIN, 13));
+		scpThumbnailArea.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.42"), Font.PLAIN, 13)); //$NON-NLS-1$
 		scpThumbnailArea.setBorder(new LineBorder(Color.GRAY));
 		scpThumbnailArea.setPreferredSize(new Dimension(2, 100));
 		add(scpThumbnailArea, BorderLayout.SOUTH);
 
 		pnlThumbnailArea = new JPanel();
-		pnlThumbnailArea.setFont(new Font("Arial", Font.PLAIN, 13));
+		pnlThumbnailArea.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.43"), Font.PLAIN, 13)); //$NON-NLS-1$
 		scpThumbnailArea.setViewportView(pnlThumbnailArea);
 
 		pnlHeaderArea = new JPanel();
@@ -216,31 +217,31 @@ public class ViewPhotoAlbumDetails extends JPanel {
 		fl_pnlHeader.setAlignment(FlowLayout.LEFT);
 		pnlHeaderArea.add(pnlHeader, BorderLayout.CENTER);
 
-		lblPhotoAlbumHeader = new JLabel("Fotoalbum");
+		lblPhotoAlbumHeader = new JLabel(Messages.getString("ViewPhotoAlbumDetails.44")); //$NON-NLS-1$
 		pnlHeader.add(lblPhotoAlbumHeader);
-		lblPhotoAlbumHeader.setFont(new Font("Arial", Font.BOLD, 15));
+		lblPhotoAlbumHeader.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.45"), Font.BOLD, 15)); //$NON-NLS-1$
 
 		pnlHeaderNavigation = new JPanel();
 		pnlHeaderArea.add(pnlHeaderNavigation, BorderLayout.EAST);
 
-		btnAddPhoto = new JButton("+");
+		btnAddPhoto = new JButton(Messages.getString("ViewPhotoAlbumDetails.46")); //$NON-NLS-1$
 		btnAddPhoto.addActionListener(new PhotoAlbumDetailsViewAddPhotoActionListener(this));
 		
-		chckbxSlideShow = new JCheckBox("Diashow");
-		chckbxSlideShow.setFont(new Font("Arial", Font.PLAIN, 13));
+		chckbxSlideShow = new JCheckBox(Messages.getString("ViewPhotoAlbumDetails.47")); //$NON-NLS-1$
+		chckbxSlideShow.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.48"), Font.PLAIN, 13)); //$NON-NLS-1$
 		chckbxSlideShow.addActionListener(new PhotoAlbumDetailsViewToggleSlideShowListener(this));
 		
 		
 		pnlHeaderNavigation.add(chckbxSlideShow);
 		pnlHeaderNavigation.add(btnAddPhoto);
-		btnAddPhoto.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnAddPhoto.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.49"), Font.PLAIN, 13)); //$NON-NLS-1$
 
-		btnRemovePhoto = new JButton("-");
+		btnRemovePhoto = new JButton(Messages.getString("ViewPhotoAlbumDetails.50")); //$NON-NLS-1$
 		btnRemovePhoto.addActionListener(new PhotoAlbumDetailsViewRemovePhotoActionListener(this));
 		pnlHeaderNavigation.add(btnRemovePhoto);
-		btnRemovePhoto.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnRemovePhoto.setFont(new Font(Messages.getString("ViewPhotoAlbumDetails.51"), Font.PLAIN, 13)); //$NON-NLS-1$
 
-		btnSwitchToOverview = new JButton("Übersicht");
+		btnSwitchToOverview = new JButton(Messages.getString("ViewPhotoAlbumDetails.52")); //$NON-NLS-1$
 		pnlHeaderNavigation.add(btnSwitchToOverview);
 		
 		this.timer = new Timer(SLIDE_SHOW_TIMER_INTERVAL, new PhotoAlbumDetailsViewSlideShowTimerListener(this));
@@ -306,9 +307,9 @@ public class ViewPhotoAlbumDetails extends JPanel {
 		
 		if( photo == null ) {
 			lblCurrentPhoto.setIcon(null);
-			txtPhotoFileName.setText("");
-			txtPhotoDate.setText("");
-			epnPhotoComment.setText("");
+			txtPhotoFileName.setText(Messages.getString("ViewPhotoAlbumDetails.53")); //$NON-NLS-1$
+			txtPhotoDate.setText(Messages.getString("ViewPhotoAlbumDetails.54")); //$NON-NLS-1$
+			epnPhotoComment.setText(Messages.getString("ViewPhotoAlbumDetails.55")); //$NON-NLS-1$
 		} else {
 			ImageIcon photoIcon = new ImageIcon(photo.getPath(), photo.getPath());
 			lblCurrentPhoto.setIcon(photoIcon);

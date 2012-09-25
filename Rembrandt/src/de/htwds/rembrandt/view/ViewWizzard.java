@@ -6,11 +6,13 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -22,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.jgoodies.forms.factories.FormFactory;
@@ -32,12 +35,7 @@ import com.jgoodies.forms.layout.Sizes;
 
 import de.htwds.rembrandt.components.JTravelInformationTextfield;
 import de.htwds.rembrandt.controler.wizzardControler.readInputData;
-import de.htwds.rembrandt.exception.ContactException;
 import de.htwds.rembrandt.exception.WizzardInputException;
-
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.Toolkit;
 
 /**
  * Diese Klasse implementiert den Wizzard zur Sammlung der Reisedaten
@@ -100,19 +98,19 @@ public class ViewWizzard extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewWizzard( ViewStart viewStart ) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(ViewWizzard.class.getResource("/de/htwds/rembrandt/resources/images/wizzard.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ViewWizzard.class.getResource(Messages.getString("ViewWizzard.0")))); //$NON-NLS-1$
 		
 		this.wizzard = this;
 		this.viewStart = viewStart;
 		setLocationRelativeTo(viewStart);
 		setVisible(true);
 		
-		setFont(new Font("Arial", Font.PLAIN, 12));
+		setFont(new Font(Messages.getString("ViewWizzard.1"), Font.PLAIN, 12)); //$NON-NLS-1$
 		cardNumber = 0;
 		controler = new readInputData(this);
-		setTitle("Reise anlegen");
+		setTitle(Messages.getString("ViewWizzard.2")); //$NON-NLS-1$
 		setMinimumSize(new Dimension(640, 480));
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 807, 497);
 		pnlQuestionCards = new JPanel();
 		pnlQuestionCards.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -124,19 +122,19 @@ public class ViewWizzard extends JFrame {
 		pnlCards.setLayout(new CardLayout(0, 0));
 		
 		pnlFirstView = new JPanel();
-		pnlCards.add(pnlFirstView, "name_17364743092986");
+		pnlCards.add(pnlFirstView, Messages.getString("ViewWizzard.3")); //$NON-NLS-1$
 		pnlFirstView.setLayout(new BorderLayout(0, 0));
 		
 		JPanel pnlViewContent = new JPanel();
 		pnlFirstView.add(pnlViewContent, BorderLayout.CENTER);
 		pnlViewContent.setLayout(new BorderLayout(0, 5));
 		
-		JLabel lblHeadLine = new JLabel("WILLKOMMEN");
+		JLabel lblHeadLine = new JLabel(Messages.getString("ViewWizzard.4")); //$NON-NLS-1$
 		lblHeadLine.setSize(new Dimension(67, 17));
 		lblHeadLine.setMaximumSize(new Dimension(67, 20));
 		lblHeadLine.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHeadLine.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblHeadLine.setFont(new Font("Arial", Font.BOLD, 15));
+		lblHeadLine.setFont(new Font(Messages.getString("ViewWizzard.5"), Font.BOLD, 15)); //$NON-NLS-1$
 		pnlViewContent.add(lblHeadLine, BorderLayout.NORTH);
 		
 		JPanel pnlContainer = new JPanel();
@@ -145,25 +143,25 @@ public class ViewWizzard extends JFrame {
 		
 		JTextPane txtpnExplanation = new JTextPane();
 		pnlContainer.add(txtpnExplanation);
-		txtpnExplanation.setFont(new Font("Arial", Font.PLAIN, 13));
+		txtpnExplanation.setFont(new Font(Messages.getString("ViewWizzard.6"), Font.PLAIN, 13)); //$NON-NLS-1$
 		txtpnExplanation.setSelectedTextColor(Color.BLACK);
 		txtpnExplanation.setSelectionColor(Color.WHITE);
-		txtpnExplanation.setText("Dieser Wizzard wird Ihnen helfen eine neue Reise anzulegen.\r\n\r\nDazu werden Ihnen verschiedene Fragen, ihre Reise betreffend gestellt. \r\nSie werden nach Ihrem:\r\n\r\n\t- Datum\r\n\t- Reiseland\r\n\t- Ort\r\n\t- usw.\r\n\r\ngefragt. \r\nDiese Angaben dienen ebenfalls dazu den Reiseeintrag sp\u00E4ter wieder zu finden. Daher sollten die Angaben m\u00F6glichst pr\u00E4zise sein.");
+		txtpnExplanation.setText(Messages.getString("ViewWizzard.7")); //$NON-NLS-1$
 		txtpnExplanation.setEditable(false);
 		
 		JPanel pnlQuestion = new JPanel();
 		pnlContainer.add(pnlQuestion);
 		pnlQuestion.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
+				ColumnSpec.decode(Messages.getString("ViewWizzard.8")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(186dlu;default)"),
+				ColumnSpec.decode(Messages.getString("ViewWizzard.9")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
+				ColumnSpec.decode(Messages.getString("ViewWizzard.10")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(186dlu;default)"),
+				ColumnSpec.decode(Messages.getString("ViewWizzard.11")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
+				ColumnSpec.decode(Messages.getString("ViewWizzard.12")),}, //$NON-NLS-1$
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
@@ -182,120 +180,120 @@ public class ViewWizzard extends JFrame {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblLocation = new JLabel("Land- und Ortsangabe:");
-		lblLocation.setFont(new Font("Arial", Font.BOLD, 13));
-		pnlQuestion.add(lblLocation, "4, 2");
+		JLabel lblLocation = new JLabel(Messages.getString("ViewWizzard.13")); //$NON-NLS-1$
+		lblLocation.setFont(new Font(Messages.getString("ViewWizzard.14"), Font.BOLD, 13)); //$NON-NLS-1$
+		pnlQuestion.add(lblLocation, Messages.getString("ViewWizzard.15")); //$NON-NLS-1$
 		
-		JLabel lblCountry = new JLabel("In welches Land reisen Sie?");
-		lblCountry.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlQuestion.add(lblCountry, "4, 4");
+		JLabel lblCountry = new JLabel(Messages.getString("ViewWizzard.16")); //$NON-NLS-1$
+		lblCountry.setFont(new Font(Messages.getString("ViewWizzard.17"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlQuestion.add(lblCountry, Messages.getString("ViewWizzard.18")); //$NON-NLS-1$
 		
-		JLabel lblCity = new JLabel("Name des Ortes Ihres Aufenthalts?");
-		lblCity.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlQuestion.add(lblCity, "8, 4");
+		JLabel lblCity = new JLabel(Messages.getString("ViewWizzard.19")); //$NON-NLS-1$
+		lblCity.setFont(new Font(Messages.getString("ViewWizzard.20"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlQuestion.add(lblCity, Messages.getString("ViewWizzard.21")); //$NON-NLS-1$
 		
 		txtInputCountry = new JTravelInformationTextfield();
-		txtInputCountry.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlQuestion.add(txtInputCountry, "4, 6");
+		txtInputCountry.setFont(new Font(Messages.getString("ViewWizzard.22"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlQuestion.add(txtInputCountry, Messages.getString("ViewWizzard.23")); //$NON-NLS-1$
 		txtInputCountry.setColumns(10);
 		
 		txtInputCity = new JTextField();
-		txtInputCity.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlQuestion.add(txtInputCity, "8, 6, fill, default");
+		txtInputCity.setFont(new Font(Messages.getString("ViewWizzard.24"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlQuestion.add(txtInputCity, Messages.getString("ViewWizzard.25")); //$NON-NLS-1$
 		txtInputCity.setColumns(10);
 		
 		pnlSecondView = new JPanel();
-		pnlCards.add(pnlSecondView, "name_17366503517548");
+		pnlCards.add(pnlSecondView, Messages.getString("ViewWizzard.26")); //$NON-NLS-1$
 		pnlSecondView.setLayout(new BorderLayout(0, 0));
 		
 		JPanel pnlViewContent_1 = new JPanel();
 		pnlSecondView.add(pnlViewContent_1, BorderLayout.CENTER);
 		pnlViewContent_1.setLayout(new BorderLayout(0, 5));
 		
-		JLabel lblHeadLine_1 = new JLabel("Reiseart und Datum");
+		JLabel lblHeadLine_1 = new JLabel(Messages.getString("ViewWizzard.27")); //$NON-NLS-1$
 		lblHeadLine_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHeadLine_1.setFont(new Font("Arial", Font.BOLD, 15));
+		lblHeadLine_1.setFont(new Font(Messages.getString("ViewWizzard.28"), Font.BOLD, 15)); //$NON-NLS-1$
 		pnlViewContent_1.add(lblHeadLine_1, BorderLayout.NORTH);
 		
 		JPanel pnlContainer_1 = new JPanel();
-		pnlContainer_1.setFont(new Font("Arial", Font.PLAIN, 11));
+		pnlContainer_1.setFont(new Font(Messages.getString("ViewWizzard.29"), Font.PLAIN, 11)); //$NON-NLS-1$
 		pnlViewContent_1.add(pnlContainer_1, BorderLayout.CENTER);
 		pnlContainer_1.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("20px", true), Sizes.constant("20px", true)), 0),
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant(Messages.getString("ViewWizzard.30"), true), Sizes.constant(Messages.getString("ViewWizzard.31"), true)), 0), //$NON-NLS-1$ //$NON-NLS-2$
 				FormFactory.RELATED_GAP_COLSPEC,
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("150px", true), Sizes.constant("200px", true)), 1),
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant(Messages.getString("ViewWizzard.32"), true), Sizes.constant(Messages.getString("ViewWizzard.33"), true)), 1), //$NON-NLS-1$ //$NON-NLS-2$
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("150px", true), Sizes.constant("200px", true)), 1),
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant(Messages.getString("ViewWizzard.34"), true), Sizes.constant(Messages.getString("ViewWizzard.35"), true)), 1), //$NON-NLS-1$ //$NON-NLS-2$
 				FormFactory.RELATED_GAP_COLSPEC,
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("20px", true), Sizes.constant("20px", true)), 0),},
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant(Messages.getString("ViewWizzard.36"), true), Sizes.constant(Messages.getString("ViewWizzard.37"), true)), 0),}, //$NON-NLS-1$ //$NON-NLS-2$
 			new RowSpec[] {
-				RowSpec.decode("65px"),
-				RowSpec.decode("14px"),
+				RowSpec.decode(Messages.getString("ViewWizzard.38")), //$NON-NLS-1$
+				RowSpec.decode(Messages.getString("ViewWizzard.39")), //$NON-NLS-1$
 				FormFactory.NARROW_LINE_GAP_ROWSPEC,
-				RowSpec.decode("14px"),
+				RowSpec.decode(Messages.getString("ViewWizzard.40")), //$NON-NLS-1$
 				FormFactory.NARROW_LINE_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				RowSpec.decode("62px"),
-				RowSpec.decode("14px"),
+				RowSpec.decode(Messages.getString("ViewWizzard.41")), //$NON-NLS-1$
+				RowSpec.decode(Messages.getString("ViewWizzard.42")), //$NON-NLS-1$
+				RowSpec.decode(Messages.getString("ViewWizzard.43")), //$NON-NLS-1$
 				FormFactory.NARROW_LINE_GAP_ROWSPEC,
-				RowSpec.decode("45px"),
+				RowSpec.decode(Messages.getString("ViewWizzard.44")), //$NON-NLS-1$
 				FormFactory.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("14px"),
+				RowSpec.decode(Messages.getString("ViewWizzard.45")), //$NON-NLS-1$
 				FormFactory.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("14px"),}));
+				RowSpec.decode(Messages.getString("ViewWizzard.46")),})); //$NON-NLS-1$
 		
-		JLabel lblDateSection = new JLabel("Datumsangaben:");
-		lblDateSection.setFont(new Font("Arial", Font.BOLD, 13));
-		pnlContainer_1.add(lblDateSection, "4, 2, left, top");
+		JLabel lblDateSection = new JLabel(Messages.getString("ViewWizzard.47")); //$NON-NLS-1$
+		lblDateSection.setFont(new Font(Messages.getString("ViewWizzard.48"), Font.BOLD, 13)); //$NON-NLS-1$
+		pnlContainer_1.add(lblDateSection, Messages.getString("ViewWizzard.49")); //$NON-NLS-1$
 		
-		JLabel lblDate = new JLabel("Datum des Reisebeginns?");
-		lblDate.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContainer_1.add(lblDate, "4, 4, left, top");
+		JLabel lblDate = new JLabel(Messages.getString("ViewWizzard.50")); //$NON-NLS-1$
+		lblDate.setFont(new Font(Messages.getString("ViewWizzard.51"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContainer_1.add(lblDate, Messages.getString("ViewWizzard.52")); //$NON-NLS-1$
 		
-		JLabel lblEndDate = new JLabel("Das Ende der Reise?");
-		lblEndDate.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContainer_1.add(lblEndDate, "8, 4, left, top");
+		JLabel lblEndDate = new JLabel(Messages.getString("ViewWizzard.53")); //$NON-NLS-1$
+		lblEndDate.setFont(new Font(Messages.getString("ViewWizzard.54"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContainer_1.add(lblEndDate, Messages.getString("ViewWizzard.55")); //$NON-NLS-1$
 		
 		txtDate = new JTravelInformationTextfield();
-		txtDate.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContainer_1.add(txtDate, "4, 6, fill, top");
+		txtDate.setFont(new Font(Messages.getString("ViewWizzard.56"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContainer_1.add(txtDate, Messages.getString("ViewWizzard.57")); //$NON-NLS-1$
 		txtDate.setColumns(10);
 		
 		txtEndDate = new JTextField();
-		txtEndDate.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContainer_1.add(txtEndDate, "8, 6, fill, top");
+		txtEndDate.setFont(new Font(Messages.getString("ViewWizzard.58"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContainer_1.add(txtEndDate, Messages.getString("ViewWizzard.59")); //$NON-NLS-1$
 		txtEndDate.setColumns(10);
 		
-		JLabel lblTravelOptions = new JLabel("Reiseart:");
-		lblTravelOptions.setFont(new Font("Arial", Font.BOLD, 13));
-		pnlContainer_1.add(lblTravelOptions, "4, 8, left, top");
+		JLabel lblTravelOptions = new JLabel(Messages.getString("ViewWizzard.60")); //$NON-NLS-1$
+		lblTravelOptions.setFont(new Font(Messages.getString("ViewWizzard.61"), Font.BOLD, 13)); //$NON-NLS-1$
+		pnlContainer_1.add(lblTravelOptions, Messages.getString("ViewWizzard.62")); //$NON-NLS-1$
 		
 		JPanel pnlSubContainer = new JPanel();
-		pnlContainer_1.add(pnlSubContainer, "4, 10, fill, fill");
+		pnlContainer_1.add(pnlSubContainer, Messages.getString("ViewWizzard.63")); //$NON-NLS-1$
 		pnlSubContainer.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("75px"),},
+				ColumnSpec.decode(Messages.getString("ViewWizzard.64")),}, //$NON-NLS-1$
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
 		cboOptions = new JComboBox();
-		cboOptions.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlSubContainer.add(cboOptions, "2, 2");
+		cboOptions.setFont(new Font(Messages.getString("ViewWizzard.65"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlSubContainer.add(cboOptions, Messages.getString("ViewWizzard.66")); //$NON-NLS-1$
 		cboOptions.setSize(new Dimension(50, 20));
 		cboOptions.setPreferredSize(new Dimension(50, 20));
-		cboOptions.setModel(new DefaultComboBoxModel(new String[] {"Auto", "Bus", "Fahrrad", "Flugzeug", "Motorrad", "Schiff", "Zug"}));
+		cboOptions.setModel(new DefaultComboBoxModel(new String[] {Messages.getString("ViewWizzard.67"), Messages.getString("ViewWizzard.68"), Messages.getString("ViewWizzard.69"), Messages.getString("ViewWizzard.70"), Messages.getString("ViewWizzard.71"), Messages.getString("ViewWizzard.72"), Messages.getString("ViewWizzard.73")})); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		
-		JLabel lblHeadlineNote = new JLabel("Hinweise:");
-		lblHeadlineNote.setFont(new Font("Arial", Font.BOLD, 13));
-		pnlContainer_1.add(lblHeadlineNote, "4, 12, left, top");
+		JLabel lblHeadlineNote = new JLabel(Messages.getString("ViewWizzard.74")); //$NON-NLS-1$
+		lblHeadlineNote.setFont(new Font(Messages.getString("ViewWizzard.75"), Font.BOLD, 13)); //$NON-NLS-1$
+		pnlContainer_1.add(lblHeadlineNote, Messages.getString("ViewWizzard.76")); //$NON-NLS-1$
 		
-		JLabel lblNote = new JLabel("Die hier angegebene Reiseart beschr\u00E4nkt sich auf den Hauptweg. Ben\u00F6tigte Transfers werden hier nicht ber\u00FCcksichtigt.");
-		lblNote.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContainer_1.add(lblNote, "4, 14, 5, 1, left, top");
+		JLabel lblNote = new JLabel(Messages.getString("ViewWizzard.77")); //$NON-NLS-1$
+		lblNote.setFont(new Font(Messages.getString("ViewWizzard.78"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContainer_1.add(lblNote, Messages.getString("ViewWizzard.79")); //$NON-NLS-1$
 		
 		pnlThirdView = new JPanel();
 		pnlThirdView.addComponentListener(new ComponentAdapter() {
@@ -304,16 +302,16 @@ public class ViewWizzard extends JFrame {
 				
 			}
 		});
-		pnlCards.add(pnlThirdView, "name_2758029025195");
+		pnlCards.add(pnlThirdView, Messages.getString("ViewWizzard.80")); //$NON-NLS-1$
 		pnlThirdView.setLayout(new BorderLayout(0, 0));
 		
 		JPanel pnlViewContent_2 = new JPanel();
 		pnlThirdView.add(pnlViewContent_2, BorderLayout.CENTER);
 		pnlViewContent_2.setLayout(new BorderLayout(0, 5));
 		
-		JLabel lblHeadLine_2 = new JLabel("Details zur Reiseroute");
+		JLabel lblHeadLine_2 = new JLabel(Messages.getString("ViewWizzard.81")); //$NON-NLS-1$
 		pnlViewContent_2.add(lblHeadLine_2, BorderLayout.NORTH);
-		lblHeadLine_2.setFont(new Font("Arial", Font.BOLD, 15));
+		lblHeadLine_2.setFont(new Font(Messages.getString("ViewWizzard.82"), Font.BOLD, 15)); //$NON-NLS-1$
 		lblHeadLine_2.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JPanel pnlContainer_2 = new JPanel();
@@ -321,11 +319,11 @@ public class ViewWizzard extends JFrame {
 		pnlContainer_2.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
+				ColumnSpec.decode(Messages.getString("ViewWizzard.83")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
+				ColumnSpec.decode(Messages.getString("ViewWizzard.84")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,},
 			new RowSpec[] {
@@ -346,65 +344,66 @@ public class ViewWizzard extends JFrame {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblArrivalTxt = new JLabel("Anreise:");
-		lblArrivalTxt.setFont(new Font("Arial", Font.BOLD, 13));
-		pnlContainer_2.add(lblArrivalTxt, "3, 2");
+		JLabel lblArrivalTxt = new JLabel(Messages.getString("ViewWizzard.85")); //$NON-NLS-1$
+		lblArrivalTxt.setFont(new Font(Messages.getString("ViewWizzard.86"), Font.BOLD, 13)); //$NON-NLS-1$
+		pnlContainer_2.add(lblArrivalTxt, Messages.getString("ViewWizzard.87")); //$NON-NLS-1$
 		
-		lblStartArrival = new JLabel("Start " + extension);
-		lblStartArrival.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContainer_2.add(lblStartArrival, "3, 4");
+		lblStartArrival = new JLabel(Messages.getString("ViewWizzard.88") + extension); //$NON-NLS-1$
+		lblStartArrival.setFont(new Font(Messages.getString("ViewWizzard.89"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContainer_2.add(lblStartArrival, Messages.getString("ViewWizzard.90")); //$NON-NLS-1$
 		
-		lblDestinationArrival = new JLabel("Ziel " + extension);
-		lblDestinationArrival.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContainer_2.add(lblDestinationArrival, "7, 4");
+		lblDestinationArrival = new JLabel(Messages.getString("ViewWizzard.91") + extension); //$NON-NLS-1$
+		lblDestinationArrival.setFont(new Font(Messages.getString("ViewWizzard.92"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContainer_2.add(lblDestinationArrival, Messages.getString("ViewWizzard.93")); //$NON-NLS-1$
 		
 		txtStartArrivalInput = new JTextField();
-		txtStartArrivalInput.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContainer_2.add(txtStartArrivalInput, "3, 6, fill, default");
+		txtStartArrivalInput.setFont(new Font(Messages.getString("ViewWizzard.94"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContainer_2.add(txtStartArrivalInput, Messages.getString("ViewWizzard.95")); //$NON-NLS-1$
 		txtStartArrivalInput.setColumns(10);
 		
 		txtDestinationArrivalInput = new JTextField();
-		txtDestinationArrivalInput.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContainer_2.add(txtDestinationArrivalInput, "7, 6, fill, default");
+		txtDestinationArrivalInput.setFont(new Font(Messages.getString("ViewWizzard.96"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContainer_2.add(txtDestinationArrivalInput, Messages.getString("ViewWizzard.97")); //$NON-NLS-1$
 		txtDestinationArrivalInput.setColumns(10);
 		
-		JLabel lblDeparture = new JLabel("Abreise:");
-		lblDeparture.setFont(new Font("Arial", Font.BOLD, 13));
-		pnlContainer_2.add(lblDeparture, "3, 12");
+		JLabel lblDeparture = new JLabel(Messages.getString("ViewWizzard.98")); //$NON-NLS-1$
+		lblDeparture.setFont(new Font(Messages.getString("ViewWizzard.99"), Font.BOLD, 13)); //$NON-NLS-1$
+		pnlContainer_2.add(lblDeparture, Messages.getString("ViewWizzard.100")); //$NON-NLS-1$
 		
-		lblDepartureStart = new JLabel("Start " + extension);
-		lblDepartureStart.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContainer_2.add(lblDepartureStart, "3, 14");
+		lblDepartureStart = new JLabel(Messages.getString("ViewWizzard.101") + extension); //$NON-NLS-1$
+		lblDepartureStart.setFont(new Font(Messages.getString("ViewWizzard.102"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContainer_2.add(lblDepartureStart, Messages.getString("ViewWizzard.103")); //$NON-NLS-1$
 		
-		lblDepartureDestination = new JLabel("Ziel " + extension);
-		lblDepartureDestination.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContainer_2.add(lblDepartureDestination, "7, 14");
+		lblDepartureDestination = new JLabel(Messages.getString("ViewWizzard.104") + extension); //$NON-NLS-1$
+		lblDepartureDestination.setFont(new Font(Messages.getString("ViewWizzard.105"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContainer_2.add(lblDepartureDestination, Messages.getString("ViewWizzard.106")); //$NON-NLS-1$
 		
 		txtDepartureStartInput = new JTextField();
-		txtDepartureStartInput.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContainer_2.add(txtDepartureStartInput, "3, 16, fill, default");
+		txtDepartureStartInput.setFont(new Font(Messages.getString("ViewWizzard.107"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContainer_2.add(txtDepartureStartInput, Messages.getString("ViewWizzard.108")); //$NON-NLS-1$
 		txtDepartureStartInput.setColumns(10);
 		
 		txtDepartureDestinationInput = new JTextField();
-		txtDepartureDestinationInput.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContainer_2.add(txtDepartureDestinationInput, "7, 16, fill, default");
+		txtDepartureDestinationInput.setFont(new Font(Messages.getString("ViewWizzard.109"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContainer_2.add(txtDepartureDestinationInput, Messages.getString("ViewWizzard.110")); //$NON-NLS-1$
 		txtDepartureDestinationInput.setColumns(10);
 		
 		JPanel pnlNavigation = new JPanel();
 		pnlQuestionCards.add(pnlNavigation, BorderLayout.SOUTH);
 		pnlNavigation.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		pnlNavigation.setLayout(new FormLayout(new ColumnSpec[] {
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant(Messages.getString("ViewWizzard.111"), true), Sizes.constant(Messages.getString("ViewWizzard.112"), true)), 1), //$NON-NLS-1$ //$NON-NLS-2$
 				FormFactory.GROWING_BUTTON_COLSPEC,
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant(Messages.getString("ViewWizzard.113"), true), Sizes.constant(Messages.getString("ViewWizzard.114"), true)), 1), //$NON-NLS-1$ //$NON-NLS-2$
 				FormFactory.GROWING_BUTTON_COLSPEC,
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("75px", true), Sizes.constant("75px", true)), 1),},
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant(Messages.getString("ViewWizzard.115"), true), Sizes.constant(Messages.getString("ViewWizzard.116"), true)), 1),}, //$NON-NLS-1$ //$NON-NLS-2$
 			new RowSpec[] {
-				RowSpec.decode("23px"),}));
+				RowSpec.decode(Messages.getString("ViewWizzard.117")),})); //$NON-NLS-1$
 		
-		btnNext = new JButton("Weiter");
-		btnNext.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnNext = new JButton(Messages.getString("ViewWizzard.118")); //$NON-NLS-1$
+		btnNext.setFont(new Font(Messages.getString("ViewWizzard.119"), Font.PLAIN, 13)); //$NON-NLS-1$
 		btnNext.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (cardNumber < LAST){
 					cardNumber += 1;
@@ -415,7 +414,7 @@ public class ViewWizzard extends JFrame {
 				case SECOND:
 					try{
 						if(txtInputCountry.getText().trim().length() == 0 || txtInputCountry.getText() == null)
-							throw new WizzardInputException("Land" + WizzardInputException.ERROR_FIELD);
+							throw new WizzardInputException(Messages.getString("ViewWizzard.120") + WizzardInputException.ERROR_FIELD); //$NON-NLS-1$
 						pnlSecondView.setVisible(true);
 						pnlFirstView.setVisible(false);
 					} catch(Exception e){
@@ -423,7 +422,7 @@ public class ViewWizzard extends JFrame {
 								e.getMessage(),
 								WizzardInputException.MSG_ERROR_OCCURED,
 								JOptionPane.ERROR_MESSAGE );
-						btnBack.setText("Abbrechen");
+						btnBack.setText(Messages.getString("ViewWizzard.121")); //$NON-NLS-1$
 						pnlSecondView.setVisible(false);
 						pnlFirstView.setVisible(true);
 						cardNumber --;
@@ -433,7 +432,7 @@ public class ViewWizzard extends JFrame {
 					getChoosed();
 					try{
 						if(txtDate.getText().trim().length() == 0 || txtInputCountry.getText() == null)
-							throw new WizzardInputException("Datum" + WizzardInputException.ERROR_FIELD);
+							throw new WizzardInputException(Messages.getString("ViewWizzard.122") + WizzardInputException.ERROR_FIELD); //$NON-NLS-1$
 						pnlThirdView.setVisible(true);
 						pnlSecondView.setVisible(false);
 					} catch(Exception e){
@@ -453,17 +452,18 @@ public class ViewWizzard extends JFrame {
 					break;
 				}
 				if (cardNumber != FIRST){
-					btnBack.setText("Zurück");
+					btnBack.setText(Messages.getString("ViewWizzard.123")); //$NON-NLS-1$
 				}
 				if (cardNumber == THIRD){
-					btnNext.setText("Ende");
+					btnNext.setText(Messages.getString("ViewWizzard.124")); //$NON-NLS-1$
 				}
 			}
 		});
 		
-		btnBack = new JButton("Abbrechen");
-		btnBack.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnBack = new JButton(Messages.getString("ViewWizzard.125")); //$NON-NLS-1$
+		btnBack.setFont(new Font(Messages.getString("ViewWizzard.126"), Font.PLAIN, 13)); //$NON-NLS-1$
 		btnBack.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (cardNumber > FIRST){
 					cardNumber -= 1;
@@ -487,18 +487,18 @@ public class ViewWizzard extends JFrame {
 					break;
 				}
 				if (cardNumber == FIRST){
-					btnBack.setText("Abbrechen");
+					btnBack.setText(Messages.getString("ViewWizzard.127")); //$NON-NLS-1$
 				}
 				if (cardNumber != THIRD){
-					btnNext.setText("Weiter");
+					btnNext.setText(Messages.getString("ViewWizzard.128")); //$NON-NLS-1$
 				}
 			}
 		});
-		pnlNavigation.add(btnBack, "2, 1");
+		pnlNavigation.add(btnBack, Messages.getString("ViewWizzard.129")); //$NON-NLS-1$
 		btnBack.setSize(new Dimension(80, 23));
 		btnBack.setMaximumSize(new Dimension(80, 23));
 		btnBack.setMinimumSize(new Dimension(80, 23));
-		pnlNavigation.add(btnNext, "4, 1");
+		pnlNavigation.add(btnNext, Messages.getString("ViewWizzard.130")); //$NON-NLS-1$
 		btnNext.setSize(new Dimension(80, 23));
 		btnNext.setMaximumSize(new Dimension(80, 23));
 		btnNext.setMinimumSize(new Dimension(80, 23));
@@ -562,34 +562,34 @@ public class ViewWizzard extends JFrame {
 		int choosed = cboOptions.getSelectedIndex();
 		switch (choosed){
 		case 0:
-			extension = "Ort";
+			extension = Messages.getString("ViewWizzard.131"); //$NON-NLS-1$
 			break;
 		case 1:
-			extension = "Haltestelle";
+			extension = Messages.getString("ViewWizzard.132"); //$NON-NLS-1$
 			break;
 		case 2:
-			extension = "Ort";
+			extension = Messages.getString("ViewWizzard.133"); //$NON-NLS-1$
 			break;
 		case 3:
-			extension = "Flughafen";
+			extension = Messages.getString("ViewWizzard.134"); //$NON-NLS-1$
 			break;
 		case 4:
-			extension = "Ort";
+			extension = Messages.getString("ViewWizzard.135"); //$NON-NLS-1$
 			break;
 		case 5:
-			extension = "Hafen";
+			extension = Messages.getString("ViewWizzard.136"); //$NON-NLS-1$
 			break;
 		case 6:
-			extension = "Bahnhof";
+			extension = Messages.getString("ViewWizzard.137"); //$NON-NLS-1$
 			break;
 		default:
 			extension = null;
 		}
 		if (extension != null) {
-			getLblStartArrival().setText("Start " + extension);
-			getLblDestinationArrival().setText("Ziel " + extension);
-			getLblDepartureStart().setText("Start " + extension);
-			getLblDepartureDestination().setText("Ziel " + extension);
+			getLblStartArrival().setText(Messages.getString("ViewWizzard.138") + extension); //$NON-NLS-1$
+			getLblDestinationArrival().setText(Messages.getString("ViewWizzard.139") + extension); //$NON-NLS-1$
+			getLblDepartureStart().setText(Messages.getString("ViewWizzard.140") + extension); //$NON-NLS-1$
+			getLblDepartureDestination().setText(Messages.getString("ViewWizzard.141") + extension); //$NON-NLS-1$
 		}
 	}
 	

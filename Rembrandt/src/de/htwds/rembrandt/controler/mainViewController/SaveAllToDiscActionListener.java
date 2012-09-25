@@ -2,7 +2,6 @@ package de.htwds.rembrandt.controler.mainViewController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
@@ -44,7 +43,7 @@ public class SaveAllToDiscActionListener implements ActionListener {
 
 			JOptionPane.showMessageDialog(viewMain, 
 					discException.getMessage() 
-					+ "\n" 
+					+ Messages.getString("SaveAllToDiscActionListener.0")  //$NON-NLS-1$
 					+TravelToDiscException.ERROR_LOAD_SELECTED_JOURNEY, 
 					TravelToDiscException.MSG_ERROR_DURING_SAVE_OR_LOAD, 
 					JOptionPane.ERROR_MESSAGE );

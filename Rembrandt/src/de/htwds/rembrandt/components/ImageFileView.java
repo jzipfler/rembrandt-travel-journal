@@ -46,19 +46,23 @@ public class ImageFileView extends FileView {
     ImageIcon tiffIcon = Utils.createImageIcon( "../resources/images/tiffIcon.png" );
     ImageIcon pngIcon = Utils.createImageIcon( "../resources/images/pngIcon.png" );
 
-    public String getName(File f) {
+    @Override
+	public String getName(File f) {
         return null; //let the L&F FileView figure this out
     }
 
-    public String getDescription(File f) {
+    @Override
+	public String getDescription(File f) {
         return null; //let the L&F FileView figure this out
     }
 
-    public Boolean isTraversable(File f) {
+    @Override
+	public Boolean isTraversable(File f) {
         return null; //let the L&F FileView figure this out
     }
 
-    public String getTypeDescription(File f) {
+    @Override
+	public String getTypeDescription(File f) {
         String extension = Utils.getExtension(f);
         String type = null;
 
@@ -78,7 +82,8 @@ public class ImageFileView extends FileView {
         return type;
     }
 
-    public Icon getIcon(File f) {
+    @Override
+	public Icon getIcon(File f) {
         String extension = Utils.getExtension(f);
         Icon icon = null;
 

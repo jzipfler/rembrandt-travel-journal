@@ -2,23 +2,21 @@ package de.htwds.rembrandt.controler.contactViewControler;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.awt.image.ImageObserver;
 
 import javax.swing.JOptionPane;
 
 import de.htwds.rembrandt.exception.ContactException;
-import de.htwds.rembrandt.model.Contact;
+import de.htwds.rembrandt.view.ViewContactDetails;
 import de.htwds.rembrandt.view.ViewContacts;
 
 public class ReturnToContactsActionListener implements ActionListener {
 
 	private ViewContacts viewContacts;
 	
-	private static final String MSG_NOT_SAVED_YET = 	"Ihre Änderungen wurden noch nicht gespeichert.\n" +
-														"Möchten Sie ihre Änderungen Speichern?";
-	private static final String MSG_ERROR_TITLE =		"Speichern vergessen";
+	private static final String MSG_NOT_SAVED_YET = 	Messages.getString("ReturnToContactsActionListener.0") + //$NON-NLS-1$
+														Messages.getString("ReturnToContactsActionListener.1"); //$NON-NLS-1$
+	private static final String MSG_ERROR_TITLE =		Messages.getString("ReturnToContactsActionListener.2"); //$NON-NLS-1$
 	
 	
 	public ReturnToContactsActionListener( ViewContacts viewContacts ) {
@@ -27,11 +25,12 @@ public class ReturnToContactsActionListener implements ActionListener {
 	
 	private int checkIfSaved() {
 		
+		viewContacts.getViewContactDetails();
 		if ( 	viewContacts.getViewContactDetails().getBtnUnlock().getText() == 
-				viewContacts.getViewContactDetails().STD_BUTTON_UNLOCK_LOCK ) {
+				ViewContactDetails.STD_BUTTON_UNLOCK_LOCK ) {
 			
-			Object[] options = {	"Ja, speichern",
-        						"Nein, Änderungen verwerfen"};
+			Object[] options = {	Messages.getString("ReturnToContactsActionListener.3"), //$NON-NLS-1$
+        						Messages.getString("ReturnToContactsActionListener.4")}; //$NON-NLS-1$
 		
 			int n = JOptionPane.showOptionDialog(	null,
 												MSG_NOT_SAVED_YET,
@@ -52,13 +51,13 @@ public class ReturnToContactsActionListener implements ActionListener {
 							contactException.getMessage(),
 							ContactException.MSG_ERROR_OCCURED,
 							JOptionPane.ERROR_MESSAGE );
-					return JOptionPane.ABORT;
+					return ImageObserver.ABORT;
 				}
 			}
 			else if ( n == JOptionPane.NO_OPTION )
 				return JOptionPane.NO_OPTION;
 			else
-				return JOptionPane.ABORT;
+				return ImageObserver.ABORT;
 		}
 		return JOptionPane.YES_OPTION;
 //		

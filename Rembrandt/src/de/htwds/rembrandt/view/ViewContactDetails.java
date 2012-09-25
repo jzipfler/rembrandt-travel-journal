@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.jgoodies.forms.factories.FormFactory;
@@ -32,8 +33,8 @@ public class ViewContactDetails extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	
-	public static final String STD_BUTTON_UNLOCK_UNLOCK = "Entsperren";
-	public static final String STD_BUTTON_UNLOCK_LOCK = "Speichern und Sperren";
+	public static final String STD_BUTTON_UNLOCK_UNLOCK = Messages.getString("ViewContactDetails.0"); //$NON-NLS-1$
+	public static final String STD_BUTTON_UNLOCK_LOCK = Messages.getString("ViewContactDetails.1"); //$NON-NLS-1$
 	
 	private boolean informationEditable = false;
 	
@@ -88,26 +89,26 @@ public class ViewContactDetails extends JPanel {
 		JPanel pnlContactDetailsHeader = new JPanel();
 		add(pnlContactDetailsHeader, BorderLayout.NORTH);
 		
-		JLabel lblKontaktdetails = new JLabel("Kontaktdetails");
-		lblKontaktdetails.setFont(new Font("Arial", Font.BOLD, 16));
+		JLabel lblKontaktdetails = new JLabel(Messages.getString("ViewContactDetails.2")); //$NON-NLS-1$
+		lblKontaktdetails.setFont(new Font(Messages.getString("ViewContactDetails.3"), Font.BOLD, 16)); //$NON-NLS-1$
 		pnlContactDetailsHeader.add(lblKontaktdetails);
 		
 		JPanel pnlContactDetailsCenter = new JPanel();
 		add(pnlContactDetailsCenter, BorderLayout.CENTER);
 		pnlContactDetailsCenter.setLayout(new BorderLayout(0, 0));
 		
-		this.pnlTabbedContactDetails = new JTabbedPane(JTabbedPane.TOP);
-		this.pnlTabbedContactDetails.setFont(new Font("Arial", Font.BOLD, 13));
+		this.pnlTabbedContactDetails = new JTabbedPane(SwingConstants.TOP);
+		this.pnlTabbedContactDetails.setFont(new Font(Messages.getString("ViewContactDetails.4"), Font.BOLD, 13)); //$NON-NLS-1$
 		pnlContactDetailsCenter.add(this.pnlTabbedContactDetails);
 		
 		this.pnlContactDetailsInformations = new JPanel();
-		this.pnlContactDetailsInformations.setFont(new Font("Arial", Font.PLAIN, 13));
-		this.pnlTabbedContactDetails.addTab("Kontakt", null, this.pnlContactDetailsInformations, null);
+		this.pnlContactDetailsInformations.setFont(new Font(Messages.getString("ViewContactDetails.5"), Font.PLAIN, 13)); //$NON-NLS-1$
+		this.pnlTabbedContactDetails.addTab(Messages.getString("ViewContactDetails.6"), null, this.pnlContactDetailsInformations, null); //$NON-NLS-1$
 		this.pnlContactDetailsInformations.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(30dlu;default)"),
+				ColumnSpec.decode(Messages.getString("ViewContactDetails.7")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -115,7 +116,7 @@ public class ViewContactDetails extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
+				ColumnSpec.decode(Messages.getString("ViewContactDetails.8")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.GROWING_BUTTON_COLSPEC,},
 			new RowSpec[] {
@@ -132,26 +133,26 @@ public class ViewContactDetails extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("bottom:pref"),
+				RowSpec.decode(Messages.getString("ViewContactDetails.9")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("bottom:pref"),
+				RowSpec.decode(Messages.getString("ViewContactDetails.10")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblGeneralInformation = new JLabel("Generelle Informationen");
-		lblGeneralInformation.setFont(new Font("Arial", Font.BOLD, 13));
-		this.pnlContactDetailsInformations.add(lblGeneralInformation, "2, 2, 7, 1, default, bottom");
+		JLabel lblGeneralInformation = new JLabel(Messages.getString("ViewContactDetails.11")); //$NON-NLS-1$
+		lblGeneralInformation.setFont(new Font(Messages.getString("ViewContactDetails.12"), Font.BOLD, 13)); //$NON-NLS-1$
+		this.pnlContactDetailsInformations.add(lblGeneralInformation, Messages.getString("ViewContactDetails.13")); //$NON-NLS-1$
 		
-		btnPicture = new JButton("Picture");
+		btnPicture = new JButton(Messages.getString("ViewContactDetails.14")); //$NON-NLS-1$
 		btnPicture.setEnabled(false);
-		btnPicture.setFont(new Font("Arial", Font.PLAIN, 13));
-		this.pnlContactDetailsInformations.add(btnPicture, "2, 4, 3, 9");
+		btnPicture.setFont(new Font(Messages.getString("ViewContactDetails.15"), Font.PLAIN, 13)); //$NON-NLS-1$
+		this.pnlContactDetailsInformations.add(btnPicture, Messages.getString("ViewContactDetails.16")); //$NON-NLS-1$
 		
 		/*
 		 * Image image = new ImageIcon(getClass().getResource("pfeil.png")).getImage();
@@ -159,52 +160,52 @@ public class ViewContactDetails extends JPanel {
             btCopy.setIcon(icon);
 		 */
 		
-		JLabel lblFirstName = new JLabel("Vorname:");
-		lblFirstName.setFont(new Font("Arial", Font.PLAIN, 13));
-		this.pnlContactDetailsInformations.add(lblFirstName, "8, 4, right, default");
+		JLabel lblFirstName = new JLabel(Messages.getString("ViewContactDetails.17")); //$NON-NLS-1$
+		lblFirstName.setFont(new Font(Messages.getString("ViewContactDetails.18"), Font.PLAIN, 13)); //$NON-NLS-1$
+		this.pnlContactDetailsInformations.add(lblFirstName, Messages.getString("ViewContactDetails.19")); //$NON-NLS-1$
 		
 		this.txtFirstName = new JTextField();
 		this.txtFirstName.setDisabledTextColor(getForeground());
 		this.txtFirstName.setEditable(false);
 		this.txtFirstName.setEnabled(false);
-		this.txtFirstName.setFont(new Font("Arial", Font.PLAIN, 13));
-		this.pnlContactDetailsInformations.add(this.txtFirstName, "10, 4, 5, 1, fill, default");
+		this.txtFirstName.setFont(new Font(Messages.getString("ViewContactDetails.20"), Font.PLAIN, 13)); //$NON-NLS-1$
+		this.pnlContactDetailsInformations.add(this.txtFirstName, Messages.getString("ViewContactDetails.21")); //$NON-NLS-1$
 		this.txtFirstName.setColumns(10);
 		
-		JLabel lblLastName = new JLabel("Nachname:");
-		lblLastName.setFont(new Font("Arial", Font.PLAIN, 13));
-		this.pnlContactDetailsInformations.add(lblLastName, "8, 6, right, default");
+		JLabel lblLastName = new JLabel(Messages.getString("ViewContactDetails.22")); //$NON-NLS-1$
+		lblLastName.setFont(new Font(Messages.getString("ViewContactDetails.23"), Font.PLAIN, 13)); //$NON-NLS-1$
+		this.pnlContactDetailsInformations.add(lblLastName, Messages.getString("ViewContactDetails.24")); //$NON-NLS-1$
 		
 		this.txtLastName = new JTextField();
 		this.txtLastName.setDisabledTextColor(getForeground());
 		this.txtLastName.setEditable(false);
 		this.txtLastName.setEnabled(false);
-		this.txtLastName.setFont(new Font("Arial", Font.PLAIN, 13));
-		this.pnlContactDetailsInformations.add(this.txtLastName, "10, 6, 5, 1, fill, default");
+		this.txtLastName.setFont(new Font(Messages.getString("ViewContactDetails.25"), Font.PLAIN, 13)); //$NON-NLS-1$
+		this.pnlContactDetailsInformations.add(this.txtLastName, Messages.getString("ViewContactDetails.26")); //$NON-NLS-1$
 		this.txtLastName.setColumns(10);
 		
-		JLabel lblCategory = new JLabel("Kategorie:");
-		lblCategory.setFont(new Font("Arial", Font.BOLD, 13));
-		this.pnlContactDetailsInformations.add(lblCategory, "8, 8");
+		JLabel lblCategory = new JLabel(Messages.getString("ViewContactDetails.27")); //$NON-NLS-1$
+		lblCategory.setFont(new Font(Messages.getString("ViewContactDetails.28"), Font.BOLD, 13)); //$NON-NLS-1$
+		this.pnlContactDetailsInformations.add(lblCategory, Messages.getString("ViewContactDetails.29")); //$NON-NLS-1$
 		
-		rdbtnPrivateContact = new JRadioButton("privater Kontakt");
+		rdbtnPrivateContact = new JRadioButton(Messages.getString("ViewContactDetails.30")); //$NON-NLS-1$
 		rdbtnPrivateContact.setSelected(true);
 		rdbtnPrivateContact.setEnabled(false);
 		rdbtnPrivateContact.setMnemonic(KeyEvent.VK_L);
-		rdbtnPrivateContact.setFont(new Font("Arial", Font.PLAIN, 13));
-		this.pnlContactDetailsInformations.add(rdbtnPrivateContact, "10, 8, 5, 1");
+		rdbtnPrivateContact.setFont(new Font(Messages.getString("ViewContactDetails.31"), Font.PLAIN, 13)); //$NON-NLS-1$
+		this.pnlContactDetailsInformations.add(rdbtnPrivateContact, Messages.getString("ViewContactDetails.32")); //$NON-NLS-1$
 		
-		rdbtnGlobalContact = new JRadioButton("globaler Kontakt");
+		rdbtnGlobalContact = new JRadioButton(Messages.getString("ViewContactDetails.33")); //$NON-NLS-1$
 		rdbtnGlobalContact.setEnabled(false);
 		rdbtnGlobalContact.setMnemonic(KeyEvent.VK_G);
-		rdbtnGlobalContact.setFont(new Font("Arial", Font.PLAIN, 13));
-		this.pnlContactDetailsInformations.add(rdbtnGlobalContact, "10, 10, 5, 1");
+		rdbtnGlobalContact.setFont(new Font(Messages.getString("ViewContactDetails.34"), Font.PLAIN, 13)); //$NON-NLS-1$
+		this.pnlContactDetailsInformations.add(rdbtnGlobalContact, Messages.getString("ViewContactDetails.35")); //$NON-NLS-1$
 		
-		rdbtnGlobalAndLocal = new JRadioButton("globaler und lokaler Kontakt");
+		rdbtnGlobalAndLocal = new JRadioButton(Messages.getString("ViewContactDetails.36")); //$NON-NLS-1$
 		rdbtnGlobalAndLocal.setEnabled(false);
 		rdbtnGlobalAndLocal.setMnemonic(KeyEvent.VK_U);
-		rdbtnGlobalAndLocal.setFont(new Font("Arial", Font.PLAIN, 13));
-		this.pnlContactDetailsInformations.add(rdbtnGlobalAndLocal, "10, 12, 5, 1");
+		rdbtnGlobalAndLocal.setFont(new Font(Messages.getString("ViewContactDetails.37"), Font.PLAIN, 13)); //$NON-NLS-1$
+		this.pnlContactDetailsInformations.add(rdbtnGlobalAndLocal, Messages.getString("ViewContactDetails.38")); //$NON-NLS-1$
 		this.pnlTabbedContactDetails.setEnabledAt(0, true);
 		
 		/*
@@ -215,71 +216,71 @@ public class ViewContactDetails extends JPanel {
 	    btngrpCategory.add(rdbtnGlobalContact);
 	    btngrpCategory.add(rdbtnGlobalAndLocal);
 	    
-	    JLabel lblMail = new JLabel("E-Mail");
-	    lblMail.setFont(new Font("Arial", Font.BOLD, 13));
-	    this.pnlContactDetailsInformations.add(lblMail, "2, 14, 3, 1, default, bottom");
+	    JLabel lblMail = new JLabel(Messages.getString("ViewContactDetails.39")); //$NON-NLS-1$
+	    lblMail.setFont(new Font(Messages.getString("ViewContactDetails.40"), Font.BOLD, 13)); //$NON-NLS-1$
+	    this.pnlContactDetailsInformations.add(lblMail, Messages.getString("ViewContactDetails.41")); //$NON-NLS-1$
 	    
-	    JLabel lblPrivatMail = new JLabel("Privat:");
-	    lblPrivatMail.setFont(new Font("Arial", Font.PLAIN, 13));
-	    this.pnlContactDetailsInformations.add(lblPrivatMail, "4, 16, right, default");
+	    JLabel lblPrivatMail = new JLabel(Messages.getString("ViewContactDetails.42")); //$NON-NLS-1$
+	    lblPrivatMail.setFont(new Font(Messages.getString("ViewContactDetails.43"), Font.PLAIN, 13)); //$NON-NLS-1$
+	    this.pnlContactDetailsInformations.add(lblPrivatMail, Messages.getString("ViewContactDetails.44")); //$NON-NLS-1$
 	    
 	    this.txtPrivatMail = new JTextField();
 	    this.txtPrivatMail.setDisabledTextColor(getForeground());
 	    this.txtPrivatMail.setEditable(false);
 	    this.txtPrivatMail.setEnabled(false);
-	    this.txtPrivatMail.setFont(new Font("Arial", Font.PLAIN, 13));
-	    this.pnlContactDetailsInformations.add(this.txtPrivatMail, "6, 16, 9, 1, fill, default");
+	    this.txtPrivatMail.setFont(new Font(Messages.getString("ViewContactDetails.45"), Font.PLAIN, 13)); //$NON-NLS-1$
+	    this.pnlContactDetailsInformations.add(this.txtPrivatMail, Messages.getString("ViewContactDetails.46")); //$NON-NLS-1$
 	    this.txtPrivatMail.setColumns(10);
 	    
-	    JLabel lblBusinessMail = new JLabel("Geschäftlich:");
-	    lblBusinessMail.setFont(new Font("Arial", Font.PLAIN, 13));
-	    this.pnlContactDetailsInformations.add(lblBusinessMail, "4, 18, right, default");
+	    JLabel lblBusinessMail = new JLabel(Messages.getString("ViewContactDetails.47")); //$NON-NLS-1$
+	    lblBusinessMail.setFont(new Font(Messages.getString("ViewContactDetails.48"), Font.PLAIN, 13)); //$NON-NLS-1$
+	    this.pnlContactDetailsInformations.add(lblBusinessMail, Messages.getString("ViewContactDetails.49")); //$NON-NLS-1$
 	    
 	    this.txtBusinessMail = new JTextField();
 	    this.txtBusinessMail.setDisabledTextColor(getForeground());
 	    this.txtBusinessMail.setEditable(false);
 	    this.txtBusinessMail.setEnabled(false);
-	    this.txtBusinessMail.setFont(new Font("Arial", Font.PLAIN, 13));
-	    this.pnlContactDetailsInformations.add(this.txtBusinessMail, "6, 18, 9, 1, fill, default");
+	    this.txtBusinessMail.setFont(new Font(Messages.getString("ViewContactDetails.50"), Font.PLAIN, 13)); //$NON-NLS-1$
+	    this.pnlContactDetailsInformations.add(this.txtBusinessMail, Messages.getString("ViewContactDetails.51")); //$NON-NLS-1$
 	    this.txtBusinessMail.setColumns(10);
 	    
-	    JLabel lblPhone = new JLabel("Telefon");
-	    lblPhone.setFont(new Font("Arial", Font.BOLD, 13));
-	    this.pnlContactDetailsInformations.add(lblPhone, "2, 20, 3, 1, default, bottom");
+	    JLabel lblPhone = new JLabel(Messages.getString("ViewContactDetails.52")); //$NON-NLS-1$
+	    lblPhone.setFont(new Font(Messages.getString("ViewContactDetails.53"), Font.BOLD, 13)); //$NON-NLS-1$
+	    this.pnlContactDetailsInformations.add(lblPhone, Messages.getString("ViewContactDetails.54")); //$NON-NLS-1$
 	    
-	    JLabel lblPrivatPhone = new JLabel("Privat:");
-	    lblPrivatPhone.setFont(new Font("Arial", Font.PLAIN, 13));
-	    this.pnlContactDetailsInformations.add(lblPrivatPhone, "4, 22, right, default");
+	    JLabel lblPrivatPhone = new JLabel(Messages.getString("ViewContactDetails.55")); //$NON-NLS-1$
+	    lblPrivatPhone.setFont(new Font(Messages.getString("ViewContactDetails.56"), Font.PLAIN, 13)); //$NON-NLS-1$
+	    this.pnlContactDetailsInformations.add(lblPrivatPhone, Messages.getString("ViewContactDetails.57")); //$NON-NLS-1$
 	    
 	    this.txtPrivatPhone = new JNumberOnlyTextField();
 	    this.txtPrivatPhone.setDisabledTextColor(getForeground());
 	    this.txtPrivatPhone.setEditable(false);
 	    this.txtPrivatPhone.setEnabled(false);
-	    this.txtPrivatPhone.setFont(new Font("Arial", Font.PLAIN, 13));
-	    this.pnlContactDetailsInformations.add(this.txtPrivatPhone, "6, 22, 9, 1, fill, default");
+	    this.txtPrivatPhone.setFont(new Font(Messages.getString("ViewContactDetails.58"), Font.PLAIN, 13)); //$NON-NLS-1$
+	    this.pnlContactDetailsInformations.add(this.txtPrivatPhone, Messages.getString("ViewContactDetails.59")); //$NON-NLS-1$
 	    this.txtPrivatPhone.setColumns(10);
 	    
-	    JLabel lblBusinessPhone = new JLabel("Geschäftlich:");
-	    lblBusinessPhone.setFont(new Font("Arial", Font.PLAIN, 13));
-	    this.pnlContactDetailsInformations.add(lblBusinessPhone, "4, 24, right, default");
+	    JLabel lblBusinessPhone = new JLabel(Messages.getString("ViewContactDetails.60")); //$NON-NLS-1$
+	    lblBusinessPhone.setFont(new Font(Messages.getString("ViewContactDetails.61"), Font.PLAIN, 13)); //$NON-NLS-1$
+	    this.pnlContactDetailsInformations.add(lblBusinessPhone, Messages.getString("ViewContactDetails.62")); //$NON-NLS-1$
 	    
 	    this.txtBusinessPhone = new JNumberOnlyTextField();
 	    this.txtBusinessPhone.setDisabledTextColor(getForeground());
 	    this.txtBusinessPhone.setEditable(false);
 	    this.txtBusinessPhone.setEnabled(false);
-	    this.txtBusinessPhone.setFont(new Font("Arial", Font.PLAIN, 13));
-	    this.pnlContactDetailsInformations.add(this.txtBusinessPhone, "6, 24, 9, 1, fill, default");
+	    this.txtBusinessPhone.setFont(new Font(Messages.getString("ViewContactDetails.63"), Font.PLAIN, 13)); //$NON-NLS-1$
+	    this.pnlContactDetailsInformations.add(this.txtBusinessPhone, Messages.getString("ViewContactDetails.64")); //$NON-NLS-1$
 	    this.txtBusinessPhone.setColumns(10);
 		
 		JPanel pnlContactDetailsPersonalInformations = new JPanel();
-		this.pnlTabbedContactDetails.addTab("Persönliche Infos", null, pnlContactDetailsPersonalInformations, null);
+		this.pnlTabbedContactDetails.addTab(Messages.getString("ViewContactDetails.65"), null, pnlContactDetailsPersonalInformations, null); //$NON-NLS-1$
 		pnlContactDetailsPersonalInformations.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(50dlu;default)"),
+				ColumnSpec.decode(Messages.getString("ViewContactDetails.66")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
+				ColumnSpec.decode(Messages.getString("ViewContactDetails.67")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,},
 			new RowSpec[] {
@@ -288,7 +289,7 @@ public class ViewContactDetails extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("bottom:pref"),
+				RowSpec.decode(Messages.getString("ViewContactDetails.68")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -304,95 +305,95 @@ public class ViewContactDetails extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblWebadressen = new JLabel("Web-Adressen");
-		pnlContactDetailsPersonalInformations.add(lblWebadressen, "2, 2, 3, 1");
-		lblWebadressen.setFont(new Font("Arial", Font.BOLD, 13));
+		JLabel lblWebadressen = new JLabel(Messages.getString("ViewContactDetails.69")); //$NON-NLS-1$
+		pnlContactDetailsPersonalInformations.add(lblWebadressen, Messages.getString("ViewContactDetails.70")); //$NON-NLS-1$
+		lblWebadressen.setFont(new Font(Messages.getString("ViewContactDetails.71"), Font.BOLD, 13)); //$NON-NLS-1$
 		
-		JLabel lblHomepage = new JLabel("Homepage:");
-		lblHomepage.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactDetailsPersonalInformations.add(lblHomepage, "4, 4, right, default");
+		JLabel lblHomepage = new JLabel(Messages.getString("ViewContactDetails.72")); //$NON-NLS-1$
+		lblHomepage.setFont(new Font(Messages.getString("ViewContactDetails.73"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContactDetailsPersonalInformations.add(lblHomepage, Messages.getString("ViewContactDetails.74")); //$NON-NLS-1$
 		
 		this.txtHomepage = new JTextField();
 		this.txtHomepage.setDisabledTextColor(getForeground());
 		this.txtHomepage.setEditable(false);
 		this.txtHomepage.setEnabled(false);
-		pnlContactDetailsPersonalInformations.add(this.txtHomepage, "6, 4, fill, default");
+		pnlContactDetailsPersonalInformations.add(this.txtHomepage, Messages.getString("ViewContactDetails.75")); //$NON-NLS-1$
 		this.txtHomepage.setColumns(10);
 		
-		JLabel lblBerufCategory = new JLabel("Beruf");
-		pnlContactDetailsPersonalInformations.add(lblBerufCategory, "2, 6, 3, 1");
-		lblBerufCategory.setFont(new Font("Arial", Font.BOLD, 13));
+		JLabel lblBerufCategory = new JLabel(Messages.getString("ViewContactDetails.76")); //$NON-NLS-1$
+		pnlContactDetailsPersonalInformations.add(lblBerufCategory, Messages.getString("ViewContactDetails.77")); //$NON-NLS-1$
+		lblBerufCategory.setFont(new Font(Messages.getString("ViewContactDetails.78"), Font.BOLD, 13)); //$NON-NLS-1$
 		
-		JLabel lblBeruf = new JLabel("Beruf:");
-		lblBeruf.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactDetailsPersonalInformations.add(lblBeruf, "4, 8, right, default");
+		JLabel lblBeruf = new JLabel(Messages.getString("ViewContactDetails.79")); //$NON-NLS-1$
+		lblBeruf.setFont(new Font(Messages.getString("ViewContactDetails.80"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContactDetailsPersonalInformations.add(lblBeruf, Messages.getString("ViewContactDetails.81")); //$NON-NLS-1$
 		
 		this.txtJob = new JTextField();
 		this.txtJob.setDisabledTextColor(getForeground());
 		this.txtJob.setEditable(false);
 		this.txtJob.setEnabled(false);
-		pnlContactDetailsPersonalInformations.add(this.txtJob, "6, 8, fill, default");
+		pnlContactDetailsPersonalInformations.add(this.txtJob, Messages.getString("ViewContactDetails.82")); //$NON-NLS-1$
 		this.txtJob.setColumns(10);
 		
-		JLabel lblCompany = new JLabel("Firma:");
-		lblCompany.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactDetailsPersonalInformations.add(lblCompany, "4, 10, right, default");
+		JLabel lblCompany = new JLabel(Messages.getString("ViewContactDetails.83")); //$NON-NLS-1$
+		lblCompany.setFont(new Font(Messages.getString("ViewContactDetails.84"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContactDetailsPersonalInformations.add(lblCompany, Messages.getString("ViewContactDetails.85")); //$NON-NLS-1$
 		
 		this.txtCompany = new JTextField();
 		this.txtCompany.setDisabledTextColor(getForeground());
 		this.txtCompany.setEditable(false);
 		this.txtCompany.setEnabled(false);
-		pnlContactDetailsPersonalInformations.add(this.txtCompany, "6, 10, fill, default");
+		pnlContactDetailsPersonalInformations.add(this.txtCompany, Messages.getString("ViewContactDetails.86")); //$NON-NLS-1$
 		this.txtCompany.setColumns(10);
 		
-		JLabel lblDepartment = new JLabel("Abteilung:");
-		lblDepartment.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactDetailsPersonalInformations.add(lblDepartment, "4, 12, right, default");
+		JLabel lblDepartment = new JLabel(Messages.getString("ViewContactDetails.87")); //$NON-NLS-1$
+		lblDepartment.setFont(new Font(Messages.getString("ViewContactDetails.88"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContactDetailsPersonalInformations.add(lblDepartment, Messages.getString("ViewContactDetails.89")); //$NON-NLS-1$
 		
 		this.txtDepartment = new JTextField();
 		this.txtDepartment.setDisabledTextColor(getForeground());
 		this.txtDepartment.setEditable(false);
 		this.txtDepartment.setEnabled(false);
-		pnlContactDetailsPersonalInformations.add(this.txtDepartment, "6, 12, fill, default");
+		pnlContactDetailsPersonalInformations.add(this.txtDepartment, Messages.getString("ViewContactDetails.90")); //$NON-NLS-1$
 		this.txtDepartment.setColumns(10);
 		
-		JLabel lblMiscellaneousCategory = new JLabel("Verschiedenes");
-		pnlContactDetailsPersonalInformations.add(lblMiscellaneousCategory, "2, 14, 3, 1");
-		lblMiscellaneousCategory.setFont(new Font("Arial", Font.BOLD, 13));
+		JLabel lblMiscellaneousCategory = new JLabel(Messages.getString("ViewContactDetails.91")); //$NON-NLS-1$
+		pnlContactDetailsPersonalInformations.add(lblMiscellaneousCategory, Messages.getString("ViewContactDetails.92")); //$NON-NLS-1$
+		lblMiscellaneousCategory.setFont(new Font(Messages.getString("ViewContactDetails.93"), Font.BOLD, 13)); //$NON-NLS-1$
 		
-		JLabel lblOffice = new JLabel("Büro:");
-		lblOffice.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactDetailsPersonalInformations.add(lblOffice, "4, 16, right, default");
+		JLabel lblOffice = new JLabel(Messages.getString("ViewContactDetails.94")); //$NON-NLS-1$
+		lblOffice.setFont(new Font(Messages.getString("ViewContactDetails.95"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContactDetailsPersonalInformations.add(lblOffice, Messages.getString("ViewContactDetails.96")); //$NON-NLS-1$
 		
 		this.txtOffice = new JTextField();
 		this.txtOffice.setDisabledTextColor(getForeground());
 		this.txtOffice.setEditable(false);
 		this.txtOffice.setEnabled(false);
-		pnlContactDetailsPersonalInformations.add(this.txtOffice, "6, 16, fill, default");
+		pnlContactDetailsPersonalInformations.add(this.txtOffice, Messages.getString("ViewContactDetails.97")); //$NON-NLS-1$
 		this.txtOffice.setColumns(10);
 		
-		JLabel lblSpouses = new JLabel("Ehepartner:");
-		lblSpouses.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactDetailsPersonalInformations.add(lblSpouses, "4, 18, right, default");
+		JLabel lblSpouses = new JLabel(Messages.getString("ViewContactDetails.98")); //$NON-NLS-1$
+		lblSpouses.setFont(new Font(Messages.getString("ViewContactDetails.99"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContactDetailsPersonalInformations.add(lblSpouses, Messages.getString("ViewContactDetails.100")); //$NON-NLS-1$
 		
 		this.txtSpouses = new JTextField();
 		this.txtSpouses.setDisabledTextColor(getForeground());
 		this.txtSpouses.setEditable(false);
 		this.txtSpouses.setEnabled(false);
-		pnlContactDetailsPersonalInformations.add(this.txtSpouses, "6, 18, fill, default");
+		pnlContactDetailsPersonalInformations.add(this.txtSpouses, Messages.getString("ViewContactDetails.101")); //$NON-NLS-1$
 		this.txtSpouses.setColumns(10);
 		
 		JPanel pnlContactDetailsPostal = new JPanel();
-		this.pnlTabbedContactDetails.addTab("Postadresse", null, pnlContactDetailsPostal, null);
+		this.pnlTabbedContactDetails.addTab(Messages.getString("ViewContactDetails.102"), null, pnlContactDetailsPostal, null); //$NON-NLS-1$
 		pnlContactDetailsPostal.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(30dlu;default)"),
+				ColumnSpec.decode(Messages.getString("ViewContactDetails.103")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(30dlu;default):grow"),
+				ColumnSpec.decode(Messages.getString("ViewContactDetails.104")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(85dlu;default):grow"),
+				ColumnSpec.decode(Messages.getString("ViewContactDetails.105")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,},
 			new RowSpec[] {
@@ -401,7 +402,7 @@ public class ViewContactDetails extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),
+				RowSpec.decode(Messages.getString("ViewContactDetails.106")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -419,108 +420,108 @@ public class ViewContactDetails extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),}));
+				RowSpec.decode(Messages.getString("ViewContactDetails.107")),})); //$NON-NLS-1$
 		
-		JLabel lblPrivat = new JLabel("Privat");
-		pnlContactDetailsPostal.add(lblPrivat, "2, 2, 3, 1");
-		lblPrivat.setFont(new Font("Arial", Font.BOLD, 13));
+		JLabel lblPrivat = new JLabel(Messages.getString("ViewContactDetails.108")); //$NON-NLS-1$
+		pnlContactDetailsPostal.add(lblPrivat, Messages.getString("ViewContactDetails.109")); //$NON-NLS-1$
+		lblPrivat.setFont(new Font(Messages.getString("ViewContactDetails.110"), Font.BOLD, 13)); //$NON-NLS-1$
 		
-		JLabel lblAdresse = new JLabel("Adresse:");
-		lblAdresse.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactDetailsPostal.add(lblAdresse, "4, 4, right, default");
+		JLabel lblAdresse = new JLabel(Messages.getString("ViewContactDetails.111")); //$NON-NLS-1$
+		lblAdresse.setFont(new Font(Messages.getString("ViewContactDetails.112"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContactDetailsPostal.add(lblAdresse, Messages.getString("ViewContactDetails.113")); //$NON-NLS-1$
 		
 		JScrollPane pnlScrollPaneAdressField = new JScrollPane();
-		pnlContactDetailsPostal.add(pnlScrollPaneAdressField, "6, 4, 3, 3, fill, fill");
+		pnlContactDetailsPostal.add(pnlScrollPaneAdressField, Messages.getString("ViewContactDetails.114")); //$NON-NLS-1$
 		
 		textAreaPrivatAdress = new JTextArea();
 		this.textAreaPrivatAdress.setDisabledTextColor(getForeground());
 		textAreaPrivatAdress.setEditable(false);
 		textAreaPrivatAdress.setLineWrap(true);
-		textAreaPrivatAdress.setFont(new Font("Arial", Font.PLAIN, 13));
+		textAreaPrivatAdress.setFont(new Font(Messages.getString("ViewContactDetails.115"), Font.PLAIN, 13)); //$NON-NLS-1$
 		textAreaPrivatAdress.setEnabled(false);
 		pnlScrollPaneAdressField.setViewportView(textAreaPrivatAdress);
 		
-		JLabel lblPostfach = new JLabel("Postfach:");
-		lblPostfach.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactDetailsPostal.add(lblPostfach, "4, 8, right, default");
+		JLabel lblPostfach = new JLabel(Messages.getString("ViewContactDetails.116")); //$NON-NLS-1$
+		lblPostfach.setFont(new Font(Messages.getString("ViewContactDetails.117"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContactDetailsPostal.add(lblPostfach, Messages.getString("ViewContactDetails.118")); //$NON-NLS-1$
 		
 		this.txtPostfach = new JTextField();
 		this.txtPostfach.setDisabledTextColor(getForeground());
 		this.txtPostfach.setEditable(false);
-		this.txtPostfach.setFont(new Font("Arial", Font.PLAIN, 13));
+		this.txtPostfach.setFont(new Font(Messages.getString("ViewContactDetails.119"), Font.PLAIN, 13)); //$NON-NLS-1$
 		this.txtPostfach.setEnabled(false);
-		pnlContactDetailsPostal.add(this.txtPostfach, "6, 8, 3, 1, fill, default");
+		pnlContactDetailsPostal.add(this.txtPostfach, Messages.getString("ViewContactDetails.120")); //$NON-NLS-1$
 		this.txtPostfach.setColumns(10);
 		
-		JLabel lblStadt = new JLabel("Stadt:");
-		lblStadt.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactDetailsPostal.add(lblStadt, "4, 10, right, default");
+		JLabel lblStadt = new JLabel(Messages.getString("ViewContactDetails.121")); //$NON-NLS-1$
+		lblStadt.setFont(new Font(Messages.getString("ViewContactDetails.122"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContactDetailsPostal.add(lblStadt, Messages.getString("ViewContactDetails.123")); //$NON-NLS-1$
 		
 		this.txtCity = new JTextField();
 		this.txtCity.setDisabledTextColor(getForeground());
 		this.txtCity.setEditable(false);
-		this.txtCity.setFont(new Font("Arial", Font.PLAIN, 13));
+		this.txtCity.setFont(new Font(Messages.getString("ViewContactDetails.124"), Font.PLAIN, 13)); //$NON-NLS-1$
 		this.txtCity.setEnabled(false);
-		pnlContactDetailsPostal.add(this.txtCity, "6, 10, 3, 1, fill, default");
+		pnlContactDetailsPostal.add(this.txtCity, Messages.getString("ViewContactDetails.125")); //$NON-NLS-1$
 		this.txtCity.setColumns(10);
 		
-		JLabel lblPostleitzahl = new JLabel("Postleitzahl:");
-		lblPostleitzahl.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactDetailsPostal.add(lblPostleitzahl, "4, 12, right, default");
+		JLabel lblPostleitzahl = new JLabel(Messages.getString("ViewContactDetails.126")); //$NON-NLS-1$
+		lblPostleitzahl.setFont(new Font(Messages.getString("ViewContactDetails.127"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContactDetailsPostal.add(lblPostleitzahl, Messages.getString("ViewContactDetails.128")); //$NON-NLS-1$
 		
 		this.txtZipPlz = new JNumberOnlyTextField();
 		this.txtZipPlz.setDisabledTextColor(getForeground());
 		this.txtZipPlz.setEditable(false);
-		this.txtZipPlz.setFont(new Font("Arial", Font.PLAIN, 13));
+		this.txtZipPlz.setFont(new Font(Messages.getString("ViewContactDetails.129"), Font.PLAIN, 13)); //$NON-NLS-1$
 		this.txtZipPlz.setEnabled(false);
-		pnlContactDetailsPostal.add(this.txtZipPlz, "6, 12, 3, 1, fill, default");
+		pnlContactDetailsPostal.add(this.txtZipPlz, Messages.getString("ViewContactDetails.130")); //$NON-NLS-1$
 		this.txtZipPlz.setColumns(10);
 		
-		JLabel lblBundeststaatprovinz = new JLabel("Bundeststaat/Provinz:");
-		lblBundeststaatprovinz.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactDetailsPostal.add(lblBundeststaatprovinz, "4, 14, 3, 1, right, default");
+		JLabel lblBundeststaatprovinz = new JLabel(Messages.getString("ViewContactDetails.131")); //$NON-NLS-1$
+		lblBundeststaatprovinz.setFont(new Font(Messages.getString("ViewContactDetails.132"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContactDetailsPostal.add(lblBundeststaatprovinz, Messages.getString("ViewContactDetails.133")); //$NON-NLS-1$
 		
 		this.txtStateProvinz = new JTextField();
 		this.txtStateProvinz.setDisabledTextColor(getForeground());
 		this.txtStateProvinz.setEditable(false);
-		this.txtStateProvinz.setFont(new Font("Arial", Font.PLAIN, 13));
+		this.txtStateProvinz.setFont(new Font(Messages.getString("ViewContactDetails.134"), Font.PLAIN, 13)); //$NON-NLS-1$
 		this.txtStateProvinz.setEnabled(false);
-		pnlContactDetailsPostal.add(this.txtStateProvinz, "8, 14, fill, default");
+		pnlContactDetailsPostal.add(this.txtStateProvinz, Messages.getString("ViewContactDetails.135")); //$NON-NLS-1$
 		this.txtStateProvinz.setColumns(10);
 		
-		JLabel lblLand = new JLabel("Land:");
-		lblLand.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactDetailsPostal.add(lblLand, "4, 16, 3, 1, right, default");
+		JLabel lblLand = new JLabel(Messages.getString("ViewContactDetails.136")); //$NON-NLS-1$
+		lblLand.setFont(new Font(Messages.getString("ViewContactDetails.137"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContactDetailsPostal.add(lblLand, Messages.getString("ViewContactDetails.138")); //$NON-NLS-1$
 		
 		this.txtCountry = new JTextField();
 		this.txtCountry.setDisabledTextColor(getForeground());
 		this.txtCountry.setEditable(false);
-		this.txtCountry.setFont(new Font("Arial", Font.PLAIN, 13));
+		this.txtCountry.setFont(new Font(Messages.getString("ViewContactDetails.139"), Font.PLAIN, 13)); //$NON-NLS-1$
 		this.txtCountry.setEnabled(false);
-		pnlContactDetailsPostal.add(this.txtCountry, "8, 16, fill, default");
+		pnlContactDetailsPostal.add(this.txtCountry, Messages.getString("ViewContactDetails.140")); //$NON-NLS-1$
 		this.txtCountry.setColumns(10);
 		
-		JLabel lblGeschftlich = new JLabel("Geschäftlich");
-		pnlContactDetailsPostal.add(lblGeschftlich, "2, 20, 3, 1");
-		lblGeschftlich.setFont(new Font("Arial", Font.BOLD, 13));
+		JLabel lblGeschftlich = new JLabel(Messages.getString("ViewContactDetails.141")); //$NON-NLS-1$
+		pnlContactDetailsPostal.add(lblGeschftlich, Messages.getString("ViewContactDetails.142")); //$NON-NLS-1$
+		lblGeschftlich.setFont(new Font(Messages.getString("ViewContactDetails.143"), Font.BOLD, 13)); //$NON-NLS-1$
 		
-		JLabel lblAdresse_1 = new JLabel("Adresse:");
-		lblAdresse_1.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlContactDetailsPostal.add(lblAdresse_1, "4, 22, right, default");
+		JLabel lblAdresse_1 = new JLabel(Messages.getString("ViewContactDetails.144")); //$NON-NLS-1$
+		lblAdresse_1.setFont(new Font(Messages.getString("ViewContactDetails.145"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlContactDetailsPostal.add(lblAdresse_1, Messages.getString("ViewContactDetails.146")); //$NON-NLS-1$
 		
 		JScrollPane pnlScrollPaneBuisnessAdress = new JScrollPane();
-		pnlContactDetailsPostal.add(pnlScrollPaneBuisnessAdress, "6, 22, 3, 3, fill, fill");
+		pnlContactDetailsPostal.add(pnlScrollPaneBuisnessAdress, Messages.getString("ViewContactDetails.147")); //$NON-NLS-1$
 		
 		textAreaBusinessAdress = new JTextArea();
 		this.textAreaBusinessAdress.setDisabledTextColor(getForeground());
 		textAreaBusinessAdress.setEditable(false);
 		textAreaBusinessAdress.setLineWrap(true);
-		textAreaBusinessAdress.setFont(new Font("Arial", Font.PLAIN, 13));
+		textAreaBusinessAdress.setFont(new Font(Messages.getString("ViewContactDetails.148"), Font.PLAIN, 13)); //$NON-NLS-1$
 		textAreaBusinessAdress.setEnabled(false);
 		pnlScrollPaneBuisnessAdress.setViewportView(textAreaBusinessAdress);
 		
 		JPanel pnlContactDetailsNotices = new JPanel();
-		this.pnlTabbedContactDetails.addTab("Notitzen", null, pnlContactDetailsNotices, null);
+		this.pnlTabbedContactDetails.addTab(Messages.getString("ViewContactDetails.149"), null, pnlContactDetailsNotices, null); //$NON-NLS-1$
 		pnlContactDetailsNotices.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -531,7 +532,7 @@ public class ViewContactDetails extends JPanel {
 		textAreaNotices.setEditable(false);
 		textAreaNotices.setEnabled(false);
 		textAreaNotices.setLineWrap(true);
-		textAreaNotices.setFont(new Font("Arial", Font.PLAIN, 13));
+		textAreaNotices.setFont(new Font(Messages.getString("ViewContactDetails.150"), Font.PLAIN, 13)); //$NON-NLS-1$
 		scrollPane.setViewportView(textAreaNotices);
 		
 		JPanel pnlEditButton = new JPanel();
@@ -539,13 +540,13 @@ public class ViewContactDetails extends JPanel {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		add(pnlEditButton, BorderLayout.SOUTH);
 		
-		this.btnBack = new JButton("Zurück");
-		this.btnBack.setFont(new Font("Arial", Font.BOLD, 13));
+		this.btnBack = new JButton(Messages.getString("ViewContactDetails.151")); //$NON-NLS-1$
+		this.btnBack.setFont(new Font(Messages.getString("ViewContactDetails.152"), Font.BOLD, 13)); //$NON-NLS-1$
 		pnlEditButton.add(this.btnBack);
 		
 		btnUnlock = new JButton( STD_BUTTON_UNLOCK_UNLOCK );
 		btnUnlock.addActionListener( new EnableTextFieldsActionListener(this) );
-		btnUnlock.setFont(new Font("Arial", Font.BOLD, 13));
+		btnUnlock.setFont(new Font(Messages.getString("ViewContactDetails.153"), Font.BOLD, 13)); //$NON-NLS-1$
 		pnlEditButton.add(btnUnlock);
 
 

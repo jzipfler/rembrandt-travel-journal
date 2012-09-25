@@ -19,6 +19,7 @@ public class PhotoAlbumDetailsViewRemovePhotoActionListener implements ActionLis
 		this.viewPhotoAlbumDetails = viewPhotoAlbumDetails;
 	}	
 	
+	@Override
 	public void actionPerformed( ActionEvent event ) {
 		
 		// get current photo

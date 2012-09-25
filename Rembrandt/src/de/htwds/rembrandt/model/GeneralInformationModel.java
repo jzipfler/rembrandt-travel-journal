@@ -37,12 +37,12 @@ public class GeneralInformationModel implements Serializable {
 	}
 	
 	public String getFolderName(){
-		return country + "_" + dateArrival;
+		return country + Messages.getString("GeneralInformationModel.0") + dateArrival; //$NON-NLS-1$
 	}
 	
 	public void setCountryAndArrivalFromFolderName( String countryAndArrivalString ) {
 		
-		String[] countryAndArrivalArray = countryAndArrivalString.split("_");
+		String[] countryAndArrivalArray = countryAndArrivalString.split(Messages.getString("GeneralInformationModel.1")); //$NON-NLS-1$
 		setCity(countryAndArrivalArray[0]);
 		setDateArrival(countryAndArrivalArray[1]);
 	}
@@ -65,12 +65,14 @@ public class GeneralInformationModel implements Serializable {
 		dateDeparture = newDateDeparture;
 	}
 	
+	@Override
 	public boolean equals(Object o){
 		if(o == null) return false;
 		if(!(o instanceof GeneralInformationModel)) return false;
 		return getFolderName().equals(((GeneralInformationModel)o).getFolderName());
 	}
 	
+	@Override
 	public String toString() {
 		return getFolderName();
 	}

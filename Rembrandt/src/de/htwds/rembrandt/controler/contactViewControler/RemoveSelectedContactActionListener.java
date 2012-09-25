@@ -11,13 +11,13 @@ import de.htwds.rembrandt.view.ViewContacts;
 
 public class RemoveSelectedContactActionListener implements ActionListener {
 
-	private static final String MSG_YES_DELETE = "Ja, löschen";
-	private static final String MSG_NOT_DELETE = "Nein, nicht löschen";
-	private static final String MSG_SURE_TO_DELETE_TITLE = "Löschen des Kontakts";
-	private static final String MSG_SURE_TO_DELETE_CONTACT = "Sie versuchen gerade einen Kontakt zu löschen.\n" +
-																"Sind Sie sicher, dass Sie den Kontakt löschen möchten?\n" +
-																"\n" +
-																"Der Kontakt kann nach dem löschen nicht wiederhergestellt werden.";
+	private static final String MSG_YES_DELETE = Messages.getString("RemoveSelectedContactActionListener.0"); //$NON-NLS-1$
+	private static final String MSG_NOT_DELETE = Messages.getString("RemoveSelectedContactActionListener.1"); //$NON-NLS-1$
+	private static final String MSG_SURE_TO_DELETE_TITLE = Messages.getString("RemoveSelectedContactActionListener.2"); //$NON-NLS-1$
+	private static final String MSG_SURE_TO_DELETE_CONTACT = Messages.getString("RemoveSelectedContactActionListener.3") + //$NON-NLS-1$
+																Messages.getString("RemoveSelectedContactActionListener.4") + //$NON-NLS-1$
+																Messages.getString("RemoveSelectedContactActionListener.5") + //$NON-NLS-1$
+																Messages.getString("RemoveSelectedContactActionListener.6"); //$NON-NLS-1$
 	
 	private ViewContacts viewContacts;
 	
@@ -30,13 +30,13 @@ public class RemoveSelectedContactActionListener implements ActionListener {
 		ArrayList<Contact> selectedContact;
 		Contact removeContact = new LoadSelectedContactControler(viewContacts).loadSelectedContact();
 		
-		if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals(viewContacts.STD_CMB_CATEGORY_PRIVATE) ) {
+		if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals(ViewContacts.STD_CMB_CATEGORY_PRIVATE) ) {
 			
 			selectedContact = viewContacts.getParentFrame().getJourneyModel().getContactListModel().getPrivateContactList();
 			selectedContact.remove(removeContact);
 			viewContacts.getParentFrame().getJourneyModel().getContactListModel().setPrivateContactList(selectedContact);
 		}
-		else if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals(viewContacts.STD_CMB_CATEGORY_GLOBAL) ) {
+		else if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals(ViewContacts.STD_CMB_CATEGORY_GLOBAL) ) {
 			
 			selectedContact = viewContacts.getParentFrame().getJourneyModel().getContactListModel().getGlobalContactList();
 			selectedContact.remove(removeContact);

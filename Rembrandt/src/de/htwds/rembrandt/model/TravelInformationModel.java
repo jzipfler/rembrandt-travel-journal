@@ -145,8 +145,9 @@ public class TravelInformationModel {
 		comment = newComment;
 	}
 	
+	@Override
 	public String toString(){
-		return country + "_" + dateArrival;
+		return country + Messages.getString("TravelInformationModel.0") + dateArrival; //$NON-NLS-1$
 	}
 	
 	public GeneralInformationModel createGeneralInformation(){

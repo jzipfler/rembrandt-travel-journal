@@ -2,11 +2,6 @@ package de.htwds.rembrandt.controler.viewStartController;
 
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-
-import de.htwds.rembrandt.controler.datastructure.GeneralInformationFromDiskControler;
-import de.htwds.rembrandt.exception.TravelToDiscException;
 import de.htwds.rembrandt.model.GeneralInformationModel;
 import de.htwds.rembrandt.view.ViewStart;
 
@@ -29,7 +24,7 @@ public class FilterListControler {
 		}
 		
 		if (!list.isEmpty()) {
-			return ((GeneralInformationModel[]) list.toArray(new GeneralInformationModel[list.size()]));
+			return list.toArray(new GeneralInformationModel[list.size()]);
 		} else {
 			return null;
 		}
@@ -49,7 +44,7 @@ public class FilterListControler {
 			viewStart.getTableModel().removeRow(0);
 		}
 		if ( filtered == null )
-			viewStart.getTableModel().addRow( new String[] { "Keine Einträge für Ihr Suchkriterium vorhanden" } );
+			viewStart.getTableModel().addRow( new String[] { Messages.getString("FilterListControler.0") } ); //$NON-NLS-1$
 		else {
 			for (GeneralInformationModel generalInformationModel : filtered ) {
 				if ( generalInformationModel != null ){

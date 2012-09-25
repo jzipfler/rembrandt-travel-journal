@@ -39,10 +39,11 @@ import javax.swing.filechooser.FileFilter;
 /* ImageFilter.java is used by FileChooserDemo2.java. */
 public class ImageFilter extends FileFilter {
 
-	static String STD_FILE_FILTER_NAME = "Nur Bilder ( jpg, png, gif, tif )";
+	static String STD_FILE_FILTER_NAME = Messages.getString("ImageFilter.0"); //$NON-NLS-1$
 	
     //Accept all directories and all gif, jpg, tiff, or png files.
-    public boolean accept(File f) {
+    @Override
+	public boolean accept(File f) {
         if (f.isDirectory()) {
             return true;
         }
@@ -65,7 +66,8 @@ public class ImageFilter extends FileFilter {
     }
 
     //The description of this filter
-    public String getDescription() {
+    @Override
+	public String getDescription() {
         return STD_FILE_FILTER_NAME;
     }
 }

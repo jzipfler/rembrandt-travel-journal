@@ -1,54 +1,31 @@
 package de.htwds.rembrandt.view;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.JTextArea;
-import javax.swing.ListSelectionModel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.JButton;
-import javax.swing.BoxLayout;
-
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.freixas.jcalendar.*;
+import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
 
-import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.RowSpec;
+import org.freixas.jcalendar.DateEvent;
+import org.freixas.jcalendar.DateListener;
+import org.freixas.jcalendar.JCalendar;
 
-import de.htwds.rembrandt.controler.contactViewControler.LoadCalendarActionListener;
-import de.htwds.rembrandt.controler.contactViewControler.LoadContactDetailsActionListener;
-import de.htwds.rembrandt.controler.contactViewControler.LoadSelectedActivityListSelectionListener;
-import de.htwds.rembrandt.controler.travelview.LoadTravelInformationPanelActionListener;
-import de.htwds.rembrandt.model.ActivityList;
 import de.htwds.rembrandt.controler.contactViewControler.LoadActivityActionListener;
+import de.htwds.rembrandt.controler.contactViewControler.LoadSelectedActivityListSelectionListener;
+import de.htwds.rembrandt.model.ActivityList;
+import javax.swing.JLabel;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 
 
@@ -81,6 +58,11 @@ public class ViewCalendar extends JPanel{
 	private ViewActivity viewActivity;
 	private ActivityList activityList;
 	private String time;
+	private JPanel panelHeader;
+	private JLabel lblAktivitten;
+	private JPanel panelButton;
+	private JScrollPane scrollPane;
+	private JList list_1;
 
 	
 	
@@ -98,30 +80,52 @@ public class ViewCalendar extends JPanel{
 		
 		listener = new MyDateListener();
 
-		jButton1 = new JButton();
-		this.jButton1.setAlignmentX(Component.CENTER_ALIGNMENT);
-		jButton1.setFont(new Font("Arial", Font.BOLD, 13));
-		jButton1.setPreferredSize(new java.awt.Dimension(120, 50));
-
 	
 			
 		calendar= new JCalendar();	
-		calendar.setTitleFont(new Font("Arial", Font.BOLD, 13));
-		calendar.setDayOfWeekFont(new Font("Arial", Font.BOLD, 15));
-		calendar.setDayFont(new Font("Arial", Font.BOLD, 13));
+		calendar.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		calendar.setTitleFont(new Font(Messages.getString("ViewCalendar.1"), Font.BOLD, 13)); //$NON-NLS-1$
+		calendar.setDayOfWeekFont(new Font(Messages.getString("ViewCalendar.2"), Font.BOLD, 15)); //$NON-NLS-1$
+		calendar.setDayFont(new Font(Messages.getString("ViewCalendar.3"), Font.BOLD, 13)); //$NON-NLS-1$
 		calendar.addDateListener(listener);
 						
-		jp = new JPanel( new GridLayout(2,1));
-		jp.add(calendar);
-		jp.add(jButton1);
+		jp = new JPanel( );
+		jp.setBorder(new EmptyBorder(5, 5, 2, 2));
+		jp.setLayout(new BorderLayout(0, 0));
+		jp.add(calendar, BorderLayout.CENTER);
 				
 				
 		calendarPane = new JPanel();
 		calendarPane.setLayout(new BorderLayout(0, 0));
 		calendarPane.add(jp, BorderLayout.CENTER);
+		
+		panelButton = new JPanel();
+		panelButton.setBorder(new EmptyBorder(5, 0, 0, 0));
+		jp.add(panelButton, BorderLayout.SOUTH);
+				panelButton.setLayout(new BorderLayout(0, 0));
+		
+				jButton1 = new JButton();
+				panelButton.add(jButton1);
+				jButton1.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+				this.jButton1.setAlignmentX(Component.CENTER_ALIGNMENT);
+				jButton1.setFont(new Font(Messages.getString("ViewCalendar.0"), Font.BOLD, 13)); //$NON-NLS-1$
+				jButton1.setPreferredSize(new java.awt.Dimension(120, 50));
 
 						
 		add(calendarPane, BorderLayout.CENTER);	
+		
+		panelHeader = new JPanel();
+		calendarPane.add(panelHeader, BorderLayout.NORTH);
+		
+		lblAktivitten = new JLabel("Aktivitäten");
+		lblAktivitten.setFont(new Font("Arial", Font.BOLD, 16));
+		panelHeader.add(lblAktivitten);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setPreferredSize(new Dimension(144, 3));
+		scrollPane.setMinimumSize(new Dimension(144, 22));
+		calendarPane.add(scrollPane, BorderLayout.WEST);
 	};
 	
 
@@ -132,14 +136,17 @@ public class ViewCalendar extends JPanel{
 		} else {
 			list  = new JList();
 		}
-		list.setFont(new Font("Arial", Font.PLAIN, 13));
-		list.setFont(new Font("Arial", Font.BOLD|Font.BOLD, 14));
-		list.setPreferredSize(new java.awt.Dimension(140, 228));
+		list.setFont(new Font(Messages.getString("ViewCalendar.4"), Font.PLAIN, 13)); //$NON-NLS-1$
+		list.setFont(new Font(Messages.getString("ViewCalendar.5"), Font.BOLD|Font.BOLD, 14)); //$NON-NLS-1$
+//		Set preferedSize to NULL for compitibility with scrollPane
+//		list.setPreferredSize(new java.awt.Dimension(120, 228));
+		list.setPreferredSize(null);
 		list.setAutoscrolls(false);
 		list.setVisibleRowCount(5);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.addListSelectionListener( new LoadSelectedActivityListSelectionListener( this ) );
-		calendarPane.add(list, BorderLayout.WEST);
+		scrollPane.setViewportView(list);
+//		calendarPane.add(list, BorderLayout.WEST);
 	}
 	
 	
@@ -148,8 +155,8 @@ public class ViewCalendar extends JPanel{
 
 		this();
 		this.frmMainFrame = frmMainFrame;
-		time = (new GregorianCalendar()).getTime().getDate()  + "." +(((new GregorianCalendar()).getTime()).getMonth()+1) + "."+ (((new GregorianCalendar()).getTime()).getYear()-100);
-		jButton1.setText("Neue Aktivität: " + time);
+		time = (new GregorianCalendar()).getTime().getDate()  + Messages.getString("ViewCalendar.6") +(((new GregorianCalendar()).getTime()).getMonth()+1) + Messages.getString("ViewCalendar.7")+ (((new GregorianCalendar()).getTime()).getYear()-100); //$NON-NLS-1$ //$NON-NLS-2$
+		jButton1.setText(Messages.getString("ViewCalendar.8") + time); //$NON-NLS-1$
 		ViewActivity viewActivity = new ViewActivity(frmMainFrame, this);
 		jButton1.addActionListener(new LoadActivityActionListener(viewActivity, this));
 	}
@@ -169,13 +176,14 @@ public class ViewCalendar extends JPanel{
 
 	private class MyDateListener implements DateListener{
 
+		@Override
 		public void dateChanged(DateEvent e){
 			Calendar c = e.getSelectedDate();
 			if (c != null) {
-				time = c.getTime().getDate()+ "."+ (c.getTime().getMonth()+1) +  "."+ (c.getTime().getYear()-100);
-				jButton1.setText("Neue Aktivität: " + time);
+				time = c.getTime().getDate()+ Messages.getString("ViewCalendar.9")+ (c.getTime().getMonth()+1) +  Messages.getString("ViewCalendar.10")+ (c.getTime().getYear()-100); //$NON-NLS-1$ //$NON-NLS-2$
+				jButton1.setText(Messages.getString("ViewCalendar.11") + time); //$NON-NLS-1$
 			} else {
-				System.out.println("No time selected.");
+				System.out.println(Messages.getString("ViewCalendar.12")); //$NON-NLS-1$
 			}
 		}
 	}

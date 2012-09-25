@@ -1,41 +1,31 @@
 package de.htwds.rembrandt.view;
 
 
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JList;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import javax.swing.JScrollPane;
 
 import de.htwds.rembrandt.controler.viewChecklistControler.ViewChecklistLoad;
-import de.htwds.rembrandt.controler.viewChecklistControler.ViewChecklistLoadFromDisc;
+import de.htwds.rembrandt.controler.viewChecklistControler.ViewChecklistSave;
 import de.htwds.rembrandt.model.CheckElement;
 import de.htwds.rembrandt.model.CheckList;
-import de.htwds.rembrandt.model.TravelInformationModel;
-import de.htwds.rembrandt.controler.viewChecklistControler.ViewChecklistSave;
-
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.AncestorEvent;
 
 public class ViewChecklist extends JPanel {
 	private JTextField txtBagElement;
@@ -60,10 +50,13 @@ public class ViewChecklist extends JPanel {
 		
 		
 		addAncestorListener(new AncestorListener() {
+			@Override
 			public void ancestorAdded(AncestorEvent arg0) {
 			}
+			@Override
 			public void ancestorMoved(AncestorEvent arg0) {
 			}
+			@Override
 			public void ancestorRemoved(AncestorEvent arg0) {
 				saveChecklists();
 			}
@@ -73,27 +66,28 @@ public class ViewChecklist extends JPanel {
 		JPanel pnlBag = new JPanel();
 		add(pnlBag);
 		
-		JLabel lblBagHeader = new JLabel("Kofferinhalt");
+		JLabel lblBagHeader = new JLabel(Messages.getString("ViewChecklist.0")); //$NON-NLS-1$
 		lblBagHeader.setHorizontalAlignment(SwingConstants.LEFT);
-		lblBagHeader.setFont(new Font("Arial", Font.BOLD, 15));
+		lblBagHeader.setFont(new Font(Messages.getString("ViewChecklist.1"), Font.BOLD, 15)); //$NON-NLS-1$
 		
 		txtBagElement = new JTextField();
-		txtBagElement.setFont(new Font("Arial", Font.PLAIN, 13));
+		txtBagElement.setFont(new Font(Messages.getString("ViewChecklist.2"), Font.PLAIN, 13)); //$NON-NLS-1$
 		txtBagElement.setColumns(10);
 		
-		JLabel lblBagElement = new JLabel("Kofferelement:");
-		lblBagElement.setFont(new Font("Arial", Font.PLAIN, 13));
+		JLabel lblBagElement = new JLabel(Messages.getString("ViewChecklist.3")); //$NON-NLS-1$
+		lblBagElement.setFont(new Font(Messages.getString("ViewChecklist.4"), Font.PLAIN, 13)); //$NON-NLS-1$
 		
-		JLabel lblCount = new JLabel("Anzahl:");
-		lblCount.setFont(new Font("Arial", Font.PLAIN, 13));
+		JLabel lblCount = new JLabel(Messages.getString("ViewChecklist.5")); //$NON-NLS-1$
+		lblCount.setFont(new Font(Messages.getString("ViewChecklist.6"), Font.PLAIN, 13)); //$NON-NLS-1$
 		
 		txtCount = new JTextField();
-		txtCount.setFont(new Font("Arial", Font.PLAIN, 13));
+		txtCount.setFont(new Font(Messages.getString("ViewChecklist.7"), Font.PLAIN, 13)); //$NON-NLS-1$
 		txtCount.setColumns(10);
 		
-		JButton btnBagCheck = new JButton("Abhaken");
-		btnBagCheck.setFont(new Font("Arial", Font.PLAIN, 13));
+		JButton btnBagCheck = new JButton(Messages.getString("ViewChecklist.8")); //$NON-NLS-1$
+		btnBagCheck.setFont(new Font(Messages.getString("ViewChecklist.9"), Font.PLAIN, 13)); //$NON-NLS-1$
 		btnBagCheck.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int index = tblBag.getSelectedRow();
 				if(index != -1)
@@ -104,11 +98,12 @@ public class ViewChecklist extends JPanel {
 			}
 		});
 		
-		JButton btnBagAdd = new JButton("Hinzuf\u00FCgen");
-		btnBagAdd.setFont(new Font("Arial", Font.PLAIN, 13));
+		JButton btnBagAdd = new JButton(Messages.getString("ViewChecklist.10")); //$NON-NLS-1$
+		btnBagAdd.setFont(new Font(Messages.getString("ViewChecklist.11"), Font.PLAIN, 13)); //$NON-NLS-1$
 		btnBagAdd.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(!txtCount.getText().trim().equals("") && !txtBagElement.getText().trim().equals(""))
+				if(!txtCount.getText().trim().equals(Messages.getString("ViewChecklist.12")) && !txtBagElement.getText().trim().equals(Messages.getString("ViewChecklist.13"))) //$NON-NLS-1$ //$NON-NLS-2$
 				{
 				if(listBag == null)
 				{
@@ -122,8 +117,9 @@ public class ViewChecklist extends JPanel {
 		
 		
 		
-		JButton btnBagDelete = new JButton("X");
+		JButton btnBagDelete = new JButton(Messages.getString("ViewChecklist.14")); //$NON-NLS-1$
 		btnBagDelete.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int index = tblBag.getSelectedRow();
 				if(index != -1)
@@ -134,10 +130,10 @@ public class ViewChecklist extends JPanel {
 			}
 		});
 		btnBagDelete.setForeground(Color.RED);
-		btnBagDelete.setFont(new Font("Arial", Font.BOLD, 13));
+		btnBagDelete.setFont(new Font(Messages.getString("ViewChecklist.15"), Font.BOLD, 13)); //$NON-NLS-1$
 		
 		JScrollPane scrpnlBag = new JScrollPane();
-		scrpnlBag.setFont(new Font("Arial", Font.PLAIN, 13));
+		scrpnlBag.setFont(new Font(Messages.getString("ViewChecklist.16"), Font.PLAIN, 13)); //$NON-NLS-1$
 		
 		GroupLayout gl_pnlBag = new GroupLayout(pnlBag);
 		gl_pnlBag.setHorizontalGroup(
@@ -200,18 +196,20 @@ public class ViewChecklist extends JPanel {
 				new Object[][] {
 				},
 				new String[] {
-					"Bezeichnung", "Menge", "Abgearbeitet"
+					Messages.getString("ViewChecklist.17"), Messages.getString("ViewChecklist.18"), Messages.getString("ViewChecklist.19") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 			) {
 				Class[] columnTypes = new Class[] {
 					String.class, Integer.class, Boolean.class
 				};
+				@Override
 				public Class getColumnClass(int columnIndex) {
 					return columnTypes[columnIndex];
 				}
 				boolean[] columnEditables = new boolean[] {
 					false, false, false
 				};
+				@Override
 				public boolean isCellEditable(int row, int column) {
 					return columnEditables[column];
 				}
@@ -226,12 +224,13 @@ public class ViewChecklist extends JPanel {
 		JPanel pnlCheck = new JPanel();
 		add(pnlCheck);
 		
-		JLabel lblNewLabel = new JLabel("Checkliste");
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 15));
+		JLabel lblNewLabel = new JLabel(Messages.getString("ViewChecklist.20")); //$NON-NLS-1$
+		lblNewLabel.setFont(new Font(Messages.getString("ViewChecklist.21"), Font.BOLD, 15)); //$NON-NLS-1$
 		
-		JButton btnCheck = new JButton("Abhaken");
-		btnCheck.setFont(new Font("Arial", Font.PLAIN, 13));
+		JButton btnCheck = new JButton(Messages.getString("ViewChecklist.22")); //$NON-NLS-1$
+		btnCheck.setFont(new Font(Messages.getString("ViewChecklist.23"), Font.PLAIN, 13)); //$NON-NLS-1$
 		btnCheck.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int index = tblCheck.getSelectedRow();
 				if(index != -1)
@@ -242,18 +241,19 @@ public class ViewChecklist extends JPanel {
 			}
 		});
 		
-		JLabel lblCheckElement = new JLabel("Checkelement:");
-		lblCheckElement.setFont(new Font("Arial", Font.PLAIN, 13));
+		JLabel lblCheckElement = new JLabel(Messages.getString("ViewChecklist.24")); //$NON-NLS-1$
+		lblCheckElement.setFont(new Font(Messages.getString("ViewChecklist.25"), Font.PLAIN, 13)); //$NON-NLS-1$
 		
 		txtCheckElement = new JTextField();
-		txtCheckElement.setFont(new Font("Arial", Font.PLAIN, 13));
+		txtCheckElement.setFont(new Font(Messages.getString("ViewChecklist.26"), Font.PLAIN, 13)); //$NON-NLS-1$
 		txtCheckElement.setColumns(10);
 		
-		JButton btnCheckAdd = new JButton("Hinzuf\u00FCgen");
-		btnCheckAdd.setFont(new Font("Arial", Font.PLAIN, 13));
+		JButton btnCheckAdd = new JButton(Messages.getString("ViewChecklist.27")); //$NON-NLS-1$
+		btnCheckAdd.setFont(new Font(Messages.getString("ViewChecklist.28"), Font.PLAIN, 13)); //$NON-NLS-1$
 		btnCheckAdd.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!txtCheckElement.getText().trim().equals(""))
+				if(!txtCheckElement.getText().trim().equals(Messages.getString("ViewChecklist.29"))) //$NON-NLS-1$
 				{
 				if(listCheck == null)
 				{
@@ -265,8 +265,9 @@ public class ViewChecklist extends JPanel {
 			}
 		});
 		
-		JButton btnCheckDelete = new JButton("X");
+		JButton btnCheckDelete = new JButton(Messages.getString("ViewChecklist.30")); //$NON-NLS-1$
 		btnCheckDelete.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int index = tblCheck.getSelectedRow();
 				if(index != -1)
@@ -276,11 +277,11 @@ public class ViewChecklist extends JPanel {
 				}
 			}
 		});
-		btnCheckDelete.setFont(new Font("Arial", Font.BOLD, 13));
+		btnCheckDelete.setFont(new Font(Messages.getString("ViewChecklist.31"), Font.BOLD, 13)); //$NON-NLS-1$
 		btnCheckDelete.setForeground(Color.RED);
 		
 		JScrollPane scrpnlCheck = new JScrollPane();
-		scrpnlCheck.setFont(new Font("Arial", Font.PLAIN, 13));
+		scrpnlCheck.setFont(new Font(Messages.getString("ViewChecklist.32"), Font.PLAIN, 13)); //$NON-NLS-1$
 		GroupLayout gl_pnlCheck = new GroupLayout(pnlCheck);
 		gl_pnlCheck.setHorizontalGroup(
 			gl_pnlCheck.createParallelGroup(Alignment.LEADING)
@@ -331,18 +332,20 @@ public class ViewChecklist extends JPanel {
 			new Object[][] {
 			},
 			new String[] {
-				"Bezeichnung", "Abgearbeitet"
+				Messages.getString("ViewChecklist.33"), Messages.getString("ViewChecklist.34") //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		) {
 			Class[] columnTypes = new Class[] {
 				String.class, Boolean.class
 			};
+			@Override
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 			boolean[] columnEditables = new boolean[] {
 				false, false
 			};
+			@Override
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}

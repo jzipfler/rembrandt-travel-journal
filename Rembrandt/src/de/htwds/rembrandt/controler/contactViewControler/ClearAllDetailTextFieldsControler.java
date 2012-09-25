@@ -34,6 +34,6 @@ public class ClearAllDetailTextFieldsControler {
 		viewContactDetails.getTextAreaNotices().setText(null);
 		
 		viewContactDetails.getBtnPicture().setIcon(null);
-		viewContactDetails.getBtnPicture().setText("Picture");
+		viewContactDetails.getBtnPicture().setText(Messages.getString("ClearAllDetailTextFieldsControler.0")); //$NON-NLS-1$
 	}
 }
