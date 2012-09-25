@@ -5,23 +5,23 @@ public class ContactException extends RuntimeException {
 	/**
 	 * This constant is used to report that the first name have to be filled.
 	 */
-	public static final String ERROR_FIRSTNAME_EMPTY = "Der Vorname darf nicht leer sein.";
+	public static final String ERROR_FIRSTNAME_EMPTY = Messages.getString("ContactException.0"); //$NON-NLS-1$
 	/**
 	 * This constant is used to report that the last name have to be filled.
 	 */
-	public static final String ERROR_LASTNAME_EMPTY = "Der Nachname darf nicht leer sein.";
+	public static final String ERROR_LASTNAME_EMPTY = Messages.getString("ContactException.1"); //$NON-NLS-1$
 	
-	public static final String ERROR_CONTACT_ALREADY_EXISTS = "Der Kontakt existiert bereits.";
+	public static final String ERROR_CONTACT_ALREADY_EXISTS = Messages.getString("ContactException.2"); //$NON-NLS-1$
 	
-	public static final String ERROR_CONTACT_EXISTS_IN_BOTH_LISTS = "Der Kontakt existiert bereits in beiden Listen.";
+	public static final String ERROR_CONTACT_EXISTS_IN_BOTH_LISTS = Messages.getString("ContactException.3"); //$NON-NLS-1$
 	
-	public static final String ERROR_CONTACT_EXISTS_IN_PRIVATE_LIST = 	"Der Kontakt existiert bereits in der privaten Liste.\n" +
-																			"Er wurde nur noch der globalen Liste hinzugefügt.";
+	public static final String ERROR_CONTACT_EXISTS_IN_PRIVATE_LIST = 	Messages.getString("ContactException.4") + //$NON-NLS-1$
+																			Messages.getString("ContactException.5"); //$NON-NLS-1$
 	
-	public static final String ERROR_CONTACT_EXISTS_IN_GLOBAL_LIST = 	"Der Kontakt existiert bereits in der globalen Liste.\n" +
-																		"Er wurde nur noch der privaten Liste hinzugefügt.";
+	public static final String ERROR_CONTACT_EXISTS_IN_GLOBAL_LIST = 	Messages.getString("ContactException.6") + //$NON-NLS-1$
+																		Messages.getString("ContactException.7"); //$NON-NLS-1$
 	
-	public static final String MSG_ERROR_OCCURED = "Fehler beim Speichern";
+	public static final String MSG_ERROR_OCCURED = Messages.getString("ContactException.8"); //$NON-NLS-1$
 	
 	
 	

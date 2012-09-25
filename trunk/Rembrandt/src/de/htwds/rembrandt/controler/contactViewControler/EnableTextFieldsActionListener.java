@@ -19,14 +19,14 @@ public class EnableTextFieldsActionListener implements ActionListener {
 	protected void setTextFieldsEnabled( ) {
 		if ( !viewContactDetails.isInformationEditable() ) {
 			viewContactDetails.setInformationEditable();
-			viewContactDetails.getBtnUnlock().setText( viewContactDetails.STD_BUTTON_UNLOCK_LOCK );
+			viewContactDetails.getBtnUnlock().setText( ViewContactDetails.STD_BUTTON_UNLOCK_LOCK );
 		}
 	}
 	
 	private void setTextFieldsNotEnabled( ) {
 		if ( viewContactDetails.isInformationEditable() ) {
 			viewContactDetails.setInformationEditable();
-			viewContactDetails.getBtnUnlock().setText( viewContactDetails.STD_BUTTON_UNLOCK_UNLOCK );
+			viewContactDetails.getBtnUnlock().setText( ViewContactDetails.STD_BUTTON_UNLOCK_UNLOCK );
 		}
 	}
 	
@@ -37,11 +37,11 @@ public class EnableTextFieldsActionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
-		if ( viewContactDetails.getBtnUnlock().getText().equals( viewContactDetails.STD_BUTTON_UNLOCK_UNLOCK ) ) {
+		if ( viewContactDetails.getBtnUnlock().getText().equals( ViewContactDetails.STD_BUTTON_UNLOCK_UNLOCK ) ) {
 			
 			setTextFieldsEnabled( );
 			
-		} else if (viewContactDetails.getBtnUnlock().getText().equals( viewContactDetails.STD_BUTTON_UNLOCK_LOCK )) {
+		} else if (viewContactDetails.getBtnUnlock().getText().equals( ViewContactDetails.STD_BUTTON_UNLOCK_LOCK )) {
 			
 			try {
 				

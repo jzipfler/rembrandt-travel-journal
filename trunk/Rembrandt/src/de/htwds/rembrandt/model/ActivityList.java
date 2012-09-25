@@ -1,7 +1,6 @@
 package de.htwds.rembrandt.model;
 
 import java.io.Serializable;
-import de.htwds.rembrandt.model.ActivityModel;
 
 public class ActivityList implements Serializable {
 	
@@ -19,7 +18,7 @@ public class ActivityList implements Serializable {
 	}
 	
 	public void addActivity(ActivityModel activityModel){
-		list[counter++] = activityModel.get_titel() + "_" + activityModel.get_time();
+		list[counter++] = activityModel.get_titel() + Messages.getString("ActivityList.0") + activityModel.get_time(); //$NON-NLS-1$
 	}
 	
 	public void deleteActivity(String filename){
@@ -51,7 +50,7 @@ public class ActivityList implements Serializable {
 	
 	public void print(){
 		for (int i = 0 ; i < getCounter(); i++){
-			System.out.println(i + " : "+ getActivityName(i));
+			System.out.println(i + Messages.getString("ActivityList.1")+ getActivityName(i)); //$NON-NLS-1$
 		}
 	}
 	

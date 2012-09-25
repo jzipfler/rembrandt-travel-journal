@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import de.htwds.rembrandt.exception.TravelToDiscException;
 import de.htwds.rembrandt.model.GeneralInformationModel;
@@ -34,7 +33,7 @@ public class GeneralInformationFromDiskControler {
 		
 		String filename;
         File data;
-        filename = FolderPathController.getGeneralInformationFolder() + FolderPathController.getFileSeperator() + "generalInformation.dat";
+        filename = FolderPathController.getGeneralInformationFolder() + FolderPathController.getFileSeperator() + Messages.getString("GeneralInformationFromDiskControler.0"); //$NON-NLS-1$
         data = new File(filename);
         if( data.exists() ){
         	
@@ -72,7 +71,7 @@ public class GeneralInformationFromDiskControler {
 	public void save(GeneralInformationModel[] data) throws TravelToDiscException{
 		ObjectOutputStream out = null;
 		File file;
-		file = new File(FolderPathController.getGeneralInformationFolder() + FolderPathController.getFileSeperator() + "generalInformation.dat");
+		file = new File(FolderPathController.getGeneralInformationFolder() + FolderPathController.getFileSeperator() + Messages.getString("GeneralInformationFromDiskControler.1")); //$NON-NLS-1$
 		if(file.exists()){
 			file.delete();
 		}

@@ -45,8 +45,9 @@ public class ActivityModel implements Serializable {
 		return story;
 	}
 	
+	@Override
 	public String toString(){
-		return "Titel: " +  titel + "\nZeitpunkt: " + time + "\nOrt: " + location + "\nStory: " +  story + "\n";
+		return Messages.getString("ActivityModel.0") +  titel + Messages.getString("ActivityModel.1") + time + Messages.getString("ActivityModel.2") + location + Messages.getString("ActivityModel.3") +  story + Messages.getString("ActivityModel.4"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 	}
 	
 }

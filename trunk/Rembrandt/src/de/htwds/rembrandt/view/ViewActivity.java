@@ -7,22 +7,19 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.BoxLayout;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
-import de.htwds.rembrandt.controler.contactViewControler.LoadCalendarActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.LoadActivityAbortActionListener;
-import de.htwds.rembrandt.controler.contactViewControler.LoadActivitySaveActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.LoadActivityDeleteActionListener;
 import de.htwds.rembrandt.controler.contactViewControler.LoadActivityEditActionListener;
-
-import java.awt.*;
+import de.htwds.rembrandt.controler.contactViewControler.LoadActivitySaveActionListener;
 
 
 
@@ -82,12 +79,12 @@ public class ViewActivity extends JPanel {
 		myLayout.setAlignment(FlowLayout.LEADING);
 		
 		
-		label1 = new JLabel("Titel");
-		label1.setFont(new Font("Arial", Font.BOLD, 14));
+		label1 = new JLabel(Messages.getString("ViewActivity.0")); //$NON-NLS-1$
+		label1.setFont(new Font(Messages.getString("ViewActivity.1"), Font.BOLD, 14)); //$NON-NLS-1$
 		
 		description = new JTextField(17);
 		description.setMaximumSize(new Dimension(1000, 25));
-		description.setFont(new Font("Arial", Font.BOLD|Font.PLAIN, 18));
+		description.setFont(new Font(Messages.getString("ViewActivity.2"), Font.BOLD|Font.PLAIN, 18)); //$NON-NLS-1$
 					
 		descriptionPane = new JPanel();
 		descriptionPane.setLayout(myLayout);
@@ -99,12 +96,12 @@ public class ViewActivity extends JPanel {
 		
 		
 		
-		label2 = new JLabel("Zeitpunkt");
-		label2.setFont(new Font("Arial", Font.BOLD, 14));
+		label2 = new JLabel(Messages.getString("ViewActivity.3")); //$NON-NLS-1$
+		label2.setFont(new Font(Messages.getString("ViewActivity.4"), Font.BOLD, 14)); //$NON-NLS-1$
 		
 		time = new JTextField(17);
 		time.setMaximumSize(new Dimension(1000, 25));
-		time.setFont(new Font("Arial", Font.BOLD|Font.PLAIN, 18));
+		time.setFont(new Font(Messages.getString("ViewActivity.5"), Font.BOLD|Font.PLAIN, 18)); //$NON-NLS-1$
 				
 		timePane = new JPanel();
 		timePane.setLayout(myLayout);
@@ -116,12 +113,12 @@ public class ViewActivity extends JPanel {
 		
 		
 		
-		label3 = new JLabel("Ort");	
-		label3.setFont(new Font("Arial", Font.BOLD, 14));
+		label3 = new JLabel(Messages.getString("ViewActivity.6"));	 //$NON-NLS-1$
+		label3.setFont(new Font(Messages.getString("ViewActivity.7"), Font.BOLD, 14)); //$NON-NLS-1$
 		
 		location = new JTextField(17);
 		location.setMaximumSize(new Dimension(1000, 25));
-		location.setFont(new Font("Arial", Font.BOLD|Font.PLAIN, 18));
+		location.setFont(new Font(Messages.getString("ViewActivity.8"), Font.BOLD|Font.PLAIN, 18)); //$NON-NLS-1$
 				
 		locationPane = new JPanel();
 		locationPane.setLayout(myLayout);
@@ -134,22 +131,22 @@ public class ViewActivity extends JPanel {
 		
 		
 		story = new JTextArea();
-		story.setFont(new Font("Arial", Font.BOLD|Font.PLAIN, 18));
+		story.setFont(new Font(Messages.getString("ViewActivity.9"), Font.BOLD|Font.PLAIN, 18)); //$NON-NLS-1$
 		
-		save = new JButton("speichern");
-		save.setFont(new Font("Arial", Font.BOLD, 16));
+		save = new JButton(Messages.getString("ViewActivity.10")); //$NON-NLS-1$
+		save.setFont(new Font(Messages.getString("ViewActivity.11"), Font.BOLD, 16)); //$NON-NLS-1$
 		save.setPreferredSize(new java.awt.Dimension(120, 50));
 	
-		abort = new JButton("zurück");
-		abort.setFont(new Font("Arial", Font.BOLD, 16));
+		abort = new JButton(Messages.getString("ViewActivity.12")); //$NON-NLS-1$
+		abort.setFont(new Font(Messages.getString("ViewActivity.13"), Font.BOLD, 16)); //$NON-NLS-1$
 		abort.setPreferredSize(new java.awt.Dimension(120, 50));
 		
-		delete = new JButton("löschen");
-		delete.setFont(new Font("Arial", Font.BOLD, 16));
+		delete = new JButton(Messages.getString("ViewActivity.14")); //$NON-NLS-1$
+		delete.setFont(new Font(Messages.getString("ViewActivity.15"), Font.BOLD, 16)); //$NON-NLS-1$
 		delete.setPreferredSize(new java.awt.Dimension(120, 50));
 		
-		edit = new JButton("bearbeiten");
-		edit.setFont(new Font("Arial", Font.BOLD, 16));
+		edit = new JButton(Messages.getString("ViewActivity.16")); //$NON-NLS-1$
+		edit.setFont(new Font(Messages.getString("ViewActivity.17"), Font.BOLD, 16)); //$NON-NLS-1$
 		edit.setPreferredSize(new java.awt.Dimension(120, 50));
 		
 	
@@ -164,7 +161,7 @@ public class ViewActivity extends JPanel {
 
 		activityPane = new JPanel();
 		activityPane.setLayout(new BoxLayout(activityPane, BoxLayout.Y_AXIS));
-		activityPane.setFont(new Font("Arial", Font.PLAIN, 14));
+		activityPane.setFont(new Font(Messages.getString("ViewActivity.18"), Font.PLAIN, 14)); //$NON-NLS-1$
 		activityPane.setMaximumSize(new Dimension(1885, 32767));
 		activityPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		activityPane.setPreferredSize(new Dimension(425, 380));

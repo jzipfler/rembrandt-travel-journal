@@ -20,6 +20,7 @@ public class PhotoAlbumDetailsViewSlideShowTimerListener implements ActionListen
 		this.viewPhotoAlbumDetails = viewPhotoAlbumDetails;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent event) {
 		PhotoAlbumModel photoAlbumModel = viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel();
 		LinkedList<Photo> photoAlbum = photoAlbumModel.getPhotoAlbum();

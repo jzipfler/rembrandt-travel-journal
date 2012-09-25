@@ -5,10 +5,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import de.htwds.rembrandt.controler.activityController.ActivityListFile;
 import de.htwds.rembrandt.controler.datastructure.FolderPathController;
 import de.htwds.rembrandt.model.TravelInformationModel;
 import de.htwds.rembrandt.view.ViewMain;
-import de.htwds.rembrandt.controler.activityController.ActivityListFile;
 
 
 /**
@@ -27,24 +27,24 @@ public class SaveTravelInformationToDiskControler {
 	
 	public String dataToString(){
 		StringBuffer value = new StringBuffer();
-		value.append(data.getCountry() + "\n");
-		value.append(data.getCity() + "\n");
-		value.append(data.getDateArrival() + "\n");
-		value.append(data.getDateDeparture() + "\n");
-		value.append(data.getArrivalStart() + "\n");
-		value.append(data.getArrivalDestination() + "\n");
-		value.append(data.getDepartureStart() + "\n");
-		value.append(data.getDepartureDestionation() + "\n");
-		value.append(data.getOption() + "\n");
-		value.append(data.getComment() + "\n");
+		value.append(data.getCountry() + Messages.getString("SaveTravelInformationToDiskControler.0")); //$NON-NLS-1$
+		value.append(data.getCity() + Messages.getString("SaveTravelInformationToDiskControler.1")); //$NON-NLS-1$
+		value.append(data.getDateArrival() + Messages.getString("SaveTravelInformationToDiskControler.2")); //$NON-NLS-1$
+		value.append(data.getDateDeparture() + Messages.getString("SaveTravelInformationToDiskControler.3")); //$NON-NLS-1$
+		value.append(data.getArrivalStart() + Messages.getString("SaveTravelInformationToDiskControler.4")); //$NON-NLS-1$
+		value.append(data.getArrivalDestination() + Messages.getString("SaveTravelInformationToDiskControler.5")); //$NON-NLS-1$
+		value.append(data.getDepartureStart() + Messages.getString("SaveTravelInformationToDiskControler.6")); //$NON-NLS-1$
+		value.append(data.getDepartureDestionation() + Messages.getString("SaveTravelInformationToDiskControler.7")); //$NON-NLS-1$
+		value.append(data.getOption() + Messages.getString("SaveTravelInformationToDiskControler.8")); //$NON-NLS-1$
+		value.append(data.getComment() + Messages.getString("SaveTravelInformationToDiskControler.9")); //$NON-NLS-1$
 		return value.toString();
 	}
 	
 	private void save(){
 		String dateiname;
-		String[] toWrite = dataToString().toString().split("\n");
+		String[] toWrite = dataToString().toString().split(Messages.getString("SaveTravelInformationToDiskControler.10")); //$NON-NLS-1$
         File file;
-        dateiname = FolderPathController.getTravelInformationFolder(data.toString()) + FolderPathController.getFileSeperator() + "travelInformation.dat";
+        dateiname = FolderPathController.getTravelInformationFolder(data.toString()) + FolderPathController.getFileSeperator() + Messages.getString("SaveTravelInformationToDiskControler.11"); //$NON-NLS-1$
         file = new File(dateiname);
         FileWriter fw = null;
         BufferedWriter bw = null;
@@ -52,8 +52,8 @@ public class SaveTravelInformationToDiskControler {
         	fw = new FileWriter(file, false);
             bw = new BufferedWriter(fw);
             for(int i=0; i < toWrite.length; i++){
-            	if(toWrite[i].equals("null")){
-            		bw.write("");
+            	if(toWrite[i].equals(Messages.getString("SaveTravelInformationToDiskControler.12"))){ //$NON-NLS-1$
+            		bw.write(Messages.getString("SaveTravelInformationToDiskControler.13")); //$NON-NLS-1$
             	} else {
             		bw.write(toWrite[i]);
             	}

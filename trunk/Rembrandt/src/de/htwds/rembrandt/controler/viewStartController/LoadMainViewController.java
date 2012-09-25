@@ -1,7 +1,5 @@
 package de.htwds.rembrandt.controler.viewStartController;
 
-import java.io.IOException;
-
 import javax.swing.JOptionPane;
 
 import de.htwds.rembrandt.controler.datastructure.ContactToDiscControler;
@@ -40,7 +38,7 @@ public class LoadMainViewController {
 		} catch (TravelToDiscException discException ) {
 			JOptionPane.showMessageDialog( viewWrapper, 
 					discException.getMessage() 
-					+ "\n" 
+					+ Messages.getString("LoadMainViewController.0")  //$NON-NLS-1$
 					+TravelToDiscException.ERROR_LOAD_GENERAL_INFORMATION, 
 					TravelToDiscException.MSG_ERROR_DURING_SAVE_OR_LOAD, 
 					JOptionPane.ERROR_MESSAGE );

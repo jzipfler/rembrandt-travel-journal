@@ -2,6 +2,7 @@ package de.htwds.rembrandt.controller.photoAlbumViewController;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,6 +25,7 @@ public class PhotoAlbumDetailsViewThumbnailMouseListener implements MouseListene
 		this.viewPhotoAlbumDetails = viewPhotoAlbumDetails;
 	}
 
+	@Override
 	public void mouseClicked(MouseEvent event) {
 		photoAlbumModel = viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel();
 		viewPhotoAlbumDetails.getParentFrame().getJourneyModel().getPhotoAlbumModel().getPhotoAlbum();
@@ -31,8 +33,8 @@ public class PhotoAlbumDetailsViewThumbnailMouseListener implements MouseListene
 	
 		// comment not locked, save?
 		if( viewPhotoAlbumDetails.getEpnPhotoComment().isEditable() ) {
-			Object[] options = { "Ja, speichern", "Nein, Änderungen verwerfen" };
-			int choice = JOptionPane.showOptionDialog( viewPhotoAlbumDetails, "Möchten Sie ihre Änderungen speichern?", "Speichern?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0] );
+			Object[] options = { Messages.getString("PhotoAlbumDetailsViewThumbnailMouseListener.0"), Messages.getString("PhotoAlbumDetailsViewThumbnailMouseListener.1") }; //$NON-NLS-1$ //$NON-NLS-2$
+			int choice = JOptionPane.showOptionDialog( viewPhotoAlbumDetails, Messages.getString("PhotoAlbumDetailsViewThumbnailMouseListener.2"), Messages.getString("PhotoAlbumDetailsViewThumbnailMouseListener.3"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0] ); //$NON-NLS-1$ //$NON-NLS-2$
 			
 			if( choice == JOptionPane.YES_OPTION ) {
 				new PhotoAlbumDetailsViewSaveCommentActionListener( viewPhotoAlbumDetails ).saveComment();
@@ -45,8 +47,12 @@ public class PhotoAlbumDetailsViewThumbnailMouseListener implements MouseListene
 	}
 
 	// not needed
+	@Override
 	public void mouseExited   ( MouseEvent event ) {}
+	@Override
 	public void mouseEntered  ( MouseEvent event ) {}
+	@Override
 	public void mousePressed  ( MouseEvent event ) {}
+	@Override
 	public void mouseReleased ( MouseEvent event ) {}
 }

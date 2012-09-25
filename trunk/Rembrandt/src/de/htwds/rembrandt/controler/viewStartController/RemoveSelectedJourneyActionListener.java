@@ -3,7 +3,6 @@ package de.htwds.rembrandt.controler.viewStartController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
@@ -69,12 +68,12 @@ public class RemoveSelectedJourneyActionListener implements ActionListener {
 			// If there was a failure while deleting the object, check if the folder was renamed and undo it.
 			if ( new File( FolderPathController.getMainFolder() 
 							+ FolderPathController.getFileSeperator() 
-							+ oldGeneralInformationArray[ itemPosition ].getFolderName() + "_old").exists() 
+							+ oldGeneralInformationArray[ itemPosition ].getFolderName() + Messages.getString("RemoveSelectedJourneyActionListener.0")).exists()  //$NON-NLS-1$
 				)
 				
 				new File( FolderPathController.getMainFolder() 
 						+ FolderPathController.getFileSeperator() 
-						+ oldGeneralInformationArray[ itemPosition ].getFolderName() + "_old" ).renameTo( new File( 
+						+ oldGeneralInformationArray[ itemPosition ].getFolderName() + Messages.getString("RemoveSelectedJourneyActionListener.1") ).renameTo( new File(  //$NON-NLS-1$
 								FolderPathController.getMainFolder() 
 								+ FolderPathController.getFileSeperator() 
 								+ oldGeneralInformationArray[ itemPosition ].getFolderName() ) );
@@ -89,7 +88,7 @@ public class RemoveSelectedJourneyActionListener implements ActionListener {
 				+ oldGeneralInformationArray[ itemPosition ].getFolderName() ).renameTo( new File( 
 						FolderPathController.getMainFolder() 
 						+ FolderPathController.getFileSeperator() 
-						+ oldGeneralInformationArray[ itemPosition ].getFolderName() + "_old" ) );
+						+ oldGeneralInformationArray[ itemPosition ].getFolderName() + Messages.getString("RemoveSelectedJourneyActionListener.2") ) ); //$NON-NLS-1$
 		
 		new File( FolderPathController.getGeneralInformationFolder() ).delete();
 //		viewStart.setGeneralInformationArray( newGeneralInformationArray );
@@ -111,7 +110,7 @@ public class RemoveSelectedJourneyActionListener implements ActionListener {
 							+ oldGeneralInformationArray[ itemPosition ].getFolderName() ).renameTo( new File( 
 									FolderPathController.getMainFolder() 
 									+ FolderPathController.getFileSeperator() 
-									+ oldGeneralInformationArray[ itemPosition ].getFolderName() + "_old" ) );
+									+ oldGeneralInformationArray[ itemPosition ].getFolderName() + Messages.getString("RemoveSelectedJourneyActionListener.3") ) ); //$NON-NLS-1$
 				} else
 					newGeneralInformationArray[i] = oldGeneralInformationArray[i];
 			else

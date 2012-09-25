@@ -19,7 +19,8 @@ public class PhotoAlbumDetailsEditCommentStatusToggleListener implements ActionL
         this.viewPhotoAlbum = viewPhotoAlbum;
     }
 
-    public void actionPerformed(ActionEvent action) {
+    @Override
+	public void actionPerformed(ActionEvent action) {
         viewPhotoAlbum.toggleCommmentEditStatus();
         
         if( viewPhotoAlbum.getBtnPhotoCommentEditToggle().getText().equals( ViewPhotoAlbumDetails.COMMENT_BUTTON_EDIT ) ) {

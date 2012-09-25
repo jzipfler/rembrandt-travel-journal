@@ -7,7 +7,6 @@ import de.htwds.rembrandt.controler.activityController.ActivityFile;
 import de.htwds.rembrandt.controler.activityController.ActivityListFile;
 import de.htwds.rembrandt.controler.datastructure.FolderPathController;
 import de.htwds.rembrandt.model.ActivityList;
-import de.htwds.rembrandt.model.ActivityModel;
 import de.htwds.rembrandt.view.ViewActivity;
 import de.htwds.rembrandt.view.ViewCalendar;
 import de.htwds.rembrandt.view.ViewMain;
@@ -29,7 +28,7 @@ public class LoadActivityDeleteActionListener implements ActionListener{
 
 		
 			ActivityFile af = new ActivityFile();
-			String filename = viewActivity.get_Description() + "_" + viewActivity.get_Time();
+			String filename = viewActivity.get_Description() + Messages.getString("LoadActivityDeleteActionListener.0") + viewActivity.get_Time(); //$NON-NLS-1$
 			ActivityListFile alf = new ActivityListFile();
 			ActivityList al = alf.load(FolderPathController.getActivitiesFolder(viewActivity.getParentFrame().getJourneyModel().getGeneralInformationModel().getFolderName()),viewActivity.getParentFrame().getJourneyModel().getGeneralInformationModel().getFolderName());
 			al.deleteActivity(filename);

@@ -17,12 +17,16 @@ public class PhotoAlbumDetailsViewResizeListener implements ComponentListener {
 		this.viewPhotoAlbumDetails = viewPhotoAlbumDetails;
 	}
 	
+	@Override
 	public void componentResized(ComponentEvent event) {
 		viewPhotoAlbumDetails.adjustPhotoArea();
 	}
 	
 	// not needed
+	@Override
 	public void componentHidden ( ComponentEvent event ) {}
+	@Override
 	public void componentMoved  ( ComponentEvent event ) {}
+	@Override
 	public void componentShown  ( ComponentEvent event ) {}	
 }

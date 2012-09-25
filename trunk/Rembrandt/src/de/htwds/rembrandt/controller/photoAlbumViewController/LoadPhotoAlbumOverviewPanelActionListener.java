@@ -18,6 +18,7 @@ public class LoadPhotoAlbumOverviewPanelActionListener implements ActionListener
         this.viewPhotoAlbum = new ViewPhotoAlbumOverview( viewMain );
     }
     
+	@Override
 	public void actionPerformed(ActionEvent event) {
         ViewMain viewMain = viewPhotoAlbum.getParentFrame(); 
 

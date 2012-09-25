@@ -1,16 +1,11 @@
 package de.htwds.rembrandt.controler.contactViewControler;
 
-import java.awt.event.ActionEvent;
-
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import de.htwds.rembrandt.controler.activityController.ActivityListFile;
 import de.htwds.rembrandt.controler.activityController.ActivityFile;
 import de.htwds.rembrandt.controler.datastructure.FolderPathController;
-import de.htwds.rembrandt.model.ActivityList;
 import de.htwds.rembrandt.model.ActivityModel;
-import de.htwds.rembrandt.model.Contact;
 import de.htwds.rembrandt.view.ViewActivity;
 import de.htwds.rembrandt.view.ViewCalendar;
 import de.htwds.rembrandt.view.ViewMain;

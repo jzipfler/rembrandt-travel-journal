@@ -15,6 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -28,8 +30,6 @@ import de.htwds.rembrandt.controler.travelview.SaveTravelInformationControler;
 import de.htwds.rembrandt.controler.travelview.SetCommentEnableActionListener;
 import de.htwds.rembrandt.controler.travelview.SetEditEnableActionListener;
 import de.htwds.rembrandt.model.TravelInformationModel;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.AncestorEvent;
 /**
  * 
  * @author Daniel
@@ -60,10 +60,13 @@ public class ViewTravelinformation extends JPanel {
 	 */
 	public ViewTravelinformation(ViewMain mainView) {
 		addAncestorListener(new AncestorListener() {
+			@Override
 			public void ancestorAdded(AncestorEvent event) {
 			}
+			@Override
 			public void ancestorMoved(AncestorEvent event) {
 			}
+			@Override
 			public void ancestorRemoved(AncestorEvent event) {
 				if(informationEditable){
 					setInformationEditable();
@@ -75,19 +78,20 @@ public class ViewTravelinformation extends JPanel {
 		});
 		this.mainView = mainView;
 		controler = new SaveTravelInformationControler(this, mainView);
-		setFont(new Font("Arial", Font.PLAIN, 11));
+		setFont(new Font(Messages.getString("ViewTravelinformation.0"), Font.PLAIN, 11)); //$NON-NLS-1$
 		setMinimumSize(new Dimension(440, 440));
 		setLayout(new BorderLayout(0, 3));
 		
-		JLabel lblHeadline = new JLabel("Reiseinformationen");
+		JLabel lblHeadline = new JLabel(Messages.getString("ViewTravelinformation.1")); //$NON-NLS-1$
 		lblHeadline.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		lblHeadline.setHorizontalAlignment(SwingConstants.LEFT);
 		lblHeadline.setHorizontalTextPosition(SwingConstants.LEFT);
-		lblHeadline.setFont(new Font("Arial", Font.BOLD, 15));
+		lblHeadline.setFont(new Font(Messages.getString("ViewTravelinformation.2"), Font.BOLD, 15)); //$NON-NLS-1$
 		add(lblHeadline, BorderLayout.NORTH);
 		
-		JTabbedPane tpnSwitch = new JTabbedPane(JTabbedPane.TOP);
+		JTabbedPane tpnSwitch = new JTabbedPane(SwingConstants.TOP);
 		tpnSwitch.addChangeListener(new ChangeListener() {
+			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				if(informationEditable){
 					setInformationEditable();
@@ -97,30 +101,30 @@ public class ViewTravelinformation extends JPanel {
 				}
 			}
 		});
-		tpnSwitch.setFont(new Font("Arial", Font.BOLD, 13));
+		tpnSwitch.setFont(new Font(Messages.getString("ViewTravelinformation.3"), Font.BOLD, 13)); //$NON-NLS-1$
 		add(tpnSwitch, BorderLayout.CENTER);
 		
 		JPanel pnlInformation = new JPanel();
-		pnlInformation.setFont(new Font("Arial", Font.PLAIN, 13));
-		tpnSwitch.addTab("Informationen", null, pnlInformation, null);
+		pnlInformation.setFont(new Font(Messages.getString("ViewTravelinformation.4"), Font.PLAIN, 13)); //$NON-NLS-1$
+		tpnSwitch.addTab(Messages.getString("ViewTravelinformation.5"), null, pnlInformation, null); //$NON-NLS-1$
 		pnlInformation.setLayout(new BorderLayout(0, 0));
 		
 		pnlInformationContent = new JPanel();
 		pnlInformation.add(pnlInformationContent, BorderLayout.NORTH);
-		pnlInformationContent.setFont(new Font("Arial", Font.PLAIN, 13));
+		pnlInformationContent.setFont(new Font(Messages.getString("ViewTravelinformation.6"), Font.PLAIN, 13)); //$NON-NLS-1$
 		pnlInformationContent.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
+				ColumnSpec.decode(Messages.getString("ViewTravelinformation.7")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("15px"),
+				ColumnSpec.decode(Messages.getString("ViewTravelinformation.8")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(64dlu;default):grow"),
+				ColumnSpec.decode(Messages.getString("ViewTravelinformation.9")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("5px"),},
+				ColumnSpec.decode(Messages.getString("ViewTravelinformation.10")),}, //$NON-NLS-1$
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
@@ -133,7 +137,7 @@ public class ViewTravelinformation extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("23px"),
+				RowSpec.decode(Messages.getString("ViewTravelinformation.11")), //$NON-NLS-1$
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -151,148 +155,148 @@ public class ViewTravelinformation extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblLocation = new JLabel("Reiseland und Ort:\r\n");
-		lblLocation.setFont(new Font("Arial", Font.BOLD, 13));
-		pnlInformationContent.add(lblLocation, "2, 2");
+		JLabel lblLocation = new JLabel(Messages.getString("ViewTravelinformation.12")); //$NON-NLS-1$
+		lblLocation.setFont(new Font(Messages.getString("ViewTravelinformation.13"), Font.BOLD, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(lblLocation, Messages.getString("ViewTravelinformation.14")); //$NON-NLS-1$
 		
-		JLabel lblCountry = new JLabel("Land:");
-		lblCountry.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(lblCountry, "2, 4, right, default");
+		JLabel lblCountry = new JLabel(Messages.getString("ViewTravelinformation.15")); //$NON-NLS-1$
+		lblCountry.setFont(new Font(Messages.getString("ViewTravelinformation.16"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(lblCountry, Messages.getString("ViewTravelinformation.17")); //$NON-NLS-1$
 		
 		txtCountryInput = new JTravelInformationTextfield();
 		txtCountryInput.setEditable(false);
-		txtCountryInput.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(txtCountryInput, "4, 4, fill, default");
+		txtCountryInput.setFont(new Font(Messages.getString("ViewTravelinformation.18"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(txtCountryInput, Messages.getString("ViewTravelinformation.19")); //$NON-NLS-1$
 		txtCountryInput.setColumns(10);
 		
-		JLabel lblCity = new JLabel("Ort:");
-		lblCity.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(lblCity, "8, 4, right, default");
+		JLabel lblCity = new JLabel(Messages.getString("ViewTravelinformation.20")); //$NON-NLS-1$
+		lblCity.setFont(new Font(Messages.getString("ViewTravelinformation.21"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(lblCity, Messages.getString("ViewTravelinformation.22")); //$NON-NLS-1$
 		
 		txtCityInput = new JTextField();
 		txtCityInput.setEditable(false);
-		txtCityInput.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(txtCityInput, "10, 4, fill, default");
+		txtCityInput.setFont(new Font(Messages.getString("ViewTravelinformation.23"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(txtCityInput, Messages.getString("ViewTravelinformation.24")); //$NON-NLS-1$
 		txtCityInput.setColumns(10);
 		
-		JLabel lblDateAndTravelInformation = new JLabel("Datum und Reiseart:");
-		lblDateAndTravelInformation.setFont(new Font("Arial", Font.BOLD, 13));
-		pnlInformationContent.add(lblDateAndTravelInformation, "2, 8");
+		JLabel lblDateAndTravelInformation = new JLabel(Messages.getString("ViewTravelinformation.25")); //$NON-NLS-1$
+		lblDateAndTravelInformation.setFont(new Font(Messages.getString("ViewTravelinformation.26"), Font.BOLD, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(lblDateAndTravelInformation, Messages.getString("ViewTravelinformation.27")); //$NON-NLS-1$
 		
-		JLabel lblDateArrival = new JLabel("Anreise:");
-		lblDateArrival.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(lblDateArrival, "2, 10, right, default");
+		JLabel lblDateArrival = new JLabel(Messages.getString("ViewTravelinformation.28")); //$NON-NLS-1$
+		lblDateArrival.setFont(new Font(Messages.getString("ViewTravelinformation.29"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(lblDateArrival, Messages.getString("ViewTravelinformation.30")); //$NON-NLS-1$
 		
 		txtArrivalInput = new JTravelInformationTextfield();
 		txtArrivalInput.setEditable(false);
-		txtArrivalInput.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(txtArrivalInput, "4, 10, fill, default");
+		txtArrivalInput.setFont(new Font(Messages.getString("ViewTravelinformation.31"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(txtArrivalInput, Messages.getString("ViewTravelinformation.32")); //$NON-NLS-1$
 		txtArrivalInput.setColumns(10);
 		
-		JLabel lblDeparture = new JLabel("Abreise:");
-		lblDeparture.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(lblDeparture, "8, 10, right, default");
+		JLabel lblDeparture = new JLabel(Messages.getString("ViewTravelinformation.33")); //$NON-NLS-1$
+		lblDeparture.setFont(new Font(Messages.getString("ViewTravelinformation.34"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(lblDeparture, Messages.getString("ViewTravelinformation.35")); //$NON-NLS-1$
 		
 		txtDepartureInput = new JTextField();
 		txtDepartureInput.setEditable(false);
-		txtDepartureInput.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(txtDepartureInput, "10, 10, fill, default");
+		txtDepartureInput.setFont(new Font(Messages.getString("ViewTravelinformation.36"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(txtDepartureInput, Messages.getString("ViewTravelinformation.37")); //$NON-NLS-1$
 		txtDepartureInput.setColumns(10);
 		
 		JPanel pnlComboBox = new JPanel();
-		pnlInformationContent.add(pnlComboBox, "4, 12, fill, fill");
+		pnlInformationContent.add(pnlComboBox, Messages.getString("ViewTravelinformation.38")); //$NON-NLS-1$
 		pnlComboBox.setLayout(new BorderLayout(0, 0));
 		
 		cboOptions.setEnabled(false);
-		cboOptions.setFont(new Font("Arial", Font.PLAIN, 13));
-		cboOptions.setModel(new DefaultComboBoxModel(new String[] {"Auto", "Bus", "Fahrrad", "Flugzeug", "Motorrad", "Schiff", "Zug"}));
+		cboOptions.setFont(new Font(Messages.getString("ViewTravelinformation.39"), Font.PLAIN, 13)); //$NON-NLS-1$
+		cboOptions.setModel(new DefaultComboBoxModel(new String[] {Messages.getString("ViewTravelinformation.40"), Messages.getString("ViewTravelinformation.41"), Messages.getString("ViewTravelinformation.42"), Messages.getString("ViewTravelinformation.43"), Messages.getString("ViewTravelinformation.44"), Messages.getString("ViewTravelinformation.45"), Messages.getString("ViewTravelinformation.46")})); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		pnlComboBox.add(cboOptions);
 		
-		JLabel lblDirections = new JLabel("Reisewege:");
-		lblDirections.setFont(new Font("Arial", Font.BOLD, 13));
-		pnlInformationContent.add(lblDirections, "2, 16");
+		JLabel lblDirections = new JLabel(Messages.getString("ViewTravelinformation.47")); //$NON-NLS-1$
+		lblDirections.setFont(new Font(Messages.getString("ViewTravelinformation.48"), Font.BOLD, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(lblDirections, Messages.getString("ViewTravelinformation.49")); //$NON-NLS-1$
 		
-		JLabel lblArrivalDirections = new JLabel("Anreise");
-		lblArrivalDirections.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(lblArrivalDirections, "2, 18");
+		JLabel lblArrivalDirections = new JLabel(Messages.getString("ViewTravelinformation.50")); //$NON-NLS-1$
+		lblArrivalDirections.setFont(new Font(Messages.getString("ViewTravelinformation.51"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(lblArrivalDirections, Messages.getString("ViewTravelinformation.52")); //$NON-NLS-1$
 		
-		JLabel lblArrivalStart = new JLabel("Start :");
-		lblArrivalStart.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(lblArrivalStart, "2, 20, right, default");
+		JLabel lblArrivalStart = new JLabel(Messages.getString("ViewTravelinformation.53")); //$NON-NLS-1$
+		lblArrivalStart.setFont(new Font(Messages.getString("ViewTravelinformation.54"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(lblArrivalStart, Messages.getString("ViewTravelinformation.55")); //$NON-NLS-1$
 		
 		txtArrivalStartInput = new JTextField();
 		txtArrivalStartInput.setEditable(false);
-		txtArrivalStartInput.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(txtArrivalStartInput, "4, 20, fill, default");
+		txtArrivalStartInput.setFont(new Font(Messages.getString("ViewTravelinformation.56"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(txtArrivalStartInput, Messages.getString("ViewTravelinformation.57")); //$NON-NLS-1$
 		txtArrivalStartInput.setColumns(10);
 		
-		JLabel lblArrivalDestination = new JLabel("Ziel :");
-		lblArrivalDestination.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(lblArrivalDestination, "8, 20, right, default");
+		JLabel lblArrivalDestination = new JLabel(Messages.getString("ViewTravelinformation.58")); //$NON-NLS-1$
+		lblArrivalDestination.setFont(new Font(Messages.getString("ViewTravelinformation.59"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(lblArrivalDestination, Messages.getString("ViewTravelinformation.60")); //$NON-NLS-1$
 		
 		txtArrivalDestinationInput = new JTextField();
 		txtArrivalDestinationInput.setEditable(false);
-		txtArrivalDestinationInput.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(txtArrivalDestinationInput, "10, 20, fill, default");
+		txtArrivalDestinationInput.setFont(new Font(Messages.getString("ViewTravelinformation.61"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(txtArrivalDestinationInput, Messages.getString("ViewTravelinformation.62")); //$NON-NLS-1$
 		txtArrivalDestinationInput.setColumns(10);
 		
-		JLabel lblDepartureDirections = new JLabel("Abreise:");
-		lblDepartureDirections.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(lblDepartureDirections, "2, 22");
+		JLabel lblDepartureDirections = new JLabel(Messages.getString("ViewTravelinformation.63")); //$NON-NLS-1$
+		lblDepartureDirections.setFont(new Font(Messages.getString("ViewTravelinformation.64"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(lblDepartureDirections, Messages.getString("ViewTravelinformation.65")); //$NON-NLS-1$
 		
-		JLabel lblDepartureStart = new JLabel("Start :");
-		lblDepartureStart.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(lblDepartureStart, "2, 24, right, default");
+		JLabel lblDepartureStart = new JLabel(Messages.getString("ViewTravelinformation.66")); //$NON-NLS-1$
+		lblDepartureStart.setFont(new Font(Messages.getString("ViewTravelinformation.67"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(lblDepartureStart, Messages.getString("ViewTravelinformation.68")); //$NON-NLS-1$
 		
 		txtDepartureStartInput = new JTextField();
 		txtDepartureStartInput.setEditable(false);
-		txtDepartureStartInput.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(txtDepartureStartInput, "4, 24, fill, default");
+		txtDepartureStartInput.setFont(new Font(Messages.getString("ViewTravelinformation.69"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(txtDepartureStartInput, Messages.getString("ViewTravelinformation.70")); //$NON-NLS-1$
 		txtDepartureStartInput.setColumns(10);
 		
-		JLabel lblDepartureDestination = new JLabel("Ziel :");
-		lblDepartureDestination.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(lblDepartureDestination, "8, 24, right, default");
+		JLabel lblDepartureDestination = new JLabel(Messages.getString("ViewTravelinformation.71")); //$NON-NLS-1$
+		lblDepartureDestination.setFont(new Font(Messages.getString("ViewTravelinformation.72"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(lblDepartureDestination, Messages.getString("ViewTravelinformation.73")); //$NON-NLS-1$
 		
 		txtDepartureDestinationInput = new JTextField();
 		txtDepartureDestinationInput.setEditable(false);
-		txtDepartureDestinationInput.setFont(new Font("Arial", Font.PLAIN, 13));
-		pnlInformationContent.add(txtDepartureDestinationInput, "10, 24, fill, default");
+		txtDepartureDestinationInput.setFont(new Font(Messages.getString("ViewTravelinformation.74"), Font.PLAIN, 13)); //$NON-NLS-1$
+		pnlInformationContent.add(txtDepartureDestinationInput, Messages.getString("ViewTravelinformation.75")); //$NON-NLS-1$
 		txtDepartureDestinationInput.setColumns(10);
 		
 		JPanel pnlEditbuttonContainer = new JPanel();
 		pnlInformation.add(pnlEditbuttonContainer, BorderLayout.SOUTH);
 		
-		btnEdit = new JButton("Bearbeiten");
-		btnEdit.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnEdit = new JButton(Messages.getString("ViewTravelinformation.76")); //$NON-NLS-1$
+		btnEdit.setFont(new Font(Messages.getString("ViewTravelinformation.77"), Font.PLAIN, 13)); //$NON-NLS-1$
 		btnEdit.addActionListener(new SetEditEnableActionListener(this));
 		pnlEditbuttonContainer.add(btnEdit);
 		
 		JPanel pnlComment = new JPanel();
-		tpnSwitch.addTab("Kommentar", null, pnlComment, null);
+		tpnSwitch.addTab(Messages.getString("ViewTravelinformation.78"), null, pnlComment, null); //$NON-NLS-1$
 		pnlComment.setLayout(new BorderLayout(0, 0));
 		
 		JPanel pnlContentContainer = new JPanel();
-		pnlContentContainer.setFont(new Font("Arial", Font.PLAIN, 11));
+		pnlContentContainer.setFont(new Font(Messages.getString("ViewTravelinformation.79"), Font.PLAIN, 11)); //$NON-NLS-1$
 		pnlComment.add(pnlContentContainer, BorderLayout.CENTER);
 		pnlContentContainer.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblTextfieldLabel = new JLabel("Kommentar zur Reise und Beschreibung:");
+		JLabel lblTextfieldLabel = new JLabel(Messages.getString("ViewTravelinformation.80")); //$NON-NLS-1$
 		pnlContentContainer.add(lblTextfieldLabel, BorderLayout.NORTH);
-		lblTextfieldLabel.setFont(new Font("Arial", Font.BOLD, 13));
+		lblTextfieldLabel.setFont(new Font(Messages.getString("ViewTravelinformation.81"), Font.BOLD, 13)); //$NON-NLS-1$
 		
 		JScrollPane scrollPane = new JScrollPane();
 		pnlContentContainer.add(scrollPane, BorderLayout.CENTER);
 		txtpnDescription.setEditable(false);
 		
 		scrollPane.setViewportView(txtpnDescription);
-		txtpnDescription.setFont(new Font("Arial", Font.PLAIN, 13));
+		txtpnDescription.setFont(new Font(Messages.getString("ViewTravelinformation.82"), Font.PLAIN, 13)); //$NON-NLS-1$
 		
 		JPanel pnlButtonContainer = new JPanel();
 		pnlContentContainer.add(pnlButtonContainer, BorderLayout.SOUTH);
 		
-		btnEditDescription = new JButton("Bearbeiten");
-		btnEditDescription.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnEditDescription = new JButton(Messages.getString("ViewTravelinformation.83")); //$NON-NLS-1$
+		btnEditDescription.setFont(new Font(Messages.getString("ViewTravelinformation.84"), Font.PLAIN, 13)); //$NON-NLS-1$
 		btnEditDescription.addActionListener(new SetCommentEnableActionListener(this));
 		pnlButtonContainer.add(btnEditDescription);
 
@@ -313,9 +317,9 @@ public class ViewTravelinformation extends JPanel {
 		txtDepartureStartInput.setEditable(informationEditable);
 		cboOptions.setEnabled(informationEditable);
 		if(informationEditable){
-			btnEdit.setText("Speichern");
+			btnEdit.setText(Messages.getString("ViewTravelinformation.85")); //$NON-NLS-1$
 		} else {
-			btnEdit.setText("Bearbeiten");
+			btnEdit.setText(Messages.getString("ViewTravelinformation.86")); //$NON-NLS-1$
 			controler.save();
 		}
 	}
@@ -327,9 +331,9 @@ public class ViewTravelinformation extends JPanel {
 		commentEditable = (!commentEditable);
 		txtpnDescription.setEditable(commentEditable);
 		if(commentEditable){
-			btnEditDescription.setText("Speichern");
+			btnEditDescription.setText(Messages.getString("ViewTravelinformation.87")); //$NON-NLS-1$
 		} else {
-			btnEditDescription.setText("Bearbeiten");
+			btnEditDescription.setText(Messages.getString("ViewTravelinformation.88")); //$NON-NLS-1$
 			controler.save();
 		}
 	}

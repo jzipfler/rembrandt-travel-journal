@@ -5,11 +5,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import de.htwds.rembrandt.controler.datastructure.FolderPathController;
 import de.htwds.rembrandt.model.CheckElement;
 import de.htwds.rembrandt.model.CheckList;
-import de.htwds.rembrandt.model.CheckListInformationModel;
 import de.htwds.rembrandt.model.JourneyModel;
-import de.htwds.rembrandt.controler.datastructure.FolderPathController;
 
 public class ViewChecklistSaveToDisc {
 
@@ -23,7 +22,7 @@ public class ViewChecklistSaveToDisc {
 	{
 		this.bag = model.getCheckListInformationModel().getBagList();
 		this.check = model.getCheckListInformationModel().getCheckList();
-		journeyname = model.getTravelInformation().getCountry() + "_" + model.getTravelInformation().getDateArrival();
+		journeyname = model.getTravelInformation().getCountry() + Messages.getString("ViewChecklistSaveToDisc.0") + model.getTravelInformation().getDateArrival(); //$NON-NLS-1$
 	}
 	
 	public void save()
@@ -49,14 +48,14 @@ public class ViewChecklistSaveToDisc {
 	}
 	
 	private void clearCheckFile() {
-		String datei = FolderPathController.getCecklistsFolder(journeyname) + FolderPathController.getFileSeperator() + "ChecklistCheck.dat";
+		String datei = FolderPathController.getCecklistsFolder(journeyname) + FolderPathController.getFileSeperator() + Messages.getString("ViewChecklistSaveToDisc.1"); //$NON-NLS-1$
 		File file = new File(datei);
 		FileWriter fw = null;
         BufferedWriter bw = null;
         try {
         	fw = new FileWriter(file, false);
             bw = new BufferedWriter(fw);
-            bw.write("");
+            bw.write(Messages.getString("ViewChecklistSaveToDisc.2")); //$NON-NLS-1$
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -71,14 +70,14 @@ public class ViewChecklistSaveToDisc {
 	}
 
 	private void clearBagFile() {
-		String datei = FolderPathController.getCecklistsFolder(journeyname) + FolderPathController.getFileSeperator() + "ChecklistBag.dat";
+		String datei = FolderPathController.getCecklistsFolder(journeyname) + FolderPathController.getFileSeperator() + Messages.getString("ViewChecklistSaveToDisc.3"); //$NON-NLS-1$
 		File file = new File(datei);
 		FileWriter fw = null;
         BufferedWriter bw = null;
         try {
         	fw = new FileWriter(file, false);
             bw = new BufferedWriter(fw);
-            bw.write("");
+            bw.write(Messages.getString("ViewChecklistSaveToDisc.4")); //$NON-NLS-1$
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -94,7 +93,7 @@ public class ViewChecklistSaveToDisc {
 
 	private void saveBag()
 	{
-		String datei = FolderPathController.getCecklistsFolder(journeyname) + FolderPathController.getFileSeperator() + "ChecklistBag.dat";
+		String datei = FolderPathController.getCecklistsFolder(journeyname) + FolderPathController.getFileSeperator() + Messages.getString("ViewChecklistSaveToDisc.5"); //$NON-NLS-1$
 		File file = new File(datei);
 		FileWriter fw = null;
         BufferedWriter bw = null;
@@ -103,7 +102,7 @@ public class ViewChecklistSaveToDisc {
             bw = new BufferedWriter(fw);
             for(String zeile : bagArray)
             {
-            	bw.write(zeile + "\n");
+            	bw.write(zeile + Messages.getString("ViewChecklistSaveToDisc.6")); //$NON-NLS-1$
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -121,7 +120,7 @@ public class ViewChecklistSaveToDisc {
 	
 	private void saveCheck()
 	{
-		String datei = FolderPathController.getCecklistsFolder(journeyname) + FolderPathController.getFileSeperator() + "ChecklistCheck.dat";
+		String datei = FolderPathController.getCecklistsFolder(journeyname) + FolderPathController.getFileSeperator() + Messages.getString("ViewChecklistSaveToDisc.7"); //$NON-NLS-1$
 		File file = new File(datei);
 		FileWriter fw = null;
         BufferedWriter bw = null;
@@ -130,7 +129,7 @@ public class ViewChecklistSaveToDisc {
             bw = new BufferedWriter(fw);
             for(String zeile : checkArray)
             {
-            	bw.write(zeile + "\n");
+            	bw.write(zeile + Messages.getString("ViewChecklistSaveToDisc.8")); //$NON-NLS-1$
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -151,12 +150,12 @@ public class ViewChecklistSaveToDisc {
 		int i = 0;
 		bagArray = new String[bag.getElementNumber()];
 		actele = bag.getRoot();
-		bagArray[i] = actele.getDescription() + ";" + actele.getAmount() + ";" + actele.getChecked();
+		bagArray[i] = actele.getDescription() + Messages.getString("ViewChecklistSaveToDisc.9") + actele.getAmount() + Messages.getString("ViewChecklistSaveToDisc.10") + actele.getChecked(); //$NON-NLS-1$ //$NON-NLS-2$
 		while(actele.getNext() != null)
 		{
 			i++;
 			actele = actele.getNext();
-			bagArray[i] = actele.getDescription() + ";" + actele.getAmount() + ";" + actele.getChecked();
+			bagArray[i] = actele.getDescription() + Messages.getString("ViewChecklistSaveToDisc.11") + actele.getAmount() + Messages.getString("ViewChecklistSaveToDisc.12") + actele.getChecked(); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 	
@@ -166,12 +165,12 @@ public class ViewChecklistSaveToDisc {
 		int i = 0;
 		checkArray = new String[check.getElementNumber()];
 		actele = check.getRoot();
-		checkArray[i] = actele.getDescription() + ";" + actele.getAmount() + ";" + actele.getChecked();
+		checkArray[i] = actele.getDescription() + Messages.getString("ViewChecklistSaveToDisc.13") + actele.getAmount() + Messages.getString("ViewChecklistSaveToDisc.14") + actele.getChecked(); //$NON-NLS-1$ //$NON-NLS-2$
 		while(actele.getNext() != null)
 		{
 			i++;
 			actele = actele.getNext();
-			checkArray[i] = actele.getDescription() + ";" + actele.getAmount() + ";" + actele.getChecked();
+			checkArray[i] = actele.getDescription() + Messages.getString("ViewChecklistSaveToDisc.15") + actele.getAmount() + Messages.getString("ViewChecklistSaveToDisc.16") + actele.getChecked(); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 }

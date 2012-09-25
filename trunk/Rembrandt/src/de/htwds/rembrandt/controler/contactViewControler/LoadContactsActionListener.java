@@ -19,7 +19,7 @@ public class LoadContactsActionListener implements ActionListener {
 	
 	private int decideChangeOrNot(){
 		ViewContactDetails viewContactDetails = viewContacts.getViewContactDetails();
-		if ( viewContactDetails.getBtnUnlock().getText() == viewContactDetails.STD_BUTTON_UNLOCK_LOCK )
+		if ( viewContactDetails.getBtnUnlock().getText() == ViewContactDetails.STD_BUTTON_UNLOCK_LOCK )
 			return -1;
 		return 0;
 	}

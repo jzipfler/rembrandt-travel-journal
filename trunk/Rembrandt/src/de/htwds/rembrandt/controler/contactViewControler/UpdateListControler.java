@@ -30,13 +30,13 @@ public class UpdateListControler {
 	private void initializeArray() {
 		
 		try {
-			if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals( viewContacts.STD_CMB_CATEGORY_PRIVATE ) )
+			if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals( ViewContacts.STD_CMB_CATEGORY_PRIVATE ) )
 				contactListElementArray 
 					= new Object[ viewContacts.getParentFrame().getJourneyModel().getContactListModel().getPrivateContactList().size() ];
-			else if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals( viewContacts.STD_CMB_CATEGORY_GLOBAL ) )
+			else if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals( ViewContacts.STD_CMB_CATEGORY_GLOBAL ) )
 				contactListElementArray 
 				= new Object[ viewContacts.getParentFrame().getJourneyModel().getContactListModel().getGlobalContactList().size() ];
-			else if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals( viewContacts.STD_CMB_CATEGORY_ALL ) ) {
+			else if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals( ViewContacts.STD_CMB_CATEGORY_ALL ) ) {
 				int sizeOfBothLists = 0;
 				if ( viewContacts.getParentFrame().getJourneyModel().getContactListModel().getPrivateContactList() != null ) 
 					sizeOfBothLists
@@ -60,13 +60,13 @@ public class UpdateListControler {
 	private void convertListToArray() {
 		
 		
-		if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals( viewContacts.STD_CMB_CATEGORY_PRIVATE ) )
+		if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals( ViewContacts.STD_CMB_CATEGORY_PRIVATE ) )
 			
 			contactListElementArray = viewContacts.getParentFrame().getJourneyModel().getContactListModel().getPrivateContactList().toArray();
-		else if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals( viewContacts.STD_CMB_CATEGORY_GLOBAL ) )
+		else if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals( ViewContacts.STD_CMB_CATEGORY_GLOBAL ) )
 			
 			contactListElementArray = viewContacts.getParentFrame().getJourneyModel().getContactListModel().getGlobalContactList().toArray();
-		else if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals( viewContacts.STD_CMB_CATEGORY_ALL ) ) {
+		else if ( viewContacts.getCmbCategory().getSelectedItem().toString().equals( ViewContacts.STD_CMB_CATEGORY_ALL ) ) {
 			
 			ArrayList<Contact> mergeList;
 			if ( 	viewContacts.getParentFrame().getJourneyModel().getContactListModel().getPrivateContactList() != null &&

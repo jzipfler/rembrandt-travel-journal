@@ -1,7 +1,5 @@
 package de.htwds.rembrandt.controler.wizzardControler;
 
-import java.io.IOException;
-
 import javax.swing.JOptionPane;
 
 import de.htwds.rembrandt.controler.datastructure.CheckExistingDataStructureControler;
@@ -20,8 +18,8 @@ import de.htwds.rembrandt.view.ViewWizzard;
  */
 public class readInputData {
 
-	private final String ERROR_JOURNEY_ALREADY_EXISTS 	= "Dies gewünschte Reise existiert bereits.";
-	private final String MSG_JOUNEY_ALREADY_EXISTS 	= "Fehler beim erstellen der Reise";
+	private final String ERROR_JOURNEY_ALREADY_EXISTS 	= Messages.getString("readInputData.0"); //$NON-NLS-1$
+	private final String MSG_JOUNEY_ALREADY_EXISTS 	= Messages.getString("readInputData.1"); //$NON-NLS-1$
 	
 	private TravelInformationModel data;
 	private GeneralInformationModel generalData;

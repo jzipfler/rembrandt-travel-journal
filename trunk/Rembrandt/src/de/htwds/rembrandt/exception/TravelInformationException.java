@@ -7,7 +7,7 @@ package de.htwds.rembrandt.exception;
  */
 public class TravelInformationException extends RuntimeException {
 	
-	public static final String ERROR_FILE_NOT_FOUND = "Die entsprechende generalInformation.dat wurde nicht gefunden";
+	public static final String ERROR_FILE_NOT_FOUND = Messages.getString("TravelInformationException.0"); //$NON-NLS-1$
 	
 	public TravelInformationException(){
 		super();

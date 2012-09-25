@@ -55,7 +55,8 @@ public class Photo implements Serializable {
     
     // FUNCTIONS
 
-    public boolean equals(Object other) {
+    @Override
+	public boolean equals(Object other) {
     	
     	if( other == this ) return true;
 

@@ -17,6 +17,7 @@ public class PhotoAlbumDetailsViewToggleSlideShowListener implements ActionListe
 		this.viewPhotoAlbumDetails = viewPhotoAlbumDetails;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent event) {
 		viewPhotoAlbumDetails.toggleSlideShow();
 	}

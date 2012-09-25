@@ -1,15 +1,13 @@
 package de.htwds.rembrandt.view;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
 import java.awt.Font;
-import javax.swing.JTextField;
-import java.awt.Insets;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class ViewConfig extends JPanel {
@@ -20,17 +18,17 @@ public class ViewConfig extends JPanel {
 	 */
 	public ViewConfig() {
 		
-		JLabel lblSavePath = new JLabel("Speicherort:");
-		lblSavePath.setFont(new Font("Tahoma", Font.BOLD, 14));
+		JLabel lblSavePath = new JLabel(Messages.getString("ViewConfig.0")); //$NON-NLS-1$
+		lblSavePath.setFont(new Font(Messages.getString("ViewConfig.1"), Font.BOLD, 14)); //$NON-NLS-1$
 		
 		txtSavePath = new JTextField();
 		txtSavePath.setColumns(10);
 		
-		JButton btnSave = new JButton("Übernehmen");
+		JButton btnSave = new JButton(Messages.getString("ViewConfig.2")); //$NON-NLS-1$
 		
-		JButton btnOk = new JButton("OK");
+		JButton btnOk = new JButton(Messages.getString("ViewConfig.3")); //$NON-NLS-1$
 		
-		JButton btnCancel = new JButton("Abbrechen");
+		JButton btnCancel = new JButton(Messages.getString("ViewConfig.4")); //$NON-NLS-1$
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

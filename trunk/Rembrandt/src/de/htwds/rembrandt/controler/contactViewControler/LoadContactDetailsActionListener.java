@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import de.htwds.rembrandt.exception.ContactException;
 import de.htwds.rembrandt.model.Contact;
 import de.htwds.rembrandt.view.ViewContactDetails;
 import de.htwds.rembrandt.view.ViewMain;

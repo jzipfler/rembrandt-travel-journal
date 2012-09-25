@@ -2,8 +2,8 @@ package de.htwds.rembrandt.exception;
 
 public class WizzardInputException extends RuntimeException{
 	
-	public static final String ERROR_FIELD = " Feld darf nicht leer sein. Bitte geben sie Daten ein.";
-	public static final String MSG_ERROR_OCCURED = "Fehler bei der Eingabe";
+	public static final String ERROR_FIELD = Messages.getString("WizzardInputException.0"); //$NON-NLS-1$
+	public static final String MSG_ERROR_OCCURED = Messages.getString("WizzardInputException.1"); //$NON-NLS-1$
 	
 	public WizzardInputException(){
 		super();

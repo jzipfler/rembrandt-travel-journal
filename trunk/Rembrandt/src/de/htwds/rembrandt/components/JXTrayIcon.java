@@ -23,16 +23,17 @@ package de.htwds.rembrandt.components;
 
 //package org.widgetfx.ui;
 
-import javax.swing.*;
-import javax.swing.event.PopupMenuListener;
-import javax.swing.event.PopupMenuEvent;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Image;
+import java.awt.TrayIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Ellipse2D;
-import java.awt.image.BufferedImage;
+
+import javax.swing.JDialog;
+import javax.swing.JPopupMenu;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 /**
  * Based on a blog post from Alexander Potochkin at the following url:
@@ -46,7 +47,7 @@ public class JXTrayIcon extends TrayIcon {
     private JPopupMenu menu;
     private static JDialog dialog;
     static {
-        dialog = new JDialog((Frame) null, "TrayDialog");
+        dialog = new JDialog((Frame) null, Messages.getString("JXTrayIcon.0")); //$NON-NLS-1$
         dialog.setUndecorated(true);
         dialog.setAlwaysOnTop(true);
     }
