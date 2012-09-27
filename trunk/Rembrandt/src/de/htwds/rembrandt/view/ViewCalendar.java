@@ -136,6 +136,7 @@ public class ViewCalendar extends JPanel{
 		} else {
 			list  = new JList();
 		}
+
 		list.setFont(new Font(Messages.getString("ViewCalendar.4"), Font.PLAIN, 13)); //$NON-NLS-1$
 		list.setFont(new Font(Messages.getString("ViewCalendar.5"), Font.BOLD|Font.BOLD, 14)); //$NON-NLS-1$
 //		Set preferedSize to NULL for compitibility with scrollPane

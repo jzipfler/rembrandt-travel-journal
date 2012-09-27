@@ -155,6 +155,10 @@ public class ViewWrapperWindow extends JFrame {
 
 	}
 	
+	private ViewWrapperWindow getViewWrapperWindow(){
+		return this;
+	}
+	
 	/**
 	 * 
 	 * @return true if mainView. false if startView.
@@ -186,6 +190,14 @@ public class ViewWrapperWindow extends JFrame {
        // Set size to make the popup menu a little bigger.
        aboutItem.setMinimumSize(new Dimension(150, 25));
        aboutItem.setPreferredSize(new Dimension(150, 25));
+       aboutItem.addActionListener( new ActionListener() {
+		
+    	   @Override
+    	   public void actionPerformed(ActionEvent e) {
+			
+    		   new ViewInfo( getViewWrapperWindow() ).setVisible(true);
+    	   }
+       } );
        
        JMenuItem exitItem = new JMenuItem(Messages.getString("ViewWrapperWindow.14")); //$NON-NLS-1$
        exitItem.setFont(new Font(Messages.getString("ViewWrapperWindow.15"), Font.BOLD, 17)); //$NON-NLS-1$
@@ -194,7 +206,7 @@ public class ViewWrapperWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+
 				System.exit(0);
 			}
 		});
