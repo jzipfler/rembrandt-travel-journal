@@ -1,0 +1,18 @@
+#labels components, help
+#useful informations about some components
+
+
+= JTextField that only allows numerically inputs =
+
+You can use the JNumberOnyTextField.java class in the de.htwds.rembrandt.components package.
+
+= Set the text color of disabled JTextFields =
+
+You can use the setDisabledTextColor(Color c) method.
+For example:
+{{{
+	this.txtStateProvinz = new JTextField();
+	this.txtStateProvinz.setDisabledTextColor(getForeground());
+	this.textAreaBusinessAdress = new JTextArea();
+	this.textAreaNotices.setDisabledTextColor(getForeground());
+}}}

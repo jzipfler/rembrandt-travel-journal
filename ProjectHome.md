@@ -1,0 +1,1 @@
+This project is part of our progamming lecture in the summer semester 2012. Our goal is the development of a travel journal software in Java, using Java Swing for the GUI.
